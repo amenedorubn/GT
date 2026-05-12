@@ -923,6 +923,17 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
   .rel-task{font-size:.66rem!important;padding:4px 3px!important}
 }
 
+/* Preguntas conectadas a obra */
+.question-card{border:1px solid #ffffff12;background:linear-gradient(180deg,#ffffff07,#ffffff03);border-radius:18px;padding:14px;margin-bottom:10px;display:grid;gap:10px}
+.question-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.question-title{font-weight:700;color:#fff;line-height:1.35}
+.question-meta{font-family:'DM Mono',monospace;font-size:.66rem;color:var(--muted);margin-top:4px}
+.question-answer{width:100%;min-height:70px;background:#0b111a;border:1px solid #ffffff18;color:var(--text);border-radius:12px;padding:10px;font-family:'DM Sans',sans-serif;resize:vertical}
+.question-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.question-badge{font-family:'DM Mono',monospace;font-size:.62rem;border-radius:999px;padding:4px 8px;background:#ffffff0b;color:var(--muted);white-space:nowrap}
+.question-badge.alta{background:#e85d5d22;color:#ff9a9a}.question-badge.media{background:#ffcf5a22;color:#ffdf80}.question-badge.baja{background:#65a7ff22;color:#9dc7ff}.question-badge.resuelta{background:#43d17a22;color:#82e8aa}
+@media(max-width:700px){.question-head{flex-direction:column}.question-form .form-row{flex-direction:column}.question-actions button{flex:1}}
+
 </style>
 </head>
 <body>
@@ -934,6 +945,7 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
     <button class="gnav-btn" id="gnav-tareas" onclick="openGlobal('tareas')">Todas las tareas</button>
     <button class="gnav-btn" id="gnav-compra" onclick="openGlobal('compra')">Toda la compra</button>
     <button class="gnav-btn" id="gnav-herramientas" onclick="openGlobal('herramientas')">Herramientas</button>
+    <button class="gnav-btn" id="gnav-preguntas" onclick="openGlobal('preguntas')">Preguntas</button>
     <button class="gnav-btn" id="gnav-gantt" onclick="openGlobal('gantt')">Cronograma</button>
   </div>
   <div class="header-stats">
@@ -1205,6 +1217,32 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
   </div>
 </div>
 
+<!-- GLOBAL: PREGUNTAS -->
+<div class="global-overlay" id="overlay-preguntas">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">PREGUNTAS · DECISIONES PENDIENTES</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn-primary" onclick="addPregunta()">+ Pregunta</button>
+      <button class="btn-icon" onclick="closeGlobal('preguntas')" style="font-size:18px;color:var(--muted)">✕</button>
+    </div>
+  </div>
+  <div class="global-overlay-body">
+    <div class="global-add-form question-form">
+      <div style="font-size:0.7rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em">Nueva pregunta de obra</div>
+      <textarea id="pregunta-text" placeholder="Ej: ¿Dónde va exactamente el punto de luz del cabecero?" style="width:100%;min-height:74px;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:10px;font-family:'DM Sans',sans-serif"></textarea>
+      <div class="form-row">
+        <select id="pregunta-room"></select>
+        <select id="pregunta-task"></select>
+        <select id="pregunta-priority"><option value="media">Prioridad media</option><option value="alta">Alta / bloqueante</option><option value="baja">Baja</option></select>
+      </div>
+      <button class="btn-primary" onclick="addPregunta()">Guardar pregunta</button>
+    </div>
+    <div class="gstats-row" id="preguntas-stats"></div>
+    <div class="filter-bar" id="preguntas-filter"></div>
+    <div id="preguntas-list"></div>
+  </div>
+</div>
+
 <!-- GLOBAL: CRONOGRAMA GANTT -->
 <div class="global-overlay" id="overlay-gantt">
   <div class="global-overlay-header">
@@ -1262,7 +1300,7 @@ const ROOMS_DEF = [
   { id:'cocina', name:'Cocina',        color:'#7ec8c8', shortName:'COC' },
 ];
 
-let appState = { tasks:{}, compra:[], notes:{}, herramientas:[], incidencias:[], showTaskForm:{}, showCompraForm:false, activeRoom:null, activeTab:'tasks', globalFilter:{tareas:'todas', compra:'todas'} };
+let appState = { tasks:{}, compra:[], notes:{}, herramientas:[], incidencias:[], preguntas:[], showTaskForm:{}, showCompraForm:false, activeRoom:null, activeTab:'tasks', globalFilter:{tareas:'todas', compra:'todas'} };
 ROOMS_DEF.forEach(r => { appState.tasks[r.id]=[]; appState.notes[r.id]=''; appState.showTaskForm[r.id]=false; });
 
 function load(){
@@ -1276,6 +1314,7 @@ function load(){
     if (d.notes) appState.notes = d.notes;
     if (d.herramientas) appState.herramientas = d.herramientas;
     if (d.incidencias) appState.incidencias = d.incidencias;
+    if (d.preguntas) appState.preguntas = d.preguntas;
 
     ROOMS_DEF.forEach(r => {
       if (!appState.tasks[r.id]) appState.tasks[r.id] = [];
@@ -1302,7 +1341,8 @@ function save(){
     compra: appState.compra,
     notes: appState.notes,
     herramientas: appState.herramientas,
-    incidencias: appState.incidencias || []
+    incidencias: appState.incidencias || [],
+    preguntas: appState.preguntas || []
   });
 }
 
@@ -1835,6 +1875,7 @@ function renderEverything(){
   if(appState.activeRoom) renderPanel();
   if(document.getElementById('overlay-tareas')?.classList.contains('open')) renderGlobalTareas();
   if(document.getElementById('overlay-mando')?.classList.contains('open')) renderCommandCenter();
+  if(document.getElementById('overlay-preguntas')?.classList.contains('open')) renderPreguntas();
   if(document.getElementById('overlay-gantt')?.classList.contains('open')) renderGantt();
 }
 
@@ -1995,10 +2036,84 @@ function renderCommandCenter(){
     </div>`;
 }
 
+
+// ── PREGUNTAS / DECISIONES ──────────────────────────────────────
+let preguntasFilter = 'abiertas';
+function preguntaRoomOptions(selectedId){
+  return `<option value="">Sin habitación</option>` + ROOMS_DEF.map(r=>`<option value="${r.id}" ${r.id===selectedId?'selected':''}>${htmlSafe(r.name)}</option>`).join('');
+}
+function preguntaTaskOptions(selectedId){
+  const tasks=allTasksFlat();
+  return `<option value="">Sin tarea</option>` + tasks.map(t=>`<option value="${t.id}" ${t.id===selectedId?'selected':''}>${htmlSafe((t._room?.shortName||t._room?.name||'')+' · '+t.texto).slice(0,95)}</option>`).join('');
+}
+function renderPreguntaFormOptions(){
+  const room=document.getElementById('pregunta-room');
+  const task=document.getElementById('pregunta-task');
+  if(room) room.innerHTML=preguntaRoomOptions('');
+  if(task) task.innerHTML=preguntaTaskOptions('');
+}
+function addPregunta(){
+  const text=document.getElementById('pregunta-text')?.value.trim();
+  if(!text) return showNotif('Escribe la pregunta');
+  appState.preguntas=appState.preguntas||[];
+  appState.preguntas.unshift({id:uid(),texto:text,respuesta:'',roomId:document.getElementById('pregunta-room')?.value||'',taskId:document.getElementById('pregunta-task')?.value||'',prioridad:document.getElementById('pregunta-priority')?.value||'media',resuelta:false,fecha:new Date().toISOString().slice(0,10)});
+  document.getElementById('pregunta-text').value='';
+  save(); renderPreguntas(); renderCommandCenter?.(); showNotif('Pregunta añadida');
+}
+function setPreguntasFilter(f){ preguntasFilter=f; renderPreguntas(); }
+function savePreguntaRespuesta(id,val){
+  const q=(appState.preguntas||[]).find(x=>x.id===id); if(!q) return;
+  q.respuesta=val; q.resuelta=!!val.trim(); q.fechaRespuesta=q.resuelta?new Date().toISOString().slice(0,10):'';
+  save(); renderPreguntasStatsOnly();
+}
+function togglePregunta(id){
+  const q=(appState.preguntas||[]).find(x=>x.id===id); if(!q) return;
+  q.resuelta=!q.resuelta; if(q.resuelta&&!q.fechaRespuesta) q.fechaRespuesta=new Date().toISOString().slice(0,10);
+  save(); renderPreguntas();
+}
+function deletePregunta(id){
+  if(!confirm('¿Eliminar esta pregunta?')) return;
+  appState.preguntas=(appState.preguntas||[]).filter(x=>x.id!==id); save(); renderPreguntas();
+}
+function editLinkedTaskFromQuestion(taskId){ if(taskId) editTaskById(taskId); }
+function updatePreguntaRoom(id,val){ const q=(appState.preguntas||[]).find(x=>x.id===id); if(q){q.roomId=val; save(); renderPreguntas();} }
+function updatePreguntaTask(id,val){ const q=(appState.preguntas||[]).find(x=>x.id===id); if(q){q.taskId=val; save(); renderPreguntas();} }
+function renderPreguntasStatsOnly(){
+  const qs=appState.preguntas||[]; const open=qs.filter(q=>!q.resuelta).length; const high=qs.filter(q=>!q.resuelta&&q.prioridad==='alta').length;
+  const el=document.getElementById('preguntas-stats'); if(el) el.innerHTML=`<div class="gstat"><div class="gstat-num">${open}</div><div class="gstat-label">abiertas</div></div><div class="gstat"><div class="gstat-num">${high}</div><div class="gstat-label">bloqueantes</div></div><div class="gstat"><div class="gstat-num">${qs.length-open}</div><div class="gstat-label">respondidas</div></div>`;
+}
+function renderPreguntas(){
+  renderPreguntaFormOptions();
+  const qs=appState.preguntas||[];
+  renderPreguntasStatsOnly();
+  document.getElementById('preguntas-filter').innerHTML=['abiertas','alta','respondidas','todas'].map(f=>`<button class="filter-btn ${preguntasFilter===f?'active':''}" onclick="setPreguntasFilter('${f}')">${f}</button>`).join('');
+  let list=qs;
+  if(preguntasFilter==='abiertas') list=qs.filter(q=>!q.resuelta);
+  if(preguntasFilter==='alta') list=qs.filter(q=>!q.resuelta&&q.prioridad==='alta');
+  if(preguntasFilter==='respondidas') list=qs.filter(q=>q.resuelta);
+  const tasks=allTasksFlat();
+  const html=list.map(q=>{
+    const room=ROOMS_DEF.find(r=>r.id===q.roomId); const task=tasks.find(t=>t.id===q.taskId);
+    return `<div class="question-card">
+      <div class="question-head"><div><div class="question-title">${htmlSafe(q.texto)}</div><div class="question-meta">${htmlSafe(q.fecha||'')} ${room?' · '+htmlSafe(room.name):''} ${task?' · tarea: '+htmlSafe(task.texto):''}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="question-badge ${htmlSafe(q.prioridad||'media')}">${htmlSafe(q.prioridad||'media')}</span>${q.resuelta?'<span class="question-badge resuelta">respondida</span>':'<span class="question-badge">pendiente</span>'}</div></div>
+      <textarea class="question-answer" placeholder="Escribe la respuesta cuando se sepa..." onblur="savePreguntaRespuesta('${q.id}',this.value)">${htmlSafe(q.respuesta||'')}</textarea>
+      <div class="question-actions">
+        <select onchange="updatePreguntaRoom('${q.id}',this.value)">${preguntaRoomOptions(q.roomId)}</select>
+        <select onchange="updatePreguntaTask('${q.id}',this.value)">${preguntaTaskOptions(q.taskId)}</select>
+        ${q.taskId?`<button class="btn-secondary" onclick="editLinkedTaskFromQuestion('${q.taskId}')">Editar tarea</button>`:''}
+        <button class="btn-secondary" onclick="togglePregunta('${q.id}')">${q.resuelta?'Reabrir':'Marcar resuelta'}</button>
+        <button class="btn-icon" onclick="deletePregunta('${q.id}')">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('preguntas-list').innerHTML = html || '<div class="empty-state">No hay preguntas en este filtro.</div>';
+}
+window.addPregunta=addPregunta; window.setPreguntasFilter=setPreguntasFilter; window.savePreguntaRespuesta=savePreguntaRespuesta; window.togglePregunta=togglePregunta; window.deletePregunta=deletePregunta; window.editLinkedTaskFromQuestion=editLinkedTaskFromQuestion; window.updatePreguntaRoom=updatePreguntaRoom; window.updatePreguntaTask=updatePreguntaTask; window.renderPreguntas=renderPreguntas;
+
 // ── GLOBAL OVERLAYS ──────────────────────────────────────────────
 
 function openGlobal(which) {
-  ['mando','tareas','compra','herramientas','gantt'].forEach(w => {
+  ['mando','tareas','compra','herramientas','preguntas','gantt'].forEach(w => {
     document.getElementById('overlay-'+w).classList.toggle('open', w===which);
     const btn = document.getElementById('gnav-'+w);
     if(btn) btn.classList.toggle('active', w===which);
@@ -2007,6 +2122,7 @@ function openGlobal(which) {
   if(which==='tareas') renderGlobalTareas();
   if(which==='compra') renderGlobalCompra();
   if(which==='herramientas') renderHerramientas();
+  if(which==='preguntas') renderPreguntas();
   if(which==='gantt') renderGantt();
 }
 
@@ -2441,7 +2557,10 @@ function renderGantt() {
   }
 
   if(!withDate.length) {
-    inner.innerHTML = `<div class="gantt-empty"><div style="font-size:2rem;opacity:0.3">📅</div>Ninguna tarea tiene fecha ni posición relativa asignada.<br>Edita las tareas para añadir fechas, duración o posición relativa.<br><br><span style="font-size:0.75rem;color:var(--muted)">${withoutDate.length} tarea${withoutDate.length!==1?'s':''} sin colocar</span></div>`;
+    const today0 = new Date(); today0.setHours(0,0,0,0);
+    const days0 = []; for(let i=0;i<45;i++){ const d=new Date(today0); d.setDate(d.getDate()+i); days0.push(d); }
+    inner.innerHTML = `<div class="gantt-empty"><div style="font-size:2rem;opacity:0.3">📅</div>Ninguna tarea tiene fecha todavía.<br>Arrastra una tarea pendiente a la banda del cronograma o edítala para darle inicio y duración.</div><div class="unscheduled-lane"><div class="gantt-drop-hint big">Arrastra una tarea desde aquí hacia la zona superior para ponerle fecha.</div><div class="unscheduled-lane-title">Sin fecha ni posición asignada (${withoutDate.length})</div><div style="display:flex;flex-wrap:wrap;gap:6px">${withoutDate.map(t => `<div class="gantt-unscheduled-chip" draggable="true" data-id="${t.id}" style="background:var(--surface);border:1px solid ${t.roomColor}44;border-radius:4px;padding:5px 10px;font-size:0.75rem;display:flex;align-items:center;gap:6px"><div style="width:6px;height:6px;border-radius:50%;background:${t.roomColor};flex-shrink:0"></div><span style="color:var(--muted);font-size:0.6rem;font-family:'DM Mono',monospace">${t.roomName}</span><span>${t.texto}</span></div>`).join('')}</div></div>`;
+    enableGanttInteractions(days0, 32);
     return;
   }
 
@@ -2578,28 +2697,33 @@ function saveTaskDateById(id, startDate, durDays){
 function enableGanttInteractions(days, DAY_W){
   const container=document.getElementById('gantt-container'); if(!container) return;
   document.querySelectorAll('.gantt-bar').forEach(bar=>{
-    bar.onclick=(ev)=>{ if(ev.detail===1 && !bar.dataset.dragging) editTaskById(bar.dataset.id); };
+    bar.title = (bar.title||'') + ' · clic para editar · arrastra para mover · borde derecho para duración';
     bar.onpointerdown=(ev)=>{
       if(ev.button!==0) return;
       ev.preventDefault();
       const id=bar.dataset.id, startX=ev.clientX, startLeft=parseFloat(bar.style.left)||0, startW=parseFloat(bar.style.width)||DAY_W;
       const resizing=ev.offsetX > bar.clientWidth-12;
-      bar.setPointerCapture(ev.pointerId); bar.dataset.dragging='1';
+      let moved=false;
+      bar.setPointerCapture(ev.pointerId);
       bar.onpointermove=(mv)=>{
         const dx=mv.clientX-startX;
+        if(Math.abs(dx)>4) moved=true;
         if(resizing) bar.style.width=Math.max(DAY_W-4,startW+dx)+'px';
         else bar.style.left=Math.max(2,startLeft+dx)+'px';
       };
       bar.onpointerup=()=>{
+        bar.releasePointerCapture?.(ev.pointerId);
+        if(!moved){ editTaskById(id); return; }
         const left=parseFloat(bar.style.left)||2; const width=parseFloat(bar.style.width)||DAY_W;
         const dayIdx=Math.max(0,Math.min(days.length-1,Math.round((left-2)/DAY_W)));
         const dur=Math.max(1,Math.round((width+4)/DAY_W));
         saveTaskDateById(id, days[dayIdx], dur);
-        setTimeout(()=>{bar.dataset.dragging='';},50);
+        showNotif(resizing?'Duración ajustada':'Tarea movida en cronograma');
       };
     };
   });
   document.querySelectorAll('.gantt-unscheduled-chip').forEach(chip=>{
+    chip.addEventListener('click',()=>editTaskById(chip.dataset.id));
     chip.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',chip.dataset.id));
   });
   const inner=document.getElementById('gantt-inner');
