@@ -564,11 +564,312 @@ select.state-sel {
 
 .notif.show { opacity: 1; transform: translateY(0); }
 
+/* GLOBAL NAV */
+.global-nav {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.gnav-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 5px 11px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+}
+
+.gnav-btn:hover, .gnav-btn.active {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* GLOBAL OVERLAY */
+.global-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 200;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.global-overlay.open { display: flex; }
+
+.global-overlay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.global-overlay-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 1rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.global-overlay-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 2rem;
+}
+
+.global-overlay-body::-webkit-scrollbar { width: 4px; }
+.global-overlay-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* Global filter bar */
+.filter-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+
+.filter-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  padding: 4px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+}
+
+.filter-btn.active, .filter-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Global task item (with room badge) */
+.gtask-room-badge {
+  font-size: 0.6rem;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.05em;
+  margin-right: 4px;
+}
+
+/* Global compra grouped by room */
+.gcompra-room-group {
+  margin-bottom: 1.2rem;
+}
+
+.gcompra-room-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-family: 'DM Mono', monospace;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+
+.gcompra-room-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+/* HERRAMIENTAS */
+.tool-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.tool-item:last-child { border-bottom: none; }
+
+.tool-name { flex: 1; font-size: 0.85rem; }
+.tool-qty {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+  min-width: 60px;
+  text-align: right;
+}
+
+.tool-status {
+  font-size: 0.65rem;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-family: 'DM Mono', monospace;
+  cursor: pointer;
+}
+
+.tool-aqui { background: #0a1e0a; color: #5cb85c; }
+.tool-fuera { background: #2a200a; color: #e8b84b; }
+.tool-falta { background: #2a0a0a; color: #e05050; }
+
+.tool-note {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* Global add form */
+.global-add-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px;
+  margin-bottom: 1.2rem;
+}
+
+.global-add-form input, .global-add-form select {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 7px 10px;
+  border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.global-add-form input::placeholder { color: var(--muted); }
+
+.global-add-form .form-row { display: flex; gap: 6px; margin-bottom: 6px; }
+.global-add-form .form-row input,
+.global-add-form .form-row select { margin-bottom: 0; flex: 1; }
+
+/* summary stats row */
+.gstats-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.gstat-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 7px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.gstat-pill strong { color: var(--accent); margin-right: 4px; }
+
+/* ── GANTT ── */
+.gantt-container { flex:1; overflow:auto; position:relative; border:1px solid var(--border); border-radius:6px; }
+.gantt-container::-webkit-scrollbar { width:4px; height:4px; }
+.gantt-container::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+.gantt-table { display:grid; min-width:100%; width:max-content; }
+.gantt-header-cell { background:var(--surface); border-bottom:1px solid var(--border); padding:6px 4px; font-family:'DM Mono',monospace; font-size:0.62rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; position:sticky; top:0; z-index:10; white-space:nowrap; text-align:center; }
+.gantt-header-cell.col-name { position:sticky; left:0; z-index:20; min-width:210px; border-right:1px solid var(--border); text-align:left; padding:6px 10px; }
+.gantt-cell { padding:0; border-bottom:1px solid var(--border); position:relative; background:var(--bg); height:40px; }
+.gantt-cell.col-name { position:sticky; left:0; z-index:5; background:var(--surface); border-right:1px solid var(--border); padding:6px 10px; min-width:210px; height:auto; min-height:40px; display:flex; flex-direction:column; justify-content:center; gap:2px; }
+.gantt-task-name { font-size:0.78rem; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:190px; }
+.gantt-task-room { font-size:0.6rem; font-family:'DM Mono',monospace; }
+.gantt-day-cell { width:32px; min-width:32px; border-right:1px solid #1a1a1a; }
+.gantt-day-cell.weekend { background:#131313; }
+.gantt-day-cell.today-col { background:#1c1900; }
+.gantt-bar { position:absolute; top:7px; bottom:7px; border-radius:3px; opacity:0.85; cursor:grab; transition:opacity 0.15s; display:flex; align-items:center; overflow:hidden; z-index:4; }
+.gantt-bar:active { cursor:grabbing; }
+.gantt-bar.editable { box-shadow:0 0 0 1px #0006; }
+.gantt-resize-handle { position:absolute; top:0; right:0; bottom:0; width:8px; cursor:ew-resize; background:#0002; }
+.gantt-drop-target { outline:1px dashed var(--accent); outline-offset:-3px; }
+.gantt-unscheduled-chip { cursor:grab; user-select:none; }
+.gantt-unscheduled-chip:active { cursor:grabbing; }
+.gantt-bar:hover { opacity:1; }
+.gantt-bar-label { font-size:9px; font-family:'DM Mono',monospace; color:#111; padding:0 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:600; }
+.gantt-today-line { position:absolute; top:0; bottom:0; width:2px; background:var(--accent); opacity:0.5; pointer-events:none; z-index:6; }
+.gantt-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; height:280px; color:var(--muted); font-size:0.85rem; gap:10px; text-align:center; }
+.gantt-toolbar { display:flex; gap:8px; align-items:center; margin-bottom:1rem; flex-wrap:wrap; }
+.gantt-toolbar select { background:var(--surface2); border:1px solid var(--border); color:var(--text); font-family:'DM Mono',monospace; font-size:0.72rem; padding:4px 8px; border-radius:4px; }
+.gantt-toolbar label { font-size:0.7rem; color:var(--muted); font-family:'DM Mono',monospace; }
+.gantt-legend { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:1rem; }
+.gantt-legend-item { display:flex; align-items:center; gap:5px; font-size:0.65rem; color:var(--muted); font-family:'DM Mono',monospace; }
+.gantt-legend-dot { width:10px; height:10px; border-radius:2px; }
+.dep-arrow { position:absolute; pointer-events:none; z-index:5; overflow:visible; }
+.dep-badge { font-size:0.58rem; padding:1px 5px; background:var(--surface2); border:1px solid var(--border); border-radius:3px; color:var(--muted); font-family:'DM Mono',monospace; }
+
+/* EDIT MODAL */
+.edit-modal-overlay {
+  display:none; position:fixed; inset:0; background:#000a; z-index:500;
+  align-items:center; justify-content:center;
+}
+.edit-modal-overlay.open { display:flex; }
+.edit-modal {
+  background:var(--surface); border:1px solid var(--border); border-radius:8px;
+  padding:1.5rem; width:min(680px,96vw); max-height:92vh; overflow-y:auto;
+  display:flex; flex-direction:column; gap:10px;
+}
+.edit-modal-title {
+  font-family:'DM Mono',monospace; font-size:0.8rem; color:var(--accent);
+  text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.edit-modal input, .edit-modal select, .edit-modal textarea {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text);
+  padding:7px 10px; border-radius:4px; font-family:'DM Sans',sans-serif;
+  font-size:0.82rem; width:100%;
+}
+.edit-modal input::placeholder, .edit-modal textarea::placeholder { color:var(--muted); }
+.edit-modal .form-row { display:flex; gap:6px; }
+.edit-modal .form-row input, .edit-modal .form-row select { flex:1; }
+.edit-modal label { font-size:0.65rem; color:var(--muted); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:3px; }
+.edit-modal-actions { display:flex; gap:8px; margin-top:4px; }
+.btn-secondary {
+  background:var(--surface2); color:var(--muted); border:1px solid var(--border);
+  padding:7px 14px; border-radius:4px; font-family:'DM Mono',monospace;
+  font-size:0.75rem; cursor:pointer; flex:1;
+}
+.btn-secondary:hover { color:var(--text); border-color:var(--muted); }
+.btn-danger {
+  background:#2a0a0a; color:#e05050; border:1px solid #5a1a1a;
+  padding:7px 14px; border-radius:4px; font-family:'DM Mono',monospace;
+  font-size:0.75rem; cursor:pointer;
+}
+.btn-danger:hover { background:#3a1010; }
+/* Room checkboxes for multi-room */
+.room-check-grid { display:flex; flex-wrap:wrap; gap:6px; }
+.room-check-label {
+  display:flex; align-items:center; gap:5px; cursor:pointer;
+  padding:4px 9px; border-radius:4px; border:1px solid var(--border);
+  font-size:0.72rem; font-family:'DM Mono',monospace; transition:all 0.15s;
+}
+.room-check-label input { width:auto; }
+.room-check-label.checked { border-color:currentColor; background:#ffffff08; }
+.task-rooms-badges { display:flex; flex-wrap:wrap; gap:4px; margin-top:3px; }
+.task-room-badge {
+  font-size:0.58rem; padding:2px 6px; border-radius:3px;
+  font-family:'DM Mono',monospace; letter-spacing:0.05em;
+}
+
 /* Mobile fallback */
 @media (max-width: 768px) {
   main { grid-template-columns: 1fr; height: auto; }
   .detail-panel { border-left: none; border-top: 1px solid var(--border); min-height: 60vh; }
   .floor-section { height: 50vw; min-height: 260px; }
+  .global-nav { gap: 4px; }
+  .gnav-btn { font-size: 0.62rem; padding: 4px 8px; }
+  .global-overlay-body { padding: 1rem; }
 }
 </style>
 </head>
@@ -576,6 +877,12 @@ select.state-sel {
 
 <header>
   <div class="logo">REFORMA<span>·</span>GT</div>
+  <div class="global-nav">
+    <button class="gnav-btn" id="gnav-tareas" onclick="openGlobal('tareas')">Todas las tareas</button>
+    <button class="gnav-btn" id="gnav-compra" onclick="openGlobal('compra')">Toda la compra</button>
+    <button class="gnav-btn" id="gnav-herramientas" onclick="openGlobal('herramientas')">Herramientas</button>
+    <button class="gnav-btn" id="gnav-gantt" onclick="openGlobal('gantt')">Cronograma</button>
+  </div>
   <div class="header-stats">
     <div class="hstat">
       <div class="hstat-val" id="stat-pct">0%</div>
@@ -695,6 +1002,7 @@ select.state-sel {
         <div class="overview-total-bar"><div class="overview-total-fill" id="ov-bar" style="width:0%"></div></div>
       </div>
       <div id="ov-rooms"></div>
+      <div style="margin-top:10px"><button class="btn-primary" onclick="openNewTaskModal()" style="width:100%">+ añadir tarea</button></div>
       <div>
         <div class="overview-title" style="margin-bottom:8px">Lista de la compra</div>
         <div id="ov-compra-stats" style="font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--muted)"></div>
@@ -748,6 +1056,106 @@ select.state-sel {
 
 <div class="notif" id="notif"></div>
 
+<!-- EDIT TASK MODAL -->
+<div class="edit-modal-overlay" id="edit-modal-overlay" onclick="if(event.target===this)closeEditModal()">
+  <div class="edit-modal">
+    <div class="edit-modal-title">
+      <span id="em-title">Editar tarea</span>
+      <button class="btn-icon" onclick="closeEditModal()" style="font-size:18px">✕</button>
+    </div>
+    <div><label>Descripción</label><input id="em-text" placeholder="Descripción de la tarea..."></div>
+    <div><label>Estado</label><select id="em-state"><option value="pendiente">pendiente</option><option value="en curso">en curso</option><option value="hecho">hecho</option></select></div>
+    <div><label>Habitaciones (puede ser varias)</label><div class="room-check-grid" id="em-rooms"></div></div>
+    <div class="form-row"><div style="flex:1"><label>Inicio</label><input id="em-date" type="date"></div><div style="flex:1"><label>Fin previsto</label><input id="em-datefin" type="date"></div></div>
+    <div><label>Duración estimada (días) — si no hay fechas</label><input id="em-duracion" type="number" min="1" placeholder="Ej: 3"></div>
+    <div>
+      <label>Relaciones de orden en el cronograma</label>
+      <div id="em-relaciones-list" style="display:flex;flex-direction:column;gap:5px;margin-bottom:6px;max-height:220px;overflow-y:auto;padding-right:2px"></div>
+      <button type="button" onclick="addRelacionRow()" style="background:var(--surface2);border:1px dashed var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:0.7rem;padding:5px 10px;border-radius:4px;cursor:pointer;width:100%;transition:all 0.15s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">+ añadir relación</button>
+    </div>
+    <div><label>Nota adicional</label><input id="em-nota" placeholder="Nota (opcional)..."></div>
+    <div class="edit-modal-actions"><button class="btn-danger" id="em-delete-btn">Eliminar</button><button class="btn-secondary" onclick="closeEditModal()">Cancelar</button><button class="btn-primary" style="flex:2" id="em-save-btn" onclick="saveEditTask()">Guardar cambios</button></div>
+  </div>
+</div>
+
+<!-- GLOBAL: TODAS LAS TAREAS -->
+<div class="global-overlay" id="overlay-tareas">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">TODAS LAS TAREAS</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn-primary" onclick="openNewTaskModal()" style="padding:7px 12px;width:auto">+ añadir tarea</button>
+      <div class="filter-bar" id="filter-bar-tareas" style="margin:0"></div>
+      <button class="btn-icon" onclick="closeGlobal('tareas')" style="font-size:18px;color:var(--muted)">✕</button>
+    </div>
+  </div>
+  <div class="global-overlay-body">
+    <div class="gstats-row" id="gstats-tareas"></div>
+    <div id="global-task-list"></div>
+  </div>
+</div>
+
+<!-- GLOBAL: TODA LA COMPRA -->
+<div class="global-overlay" id="overlay-compra">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">LISTA DE LA COMPRA · GLOBAL</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="filter-bar" id="filter-bar-compra" style="margin:0"></div>
+      <button class="btn-icon" onclick="closeGlobal('compra')" style="font-size:18px;color:var(--muted)">✕</button>
+    </div>
+  </div>
+  <div class="global-overlay-body">
+    <div class="gstats-row" id="gstats-compra"></div>
+    <div id="global-compra-list"></div>
+    <div id="global-compra-form-area" style="margin-top:1rem"></div>
+  </div>
+</div>
+
+<!-- GLOBAL: HERRAMIENTAS -->
+<div class="global-overlay" id="overlay-herramientas">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">HERRAMIENTAS</span>
+    <button class="btn-icon" onclick="closeGlobal('herramientas')" style="font-size:18px;color:var(--muted)">✕</button>
+  </div>
+  <div class="global-overlay-body">
+    <div class="global-add-form">
+      <div style="font-size:0.7rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em">Añadir herramienta</div>
+      <input id="herr-nombre" placeholder="Nombre de la herramienta..." onkeydown="if(event.key==='Enter')addHerramienta()">
+      <div class="form-row">
+        <input id="herr-qty" placeholder="Cantidad (ej: 2 unidades)">
+        <select id="herr-estado">
+          <option value="aqui">Está aquí ✓</option>
+          <option value="fuera">Fuera / prestada</option>
+          <option value="falta">Falta comprar</option>
+        </select>
+      </div>
+      <input id="herr-nota" placeholder="Nota (ubicación, quién la tiene...)" style="margin-bottom:8px">
+      <button class="btn-primary" onclick="addHerramienta()">+ Añadir herramienta</button>
+    </div>
+    <div class="gstats-row" id="gstats-herr"></div>
+    <div id="herr-list"></div>
+  </div>
+</div>
+
+<!-- GLOBAL: CRONOGRAMA GANTT -->
+<div class="global-overlay" id="overlay-gantt">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">CRONOGRAMA · GANTT</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="gantt-toolbar" style="margin:0" id="gantt-toolbar"></div>
+      <button class="btn-icon" onclick="closeGlobal('gantt')" style="font-size:18px;color:var(--muted)">✕</button>
+    </div>
+  </div>
+  <div class="global-overlay-body" style="display:flex;flex-direction:column;height:calc(100% - 60px);padding-bottom:0">
+    <div class="gantt-legend" id="gantt-legend"></div>
+    <div class="gantt-container" id="gantt-container">
+      <div id="gantt-inner"></div>
+    </div>
+    <div style="padding:10px 0;font-size:0.68rem;color:var(--muted);font-family:'DM Mono',monospace;flex-shrink:0">
+      Puedes clicar una tarea o área del cronograma para editarla. Arrastra barras para mover fechas; arrastra el borde derecho para cambiar duración. Las tareas sin fecha aparecen abajo y se pueden arrastrar al cronograma.
+    </div>
+  </div>
+</div>
+
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -784,9 +1192,12 @@ const ROOMS_DEF = [
   { id:'despensa',name:'Despensa',     color:'#a0b8d0', shortName:'DES' },
   { id:'cocina', name:'Cocina',        color:'#7ec8c8', shortName:'COC' },
 ];
+const UNASSIGNED_TASK_BUCKET = { id:'sin_asignar', name:'Sin asignar', color:'#888', shortName:'SIN' };
+function taskBuckets(){ return [UNASSIGNED_TASK_BUCKET, ...ROOMS_DEF]; }
 
-let appState = { tasks:{}, compra:[], notes:{}, showTaskForm:{}, showCompraForm:false, activeRoom:null, activeTab:'tasks' };
+let appState = { tasks:{}, compra:[], notes:{}, herramientas:[], showTaskForm:{}, showCompraForm:false, activeRoom:null, activeTab:'tasks', globalFilter:{tareas:'todas', compra:'todas'} };
 ROOMS_DEF.forEach(r => { appState.tasks[r.id]=[]; appState.notes[r.id]=''; appState.showTaskForm[r.id]=false; });
+appState.tasks[UNASSIGNED_TASK_BUCKET.id]=[];
 
 function load(){
   onValue(proyectoRef, (snapshot) => {
@@ -797,12 +1208,14 @@ function load(){
     if (d.tasks) appState.tasks = d.tasks;
     if (d.compra) appState.compra = d.compra;
     if (d.notes) appState.notes = d.notes;
+    if (d.herramientas) appState.herramientas = d.herramientas;
 
     ROOMS_DEF.forEach(r => {
       if (!appState.tasks[r.id]) appState.tasks[r.id] = [];
       if (!appState.notes[r.id]) appState.notes[r.id] = '';
       if (appState.showTaskForm[r.id] === undefined) appState.showTaskForm[r.id] = false;
     });
+    if (!appState.tasks[UNASSIGNED_TASK_BUCKET.id]) appState.tasks[UNASSIGNED_TASK_BUCKET.id] = [];
 
     firebaseReady = true;
 
@@ -821,7 +1234,8 @@ function save(){
   set(proyectoRef, {
     tasks: appState.tasks,
     compra: appState.compra,
-    notes: appState.notes
+    notes: appState.notes,
+    herramientas: appState.herramientas
   });
 }
 
@@ -942,48 +1356,63 @@ function renderTasks(room){
   if(!tasks.length){
     list.innerHTML=`<div class="empty-state">Sin tareas todavía.<br>Añade la primera abajo.</div>`;
   } else {
-    list.innerHTML=tasks.map((t,i)=>`
+    list.innerHTML=tasks.map((t,i)=>{
+      // Relation badges (multi) — define first so depLabel can reference it
+      const rels = t.relaciones && t.relaciones.length ? t.relaciones
+        : (t.relType && t.relTaskId ? [{tipo:t.relType, taskId:t.relTaskId}]
+          : (t.depId ? [{tipo:'after', taskId:t.depId}] : []));
+      // Legacy depLabel only if no rels
+      let depLabel = '';
+      if(!rels.length && t.depId) {
+        let depTask = null;
+        taskBuckets().forEach(r => { const f=(appState.tasks[r.id]||[]).find(x=>x.id===t.depId); if(f) depTask=f; });
+        if(depTask) depLabel = `<span class="dep-badge" title="Después de: ${depTask.texto}">⛓ ${depTask.texto.length>25?depTask.texto.slice(0,25)+'…':depTask.texto}</span>`;
+      }
+      const relLabels = rels.map(rel => {
+        let relTask = null;
+        taskBuckets().forEach(r => { const f=(appState.tasks[r.id]||[]).find(x=>x.id===rel.taskId); if(f) relTask=f; });
+        if(!relTask) return '';
+        const icon = rel.tipo==='before'?'↑':rel.tipo==='during'?'↔':'↓';
+        const word = rel.tipo==='before'?'Antes de':rel.tipo==='during'?'Durante':'Después de';
+        const name = relTask.texto.length>18?relTask.texto.slice(0,18)+'…':relTask.texto;
+        return `<span class="dep-badge" title="${word}: ${relTask.texto}">${icon} ${name}</span>`;
+      }).join('');
+      // Multi-room badges (other rooms)
+      const otherRooms = (t.rooms||[]).filter(r=>r!==room.id);
+      const roomBadges = otherRooms.map(rid=>{
+        const rd=taskBuckets().find(x=>x.id===rid);
+        return rd?`<span class="task-room-badge" style="background:${rd.color}22;color:${rd.color}">${rd.shortName||rd.name}</span>`:'';
+      }).join('');
+      // Duration
+      const durLabel = (!t.fecha && t.duracion)?`<span class="dep-badge">⏱ ${t.duracion}d</span>`:'';
+      return `
       <div class="task-item ${t.estado==='hecho'?'task-done':''}">
         <input type="checkbox" class="task-check" ${t.estado==='hecho'?'checked':''} onchange="toggleTask('${room.id}',${i})">
         <div class="task-content">
           <div class="task-text">${t.texto}</div>
           <div class="task-meta">
             <span class="tag tag-${t.estado==='hecho'?'done':t.estado==='en curso'?'doing':'pending'}">${t.estado}</span>
-            ${t.fecha?`<span class="task-date">📅 ${t.fecha}</span>`:''}
+            ${t.fecha?`<span class="task-date">📅 ${t.fecha}${t.fechaFin?' → '+t.fechaFin:''}</span>`:''}
+            ${depLabel}${relLabels}${durLabel}
+            ${roomBadges}
           </div>
           ${t.nota?`<div class="task-note">${t.nota}</div>`:''}
         </div>
         <div class="task-actions">
+          <button class="btn-icon" onclick="openEditModal('${room.id}',${i})" title="Editar" style="color:var(--accent);font-size:13px">✎</button>
           <select class="state-sel" onchange="changeState('${room.id}',${i},this.value)">
             ${['pendiente','en curso','hecho'].map(s=>`<option value="${s}"${t.estado===s?' selected':''}>${s}</option>`).join('')}
           </select>
           <button class="btn-icon" onclick="deleteTask('${room.id}',${i})">✕</button>
         </div>
       </div>
-    `).join('');
+    `}).join('');
   }
 
   const formArea=document.getElementById('task-form-area');
-  if(appState.showTaskForm[room.id]){
-    formArea.innerHTML=`
-      <div class="add-form">
-        <input id="nt-text" placeholder="Descripción de la tarea..." onkeydown="if(event.key==='Enter')addTask('${room.id}')">
-        <div class="form-row">
-          <select id="nt-state">
-            <option value="pendiente">pendiente</option>
-            <option value="en curso">en curso</option>
-            <option value="hecho">hecho</option>
-          </select>
-          <input id="nt-date" type="date">
-        </div>
-        <input id="nt-nota" placeholder="Nota adicional (opcional)..." style="margin-bottom:8px">
-        <button class="btn-primary" onclick="addTask('${room.id}')">+ Añadir tarea</button>
-      </div>`;
-    setTimeout(()=>document.getElementById('nt-text')?.focus(),50);
-  } else {
-    formArea.innerHTML=`<span class="add-toggle" onclick="toggleTaskForm('${room.id}')">+ añadir tarea</span>`;
-  }
+  formArea.innerHTML=`<span class="add-toggle" onclick="openNewTaskModal('${room.id}')">+ añadir tarea</span>`;
 }
+
 
 function renderCompra(room){
   const all=appState.compra.filter(x=>x.roomId===room.id);
@@ -1030,15 +1459,248 @@ function renderCompra(room){
 function toggleTaskForm(id){ appState.showTaskForm[id]=!appState.showTaskForm[id]; renderPanel(); }
 function toggleCompraForm(){ appState.showCompraForm=!appState.showCompraForm; renderPanel(); }
 
-function addTask(id){
-  const txt=document.getElementById('nt-text')?.value?.trim();
-  if(!txt){ showNotif('Escribe una descripción'); return; }
-  appState.tasks[id].push({ id:uid(), texto:txt, estado:document.getElementById('nt-state')?.value||'pendiente', fecha:document.getElementById('nt-date')?.value||'', nota:document.getElementById('nt-nota')?.value||'' });
-  appState.showTaskForm[id]=false;
-  save(); renderPanel(); showNotif('Tarea añadida ✓');
-}
+function addTask(id){ openNewTaskModal(id); }
 
 function deleteTask(id,i){ appState.tasks[id].splice(i,1); save(); renderPanel(); }
+
+// ── EDIT TASK MODAL ──────────────────────────────────────────────
+
+let editCtx = null; // { mode:'edit'|'new', roomId, idx }
+let _allTasksForRel = []; // cached list for relation dropdowns
+
+
+function openNewTaskModal(defaultRoomId='') {
+  editCtx = { mode:'new', roomId: defaultRoomId || UNASSIGNED_TASK_BUCKET.id, idx: -1 };
+
+  document.getElementById('em-title').textContent = 'Añadir tarea';
+  document.getElementById('em-save-btn').textContent = 'Añadir tarea';
+  document.getElementById('em-delete-btn').style.display = 'none';
+
+  document.getElementById('em-text').value = '';
+  document.getElementById('em-state').value = 'pendiente';
+  document.getElementById('em-date').value = '';
+  document.getElementById('em-datefin').value = '';
+  document.getElementById('em-duracion').value = '';
+  document.getElementById('em-nota').value = '';
+
+  const currentRooms = defaultRoomId ? [defaultRoomId] : [];
+  document.getElementById('em-rooms').innerHTML = ROOMS_DEF.map(r => `
+    <label class="room-check-label ${currentRooms.includes(r.id)?'checked':''}" style="color:${r.color}">
+      <input type="checkbox" value="${r.id}" ${currentRooms.includes(r.id)?'checked':''}
+        onchange="this.closest('.room-check-label').classList.toggle('checked',this.checked)">
+      ${r.shortName||r.name}
+    </label>
+  `).join('') + `<label class="room-check-label ${!currentRooms.length?'checked':''}" style="color:${UNASSIGNED_TASK_BUCKET.color}">
+      <input type="checkbox" value="${UNASSIGNED_TASK_BUCKET.id}" ${!currentRooms.length?'checked':''}
+        onchange="this.closest('.room-check-label').classList.toggle('checked',this.checked)">
+      Sin asignar
+    </label>`;
+
+  _allTasksForRel = [];
+  taskBuckets().forEach(r => {
+    (appState.tasks[r.id]||[]).forEach(x => {
+      if(!_allTasksForRel.find(y=>y.id===x.id)) _allTasksForRel.push({id:x.id, label:`[${r.name}] ${x.texto}`});
+    });
+  });
+  renderRelacionRows([]);
+  document.getElementById('edit-modal-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('em-text')?.focus(), 60);
+}
+
+function openEditModal(roomId, idx) {
+  const t = appState.tasks[roomId][idx];
+  if(!t) return;
+  editCtx = { mode:'edit', roomId, idx };
+  document.getElementById('em-title').textContent = 'Editar tarea';
+  document.getElementById('em-save-btn').textContent = 'Guardar cambios';
+  document.getElementById('em-delete-btn').style.display = '';
+
+  document.getElementById('em-text').value = t.texto || '';
+  document.getElementById('em-state').value = t.estado || 'pendiente';
+  document.getElementById('em-date').value = t.fecha || '';
+  document.getElementById('em-datefin').value = t.fechaFin || '';
+  document.getElementById('em-duracion').value = t.duracion || '';
+  document.getElementById('em-nota').value = t.nota || '';
+
+  // Multi-room checkboxes
+  const currentRooms = t.rooms && t.rooms.length ? t.rooms : [roomId];
+  document.getElementById('em-rooms').innerHTML = ROOMS_DEF.map(r => `
+    <label class="room-check-label ${currentRooms.includes(r.id)?'checked':''}" style="color:${r.color}">
+      <input type="checkbox" value="${r.id}" ${currentRooms.includes(r.id)?'checked':''}
+        onchange="this.closest('.room-check-label').classList.toggle('checked',this.checked)">
+      ${r.shortName||r.name}
+    </label>
+  `).join('') + `<label class="room-check-label ${currentRooms.includes(UNASSIGNED_TASK_BUCKET.id)?'checked':''}" style="color:${UNASSIGNED_TASK_BUCKET.color}">
+      <input type="checkbox" value="${UNASSIGNED_TASK_BUCKET.id}" ${currentRooms.includes(UNASSIGNED_TASK_BUCKET.id)?'checked':''}
+        onchange="this.closest('.room-check-label').classList.toggle('checked',this.checked)">
+      Sin asignar
+    </label>`;
+
+  // Build cached task list for selects (exclude self)
+  _allTasksForRel = [];
+  taskBuckets().forEach(r => {
+    (appState.tasks[r.id]||[]).forEach(x => {
+      if(x.id !== t.id && !_allTasksForRel.find(y=>y.id===x.id))
+        _allTasksForRel.push({id:x.id, label:`[${r.name}] ${x.texto}`});
+    });
+  });
+
+  // Load existing relaciones (multi), migrating legacy single relType/relTaskId/depId
+  let relaciones = t.relaciones ? [...t.relaciones] : [];
+  if(!relaciones.length) {
+    if(t.relType && t.relTaskId) relaciones = [{tipo: t.relType, taskId: t.relTaskId}];
+    else if(t.depId) relaciones = [{tipo:'after', taskId: t.depId}];
+  }
+  renderRelacionRows(relaciones);
+
+  // Delete button
+  document.getElementById('em-delete-btn').onclick = () => {
+    if(confirm('¿Eliminar esta tarea?')) {
+      const rooms = t.rooms && t.rooms.length ? t.rooms : [roomId];
+      rooms.forEach(rid => {
+        const arr = appState.tasks[rid]||[];
+        const fi = arr.findIndex(x=>x.id===t.id);
+        if(fi>=0) arr.splice(fi,1);
+      });
+      closeEditModal(); save(); renderPanel(); showNotif('Tarea eliminada');
+    }
+  };
+
+  document.getElementById('edit-modal-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('em-text')?.focus(), 60);
+}
+
+function closeEditModal() {
+  document.getElementById('edit-modal-overlay').classList.remove('open');
+  editCtx = null;
+}
+
+// Build options HTML for a task select
+function relTaskOptions(selectedId) {
+  return `<option value="">— Selecciona tarea —</option>` +
+    _allTasksForRel.map(x =>
+      `<option value="${x.id}" ${x.id===selectedId?'selected':''}>${x.label.length>50?x.label.slice(0,50)+'…':x.label}</option>`
+    ).join('');
+}
+
+const REL_LABELS = { before:'Antes de', after:'Después de', during:'Durante' };
+
+function renderRelacionRows(relaciones) {
+  const container = document.getElementById('em-relaciones-list');
+  if(!relaciones.length) {
+    container.innerHTML = `<div style="font-size:0.72rem;color:var(--muted);font-style:italic;padding:4px 0">Sin relaciones — la tarea se posicionará por fecha o flotará al final.</div>`;
+    container._relaciones = [];
+    return;
+  }
+  container._relaciones = relaciones;
+  container.innerHTML = relaciones.map((rel, i) => `
+    <div class="rel-row" data-i="${i}" style="display:grid;grid-template-columns:150px minmax(0,1fr) 24px;gap:8px;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:6px 8px;width:100%;box-sizing:border-box">
+      <select class="rel-tipo" style="background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:0.68rem;padding:5px 6px;border-radius:4px;width:100%;min-width:0"
+        onchange="updateRelacion(${i},'tipo',this.value)">
+        <option value="before" ${rel.tipo==='before'?'selected':''}>Antes de</option>
+        <option value="after"  ${rel.tipo==='after' ?'selected':''}>Después de</option>
+        <option value="during" ${rel.tipo==='during'?'selected':''}>Durante / al mismo tiempo</option>
+      </select>
+      <select class="rel-task" style="background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.75rem;padding:5px 6px;border-radius:4px;width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis"
+        onchange="updateRelacion(${i},'taskId',this.value)">
+        ${relTaskOptions(rel.taskId)}
+      </select>
+      <button type="button" onclick="removeRelacion(${i})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:2px 3px;line-height:1;text-align:center" title="Quitar">✕</button>
+    </div>
+  `).join('');
+}
+
+function addRelacionRow() {
+  const container = document.getElementById('em-relaciones-list');
+  const relaciones = container._relaciones || [];
+  relaciones.push({tipo:'after', taskId:''});
+  renderRelacionRows(relaciones);
+}
+
+function updateRelacion(i, field, val) {
+  const container = document.getElementById('em-relaciones-list');
+  if(container._relaciones && container._relaciones[i])
+    container._relaciones[i][field] = val;
+}
+
+function removeRelacion(i) {
+  const container = document.getElementById('em-relaciones-list');
+  const relaciones = container._relaciones || [];
+  relaciones.splice(i, 1);
+  renderRelacionRows(relaciones);
+}
+
+function saveEditTask() {
+  if(!editCtx) return;
+  const { roomId, idx, mode } = editCtx;
+  const isNew = mode === 'new';
+  const t = isNew ? { id: uid(), estado:'pendiente', rooms: [] } : appState.tasks[roomId][idx];
+  if(!t) { closeEditModal(); return; }
+
+  const newText = document.getElementById('em-text').value.trim();
+  if(!newText) { showNotif('La descripción no puede estar vacía'); return; }
+
+  const checkedRooms = [...document.querySelectorAll('#em-rooms input:checked')].map(el=>el.value);
+  if(!checkedRooms.length) checkedRooms.push(UNASSIGNED_TASK_BUCKET.id);
+
+  // Collect relaciones, filtering out empty ones
+  const container = document.getElementById('em-relaciones-list');
+  const relaciones = (container._relaciones || []).filter(r=>r.taskId);
+
+  // Build legacy compat fields from first 'after' relation
+  const firstAfter = relaciones.find(r=>r.tipo==='after');
+  const depId = firstAfter ? firstAfter.taskId : '';
+  // Legacy single relType/relTaskId from first relation
+  const firstRel = relaciones[0];
+  const relType = firstRel ? firstRel.tipo : '';
+  const relTaskId = firstRel ? firstRel.taskId : '';
+
+  const updated = {
+    ...t,
+    texto: newText,
+    estado: document.getElementById('em-state').value,
+    fecha: document.getElementById('em-date').value,
+    fechaFin: document.getElementById('em-datefin').value,
+    duracion: document.getElementById('em-duracion').value,
+    nota: document.getElementById('em-nota').value,
+    relaciones,
+    relType,    // legacy compat
+    relTaskId,  // legacy compat
+    depId,      // legacy compat
+    rooms: checkedRooms
+  };
+
+  const prevRooms = isNew ? [] : (t.rooms && t.rooms.length ? t.rooms : [roomId]);
+  prevRooms.forEach(rid => {
+    if(!checkedRooms.includes(rid)) {
+      const arr = appState.tasks[rid]||[];
+      const fi = arr.findIndex(x=>x.id===t.id);
+      if(fi>=0) arr.splice(fi,1);
+    }
+  });
+  checkedRooms.forEach(rid => {
+    if(!appState.tasks[rid]) appState.tasks[rid]=[];
+    const arr = appState.tasks[rid];
+    const fi = arr.findIndex(x=>x.id===t.id);
+    if(fi>=0) arr[fi] = updated;
+    else arr.push({...updated});
+  });
+
+  closeEditModal(); save(); renderPanel();
+  updateHeader(); updateFloorPlan(); updateOverview();
+  if(document.getElementById('overlay-tareas')?.classList.contains('open')) renderGlobalTareas();
+  if(document.getElementById('overlay-gantt')?.classList.contains('open')) renderGantt();
+  showNotif(isNew ? 'Tarea añadida ✓' : 'Tarea guardada ✓');
+}
+
+window.openNewTaskModal = openNewTaskModal;
+window.openEditModal = openEditModal;
+window.openEditModalByTaskId = openEditModalByTaskId;
+window.closeEditModal = closeEditModal;
+window.addRelacionRow = addRelacionRow;
+window.updateRelacion = updateRelacion;
+window.removeRelacion = removeRelacion;
+window.saveEditTask = saveEditTask;
 
 function toggleTask(id,i){
   const t=appState.tasks[id][i];
@@ -1073,6 +1735,786 @@ function showNotif(msg){
   setTimeout(()=>el.classList.remove('show'),2000);
 }
 
+
+// ── GLOBAL OVERLAYS ──────────────────────────────────────────────
+
+function openGlobal(which) {
+  ['tareas','compra','herramientas','gantt'].forEach(w => {
+    document.getElementById('overlay-'+w).classList.toggle('open', w===which);
+    const btn = document.getElementById('gnav-'+w);
+    if(btn) btn.classList.toggle('active', w===which);
+  });
+  if(which==='tareas') renderGlobalTareas();
+  if(which==='compra') renderGlobalCompra();
+  if(which==='herramientas') renderHerramientas();
+  if(which==='gantt') renderGantt();
+}
+
+function closeGlobal(which) {
+  document.getElementById('overlay-'+which).classList.remove('open');
+  const btn = document.getElementById('gnav-'+which);
+  if(btn) btn.classList.remove('active');
+}
+
+// ── GLOBAL TAREAS ──────────────────────────────────────────────
+
+function renderGlobalTareas() {
+  const filter = appState.globalFilter.tareas || 'todas';
+  // Filter bar
+  const filters = ['todas','pendiente','en curso','hecho'];
+  document.getElementById('filter-bar-tareas').innerHTML = filters.map(f =>
+    `<button class="filter-btn ${filter===f?'active':''}" onclick="setGlobalFilter('tareas','${f}')">${f}</button>`
+  ).join('');
+
+  // Collect all tasks, deduplicating by id (tasks can belong to multiple rooms)
+  let allTasks = [];
+  const seenIds = new Set();
+  taskBuckets().forEach(r => {
+    (appState.tasks[r.id]||[]).forEach((t,i) => {
+      if(seenIds.has(t.id)) return;
+      seenIds.add(t.id);
+      // Use primary room (first in t.rooms, or current room)
+      const primaryRoomId = (t.rooms && t.rooms.length) ? t.rooms[0] : r.id;
+      const primaryRoom = taskBuckets().find(x=>x.id===primaryRoomId) || r;
+      allTasks.push({...t, roomId:primaryRoom.id, roomName:primaryRoom.name, roomColor:primaryRoom.color, idx:i, _origRoomId:r.id, _origIdx:i});
+    });
+  });
+
+  const filtered = filter==='todas' ? allTasks : allTasks.filter(t=>t.estado===filter);
+
+  // Stats
+  const total=allTasks.length, done=allTasks.filter(t=>t.estado==='hecho').length,
+        doing=allTasks.filter(t=>t.estado==='en curso').length, pend=allTasks.filter(t=>t.estado==='pendiente').length;
+  document.getElementById('gstats-tareas').innerHTML = `
+    <div class="gstat-pill"><strong>${total}</strong> total</div>
+    <div class="gstat-pill"><strong style="color:#5cb85c">${done}</strong> hechas</div>
+    <div class="gstat-pill"><strong style="color:#5b9bd5">${doing}</strong> en curso</div>
+    <div class="gstat-pill"><strong style="color:#e8b84b">${pend}</strong> pendientes</div>
+  `;
+
+  if(!filtered.length) {
+    document.getElementById('global-task-list').innerHTML = `<div class="empty-state">No hay tareas${filter!=='todas'?' con estado "'+filter+'"':''}.</div>`;
+    return;
+  }
+
+  document.getElementById('global-task-list').innerHTML = filtered.map(t => {
+    const taskRooms = (t.rooms && t.rooms.length) ? t.rooms : [t.roomId];
+    const roomBadgesHtml = taskRooms.map(rid=>{
+      const rd=taskBuckets().find(x=>x.id===rid);
+      return rd?`<span class="gtask-room-badge" style="background:${rd.color}22;color:${rd.color}">${rd.shortName||rd.name}</span>`:'';
+    }).join('');
+    // For actions, use the room where we found the task and its index there
+    const actRoomId = t._origRoomId || t.roomId;
+    const actIdx = t._origIdx !== undefined ? t._origIdx : t.idx;
+    return `
+    <div class="task-item ${t.estado==='hecho'?'task-done':''}">
+      <input type="checkbox" class="task-check" ${t.estado==='hecho'?'checked':''} onchange="globalToggleTask('${actRoomId}',${actIdx})">
+      <div class="task-content">
+        <div class="task-text">${t.texto}</div>
+        <div class="task-meta">
+          ${roomBadgesHtml}
+          <span class="tag tag-${t.estado==='hecho'?'done':t.estado==='en curso'?'doing':'pending'}">${t.estado}</span>
+          ${t.fecha?`<span class="task-date">📅 ${t.fecha}</span>`:''}
+          ${(!t.fecha&&t.duracion)?`<span class="dep-badge">⏱ ${t.duracion}d</span>`:''}
+        </div>
+        ${t.nota?`<div class="task-note">${t.nota}</div>`:''}
+      </div>
+      <div class="task-actions">
+        <button class="btn-icon" onclick="openEditModal('${actRoomId}',${actIdx})" title="Editar" style="color:var(--accent);font-size:13px">✎</button>
+        <select class="state-sel" onchange="globalChangeState('${actRoomId}',${actIdx},this.value)">
+          ${['pendiente','en curso','hecho'].map(s=>`<option value="${s}"${t.estado===s?' selected':''}>${s}</option>`).join('')}
+        </select>
+        <button class="btn-icon" onclick="globalDeleteTask('${actRoomId}',${actIdx})">✕</button>
+      </div>
+    </div>
+  `}).join('');
+}
+
+function setGlobalFilter(which, val) {
+  appState.globalFilter[which] = val;
+  if(which==='tareas') renderGlobalTareas();
+  if(which==='compra') renderGlobalCompra();
+}
+
+function globalToggleTask(roomId, i) {
+  const t = appState.tasks[roomId][i];
+  t.estado = t.estado==='hecho'?'pendiente':'hecho';
+  save(); renderGlobalTareas(); updateHeader(); updateFloorPlan();
+  if(appState.activeRoom===roomId) renderPanel();
+}
+
+function globalChangeState(roomId, i, val) {
+  appState.tasks[roomId][i].estado = val;
+  save(); renderGlobalTareas(); updateHeader(); updateFloorPlan();
+  if(appState.activeRoom===roomId) renderPanel();
+}
+
+function globalDeleteTask(roomId, i) {
+  appState.tasks[roomId].splice(i,1);
+  save(); renderGlobalTareas(); updateHeader(); updateFloorPlan();
+  if(appState.activeRoom===roomId) renderPanel();
+}
+
+// ── GLOBAL COMPRA ──────────────────────────────────────────────
+
+function renderGlobalCompra() {
+  const filter = appState.globalFilter.compra || 'todas';
+  const filters = ['todas','por comprar','comprado'];
+  document.getElementById('filter-bar-compra').innerHTML = filters.map(f =>
+    `<button class="filter-btn ${filter===f?'active':''}" onclick="setGlobalFilter('compra','${f}')">${f}</button>`
+  ).join('');
+
+  const total = appState.compra.length;
+  const bought = appState.compra.filter(x=>x.comprado).length;
+  const gastado = appState.compra.filter(x=>x.comprado&&x.precio).reduce((s,x)=>s+parseFloat(x.precio||0),0);
+  const pendGasto = appState.compra.filter(x=>!x.comprado&&x.precio).reduce((s,x)=>s+parseFloat(x.precio||0),0);
+
+  document.getElementById('gstats-compra').innerHTML = `
+    <div class="gstat-pill"><strong>${total}</strong> artículos</div>
+    <div class="gstat-pill"><strong style="color:#5cb85c">${bought}</strong> comprados</div>
+    <div class="gstat-pill"><strong style="color:#e8b84b">${total-bought}</strong> pendientes</div>
+    ${gastado?`<div class="gstat-pill"><strong>${gastado.toFixed(0)}€</strong> gastados</div>`:''}
+    ${pendGasto?`<div class="gstat-pill"><strong>${pendGasto.toFixed(0)}€</strong> por gastar</div>`:''}
+  `;
+
+  // Group by room
+  let html = '';
+  ROOMS_DEF.forEach(r => {
+    let items = appState.compra.filter(x=>x.roomId===r.id);
+    if(filter==='por comprar') items = items.filter(x=>!x.comprado);
+    if(filter==='comprado') items = items.filter(x=>x.comprado);
+    if(!items.length) return;
+    html += `<div class="gcompra-room-group">
+      <div class="gcompra-room-header">
+        <div class="gcompra-room-dot" style="background:${r.color}"></div>
+        ${r.name} · ${items.length} artículo${items.length!==1?'s':''}
+      </div>
+      ${items.map(it => {
+        const i = appState.compra.indexOf(it);
+        return `<div class="compra-item ${it.comprado?'compra-done':''}">
+          <input type="checkbox" class="task-check" ${it.comprado?'checked':''} onchange="globalToggleCompra(${i})">
+          <span class="compra-text">${it.texto}</span>
+          ${it.precio?`<span class="compra-price">${parseFloat(it.precio).toFixed(0)}€</span>`:''}
+          <button class="btn-icon" onclick="globalDeleteCompra(${i})">✕</button>
+        </div>`;
+      }).join('')}
+    </div>`;
+  });
+
+  // Items with no room or unknown room
+  const sinRoom = appState.compra.filter(x => !x.roomId || !ROOMS_DEF.find(r=>r.id===x.roomId));
+  let sinRoomFiltered = sinRoom;
+  if(filter==='por comprar') sinRoomFiltered = sinRoom.filter(x=>!x.comprado);
+  if(filter==='comprado') sinRoomFiltered = sinRoom.filter(x=>x.comprado);
+  if(sinRoomFiltered.length) {
+    html += `<div class="gcompra-room-group">
+      <div class="gcompra-room-header"><div class="gcompra-room-dot" style="background:var(--muted)"></div>Sin habitación asignada</div>
+      ${sinRoomFiltered.map(it => {
+        const i = appState.compra.indexOf(it);
+        return `<div class="compra-item ${it.comprado?'compra-done':''}">
+          <input type="checkbox" class="task-check" ${it.comprado?'checked':''} onchange="globalToggleCompra(${i})">
+          <span class="compra-text">${it.texto}</span>
+          ${it.precio?`<span class="compra-price">${parseFloat(it.precio).toFixed(0)}€</span>`:''}
+          <button class="btn-icon" onclick="globalDeleteCompra(${i})">✕</button>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }
+
+  if(!html) html = `<div class="empty-state">No hay artículos${filter!=='todas'?' en esta categoría':''}.</div>`;
+  document.getElementById('global-compra-list').innerHTML = html;
+
+  // Add form for global compra
+  document.getElementById('global-compra-form-area').innerHTML = `
+    <div class="global-add-form">
+      <div style="font-size:0.7rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em">Añadir artículo</div>
+      <input id="gnc-text" placeholder="Artículo a comprar..." onkeydown="if(event.key==='Enter')addGlobalCompra()">
+      <div class="form-row">
+        <select id="gnc-room">
+          <option value="">Sin habitación</option>
+          ${ROOMS_DEF.map(r=>`<option value="${r.id}">${r.name}</option>`).join('')}
+        </select>
+        <input id="gnc-price" type="number" placeholder="Precio €">
+      </div>
+      <button class="btn-primary" onclick="addGlobalCompra()">+ Añadir a la lista</button>
+    </div>
+  `;
+}
+
+function globalToggleCompra(i) {
+  appState.compra[i].comprado = !appState.compra[i].comprado;
+  save(); renderGlobalCompra(); updateHeader();
+  if(appState.activeRoom) renderPanel();
+}
+
+function globalDeleteCompra(i) {
+  appState.compra.splice(i,1);
+  save(); renderGlobalCompra(); updateHeader();
+  if(appState.activeRoom) renderPanel();
+}
+
+function addGlobalCompra() {
+  const txt = document.getElementById('gnc-text')?.value?.trim();
+  if(!txt) { showNotif('Escribe un artículo'); return; }
+  appState.compra.push({
+    id: uid(),
+    roomId: document.getElementById('gnc-room')?.value || '',
+    texto: txt,
+    precio: document.getElementById('gnc-price')?.value || '',
+    comprado: false
+  });
+  save(); renderGlobalCompra(); updateHeader(); showNotif('Artículo añadido ✓');
+}
+
+// ── HERRAMIENTAS ──────────────────────────────────────────────
+
+function renderHerramientas() {
+  const herr = appState.herramientas || [];
+  const aqui = herr.filter(h=>h.estado==='aqui').length;
+  const fuera = herr.filter(h=>h.estado==='fuera').length;
+  const falta = herr.filter(h=>h.estado==='falta').length;
+
+  document.getElementById('gstats-herr').innerHTML = `
+    <div class="gstat-pill"><strong>${herr.length}</strong> herramientas</div>
+    ${aqui?`<div class="gstat-pill"><strong style="color:#5cb85c">${aqui}</strong> aquí</div>`:''}
+    ${fuera?`<div class="gstat-pill"><strong style="color:#e8b84b">${fuera}</strong> fuera</div>`:''}
+    ${falta?`<div class="gstat-pill"><strong style="color:#e05050">${falta}</strong> por comprar</div>`:''}
+  `;
+
+  if(!herr.length) {
+    document.getElementById('herr-list').innerHTML = `<div class="empty-state">No hay herramientas todavía.<br>Añade la primera arriba.</div>`;
+    return;
+  }
+
+  const statusLabel = { aqui:'Aquí ✓', fuera:'Fuera', falta:'Falta comprar' };
+  const statusClass = { aqui:'tool-aqui', fuera:'tool-fuera', falta:'tool-falta' };
+
+  document.getElementById('herr-list').innerHTML = herr.map((h,i) => `
+    <div class="tool-item">
+      <div style="flex:1;min-width:0">
+        <div class="tool-name">${h.nombre}</div>
+        ${h.nota?`<div class="tool-note">${h.nota}</div>`:''}
+      </div>
+      ${h.qty?`<div class="tool-qty">${h.qty}</div>`:''}
+      <select class="tool-status ${statusClass[h.estado]||'tool-aqui'}" onchange="changeHerr(${i},this.value)">
+        <option value="aqui" ${h.estado==='aqui'?'selected':''}>Aquí ✓</option>
+        <option value="fuera" ${h.estado==='fuera'?'selected':''}>Fuera</option>
+        <option value="falta" ${h.estado==='falta'?'selected':''}>Falta comprar</option>
+      </select>
+      <button class="btn-icon" onclick="deleteHerr(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+function addHerramienta() {
+  const nombre = document.getElementById('herr-nombre')?.value?.trim();
+  if(!nombre) { showNotif('Escribe el nombre de la herramienta'); return; }
+  if(!appState.herramientas) appState.herramientas = [];
+  appState.herramientas.push({
+    id: uid(),
+    nombre,
+    qty: document.getElementById('herr-qty')?.value?.trim() || '',
+    estado: document.getElementById('herr-estado')?.value || 'aqui',
+    nota: document.getElementById('herr-nota')?.value?.trim() || ''
+  });
+  document.getElementById('herr-nombre').value = '';
+  document.getElementById('herr-qty').value = '';
+  document.getElementById('herr-nota').value = '';
+  save(); renderHerramientas(); showNotif('Herramienta añadida ✓');
+}
+
+function changeHerr(i, val) {
+  appState.herramientas[i].estado = val;
+  save(); renderHerramientas();
+}
+
+function deleteHerr(i) {
+  appState.herramientas.splice(i,1);
+  save(); renderHerramientas();
+}
+
+// ── GANTT ENGINE ──────────────────────────────────────────────
+
+let ganttFilter = 'todas';
+
+function renderGantt() {
+  // Collect all tasks
+  let allTasks = [];
+  taskBuckets().forEach(r => {
+    (appState.tasks[r.id]||[]).forEach(t => {
+      // Avoid duplicates when a task belongs to multiple rooms
+      if(!allTasks.find(x=>x.id===t.id)) {
+        // Determine display rooms
+        const taskRooms = (t.rooms && t.rooms.length) ? t.rooms : [r.id];
+        const primaryRoom = taskBuckets().find(x=>x.id===taskRooms[0]) || taskBuckets().find(x=>x.id===r.id);
+        const roomNames = taskRooms.map(rid=>{ const rd=taskBuckets().find(x=>x.id===rid); return rd?rd.shortName||rd.name:''; }).join('+');
+        allTasks.push({...t, roomId:primaryRoom.id, roomName:roomNames, roomColor:primaryRoom.color});
+      }
+    });
+  });
+
+  if(ganttFilter !== 'todas') allTasks = allTasks.filter(t => t.estado === ganttFilter);
+
+  // ── Resolve relative positions for tasks without dates ──
+  const taskById = {};
+  allTasks.forEach(t => { taskById[t.id]=t; });
+
+  const resolved = {};
+  allTasks.forEach(t => { if(t.fecha) resolved[t.id]=true; });
+
+  // Helper: get effective start/end of a task (computed or explicit)
+  function taskWindow(t) {
+    const s = t._computedFecha || t.fecha;
+    const e = t._computedFechaFin || t.fechaFin || s;
+    return s ? { start: new Date(s), end: new Date(e) } : null;
+  }
+
+  // Iterate until convergence
+  for(let pass=0; pass<allTasks.length+1; pass++) {
+    let changed = false;
+    allTasks.forEach(t => {
+      if(resolved[t.id]) return;
+      const dur = Math.max(parseInt(t.duracion)||1, 1);
+
+      // Collect all relations: new multi-array and legacy fields
+      const rels = t.relaciones && t.relaciones.length ? t.relaciones
+        : (t.relType && t.relTaskId ? [{tipo:t.relType, taskId:t.relTaskId}]
+          : (t.depId ? [{tipo:'after', taskId:t.depId}] : []));
+
+      if(!rels.length) return; // no anchor at all
+
+      // Check all anchors are resolved
+      const allResolved = rels.every(r => {
+        const a = taskById[r.taskId];
+        return a && (a.fecha || a._computedFecha);
+      });
+      if(!allResolved) return;
+
+      // Compute start date from each relation, then pick the most constraining
+      // "after X" → must start after X ends (latest wins)
+      // "before X" → must finish before X starts (earliest X start wins → push our start back)
+      // "during X" → start = X start (latest X start wins)
+
+      let earliestStart = null; // will be maximized for 'after' / 'during'
+      let latestBeforeEnd = null; // for 'before': our end must be ≤ min(X.start - 1)
+
+      for(const rel of rels) {
+        const anchor = taskById[rel.taskId];
+        if(!anchor) continue;
+        const w = taskWindow(anchor);
+        if(!w) continue;
+        if(rel.tipo === 'after') {
+          const candidate = new Date(w.end); candidate.setDate(candidate.getDate()+1);
+          if(!earliestStart || candidate > earliestStart) earliestStart = candidate;
+        } else if(rel.tipo === 'during') {
+          if(!earliestStart || w.start > earliestStart) earliestStart = new Date(w.start);
+        } else if(rel.tipo === 'before') {
+          // Our end = start - 1; our start = end - dur + 1
+          const lastDay = new Date(w.start); lastDay.setDate(lastDay.getDate()-1);
+          if(!latestBeforeEnd || lastDay < latestBeforeEnd) latestBeforeEnd = lastDay;
+        }
+      }
+
+      let start;
+      if(latestBeforeEnd && !earliestStart) {
+        // Only "before" constraints: place as late as possible before the earliest deadline
+        start = new Date(latestBeforeEnd);
+        start.setDate(start.getDate() - dur + 1);
+      } else if(earliestStart && latestBeforeEnd) {
+        // Mixed: respect earliestStart but also finish before latestBeforeEnd
+        start = new Date(earliestStart);
+        // (If this violates the before constraint, we can't fully satisfy both — best effort)
+      } else if(earliestStart) {
+        start = new Date(earliestStart);
+      } else {
+        return; // no constraint resolved yet
+      }
+
+      const end = new Date(start.getTime()+(dur-1)*86400000);
+      t._computedFecha = start.toISOString().slice(0,10);
+      t._computedFechaFin = end.toISOString().slice(0,10);
+      resolved[t.id]=true;
+      changed=true;
+    });
+    if(!changed) break;
+  }
+
+  // Sort by effective start date
+  allTasks.sort((a,b) => {
+    const da = a.fecha||a._computedFecha, db = b.fecha||b._computedFecha;
+    if(!da && !db) return 0;
+    if(!da) return 1;
+    if(!db) return -1;
+    return da.localeCompare(db);
+  });
+
+  // Toolbar
+  document.getElementById('gantt-toolbar').innerHTML = `
+    <label>Filtrar:</label>
+    <select onchange="setGanttFilter(this.value)">
+      <option value="todas" ${ganttFilter==='todas'?'selected':''}>Todas</option>
+      <option value="pendiente" ${ganttFilter==='pendiente'?'selected':''}>Pendientes</option>
+      <option value="en curso" ${ganttFilter==='en curso'?'selected':''}>En curso</option>
+      <option value="hecho" ${ganttFilter==='hecho'?'selected':''}>Hechas</option>
+    </select>
+    <button class="btn-secondary" onclick="refreshGantt()" title="Recalcular y recolocar las tareas con fecha o relaciones">Actualizar cronograma</button>
+  `;
+
+  // Legend
+  document.getElementById('gantt-legend').innerHTML = taskBuckets().map(r =>
+    `<div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:${r.color}"></div>${r.name}</div>`
+  ).join('') + `
+    <div class="gantt-legend-item" style="margin-left:8px"><div class="gantt-legend-dot" style="background:#555;border:1px solid var(--accent)"></div>Hoy</div>
+    <div class="gantt-legend-item">→ flecha = depende de</div>
+    <div class="gantt-legend-item" style="opacity:0.55">░ barra tenue = fecha estimada</div>
+  `;
+
+  const inner = document.getElementById('gantt-inner');
+
+  // Tasks with a real or computed date
+  let withDate = allTasks.filter(t => t.fecha || t._computedFecha);
+  const withoutDate = allTasks.filter(t => !t.fecha && !t._computedFecha);
+
+  if(!allTasks.length) {
+    inner.innerHTML = `<div class="gantt-empty"><div style="font-size:2rem;opacity:0.3">📅</div>No hay tareas todavía.<br>Añade tareas con fecha de inicio desde cada habitación.</div>`;
+    return;
+  }
+
+  const hasScheduledRows = withDate.length > 0;
+
+  // Determine date range
+  const today = new Date(); today.setHours(0,0,0,0);
+  const allDates = [];
+  withDate.forEach(t => {
+    const s = t.fecha||t._computedFecha;
+    const e = t.fechaFin||t._computedFechaFin||s;
+    if(s) allDates.push(new Date(s));
+    if(e) allDates.push(new Date(e));
+  });
+  allDates.push(today);
+
+  let minDate = new Date(Math.min(...allDates.map(d=>d.getTime())));
+  let maxDate = new Date(Math.max(...allDates.map(d=>d.getTime())));
+
+  // Add padding
+  minDate.setDate(minDate.getDate() - 2);
+  maxDate.setDate(maxDate.getDate() + 5);
+
+  // Build day array
+  const days = [];
+  let cur = new Date(minDate);
+  while(cur <= maxDate) {
+    days.push(new Date(cur));
+    cur.setDate(cur.getDate() + 1);
+  }
+
+  const DAY_W = 32; // px per day
+  const ROW_H = 40;
+  const NAME_W = 210;
+
+  // Grid template columns: name col + one per day
+  const gridCols = `${NAME_W}px ` + days.map(()=>`${DAY_W}px`).join(' ');
+
+  // Build HTML
+  let html = `<div class="gantt-table" style="grid-template-columns:${gridCols}">`;
+
+  // Header row
+  html += `<div class="gantt-header-cell col-name">Tarea</div>`;
+  days.forEach((d,di) => {
+    const isWeekend = d.getDay()===0||d.getDay()===6;
+    const isToday = d.toDateString()===today.toDateString();
+    const label = d.getDate()===1||di===0 ? `${d.getDate()}/${d.getMonth()+1}` : (d.getDate()%5===0?d.getDate():'');
+    html += `<div class="gantt-header-cell ${isWeekend?'weekend':''} ${isToday?'today-col':''}" style="font-size:0.58rem">${label}</div>`;
+  });
+
+  if(!hasScheduledRows) {
+    html += `<div class="gantt-cell col-name"><div class="gantt-task-name">Arrastra aquí</div><div class="gantt-task-room" style="color:var(--muted)">sin tareas colocadas</div></div>`;
+    html += `<div class="gantt-cell gantt-day-cell gantt-grid-row" data-row-task-id="" style="grid-column:span ${days.length};height:${ROW_H}px;position:relative;border-right:none">`;
+    days.forEach((d,di) => {
+      const isWeekend = d.getDay()===0||d.getDay()===6;
+      const isToday = d.toDateString()===today.toDateString();
+      html += `<div style="position:absolute;top:0;bottom:0;left:${di*DAY_W}px;width:${DAY_W}px;${isWeekend?'background:#ffffff04;':''} ${isToday?'background:#1c190080;':''} border-right:1px solid #1a1a1a"></div>`;
+    });
+    html += `<div style="position:absolute;left:10px;top:10px;color:var(--muted);font-size:0.72rem;font-family:'DM Mono',monospace">Suelta una tarea sin asignar para fijar fecha</div></div>`;
+  }
+
+  // Task rows
+  withDate.forEach(t => {
+    const startStr = t.fecha||t._computedFecha;
+    const endStr = t.fechaFin||t._computedFechaFin||startStr;
+    const startDate = new Date(startStr);
+    const endDate = new Date(endStr);
+    const startIdx = days.findIndex(d => d.toDateString()===startDate.toDateString());
+    const endIdx = days.findIndex(d => d.toDateString()===endDate.toDateString());
+
+    const barLeft = (startIdx >= 0 ? startIdx : 0) * DAY_W;
+    const barWidth = Math.max((endIdx >= startIdx && endIdx >= 0 ? (endIdx - startIdx + 1) : 1) * DAY_W - 4, DAY_W - 4);
+
+    const stateColor = t.estado==='hecho' ? '#3a7a3a' : t.estado==='en curso' ? '#2a5a8a' : '#5a4a1a';
+    const bgColor = t.roomColor;
+    const isComputed = !t.fecha; // positioned from relative/duration, no explicit date
+
+    // Name cell
+    html += `<div class="gantt-cell col-name" onclick="openEditModalByTaskId('${t.id}')" style="cursor:pointer">
+      <div class="gantt-task-name" title="${t.texto}">${t.texto}</div>
+      <div class="gantt-task-room" style="color:${t.roomColor}">${t.roomName}${isComputed?' <span style="opacity:0.5;font-size:0.55rem">~est</span>':''}</div>
+    </div>`;
+
+    // Day cells as one wide cell spanning all days
+    html += `<div class="gantt-cell gantt-day-cell gantt-grid-row" data-row-task-id="${t.id}" style="grid-column:span ${days.length};height:${ROW_H}px;position:relative;border-right:none">`;
+
+    // Vertical grid lines
+    days.forEach((d,di) => {
+      const isWeekend = d.getDay()===0||d.getDay()===6;
+      const isToday = d.toDateString()===today.toDateString();
+      html += `<div style="position:absolute;top:0;bottom:0;left:${di*DAY_W}px;width:${DAY_W}px;${isWeekend?'background:#ffffff04;':''} ${isToday?'background:#1c190080;':''} border-right:1px solid #1a1a1a"></div>`;
+    });
+
+    // The bar
+    html += `<div class="gantt-bar editable" draggable="true" data-id="${t.id}" data-start="${startStr}" data-duration="${Math.max(parseInt(t.duracion)||Math.max(1,endIdx-startIdx+1),1)}" style="left:${barLeft+2}px;width:${barWidth}px;background:${bgColor};border-left:3px solid ${stateColor};${isComputed?'opacity:0.55;border-style:dashed;':''}" title="${t.texto} · ${t.estado}${startStr?' · '+startStr:''}${endStr&&endStr!==startStr?' → '+endStr:''}${isComputed?' (estimado)':''}">
+      <div class="gantt-bar-label">${t.texto.length>20?t.texto.slice(0,20)+'…':t.texto}</div><div class="gantt-resize-handle" title="Arrastra para cambiar duración"></div>
+    </div>`;
+
+    // Today line
+    const todayIdx = days.findIndex(d => d.toDateString()===today.toDateString());
+    if(todayIdx>=0) {
+      html += `<div class="gantt-today-line" style="left:${todayIdx*DAY_W + DAY_W/2}px"></div>`;
+    }
+
+    html += `</div>`; // close day span cell
+  });
+
+  html += `</div>`; // close gantt-table
+
+  // Tasks without date section
+  if(withoutDate.length) {
+    html += `<div style="padding:1rem;border-top:1px solid var(--border);margin-top:8px">
+      <div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Sin fecha ni posición asignada (${withoutDate.length})</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        ${withoutDate.map(t => `
+          <div class="gantt-unscheduled-chip" draggable="true" data-id="${t.id}" onclick="openEditModalByTaskId('${t.id}')" title="Arrastra al cronograma para poner fecha" style="background:var(--surface);border:1px solid ${t.roomColor}44;border-radius:4px;padding:5px 10px;font-size:0.75rem;display:flex;align-items:center;gap:6px">
+            <div style="width:6px;height:6px;border-radius:50%;background:${t.roomColor};flex-shrink:0"></div>
+            <span style="color:var(--muted);font-size:0.6rem;font-family:'DM Mono',monospace">${t.roomName}</span>
+            <span>${t.texto}</span>
+            <span class="tag tag-${t.estado==='hecho'?'done':t.estado==='en curso'?'doing':'pending'}" style="font-size:0.58rem">${t.estado}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+  }
+
+  // Dependency arrows using SVG overlay
+  // We render them after HTML using a post-render step
+  inner.innerHTML = html;
+
+  // Activate click, drag/drop and resize handlers after HTML is replaced
+  initGanttInteractions(allTasks, days, DAY_W);
+
+  // Draw dependency arrows after render
+  setTimeout(() => drawDepArrows(withDate, days, DAY_W, ROW_H, NAME_W), 50);
+}
+
+
+function findTaskLocationById(taskId) {
+  for(const bucket of taskBuckets()) {
+    const arr = appState.tasks[bucket.id] || [];
+    const idx = arr.findIndex(t => t.id === taskId);
+    if(idx >= 0) return { roomId: bucket.id, idx, task: arr[idx] };
+  }
+  return null;
+}
+
+function openEditModalByTaskId(taskId) {
+  const loc = findTaskLocationById(taskId);
+  if(loc) openEditModal(loc.roomId, loc.idx);
+}
+
+function setTaskDateById(taskId, startDate, durationDays) {
+  const loc = findTaskLocationById(taskId);
+  if(!loc) return;
+  const base = new Date(startDate); base.setHours(0,0,0,0);
+  const dur = Math.max(parseInt(durationDays || loc.task.duracion || 1) || 1, 1);
+  const end = new Date(base); end.setDate(end.getDate() + dur - 1);
+  const rooms = loc.task.rooms && loc.task.rooms.length ? loc.task.rooms : [loc.roomId];
+  rooms.forEach(rid => {
+    const arr = appState.tasks[rid] || [];
+    const i = arr.findIndex(t => t.id === taskId);
+    if(i >= 0) {
+      arr[i].fecha = base.toISOString().slice(0,10);
+      arr[i].fechaFin = end.toISOString().slice(0,10);
+      arr[i].duracion = String(dur);
+    }
+  });
+  save(); renderGantt(); updateHeader(); updateFloorPlan(); updateOverview();
+  showNotif('Cronograma actualizado ✓');
+}
+
+function initGanttInteractions(allTasks, days, DAY_W) {
+  const firstDay = days[0];
+  const dayFromClientX = (clientX, rowEl) => {
+    const rect = rowEl.getBoundingClientRect();
+    let idx = Math.floor((clientX - rect.left) / DAY_W);
+    idx = Math.max(0, Math.min(days.length - 1, idx));
+    return days[idx];
+  };
+
+  document.querySelectorAll('.gantt-bar').forEach(bar => {
+    let resizing = false;
+    const taskId = bar.dataset.id;
+    bar.addEventListener('click', ev => {
+      if(ev.target.classList.contains('gantt-resize-handle')) return;
+      ev.stopPropagation(); openEditModalByTaskId(taskId);
+    });
+    bar.querySelector('.gantt-resize-handle')?.addEventListener('mousedown', ev => {
+      ev.preventDefault(); ev.stopPropagation(); resizing = true;
+      const startX = ev.clientX;
+      const loc = findTaskLocationById(taskId); if(!loc) return;
+      const startDur = Math.max(parseInt(loc.task.duracion)||1, 1);
+      const onMove = e => {
+        const deltaDays = Math.round((e.clientX - startX) / DAY_W);
+        const dur = Math.max(startDur + deltaDays, 1);
+        bar.style.width = Math.max(dur * DAY_W - 4, DAY_W - 4) + 'px';
+      };
+      const onUp = e => {
+        document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp);
+        const deltaDays = Math.round((e.clientX - startX) / DAY_W);
+        const dur = Math.max(startDur + deltaDays, 1);
+        const start = loc.task.fecha || bar.dataset.start || new Date().toISOString().slice(0,10);
+        setTaskDateById(taskId, start, dur);
+      };
+      document.addEventListener('mousemove', onMove); document.addEventListener('mouseup', onUp);
+    });
+    bar.addEventListener('dragstart', ev => {
+      if(resizing) { ev.preventDefault(); return; }
+      ev.dataTransfer.setData('text/plain', taskId);
+      ev.dataTransfer.effectAllowed = 'move';
+    });
+  });
+
+  document.querySelectorAll('.gantt-unscheduled-chip').forEach(chip => {
+    chip.addEventListener('dragstart', ev => {
+      ev.dataTransfer.setData('text/plain', chip.dataset.id);
+      ev.dataTransfer.effectAllowed = 'move';
+    });
+  });
+
+  document.querySelectorAll('.gantt-grid-row').forEach(row => {
+    row.addEventListener('dragover', ev => { ev.preventDefault(); row.classList.add('gantt-drop-target'); });
+    row.addEventListener('dragleave', () => row.classList.remove('gantt-drop-target'));
+    row.addEventListener('drop', ev => {
+      ev.preventDefault(); row.classList.remove('gantt-drop-target');
+      const taskId = ev.dataTransfer.getData('text/plain');
+      if(!taskId) return;
+      const d = dayFromClientX(ev.clientX, row);
+      const loc = findTaskLocationById(taskId);
+      const dur = Math.max(parseInt(loc?.task?.duracion)||1, 1);
+      setTaskDateById(taskId, d, dur);
+    });
+  });
+}
+
+function drawDepArrows(tasks, days, DAY_W, ROW_H, NAME_W) {
+  // Remove old arrows
+  document.querySelectorAll('.dep-arrow-svg').forEach(e=>e.remove());
+
+  const container = document.getElementById('gantt-container');
+  if(!container) return;
+
+  // For each task, draw arrows for all 'after' relations (and legacy depId)
+  tasks.forEach((t, rowIdx) => {
+    // Collect all 'after' type target IDs
+    const afterIds = [];
+    if(t.relaciones && t.relaciones.length) {
+      t.relaciones.filter(r=>r.tipo==='after'&&r.taskId).forEach(r=>afterIds.push(r.taskId));
+    } else {
+      if(t.depId) afterIds.push(t.depId);
+      else if(t.relType==='after' && t.relTaskId) afterIds.push(t.relTaskId);
+    }
+    afterIds.forEach(depTargetId => {
+      const depTask = tasks.find(x=>x.id===depTargetId);
+      if(!depTask) return;
+
+    const depRowIdx = tasks.indexOf(depTask);
+
+    const depEndDate = depTask.fechaFin||depTask._computedFechaFin ? new Date(depTask.fechaFin||depTask._computedFechaFin) : new Date(depTask.fecha||depTask._computedFecha);
+    const thisStartDate = new Date(t.fecha||t._computedFecha);
+
+    const depEndDayIdx = days.findIndex(d=>d.toDateString()===depEndDate.toDateString());
+    const thisStartDayIdx = days.findIndex(d=>d.toDateString()===thisStartDate.toDateString());
+
+    if(depEndDayIdx<0||thisStartDayIdx<0) return;
+
+    // Pixel positions (relative to gantt-table)
+    const x1 = NAME_W + depEndDayIdx * DAY_W + DAY_W; // right edge of dep bar
+    const y1 = (depRowIdx + 1) * ROW_H + ROW_H/2; // center of dep row (+1 for header)
+    const x2 = NAME_W + thisStartDayIdx * DAY_W; // left edge of this bar
+    const y2 = (rowIdx + 1) * ROW_H + ROW_H/2;
+
+    // Draw SVG arrow
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS,'svg');
+    svg.classList.add('dep-arrow-svg');
+    svg.style.cssText = `position:absolute;top:0;left:0;width:100%;height:${(tasks.length+1)*ROW_H}px;pointer-events:none;z-index:8;overflow:visible`;
+
+    const midX = (x1+x2)/2;
+    const path = document.createElementNS(svgNS,'path');
+    const d = `M${x1},${y1} C${midX},${y1} ${midX},${y2} ${x2},${y2}`;
+    path.setAttribute('d',d);
+    path.setAttribute('fill','none');
+    path.setAttribute('stroke','#e8d5a055');
+    path.setAttribute('stroke-width','1.5');
+    path.setAttribute('stroke-dasharray','4,3');
+    path.setAttribute('marker-end','url(#arrowhead)');
+
+    const defs = document.createElementNS(svgNS,'defs');
+    const marker = document.createElementNS(svgNS,'marker');
+    marker.setAttribute('id','arrowhead');
+    marker.setAttribute('markerWidth','6');
+    marker.setAttribute('markerHeight','6');
+    marker.setAttribute('refX','3');
+    marker.setAttribute('refY','3');
+    marker.setAttribute('orient','auto');
+    const poly = document.createElementNS(svgNS,'polygon');
+    poly.setAttribute('points','0 0, 6 3, 0 6');
+    poly.setAttribute('fill','#e8d5a055');
+    marker.appendChild(poly);
+    defs.appendChild(marker);
+    svg.appendChild(defs);
+    svg.appendChild(path);
+
+    // Append to a relative wrapper inside the gantt table
+    const inner = document.getElementById('gantt-inner');
+    if(inner) inner.style.position='relative';
+    inner.appendChild(svg);
+    }); // end afterIds.forEach
+  }); // end tasks.forEach
+}
+
+function setGanttFilter(val) {
+  ganttFilter = val;
+  renderGantt();
+}
+
+function refreshGantt() {
+  renderGantt();
+  showNotif('Cronograma actualizado ✓');
+}
+
+window.setGanttFilter = setGanttFilter;
+window.refreshGantt = refreshGantt;
+
+window.openGlobal = openGlobal;
+window.closeGlobal = closeGlobal;
+window.setGlobalFilter = setGlobalFilter;
+window.globalToggleTask = globalToggleTask;
+window.globalChangeState = globalChangeState;
+window.globalDeleteTask = globalDeleteTask;
+window.globalToggleCompra = globalToggleCompra;
+window.globalDeleteCompra = globalDeleteCompra;
+window.addGlobalCompra = addGlobalCompra;
+window.addHerramienta = addHerramienta;
+window.changeHerr = changeHerr;
+window.deleteHerr = deleteHerr;
 
 window.selectRoom = selectRoom;
 window.closeRoom = closeRoom;
