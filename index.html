@@ -862,14 +862,138 @@ select.state-sel {
   font-family:'DM Mono',monospace; letter-spacing:0.05em;
 }
 
-/* Mobile fallback */
+/* Responsive · escritorio + móvil */
+@media (max-width: 980px) {
+  header {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0.9rem 1rem;
+    position: sticky;
+  }
+  .logo { width: 100%; }
+  .global-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .global-nav::-webkit-scrollbar { display:none; }
+  .gnav-btn { white-space: nowrap; flex: 0 0 auto; }
+  .header-stats { gap: 0.9rem; margin-left: auto; }
+  .hstat-val { font-size: 0.95rem; }
+  .hstat-label { font-size: 0.58rem; }
+
+  main {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: calc(100vh - 110px);
+  }
+  .floor-section {
+    min-height: 330px;
+    height: auto;
+    padding: 1rem;
+    overflow: visible;
+  }
+  .floor-plan {
+    min-height: 260px;
+    overflow: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+  .floor-svg {
+    min-width: 680px;
+    max-height: none;
+  }
+  .detail-panel {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    min-height: 55vh;
+  }
+  .overview, .panel-header, .panel-body { padding-left: 1rem; padding-right: 1rem; }
+  .overview-big { font-size: 2.25rem; }
+}
+
 @media (max-width: 768px) {
-  main { grid-template-columns: 1fr; height: auto; }
-  .detail-panel { border-left: none; border-top: 1px solid var(--border); min-height: 60vh; }
-  .floor-section { height: 50vw; min-height: 260px; }
-  .global-nav { gap: 4px; }
-  .gnav-btn { font-size: 0.62rem; padding: 4px 8px; }
+  body { font-size: 15px; }
+  .floor-title { margin-bottom: 0.65rem; }
+  .room-label { font-size: 12px; }
+  .room-sublabel { font-size: 10px; }
+  .task-item, .compra-item, .tool-item { gap: 8px; }
+  .task-actions { flex-wrap: wrap; justify-content: flex-end; }
+  .form-row, .global-add-form .form-row, .edit-modal .form-row { flex-direction: column; }
+  .global-overlay-header {
+    padding: 0.9rem 1rem;
+    align-items: flex-start;
+    gap: 8px;
+    flex-direction: column;
+  }
+  .global-overlay-title { font-size: 0.86rem; }
   .global-overlay-body { padding: 1rem; }
+  .filter-bar, .gstats-row, .gantt-legend { gap: 6px; }
+  .gstat-pill { width: calc(50% - 6px); padding: 7px 9px; }
+
+  .gantt-container {
+    min-height: 52vh;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+  }
+  .gantt-header-cell.col-name, .gantt-cell.col-name {
+    min-width: 150px !important;
+    max-width: 150px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .gantt-task-name { max-width: 132px; font-size: 0.72rem; }
+  .gantt-task-room { font-size: 0.55rem; }
+  .gantt-bar { top: 6px; bottom: 6px; min-height: 28px; touch-action: none; }
+  .gantt-resize-handle { width: 18px; background:#0004; }
+  .gantt-unscheduled-chip {
+    min-height: 34px;
+    touch-action: none;
+  }
+  .gantt-toolbar { width: 100%; gap: 6px; }
+  .gantt-toolbar select, .gantt-toolbar button { flex: 1; min-width: 130px; }
+
+  .edit-modal-overlay { align-items: flex-end; }
+  .edit-modal {
+    width: 100vw;
+    max-height: 92vh;
+    border-radius: 12px 12px 0 0;
+    padding: 1rem;
+  }
+  .edit-modal-actions {
+    position: sticky;
+    bottom: -1rem;
+    background: var(--surface);
+    padding-top: 8px;
+    flex-wrap: wrap;
+  }
+  .edit-modal-actions .btn-primary { flex-basis: 100%; order: -1; }
+  .room-check-label { flex: 1 1 calc(50% - 6px); justify-content: center; }
+  .notif { left: 1rem; right: 1rem; bottom: 1rem; text-align:center; }
+}
+
+@media (max-width: 430px) {
+  header { padding: 0.8rem; }
+  .logo { font-size: 1rem; }
+  .header-stats { width: 100%; justify-content: space-between; }
+  .hstat { text-align: left; }
+  .gnav-btn { font-size: 0.58rem; padding: 6px 8px; }
+  .floor-section { padding: 0.8rem; min-height: 300px; }
+  .floor-plan { min-height: 235px; }
+  .floor-svg { min-width: 620px; }
+  .panel-tabs { overflow-x: auto; }
+  .ptab { min-width: 96px; font-size: 0.68rem; }
+  .task-item { align-items: flex-start; }
+  .task-actions { width: 100%; margin-top: 4px; }
+  .filter-btn { flex: 1 1 calc(50% - 6px); }
+  .gstat-pill { width: 100%; }
+  .global-overlay-body { padding: 0.8rem; }
+  .gantt-header-cell.col-name, .gantt-cell.col-name { min-width: 132px !important; max-width:132px; }
+  .gantt-task-name { max-width: 112px; }
+  .edit-modal-title { font-size: 0.72rem; }
 }
 </style>
 </head>
@@ -2409,6 +2533,90 @@ function initGanttInteractions(allTasks, days, DAY_W) {
       const loc = findTaskLocationById(taskId);
       const dur = Math.max(parseInt(loc?.task?.duracion)||1, 1);
       setTaskDateById(taskId, d, dur);
+    });
+  });
+
+  // Soporte móvil/tablet: tocar para editar, mantener y mover para recolocar, borde derecho para duración.
+  const rowFromPoint = (x, y) => document.elementFromPoint(x, y)?.closest?.('.gantt-grid-row');
+  const clearDropTargets = () => document.querySelectorAll('.gantt-drop-target').forEach(e => e.classList.remove('gantt-drop-target'));
+
+  document.querySelectorAll('.gantt-bar').forEach(bar => {
+    const taskId = bar.dataset.id;
+    let pointer = null;
+    bar.addEventListener('pointerdown', ev => {
+      if(ev.pointerType === 'mouse') return;
+      const isResize = ev.target.classList.contains('gantt-resize-handle');
+      const loc = findTaskLocationById(taskId);
+      if(!loc) return;
+      pointer = {
+        id: ev.pointerId,
+        mode: isResize ? 'resize' : 'move',
+        startX: ev.clientX,
+        startY: ev.clientY,
+        moved: false,
+        dur: Math.max(parseInt(loc.task.duracion)||1, 1),
+        startDate: loc.task.fecha || bar.dataset.start || new Date().toISOString().slice(0,10)
+      };
+      bar.setPointerCapture?.(ev.pointerId);
+      ev.preventDefault();
+    });
+    bar.addEventListener('pointermove', ev => {
+      if(!pointer || ev.pointerId !== pointer.id) return;
+      if(Math.abs(ev.clientX-pointer.startX) > 5 || Math.abs(ev.clientY-pointer.startY) > 5) pointer.moved = true;
+      if(pointer.mode === 'resize') {
+        const deltaDays = Math.round((ev.clientX - pointer.startX) / DAY_W);
+        const dur = Math.max(pointer.dur + deltaDays, 1);
+        bar.style.width = Math.max(dur * DAY_W - 4, DAY_W - 4) + 'px';
+      } else {
+        clearDropTargets();
+        rowFromPoint(ev.clientX, ev.clientY)?.classList.add('gantt-drop-target');
+      }
+      ev.preventDefault();
+    });
+    bar.addEventListener('pointerup', ev => {
+      if(!pointer || ev.pointerId !== pointer.id) return;
+      const data = pointer;
+      pointer = null;
+      bar.releasePointerCapture?.(ev.pointerId);
+      clearDropTargets();
+      if(!data.moved) { openEditModalByTaskId(taskId); return; }
+      if(data.mode === 'resize') {
+        const deltaDays = Math.round((ev.clientX - data.startX) / DAY_W);
+        setTaskDateById(taskId, data.startDate, Math.max(data.dur + deltaDays, 1));
+      } else {
+        const row = rowFromPoint(ev.clientX, ev.clientY) || bar.closest('.gantt-grid-row');
+        if(row) setTaskDateById(taskId, dayFromClientX(ev.clientX, row), data.dur);
+      }
+      ev.preventDefault();
+    });
+  });
+
+  document.querySelectorAll('.gantt-unscheduled-chip').forEach(chip => {
+    let pointer = null;
+    chip.addEventListener('pointerdown', ev => {
+      if(ev.pointerType === 'mouse') return;
+      pointer = { id: ev.pointerId, startX: ev.clientX, startY: ev.clientY, moved: false };
+      chip.setPointerCapture?.(ev.pointerId);
+      ev.preventDefault();
+    });
+    chip.addEventListener('pointermove', ev => {
+      if(!pointer || ev.pointerId !== pointer.id) return;
+      if(Math.abs(ev.clientX-pointer.startX) > 5 || Math.abs(ev.clientY-pointer.startY) > 5) pointer.moved = true;
+      clearDropTargets();
+      rowFromPoint(ev.clientX, ev.clientY)?.classList.add('gantt-drop-target');
+      ev.preventDefault();
+    });
+    chip.addEventListener('pointerup', ev => {
+      if(!pointer || ev.pointerId !== pointer.id) return;
+      const data = pointer; pointer = null; chip.releasePointerCapture?.(ev.pointerId);
+      clearDropTargets();
+      if(!data.moved) { openEditModalByTaskId(chip.dataset.id); return; }
+      const row = rowFromPoint(ev.clientX, ev.clientY);
+      if(row) {
+        const loc = findTaskLocationById(chip.dataset.id);
+        setTaskDateById(chip.dataset.id, dayFromClientX(ev.clientX, row), Math.max(parseInt(loc?.task?.duracion)||1, 1));
+      }
+      ev.preventDefault();
     });
   });
 }
