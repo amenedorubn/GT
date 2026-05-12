@@ -21,7 +21,7 @@
   --h4: #5b9bd5;
   --bano: #d4739a;
   --cocina: #7ec8c8;
-  --despensa: #a0b8d0;
+  --despensa: #8b5a2b;
   --pasillo: #6070a0;
 }
 
@@ -934,6 +934,16 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
 .question-badge.alta{background:#e85d5d22;color:#ff9a9a}.question-badge.media{background:#ffcf5a22;color:#ffdf80}.question-badge.baja{background:#65a7ff22;color:#9dc7ff}.question-badge.resuelta{background:#43d17a22;color:#82e8aa}
 @media(max-width:700px){.question-head{flex-direction:column}.question-form .form-row{flex-direction:column}.question-actions button{flex:1}}
 
+.person-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.person-card{border:1px solid #ffffff14;background:linear-gradient(180deg,#ffffff08,#ffffff03);border-radius:18px;padding:14px;cursor:pointer;transition:.15s}
+.person-card:hover,.person-card.active{border-color:var(--accent);transform:translateY(-1px)}
+.person-name{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.person-counts{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
+.person-section-title{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin:18px 0 8px}
+.person-empty{border:1px dashed #ffffff18;border-radius:14px;padding:14px;color:var(--muted);font-size:.85rem}
+.person-assign-select{min-width:120px}
+.person-assign-select{min-width:145px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px}.person-help{font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px}
+
 </style>
 </head>
 <body>
@@ -946,6 +956,7 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
     <button class="gnav-btn" id="gnav-compra" onclick="openGlobal('compra')">Toda la compra</button>
     <button class="gnav-btn" id="gnav-herramientas" onclick="openGlobal('herramientas')">Herramientas</button>
     <button class="gnav-btn" id="gnav-preguntas" onclick="openGlobal('preguntas')">Preguntas</button>
+    <button class="gnav-btn" id="gnav-personas" onclick="openGlobal('personas')">Personas</button>
     <button class="gnav-btn" id="gnav-gantt" onclick="openGlobal('gantt')">Cronograma</button>
   </div>
   <div class="header-stats">
@@ -1046,9 +1057,9 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
 
 <!-- Despensa -->
 <g class="room" id="room-despensa" onclick="selectRoom('despensa')">
-  <rect x="305" y="330" width="145" height="170" rx="4" fill="#a0b8d015" stroke="#a0b8d0" stroke-width="1.5"/>
-  <text class="room-label" x="377" y="405" fill="#a0b8d0">Despensa</text>
-  <text class="room-progress-text" x="377" y="425" fill="#a0b8d099" id="prog-despensa">0%</text>
+  <rect x="305" y="330" width="145" height="170" rx="4" fill="#8b5a2b22" stroke="#8b5a2b" stroke-width="1.5"/>
+  <text class="room-label" x="377" y="405" fill="#8b5a2b">Despensa</text>
+  <text class="room-progress-text" x="377" y="425" fill="#8b5a2b99" id="prog-despensa">0%</text>
 </g>
 
 <!-- Cocina -->
@@ -1140,6 +1151,7 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
     </div>
     <div><label>Descripción</label><input id="em-text" placeholder="Descripción de la tarea..."></div>
     <div><label>Estado</label><select id="em-state"><option value="pendiente">pendiente</option><option value="en curso">en curso</option><option value="hecho">hecho</option></select></div>
+    <div><label>Personas asignadas</label><select id="em-person" class="person-assign-select"></select></div>
     <div><label>Habitaciones (puede ser varias)</label><div class="room-check-grid" id="em-rooms"></div></div>
     <div class="form-row"><div style="flex:1"><label>Inicio</label><input id="em-date" type="date"></div><div style="flex:1"><label>Fin previsto</label><input id="em-datefin" type="date"></div></div>
     <div><label>Duración estimada (días) — si no hay fechas</label><input id="em-duracion" type="number" min="1" placeholder="Ej: 3"></div>
@@ -1242,12 +1254,30 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
         <select id="pregunta-room"></select>
         <select id="pregunta-task"></select>
         <select id="pregunta-priority"><option value="media">Prioridad media</option><option value="alta">Alta / bloqueante</option><option value="baja">Baja</option></select>
+        <select id="pregunta-person"></select>
       </div>
       <button class="btn-primary" onclick="addPregunta()">Guardar pregunta</button>
     </div>
     <div class="gstats-row" id="preguntas-stats"></div>
     <div class="filter-bar" id="preguntas-filter"></div>
     <div id="preguntas-list"></div>
+  </div>
+</div>
+
+
+<!-- GLOBAL: PERSONAS -->
+<div class="global-overlay" id="overlay-personas">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">PERSONAS · TAREAS Y PREGUNTAS ASIGNADAS</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn-primary" onclick="openNewTaskModal()">+ Tarea</button>
+      <button class="btn-secondary" onclick="openGlobal('preguntas')">+ Pregunta</button>
+      <button class="btn-icon" onclick="closeGlobal('personas')" style="font-size:18px;color:var(--muted)">✕</button>
+    </div>
+  </div>
+  <div class="global-overlay-body">
+    <div class="person-grid" id="person-grid"></div>
+    <div id="person-detail"></div>
   </div>
 </div>
 
@@ -1297,6 +1327,15 @@ let firebaseReady = false;
 let cargandoDesdeFirebase = false;
 
 
+const PERSONS_DEF = [
+  { id:'mama', name:'Mamá' },
+  { id:'papa', name:'Papá' },
+  { id:'nere', name:'Nere' },
+  { id:'javi', name:'Javi' },
+  { id:'ruben', name:'Rubén' }
+];
+let activePersonId = 'mama';
+
 const ROOMS_DEF = [
   { id:'fachada', name:'Fachada',       color:'#ffffff', shortName:'FAC' },
   { id:'h1',     name:'Habitación 1', color:'#f0c040', shortName:'H1' },
@@ -1305,7 +1344,7 @@ const ROOMS_DEF = [
   { id:'h4',     name:'Habitación 4', color:'#5b9bd5', shortName:'H4' },
   { id:'pasillo',name:'Pasillo',       color:'#8090c0', shortName:'PAS' },
   { id:'bano',   name:'Baño',          color:'#d4739a', shortName:'BAÑ' },
-  { id:'despensa',name:'Despensa',     color:'#a0b8d0', shortName:'DES' },
+  { id:'despensa',name:'Despensa',     color:'#8b5a2b', shortName:'DES' },
   { id:'cocina', name:'Cocina',        color:'#7ec8c8', shortName:'COC' },
 ];
 
@@ -1516,6 +1555,7 @@ function renderTasks(room){
           ${t.nota?`<div class="task-note">${t.nota}</div>`:''}
         </div>
         <div class="task-actions">
+          <select class="person-assign-select" onchange="updateTaskPersonsById('${t.id}',personSelectToIds(this.value))">${personSelectOptions(personIds(t))}</select>
           <button class="btn-icon" onclick="openEditModal('${room.id}',${i})" title="Editar" style="color:var(--accent);font-size:13px">✎</button>
           <select class="state-sel" onchange="changeState('${room.id}',${i},this.value)">
             ${['pendiente','en curso','hecho'].map(s=>`<option value="${s}"${t.estado===s?' selected':''}>${s}</option>`).join('')}
@@ -1548,6 +1588,7 @@ function renderTasks(room){
             <option value="en curso">en curso</option>
             <option value="hecho">hecho</option>
           </select>
+          <select id="nt-person" class="person-assign-select">${personSelectOptions([])}</select>
         </div>
         <div style="display:flex;gap:6px;margin-bottom:6px">
           <div style="flex:1">
@@ -1631,6 +1672,8 @@ function addTask(id){
     fecha: document.getElementById('nt-date')?.value||'',
     fechaFin: document.getElementById('nt-datefin')?.value||'',
     nota: document.getElementById('nt-nota')?.value||'',
+    personIds: personSelectToIds(document.getElementById('nt-person')?.value||''),
+    personId: personSelectToIds(document.getElementById('nt-person')?.value||'')[0]||'',
     depId: depId,
     rooms: [id],   // multi-room: list of room ids
     duracion: '',  // estimated days
@@ -1671,6 +1714,7 @@ function fillTaskModal(t, roomId, isNew) {
   document.getElementById('em-datefin').value = t.fechaFin || '';
   document.getElementById('em-duracion').value = t.duracion || '';
   document.getElementById('em-nota').value = t.nota || '';
+  const personSel=document.getElementById('em-person'); if(personSel) personSel.innerHTML=personSelectOptions(personIds(t));
 
   // Multi-room checkboxes
   const currentRooms = t.rooms && t.rooms.length ? t.rooms : [roomId];
@@ -1810,6 +1854,8 @@ function saveEditTask() {
     fechaFin: document.getElementById('em-datefin').value,
     duracion: document.getElementById('em-duracion').value,
     nota: document.getElementById('em-nota').value,
+    personIds: personSelectToIds(document.getElementById('em-person')?.value||''),
+    personId: personSelectToIds(document.getElementById('em-person')?.value||'')[0] || '',
     relaciones,
     relType,    // legacy compat
     relTaskId,  // legacy compat
@@ -1885,6 +1931,7 @@ function renderEverything(){
   if(document.getElementById('overlay-tareas')?.classList.contains('open')) renderGlobalTareas();
   if(document.getElementById('overlay-mando')?.classList.contains('open')) renderCommandCenter();
   if(document.getElementById('overlay-preguntas')?.classList.contains('open')) renderPreguntas();
+  if(document.getElementById('overlay-personas')?.classList.contains('open')) renderPersonas();
   if(document.getElementById('overlay-gantt')?.classList.contains('open')) renderGantt();
 }
 
@@ -1903,7 +1950,7 @@ function allTasksFlat(){
   const arr=[];
   ROOMS_DEF.forEach(r=>{
     (appState.tasks[r.id]||[]).forEach((t,i)=>{
-      if(!arr.find(x=>x.id===t.id)) arr.push({...t,_roomId:r.id,_idx:i,_room:r});
+      if(!arr.find(x=>x.id===t.id)) arr.push({...t,_roomId:r.id,_idx:i,_room:r,roomId:r.id,idx:i});
     });
   });
   return arr;
@@ -1911,6 +1958,47 @@ function allTasksFlat(){
 function htmlSafe(v){
   return String(v??'').replace(/[&<>'"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 }
+
+function personIds(item){
+  const arr = Array.isArray(item?.personIds) ? item.personIds : (item?.personId ? [item.personId] : []);
+  return [...new Set(arr.filter(Boolean))];
+}
+function selectedValues(sel){ return [...(sel?.selectedOptions||[])].map(o=>o.value).filter(Boolean); }
+function personOptions(selectedIds=[], includeEmpty=true){
+  const ids = Array.isArray(selectedIds) ? selectedIds : (selectedIds ? [selectedIds] : []);
+  return (includeEmpty?'<option value="">Sin asignar</option>':'') + PERSONS_DEF.map(p=>`<option value="${p.id}" ${ids.includes(p.id)?'selected':''}>${htmlSafe(p.name)}</option>`).join('');
+}
+function personSelectValue(selectedIds=[]){
+  const ids = personIds({personIds:selectedIds});
+  if(!ids.length) return '__none__';
+  if(PERSONS_DEF.every(p=>ids.includes(p.id))) return '__all__';
+  return ids[0] || '__none__';
+}
+function personSelectToIds(value){
+  if(value==='__all__') return PERSONS_DEF.map(p=>p.id);
+  if(value==='__none__' || !value) return [];
+  return [value];
+}
+function personSelectOptions(selectedIds=[]){
+  const val = personSelectValue(selectedIds);
+  return `<option value="__none__" ${val==='__none__'?'selected':''}>Nadie</option>`+
+    `<option value="__all__" ${val==='__all__'?'selected':''}>Todos</option>`+
+    PERSONS_DEF.map(p=>`<option value="${p.id}" ${val===p.id?'selected':''}>${htmlSafe(p.name)}</option>`).join('');
+}
+function personName(id){ const p=PERSONS_DEF.find(x=>x.id===id); return p?p.name:''; }
+function updateTaskPersonsById(taskId, ids){
+  ROOMS_DEF.forEach(r => (appState.tasks[r.id]||[]).forEach(t => { if(t.id===taskId){ t.personIds=[...new Set((ids||[]).filter(Boolean))]; t.personId=t.personIds[0]||''; } }));
+  save(); renderEverything(); if(document.getElementById('overlay-personas')?.classList.contains('open')) renderPersonas();
+}
+function updateTaskPersonById(taskId, personId){ updateTaskPersonsById(taskId, personId?[personId]:[]); }
+function removeTaskPersonById(taskId, personId){
+  ROOMS_DEF.forEach(r => (appState.tasks[r.id]||[]).forEach(t => { if(t.id===taskId){ t.personIds=personIds(t).filter(id=>id!==personId); t.personId=t.personIds[0]||''; } }));
+  save(); renderEverything(); if(document.getElementById('overlay-personas')?.classList.contains('open')) renderPersonas();
+}
+function updatePreguntaPersons(id, ids){ const q=(appState.preguntas||[]).find(x=>x.id===id); if(q){ q.personIds=[...new Set((ids||[]).filter(Boolean))]; q.personId=q.personIds[0]||''; save(); renderPreguntas(); if(document.getElementById('overlay-personas')?.classList.contains('open')) renderPersonas(); } }
+function updatePreguntaPerson(id, personId){ updatePreguntaPersons(id, personId?[personId]:[]); }
+function removePreguntaPerson(id, personId){ const q=(appState.preguntas||[]).find(x=>x.id===id); if(q){ q.personIds=personIds(q).filter(pid=>pid!==personId); q.personId=q.personIds[0]||''; save(); renderPreguntas(); if(document.getElementById('overlay-personas')?.classList.contains('open')) renderPersonas(); } }
+
 function daysUntil(dateStr){
   if(!dateStr) return null;
   const a=new Date(); a.setHours(0,0,0,0);
@@ -2060,12 +2148,13 @@ function renderPreguntaFormOptions(){
   const task=document.getElementById('pregunta-task');
   if(room) room.innerHTML=preguntaRoomOptions('');
   if(task) task.innerHTML=preguntaTaskOptions('');
+  const person=document.getElementById('pregunta-person'); if(person){ person.multiple=false; person.removeAttribute('size'); person.classList.add('person-assign-select'); person.innerHTML=personSelectOptions([]); }
 }
 function addPregunta(){
   const text=document.getElementById('pregunta-text')?.value.trim();
   if(!text) return showNotif('Escribe la pregunta');
   appState.preguntas=appState.preguntas||[];
-  appState.preguntas.unshift({id:uid(),texto:text,respuesta:'',roomId:document.getElementById('pregunta-room')?.value||'',taskId:document.getElementById('pregunta-task')?.value||'',prioridad:document.getElementById('pregunta-priority')?.value||'media',resuelta:false,fecha:new Date().toISOString().slice(0,10)});
+  appState.preguntas.unshift({id:uid(),texto:text,respuesta:'',roomId:document.getElementById('pregunta-room')?.value||'',taskId:document.getElementById('pregunta-task')?.value||'',prioridad:document.getElementById('pregunta-priority')?.value||'media',personIds:personSelectToIds(document.getElementById('pregunta-person')?.value||''),personId:personSelectToIds(document.getElementById('pregunta-person')?.value||'')[0]||'',resuelta:false,fecha:new Date().toISOString().slice(0,10)});
   document.getElementById('pregunta-text').value='';
   save(); renderPreguntas(); renderCommandCenter?.(); showNotif('Pregunta añadida');
 }
@@ -2109,6 +2198,7 @@ function renderPreguntas(){
       <div class="question-actions">
         <select onchange="updatePreguntaRoom('${q.id}',this.value)">${preguntaRoomOptions(q.roomId)}</select>
         <select onchange="updatePreguntaTask('${q.id}',this.value)">${preguntaTaskOptions(q.taskId)}</select>
+        <select class="person-assign-select" onchange="updatePreguntaPersons('${q.id}',personSelectToIds(this.value))">${personSelectOptions(personIds(q))}</select>
         ${q.taskId?`<button class="btn-secondary" onclick="editLinkedTaskFromQuestion('${q.taskId}')">Editar tarea</button>`:''}
         <button class="btn-secondary" onclick="togglePregunta('${q.id}')">${q.resuelta?'Reabrir':'Marcar resuelta'}</button>
         <button class="btn-icon" onclick="deletePregunta('${q.id}')">✕</button>
@@ -2117,12 +2207,31 @@ function renderPreguntas(){
   }).join('');
   document.getElementById('preguntas-list').innerHTML = html || '<div class="empty-state">No hay preguntas en este filtro.</div>';
 }
-window.addPregunta=addPregunta; window.setPreguntasFilter=setPreguntasFilter; window.savePreguntaRespuesta=savePreguntaRespuesta; window.togglePregunta=togglePregunta; window.deletePregunta=deletePregunta; window.editLinkedTaskFromQuestion=editLinkedTaskFromQuestion; window.updatePreguntaRoom=updatePreguntaRoom; window.updatePreguntaTask=updatePreguntaTask; window.renderPreguntas=renderPreguntas;
+window.addPregunta=addPregunta; window.setPreguntasFilter=setPreguntasFilter; window.savePreguntaRespuesta=savePreguntaRespuesta; window.togglePregunta=togglePregunta; window.deletePregunta=deletePregunta; window.editLinkedTaskFromQuestion=editLinkedTaskFromQuestion; window.updatePreguntaRoom=updatePreguntaRoom; window.updatePreguntaTask=updatePreguntaTask; window.updatePreguntaPerson=updatePreguntaPerson; window.renderPreguntas=renderPreguntas;
+
+
+// ── PERSONAS ───────────────────────────────────────────────────
+function setActivePerson(id){ activePersonId=id; renderPersonas(); }
+function renderPersonas(){
+  const grid=document.getElementById('person-grid'); const detail=document.getElementById('person-detail'); if(!grid||!detail) return;
+  const tasks=allTasksFlat(); const qs=appState.preguntas||[];
+  grid.innerHTML=PERSONS_DEF.map(p=>{
+    const pt=tasks.filter(t=>personIds(t).includes(p.id)); const pq=qs.filter(q=>personIds(q).includes(p.id));
+    const openT=pt.filter(t=>t.estado!=='hecho').length; const openQ=pq.filter(q=>!q.resuelta).length;
+    return `<div class="person-card ${activePersonId===p.id?'active':''}" onclick="setActivePerson('${p.id}')"><div class="person-name">${htmlSafe(p.name)}</div><div class="person-counts"><span>${openT}/${pt.length} tareas</span><span>${openQ}/${pq.length} preguntas</span></div></div>`;
+  }).join('');
+  const p=PERSONS_DEF.find(x=>x.id===activePersonId)||PERSONS_DEF[0]; if(!p) return;
+  const pt=tasks.filter(t=>personIds(t).includes(p.id)); const pq=qs.filter(q=>personIds(q).includes(p.id));
+  const taskHtml=pt.map(t=>`<div class="task-item"><div class="task-main"><div class="task-text ${t.estado==='hecho'?'done':''}">${htmlSafe(t.texto)}</div><div class="task-meta">${htmlSafe(t._room?.name||'')} ${t.fecha?' · '+htmlSafe(t.fecha):''}${t.fechaFin?' → '+htmlSafe(t.fechaFin):''}</div></div><div class="task-actions"><select onchange="changeState('${t.roomId}',${t.idx},this.value)"><option value="pendiente" ${t.estado==='pendiente'?'selected':''}>pendiente</option><option value="en curso" ${t.estado==='en curso'?'selected':''}>en curso</option><option value="hecho" ${t.estado==='hecho'?'selected':''}>hecho</option></select><button class="btn-secondary" onclick="editTaskById('${t.id}')">Editar</button><button class="btn-icon" onclick="removeTaskPersonById('${t.id}','${p.id}')">Quitar</button></div></div>`).join('') || '<div class="person-empty">No tiene tareas asignadas.</div>';
+  const qHtml=pq.map(q=>{ const room=ROOMS_DEF.find(r=>r.id===q.roomId); return `<div class="question-card"><div class="question-head"><div><div class="question-title">${htmlSafe(q.texto)}</div><div class="question-meta">${htmlSafe(q.fecha||'')}${room?' · '+htmlSafe(room.name):''}</div></div><div><span class="question-badge ${htmlSafe(q.prioridad||'media')}">${htmlSafe(q.prioridad||'media')}</span> ${q.resuelta?'<span class="question-badge resuelta">respondida</span>':'<span class="question-badge">pendiente</span>'}</div></div><textarea class="question-answer" placeholder="Respuesta..." onblur="savePreguntaRespuesta('${q.id}',this.value)">${htmlSafe(q.respuesta||'')}</textarea><div class="question-actions"><button class="btn-secondary" onclick="togglePregunta('${q.id}')">${q.resuelta?'Reabrir':'Marcar resuelta'}</button><button class="btn-icon" onclick="removePreguntaPerson('${q.id}','${p.id}')">Quitar</button></div></div>`; }).join('') || '<div class="person-empty">No tiene preguntas asignadas.</div>';
+  detail.innerHTML=`<div class="person-section-title">${htmlSafe(p.name)} · tareas</div>${taskHtml}<div class="person-section-title">${htmlSafe(p.name)} · preguntas</div>${qHtml}`;
+}
+window.setActivePerson=setActivePerson; window.renderPersonas=renderPersonas; window.updateTaskPersonById=updateTaskPersonById; window.updateTaskPersonsById=updateTaskPersonsById; window.updatePreguntaPerson=updatePreguntaPerson; window.updatePreguntaPersons=updatePreguntaPersons; window.removeTaskPersonById=removeTaskPersonById; window.removePreguntaPerson=removePreguntaPerson; window.selectedValues=selectedValues; window.personSelectToIds=personSelectToIds;
 
 // ── GLOBAL OVERLAYS ──────────────────────────────────────────────
 
 function openGlobal(which) {
-  ['mando','tareas','compra','herramientas','preguntas','gantt'].forEach(w => {
+  ['mando','tareas','compra','herramientas','preguntas','personas','gantt'].forEach(w => {
     document.getElementById('overlay-'+w).classList.toggle('open', w===which);
     const btn = document.getElementById('gnav-'+w);
     if(btn) btn.classList.toggle('active', w===which);
@@ -2132,6 +2241,7 @@ function openGlobal(which) {
   if(which==='compra') renderGlobalCompra();
   if(which==='herramientas') renderHerramientas();
   if(which==='preguntas') renderPreguntas();
+  if(which==='personas') renderPersonas();
   if(which==='gantt') renderGantt();
 }
 
