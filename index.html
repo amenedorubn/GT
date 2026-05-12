@@ -116,7 +116,7 @@ main {
   width: 100%;
   height: auto;
   max-height: 100%;
-  aspect-ratio: 700 / 520;
+  aspect-ratio: 735 / 520;
   display: block;
 }
 
@@ -969,12 +969,13 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
   <div class="floor-section">
     <div class="floor-title">Plano del bajo · click para ver detalle</div>
     <div class="floor-plan">
-      <svg class="floor-svg" viewBox="0 0 700 520" xmlns="http://www.w3.org/2000/svg" id="floorsvg">
+      <svg class="floor-svg" viewBox="0 0 730 520" xmlns="http://www.w3.org/2000/svg" id="floorsvg">
 
 <!-- Outer wall suggestion -->
 <rect x="10" y="10" width="680" height="500" rx="2" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="4,4"/>
 
-<!-- Fachada - franja vertical exterior -->
+
+<!-- Fachada - franja vertical exterior añadida a la izquierda sin tocar H1/H2 -->
 <g class="room" id="room-fachada" onclick="selectRoom('fachada')">
   <rect x="20" y="20" width="24" height="365" rx="4" fill="#ffffff10" stroke="#f2f2f2" stroke-width="1.5"/>
   <text class="room-label" x="32" y="202" fill="#f2f2f2" transform="rotate(-90 32 202)">FACHADA</text>
@@ -1297,9 +1298,9 @@ let cargandoDesdeFirebase = false;
 
 
 const ROOMS_DEF = [
+  { id:'fachada', name:'Fachada',       color:'#ffffff', shortName:'FAC' },
   { id:'h1',     name:'Habitación 1', color:'#f0c040', shortName:'H1' },
   { id:'h2',     name:'Habitación 2', color:'#e05050', shortName:'H2' },
-  { id:'fachada',name:'Fachada',       color:'#f2f2f2', shortName:'FACH' },
   { id:'h3',     name:'Sala', color:'#5cb85c', shortName:'H3' },
   { id:'h4',     name:'Habitación 4', color:'#5b9bd5', shortName:'H4' },
   { id:'pasillo',name:'Pasillo',       color:'#8090c0', shortName:'PAS' },
@@ -1975,15 +1976,12 @@ function renderCommandCenter(){
   const missingBuy=(appState.compra||[]).filter(x=>!x.comprado);
   const openIncidents=(appState.incidencias||[]).filter(x=>!x.resuelta);
   const closedIncidents=(appState.incidencias||[]).filter(x=>x.resuelta).slice(0,4);
-  const openQuestions=(appState.preguntas||[]).filter(q=>!q.resuelta);
-  const highQuestions=openQuestions.filter(q=>q.prioridad==='alta');
-  const answeredQuestions=(appState.preguntas||[]).filter(q=>q.resuelta).slice(0,4);
   const pct=total?Math.round(done/total*100):0;
   const highInc=openIncidents.filter(i=>i.nivel==='alta').length;
-  const riskScore=overdue.length*3+blocked.length*2+highInc*3+highQuestions.length*2+openQuestions.length+noDate.length+missingBuy.length;
+  const riskScore=overdue.length*3+blocked.length*2+highInc*3+noDate.length+missingBuy.length;
   const riskLabel=riskScore>14?'ALTO':riskScore>6?'MEDIO':'CONTROLADO';
   const riskClass=riskScore>14?'risk-high':riskScore>6?'risk-mid':'risk-ok';
-  const mainAdvice = overdue[0] ? `Corrige primero: ${htmlSafe(overdue[0].texto)}` : openIncidents[0] ? `Resuelve incidencia: ${htmlSafe(openIncidents[0].texto)}` : highQuestions[0] ? `Responde pregunta clave: ${htmlSafe(highQuestions[0].texto)}` : blocked[0] ? `Desbloquea: ${htmlSafe(blocked[0].texto)}` : next[0] ? `Siguiente tarea: ${htmlSafe(next[0].texto)}` : 'Coloca tareas en el cronograma para activar el plan';
+  const mainAdvice = overdue[0] ? `Corrige primero: ${htmlSafe(overdue[0].texto)}` : openIncidents[0] ? `Resuelve incidencia: ${htmlSafe(openIncidents[0].texto)}` : blocked[0] ? `Desbloquea: ${htmlSafe(blocked[0].texto)}` : next[0] ? `Siguiente tarea: ${htmlSafe(next[0].texto)}` : 'Coloca tareas en el cronograma para activar el plan';
   const item=t=>`<div class="command-item" onclick="editTaskById('${t.id}')"><div class="ci-dot" style="background:${t._room.color};color:${t._room.color}"></div><div class="ci-main"><div class="ci-title">${htmlSafe(t.texto)}</div><div class="ci-meta">${htmlSafe(t._room.name)}${t.fecha?' · '+t.fecha:''}${t.fechaFin?' → '+t.fechaFin:''}</div></div><div class="ci-tag">${htmlSafe(t.estado||'pendiente')}</div></div>`;
   const incidentCard=i=>{
     const linked=i.taskId?taskNameById(i.taskId):'';
@@ -1996,11 +1994,6 @@ function renderCommandCenter(){
       </div>
     </div>`;
   };
-  const questionCard=q=>{
-    const room=ROOMS_DEF.find(r=>r.id===q.roomId);
-    const linked=q.taskId?taskNameById(q.taskId):'';
-    return `<div class="command-item" onclick="openGlobal('preguntas')"><div class="ci-dot ${q.prioridad==='alta'?'risk-high':'risk-mid'}" style="background:${q.prioridad==='alta'?'var(--danger)':'var(--warn)'}"></div><div class="ci-main"><div class="ci-title">${htmlSafe(q.texto)}</div><div class="ci-meta">${htmlSafe(q.fecha||'')} ${room?' · '+htmlSafe(room.name):''}${linked?' · '+htmlSafe(linked):' · sin tarea'}</div></div><div class="ci-tag">pregunta</div></div>`;
-  };
   body.innerHTML=`
     <div class="command-focus">
       <div class="command-nextstep">
@@ -2011,13 +2004,11 @@ function renderCommandCenter(){
           <div class="lane-card" onclick="openGlobal('tareas')"><b>${today.length}</b><span>activas hoy</span></div>
           <div class="lane-card" onclick="renderCommandCenter()"><b class="${riskClass}">${riskLabel}</b><span>riesgo obra</span></div>
           <div class="lane-card" onclick="commandOpenGantt()"><b>${noDate.length}</b><span>sin fecha</span></div>
-          <div class="lane-card" onclick="openGlobal('preguntas')"><b>${openQuestions.length}</b><span>preguntas abiertas</span></div>
         </div>
         <div class="command-minibar">
           <button class="btn-primary" onclick="openNewTaskModal()">+ Nueva tarea</button>
           <button class="btn-secondary" onclick="commandOpenGantt()">Actualizar cronograma</button>
           <button class="btn-secondary" onclick="openGlobal('compra')">Compras pendientes: ${missingBuy.length}</button>
-          <button class="btn-secondary" onclick="openGlobal('preguntas')">Preguntas: ${openQuestions.length}</button>
         </div>
       </div>
       <div class="pulse-card">
@@ -2026,7 +2017,6 @@ function renderCommandCenter(){
         <div class="pulse-metric"><span>En curso</span><b>${doing}</b></div>
         <div class="pulse-metric"><span>Vencidas</span><b class="${overdue.length?'risk-high':''}">${overdue.length}</b></div>
         <div class="pulse-metric"><span>Incidencias abiertas</span><b class="${openIncidents.length?'risk-mid':''}">${openIncidents.length}</b></div>
-        <div class="pulse-metric"><span>Preguntas abiertas</span><b class="${openQuestions.length?'risk-mid':''}">${openQuestions.length}</b></div>
       </div>
     </div>
 
@@ -2045,16 +2035,13 @@ function renderCommandCenter(){
       <div class="command-card"><div class="command-section-title">Plan de ejecución</div><div class="command-list">${overdue.slice(0,3).map(item).join('')}${blocked.slice(0,3).map(item).join('')}${(!overdue.length&&!blocked.length)?(next.length?next.map(item).join(''):'<div class="empty-state">No hay próximas tareas con fecha. Coloca tareas en el cronograma.</div>'):''}</div></div>
     </div>
 
-    <div class="command-card" style="margin-bottom:16px"><h3>Preguntas abiertas que afectan a la obra</h3><div class="command-list">${openQuestions.length?openQuestions.slice(0,8).map(questionCard).join(''):'<div class="empty-state risk-ok">No hay preguntas abiertas.</div>'}</div><div style="margin-top:10px"><button class="btn-secondary" onclick="openGlobal('preguntas')">Abrir pestaña Preguntas</button></div></div>
-
     <div class="command-grid">
       <div class="command-card"><h3>Próximas tareas</h3><div class="command-list">${next.length?next.map(item).join(''):'<div class="empty-state">No hay tareas próximas con fecha.</div>'}</div></div>
       <div class="command-card"><h3>Bloqueos por dependencias</h3><div class="command-list">${blocked.length?blocked.slice(0,6).map(item).join(''):'<div class="empty-state risk-ok">No hay bloqueos por dependencias.</div>'}</div></div>
       <div class="command-card"><h3>Sin colocar en calendario</h3><div class="command-list">${noDate.slice(0,7).map(item).join('') || '<div class="empty-state risk-ok">Todo tiene fecha o está hecho.</div>'}</div></div>
       <div class="command-card"><h3>Compras que pueden parar obra</h3><div class="command-list">${missingBuy.slice(0,8).map(x=>`<div class="command-item" onclick="openGlobal('compra')"><div class="ci-dot risk-mid" style="background:var(--warn)"></div><div class="ci-main"><div class="ci-title">${htmlSafe(x.nombre||x.texto||'Artículo')}</div><div class="ci-meta">${htmlSafe(x.room||x.habitacion||'global')}${x.precio?' · '+htmlSafe(x.precio)+'€':''}</div></div><div class="ci-tag">comprar</div></div>`).join('') || '<div class="empty-state risk-ok">No hay compras pendientes.</div>'}</div></div>
       <div class="command-card"><h3>Incidencias cerradas recientes</h3><div class="command-list">${closedIncidents.length?closedIncidents.map(i=>`<div class="incident-row"><span>${htmlSafe(i.texto)}<div class="ci-meta">${htmlSafe(i.fecha)} · ${htmlSafe(i.nivel)}</div></span><button class="btn-secondary" onclick="reopenIncident('${i.id}')">reabrir</button></div>`).join(''):'<div class="empty-state">Aún no has cerrado incidencias.</div>'}</div></div>
-      <div class="command-card"><h3>Preguntas respondidas recientes</h3><div class="command-list">${answeredQuestions.length?answeredQuestions.map(q=>`<div class="command-item" onclick="openGlobal('preguntas')"><div class="ci-dot risk-ok" style="background:var(--ok)"></div><div class="ci-main"><div class="ci-title">${htmlSafe(q.texto)}</div><div class="ci-meta">${htmlSafe(q.fechaRespuesta||q.fecha||'')} · respuesta guardada</div></div><div class="ci-tag">respondida</div></div>`).join(''):'<div class="empty-state">Aún no hay preguntas respondidas.</div>'}</div></div>
-      <div class="command-card"><h3>Regla de decisión</h3><div class="empty-state">No empieces una tarea si tiene una incidencia abierta vinculada, una dependencia sin terminar, compras pendientes, una pregunta clave abierta o no tiene fecha/duración.</div></div>
+      <div class="command-card"><h3>Regla de decisión</h3><div class="empty-state">No empieces una tarea si tiene una incidencia abierta vinculada, una dependencia sin terminar, compras pendientes o no tiene fecha/duración.</div></div>
     </div>`;
 }
 
@@ -2086,7 +2073,7 @@ function setPreguntasFilter(f){ preguntasFilter=f; renderPreguntas(); }
 function savePreguntaRespuesta(id,val){
   const q=(appState.preguntas||[]).find(x=>x.id===id); if(!q) return;
   q.respuesta=val; q.resuelta=!!val.trim(); q.fechaRespuesta=q.resuelta?new Date().toISOString().slice(0,10):'';
-  save(); renderPreguntasStatsOnly(); if(document.getElementById('overlay-mando')?.classList.contains('open')) renderCommandCenter();
+  save(); renderPreguntasStatsOnly();
 }
 function togglePregunta(id){
   const q=(appState.preguntas||[]).find(x=>x.id===id); if(!q) return;
