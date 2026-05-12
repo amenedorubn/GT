@@ -789,13 +789,7 @@ select.state-sel {
 .gantt-day-cell { width:32px; min-width:32px; border-right:1px solid #1a1a1a; }
 .gantt-day-cell.weekend { background:#131313; }
 .gantt-day-cell.today-col { background:#1c1900; }
-.gantt-bar { position:absolute; top:7px; bottom:7px; border-radius:3px; opacity:0.85; cursor:grab; transition:opacity 0.15s; display:flex; align-items:center; overflow:hidden; z-index:4; }
-.gantt-bar:active { cursor:grabbing; }
-.gantt-bar.editable { box-shadow:0 0 0 1px #0006; }
-.gantt-resize-handle { position:absolute; top:0; right:0; bottom:0; width:8px; cursor:ew-resize; background:#0002; }
-.gantt-drop-target { outline:1px dashed var(--accent); outline-offset:-3px; }
-.gantt-unscheduled-chip { cursor:grab; user-select:none; }
-.gantt-unscheduled-chip:active { cursor:grabbing; }
+.gantt-bar { position:absolute; top:7px; bottom:7px; border-radius:3px; opacity:0.85; cursor:pointer; transition:opacity 0.15s; display:flex; align-items:center; overflow:hidden; z-index:4; }
 .gantt-bar:hover { opacity:1; }
 .gantt-bar-label { font-size:9px; font-family:'DM Mono',monospace; color:#111; padding:0 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:600; }
 .gantt-today-line { position:absolute; top:0; bottom:0; width:2px; background:var(--accent); opacity:0.5; pointer-events:none; z-index:6; }
@@ -817,7 +811,7 @@ select.state-sel {
 .edit-modal-overlay.open { display:flex; }
 .edit-modal {
   background:var(--surface); border:1px solid var(--border); border-radius:8px;
-  padding:1.5rem; width:min(680px,96vw); max-height:92vh; overflow-y:auto;
+  padding:1.5rem; width:min(520px,95vw); max-height:92vh; overflow-y:auto;
   display:flex; flex-direction:column; gap:10px;
 }
 .edit-modal-title {
@@ -862,139 +856,73 @@ select.state-sel {
   font-family:'DM Mono',monospace; letter-spacing:0.05em;
 }
 
-/* Responsive · escritorio + móvil */
-@media (max-width: 980px) {
-  header {
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 0.9rem 1rem;
-    position: sticky;
-  }
-  .logo { width: 100%; }
-  .global-nav {
-    order: 3;
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 2px;
-    -webkit-overflow-scrolling: touch;
-  }
-  .global-nav::-webkit-scrollbar { display:none; }
-  .gnav-btn { white-space: nowrap; flex: 0 0 auto; }
-  .header-stats { gap: 0.9rem; margin-left: auto; }
-  .hstat-val { font-size: 0.95rem; }
-  .hstat-label { font-size: 0.58rem; }
-
-  main {
-    grid-template-columns: 1fr;
-    height: auto;
-    min-height: calc(100vh - 110px);
-  }
-  .floor-section {
-    min-height: 330px;
-    height: auto;
-    padding: 1rem;
-    overflow: visible;
-  }
-  .floor-plan {
-    min-height: 260px;
-    overflow: auto;
-    justify-content: flex-start;
-    -webkit-overflow-scrolling: touch;
-  }
-  .floor-svg {
-    min-width: 680px;
-    max-height: none;
-  }
-  .detail-panel {
-    border-left: none;
-    border-top: 1px solid var(--border);
-    min-height: 55vh;
-  }
-  .overview, .panel-header, .panel-body { padding-left: 1rem; padding-right: 1rem; }
-  .overview-big { font-size: 2.25rem; }
-}
-
+/* Mobile fallback */
 @media (max-width: 768px) {
-  body { font-size: 15px; }
-  .floor-title { margin-bottom: 0.65rem; }
-  .room-label { font-size: 12px; }
-  .room-sublabel { font-size: 10px; }
-  .task-item, .compra-item, .tool-item { gap: 8px; }
-  .task-actions { flex-wrap: wrap; justify-content: flex-end; }
-  .form-row, .global-add-form .form-row, .edit-modal .form-row { flex-direction: column; }
-  .global-overlay-header {
-    padding: 0.9rem 1rem;
-    align-items: flex-start;
-    gap: 8px;
-    flex-direction: column;
-  }
-  .global-overlay-title { font-size: 0.86rem; }
+  main { grid-template-columns: 1fr; height: auto; }
+  .detail-panel { border-left: none; border-top: 1px solid var(--border); min-height: 60vh; }
+  .floor-section { height: 50vw; min-height: 260px; }
+  .global-nav { gap: 4px; }
+  .gnav-btn { font-size: 0.62rem; padding: 4px 8px; }
   .global-overlay-body { padding: 1rem; }
-  .filter-bar, .gstats-row, .gantt-legend { gap: 6px; }
-  .gstat-pill { width: calc(50% - 6px); padding: 7px 9px; }
-
-  .gantt-container {
-    min-height: 52vh;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x pan-y;
-  }
-  .gantt-header-cell.col-name, .gantt-cell.col-name {
-    min-width: 150px !important;
-    max-width: 150px;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-  .gantt-task-name { max-width: 132px; font-size: 0.72rem; }
-  .gantt-task-room { font-size: 0.55rem; }
-  .gantt-bar { top: 6px; bottom: 6px; min-height: 28px; touch-action: none; }
-  .gantt-resize-handle { width: 18px; background:#0004; }
-  .gantt-unscheduled-chip {
-    min-height: 34px;
-    touch-action: none;
-  }
-  .gantt-toolbar { width: 100%; gap: 6px; }
-  .gantt-toolbar select, .gantt-toolbar button { flex: 1; min-width: 130px; }
-
-  .edit-modal-overlay { align-items: flex-end; }
-  .edit-modal {
-    width: 100vw;
-    max-height: 92vh;
-    border-radius: 12px 12px 0 0;
-    padding: 1rem;
-  }
-  .edit-modal-actions {
-    position: sticky;
-    bottom: -1rem;
-    background: var(--surface);
-    padding-top: 8px;
-    flex-wrap: wrap;
-  }
-  .edit-modal-actions .btn-primary { flex-basis: 100%; order: -1; }
-  .room-check-label { flex: 1 1 calc(50% - 6px); justify-content: center; }
-  .notif { left: 1rem; right: 1rem; bottom: 1rem; text-align:center; }
 }
 
-@media (max-width: 430px) {
-  header { padding: 0.8rem; }
-  .logo { font-size: 1rem; }
-  .header-stats { width: 100%; justify-content: space-between; }
-  .hstat { text-align: left; }
-  .gnav-btn { font-size: 0.58rem; padding: 6px 8px; }
-  .floor-section { padding: 0.8rem; min-height: 300px; }
-  .floor-plan { min-height: 235px; }
-  .floor-svg { min-width: 620px; }
-  .panel-tabs { overflow-x: auto; }
-  .ptab { min-width: 96px; font-size: 0.68rem; }
-  .task-item { align-items: flex-start; }
-  .task-actions { width: 100%; margin-top: 4px; }
-  .filter-btn { flex: 1 1 calc(50% - 6px); }
-  .gstat-pill { width: 100%; }
-  .global-overlay-body { padding: 0.8rem; }
-  .gantt-header-cell.col-name, .gantt-cell.col-name { min-width: 132px !important; max-width:132px; }
-  .gantt-task-name { max-width: 112px; }
-  .edit-modal-title { font-size: 0.72rem; }
+
+/* ==== REFORMA GT 2.0 · CENTRO DE MANDO DE OBRA ==== */
+:root{
+  --bg:#080b10; --surface:#111823; --surface2:#172232; --border:#263448; --text:#f5f1e8; --muted:#91a0b5; --accent:#ffcf5a;
+  --danger:#ff5d5d; --ok:#42d392; --warn:#ffb84d; --blue:#65a7ff; --glass:rgba(17,24,35,.72);
 }
+body{background:radial-gradient(circle at 20% 0%,#1c293b 0,#080b10 42%,#05070a 100%);}
+header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px solid #ffffff14;box-shadow:0 18px 60px #0008;}
+.logo{font-size:1.25rem;color:var(--accent);text-shadow:0 0 22px #ffcf5a44}.logo:after{content:' 2.0';font-size:.58rem;color:var(--blue);vertical-align:super;margin-left:4px}.gnav-btn{border:1px solid #ffffff18;background:#ffffff08;border-radius:999px}.gnav-btn.active,.gnav-btn:hover{background:linear-gradient(135deg,#ffcf5a22,#65a7ff22);border-color:#ffcf5a66;color:#fff}.floor-section{background:linear-gradient(180deg,#ffffff05,#0000)}.detail-panel{background:var(--glass);backdrop-filter:blur(18px);box-shadow:inset 1px 0 0 #ffffff0c}.overview,.panel-header,.global-add-form,.task-item,.compra-item,.herr-item{border-radius:18px;background:linear-gradient(180deg,#ffffff08,#ffffff03);border:1px solid #ffffff12;box-shadow:0 12px 40px #0005}.overview{padding:1rem}.room-row{border-radius:14px;background:#ffffff05;margin-bottom:8px}.global-overlay{background:rgba(8,11,16,.96);backdrop-filter:blur(18px)}.global-overlay-header{background:linear-gradient(90deg,#101927,#0b1018);border-bottom:1px solid #ffffff12}.global-overlay-title{font-size:.78rem;color:#fff}.btn-primary{background:linear-gradient(135deg,#ffcf5a,#ff9f43);color:#15100a;border:0;border-radius:12px;font-weight:700}.btn-secondary,.btn-icon{border-radius:12px}.edit-modal{border-radius:24px;background:#101722;box-shadow:0 30px 100px #000c;border:1px solid #ffffff18}.edit-modal input,.edit-modal select,.edit-modal textarea,.global-add-form input,.global-add-form select{border-radius:12px;background:#0b111a;border-color:#ffffff18}.floor-svg{filter:drop-shadow(0 24px 70px #0009)}.room rect,.room path{filter:drop-shadow(0 10px 24px #0006)}
+.command-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.command-hero{border:1px solid #ffffff14;background:linear-gradient(135deg,#152033,#10151f 60%,#201a0c);border-radius:26px;padding:20px;display:grid;grid-template-columns:1.2fr .8fr;gap:18px;box-shadow:0 24px 80px #0007}.command-eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--accent);letter-spacing:.16em;text-transform:uppercase}.command-title{font-size:2rem;line-height:1;margin:8px 0 12px}.command-sub{color:var(--muted);line-height:1.45}.pulse-card{background:#0000002e;border:1px solid #ffffff12;border-radius:20px;padding:14px}.pulse-metric{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #ffffff0d}.pulse-metric:last-child{border-bottom:0}.pulse-metric b{font-family:'DM Mono',monospace;color:#fff}.command-card{background:linear-gradient(180deg,#ffffff08,#ffffff03);border:1px solid #ffffff12;border-radius:22px;padding:16px;min-height:120px;box-shadow:0 16px 50px #0005}.command-card h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:12px;font-family:'DM Mono',monospace}.command-list{display:flex;flex-direction:column;gap:8px}.command-item{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px;border:1px solid #ffffff10;border-radius:14px;background:#00000022;cursor:pointer}.command-item:hover{border-color:#ffcf5a66;background:#ffcf5a0b}.ci-dot{width:9px;height:9px;border-radius:50%;box-shadow:0 0 18px currentColor}.ci-main{min-width:0}.ci-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ci-meta{font-size:.68rem;color:var(--muted);margin-top:2px;font-family:'DM Mono',monospace}.ci-tag{font-size:.62rem;border-radius:999px;padding:4px 7px;background:#ffffff0b;color:var(--muted);font-family:'DM Mono',monospace}.risk-high{color:var(--danger)}.risk-mid{color:var(--warn)}.risk-ok{color:var(--ok)}.quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.quick-action{padding:13px;border-radius:16px;border:1px solid #ffffff12;background:#ffffff06;color:#fff;text-align:left;cursor:pointer}.quick-action:hover{border-color:#65a7ff77;background:#65a7ff14}.quick-action span{display:block;font-size:.68rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:4px}.incident-form{display:grid;grid-template-columns:1fr 150px auto;gap:8px}.incident-form input,.incident-form select{background:#0b111a;border:1px solid #ffffff18;color:var(--text);border-radius:12px;padding:10px}.incident-row{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:10px;border-radius:14px;background:#00000026;border:1px solid #ffffff10}.gantt-bar{cursor:grab}.gantt-bar:active{cursor:grabbing}.gantt-bar::after{content:'';position:absolute;right:0;top:0;width:9px;height:100%;background:#0005;border-left:1px solid #fff5;cursor:ew-resize}.gantt-unscheduled-chip{cursor:grab;user-select:none}.gantt-drop-hint{border:1px dashed #65a7ff77;background:#65a7ff0c;border-radius:14px;padding:10px;color:var(--muted);font-family:'DM Mono',monospace;font-size:.68rem;margin-top:8px}
+
+.command-focus{display:grid;grid-template-columns:1.4fr .8fr;gap:16px;margin-bottom:16px}.command-nextstep{border:1px solid #ffcf5a33;background:linear-gradient(135deg,#211b0b,#111827);border-radius:24px;padding:18px}.command-nextstep h2{font-size:1.55rem;margin:8px 0 8px}.command-nextstep p{color:var(--muted);line-height:1.45}.command-lane{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.lane-card{border:1px solid #ffffff12;background:#00000026;border-radius:16px;padding:12px;cursor:pointer}.lane-card:hover{border-color:#ffcf5a66}.lane-card b{font-family:'DM Mono',monospace;font-size:1.4rem;color:var(--accent)}.lane-card span{display:block;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.09em}.incident-board{display:grid;grid-template-columns:1fr;gap:10px}.incident-card{border:1px solid #ffffff12;background:#0000002c;border-radius:16px;padding:12px;display:grid;gap:8px}.incident-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.incident-title{font-weight:600}.incident-actions{display:flex;gap:6px;flex-wrap:wrap}.incident-link{font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace}.incident-form.command-form{grid-template-columns:1fr 170px 180px auto}.command-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.empty-state{border:1px dashed #ffffff1b;border-radius:16px;padding:16px;color:var(--muted);background:#ffffff04}.command-section-title{font-family:'DM Mono',monospace;color:var(--accent);font-size:.72rem;text-transform:uppercase;letter-spacing:.13em;margin:2px 0 10px}.command-minibar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.command-minibar button{padding:9px 11px;border-radius:999px}
+@media(max-width:900px){.command-focus,.command-two{grid-template-columns:1fr}.command-lane{grid-template-columns:1fr}.incident-form.command-form{grid-template-columns:1fr}.incident-top{flex-direction:column}.incident-actions{width:100%}.incident-actions button{flex:1}}
+
+@media(max-width:900px){.command-grid,.command-hero{grid-template-columns:1fr}.quick-actions{grid-template-columns:1fr 1fr}.incident-form{grid-template-columns:1fr}.command-title{font-size:1.5rem}header{align-items:flex-start;gap:10px;flex-direction:column}.header-stats{width:100%;justify-content:space-between}.global-nav{width:100%;overflow-x:auto;padding-bottom:3px}.gnav-btn{white-space:nowrap}.floor-section{height:auto;min-height:360px}.edit-modal{width:calc(100vw - 18px);max-height:92vh}.global-overlay-body{padding:.9rem!important}.command-item{grid-template-columns:auto 1fr}.ci-tag{grid-column:2}}
+
+/* ==== RESCATE GRAN CAMBIO · APP DE OBRA UTIL ==== */
+.work-os{margin-top:14px;border:1px solid #ffffff16;border-radius:22px;background:linear-gradient(135deg,#101a29,#0b0f16);padding:14px;box-shadow:0 20px 60px #0007}
+.work-os-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.work-os-title{font-size:.72rem;color:var(--accent);font-family:'DM Mono',monospace;letter-spacing:.16em;text-transform:uppercase}.work-os-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.work-tile{border:1px solid #ffffff12;background:#ffffff07;border-radius:16px;padding:12px;cursor:pointer;min-height:84px}.work-tile:hover{border-color:#ffcf5a77;background:#ffcf5a10}.work-tile b{font-size:1.45rem;display:block;line-height:1;color:#fff}.work-tile span{font-size:.68rem;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase}.work-tile p{margin-top:7px;color:var(--muted);font-size:.78rem;line-height:1.3}.task-item{cursor:default}.task-text{cursor:pointer}.task-text:hover{color:var(--accent)}.sticky-add-task{position:sticky;bottom:0;z-index:5;background:linear-gradient(180deg,transparent,#080b10 26%);padding-top:12px}.global-add-strip{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px;border:1px solid #ffffff14;background:linear-gradient(135deg,#ffcf5a12,#65a7ff12);border-radius:18px;padding:12px}.global-add-strip strong{color:#fff}.global-add-strip span{color:var(--muted);font-size:.82rem}.gantt-bar{min-height:24px;display:flex;align-items:center}.gantt-bar:hover{outline:2px solid #fff8;z-index:4}.gantt-bar-label{pointer-events:none}.gantt-container{background:linear-gradient(180deg,#080b10,#0e141d);border-radius:18px;border:1px solid #ffffff14}.gantt-table{min-width:max-content}.gantt-drop-hint.big{margin:0 0 10px 0;border-color:#ffcf5a77;background:#ffcf5a0d;color:#f5f1e8}.unscheduled-lane{border:1px solid #ffffff12;background:#00000025;border-radius:18px;padding:12px;margin-top:12px}.unscheduled-lane-title{font-family:'DM Mono',monospace;color:var(--accent);font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
+@media(max-width:900px){.work-os-grid{grid-template-columns:1fr}.global-add-strip{flex-direction:column;align-items:stretch}.work-os-head{align-items:flex-start;flex-direction:column}}
+
+
+
+/* FIX relaciones modal: tipo izquierda + tarea derecha, sin salirse */
+.rel-row{
+  display:grid!important;
+  grid-template-columns:104px minmax(0,1fr) 26px;
+  gap:6px!important;
+  align-items:center!important;
+  width:100%;
+  box-sizing:border-box;
+}
+.rel-row select{
+  width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box;
+}
+.rel-tipo{
+  max-width:104px!important;
+  font-size:.64rem!important;
+}
+.rel-task{
+  max-width:100%!important;
+  font-size:.72rem!important;
+}
+#em-relaciones-list{
+  overflow-x:hidden!important;
+}
+.edit-modal{
+  width:min(680px,calc(100vw - 24px))!important;
+}
+@media(max-width:520px){
+  .rel-row{grid-template-columns:92px minmax(0,1fr) 24px!important;gap:4px!important;padding:5px!important}
+  .rel-tipo{max-width:92px!important;font-size:.58rem!important;padding:4px 3px!important}
+  .rel-task{font-size:.66rem!important;padding:4px 3px!important}
+}
+
 </style>
 </head>
 <body>
@@ -1002,6 +930,7 @@ select.state-sel {
 <header>
   <div class="logo">REFORMA<span>·</span>GT</div>
   <div class="global-nav">
+    <button class="gnav-btn" id="gnav-mando" onclick="openGlobal('mando')">Centro de mando</button>
     <button class="gnav-btn" id="gnav-tareas" onclick="openGlobal('tareas')">Todas las tareas</button>
     <button class="gnav-btn" id="gnav-compra" onclick="openGlobal('compra')">Toda la compra</button>
     <button class="gnav-btn" id="gnav-herramientas" onclick="openGlobal('herramientas')">Herramientas</button>
@@ -1126,10 +1055,12 @@ select.state-sel {
         <div class="overview-total-bar"><div class="overview-total-fill" id="ov-bar" style="width:0%"></div></div>
       </div>
       <div id="ov-rooms"></div>
-      <div style="margin-top:10px"><button class="btn-primary" onclick="openNewTaskModal()" style="width:100%">+ añadir tarea</button></div>
       <div>
         <div class="overview-title" style="margin-bottom:8px">Lista de la compra</div>
         <div id="ov-compra-stats" style="font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--muted)"></div>
+        <button class="btn-primary" style="width:100%;margin-top:12px" onclick="openGlobal('mando')">Abrir centro de mando de obra</button>
+        <button class="btn-secondary" style="width:100%;margin-top:8px" onclick="openNewTaskModal()">+ Añadir tarea completa</button>
+        <div id="overview-work-os"></div>
       </div>
     </div>
 
@@ -1184,7 +1115,7 @@ select.state-sel {
 <div class="edit-modal-overlay" id="edit-modal-overlay" onclick="if(event.target===this)closeEditModal()">
   <div class="edit-modal">
     <div class="edit-modal-title">
-      <span id="em-title">Editar tarea</span>
+      <span id="edit-modal-title-text">Editar tarea</span>
       <button class="btn-icon" onclick="closeEditModal()" style="font-size:18px">✕</button>
     </div>
     <div><label>Descripción</label><input id="em-text" placeholder="Descripción de la tarea..."></div>
@@ -1198,8 +1129,22 @@ select.state-sel {
       <button type="button" onclick="addRelacionRow()" style="background:var(--surface2);border:1px dashed var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:0.7rem;padding:5px 10px;border-radius:4px;cursor:pointer;width:100%;transition:all 0.15s" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">+ añadir relación</button>
     </div>
     <div><label>Nota adicional</label><input id="em-nota" placeholder="Nota (opcional)..."></div>
-    <div class="edit-modal-actions"><button class="btn-danger" id="em-delete-btn">Eliminar</button><button class="btn-secondary" onclick="closeEditModal()">Cancelar</button><button class="btn-primary" style="flex:2" id="em-save-btn" onclick="saveEditTask()">Guardar cambios</button></div>
+    <div class="edit-modal-actions"><button class="btn-danger" id="em-delete-btn">Eliminar</button><button class="btn-secondary" onclick="closeEditModal()">Cancelar</button><button class="btn-primary" style="flex:2" onclick="saveEditTask()">Guardar cambios</button></div>
   </div>
+</div>
+
+
+<!-- GLOBAL: CENTRO DE MANDO -->
+<div class="global-overlay" id="overlay-mando">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">CENTRO DE MANDO · OBRA VIVA</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn-secondary" onclick="renderCommandCenter()">Actualizar diagnóstico</button>
+      <button class="btn-primary" onclick="openNewTaskModal()">+ Nueva tarea completa</button>
+      <button class="btn-icon" onclick="closeGlobal('mando')" style="font-size:18px;color:var(--muted)">✕</button>
+    </div>
+  </div>
+  <div class="global-overlay-body" id="command-body"></div>
 </div>
 
 <!-- GLOBAL: TODAS LAS TAREAS -->
@@ -1207,12 +1152,12 @@ select.state-sel {
   <div class="global-overlay-header">
     <span class="global-overlay-title">TODAS LAS TAREAS</span>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <button class="btn-primary" onclick="openNewTaskModal()" style="padding:7px 12px;width:auto">+ añadir tarea</button>
       <div class="filter-bar" id="filter-bar-tareas" style="margin:0"></div>
       <button class="btn-icon" onclick="closeGlobal('tareas')" style="font-size:18px;color:var(--muted)">✕</button>
     </div>
   </div>
   <div class="global-overlay-body">
+    <div class="global-add-strip"><div><strong>Alta de tarea completa</strong><br><span>Se abre la misma ventana que editar: fechas, duración, habitaciones y relaciones.</span></div><button class="btn-primary" onclick="openNewTaskModal()">+ Añadir tarea</button></div>
     <div class="gstats-row" id="gstats-tareas"></div>
     <div id="global-task-list"></div>
   </div>
@@ -1265,7 +1210,7 @@ select.state-sel {
   <div class="global-overlay-header">
     <span class="global-overlay-title">CRONOGRAMA · GANTT</span>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <div class="gantt-toolbar" style="margin:0" id="gantt-toolbar"></div>
+      <button class="btn-primary" onclick="openNewTaskModal()">+ Tarea</button><button class="btn-secondary" onclick="renderGantt()">Actualizar cronograma</button><div class="gantt-toolbar" style="margin:0" id="gantt-toolbar"></div>
       <button class="btn-icon" onclick="closeGlobal('gantt')" style="font-size:18px;color:var(--muted)">✕</button>
     </div>
   </div>
@@ -1275,7 +1220,7 @@ select.state-sel {
       <div id="gantt-inner"></div>
     </div>
     <div style="padding:10px 0;font-size:0.68rem;color:var(--muted);font-family:'DM Mono',monospace;flex-shrink:0">
-      Puedes clicar una tarea o área del cronograma para editarla. Arrastra barras para mover fechas; arrastra el borde derecho para cambiar duración. Las tareas sin fecha aparecen abajo y se pueden arrastrar al cronograma.
+      Las fechas de inicio/fin se toman de las tareas. Las flechas indican dependencias (una tarea debe completarse antes de la siguiente).
     </div>
   </div>
 </div>
@@ -1316,12 +1261,9 @@ const ROOMS_DEF = [
   { id:'despensa',name:'Despensa',     color:'#a0b8d0', shortName:'DES' },
   { id:'cocina', name:'Cocina',        color:'#7ec8c8', shortName:'COC' },
 ];
-const UNASSIGNED_TASK_BUCKET = { id:'sin_asignar', name:'Sin asignar', color:'#888', shortName:'SIN' };
-function taskBuckets(){ return [UNASSIGNED_TASK_BUCKET, ...ROOMS_DEF]; }
 
-let appState = { tasks:{}, compra:[], notes:{}, herramientas:[], showTaskForm:{}, showCompraForm:false, activeRoom:null, activeTab:'tasks', globalFilter:{tareas:'todas', compra:'todas'} };
+let appState = { tasks:{}, compra:[], notes:{}, herramientas:[], incidencias:[], showTaskForm:{}, showCompraForm:false, activeRoom:null, activeTab:'tasks', globalFilter:{tareas:'todas', compra:'todas'} };
 ROOMS_DEF.forEach(r => { appState.tasks[r.id]=[]; appState.notes[r.id]=''; appState.showTaskForm[r.id]=false; });
-appState.tasks[UNASSIGNED_TASK_BUCKET.id]=[];
 
 function load(){
   onValue(proyectoRef, (snapshot) => {
@@ -1333,13 +1275,13 @@ function load(){
     if (d.compra) appState.compra = d.compra;
     if (d.notes) appState.notes = d.notes;
     if (d.herramientas) appState.herramientas = d.herramientas;
+    if (d.incidencias) appState.incidencias = d.incidencias;
 
     ROOMS_DEF.forEach(r => {
       if (!appState.tasks[r.id]) appState.tasks[r.id] = [];
       if (!appState.notes[r.id]) appState.notes[r.id] = '';
       if (appState.showTaskForm[r.id] === undefined) appState.showTaskForm[r.id] = false;
     });
-    if (!appState.tasks[UNASSIGNED_TASK_BUCKET.id]) appState.tasks[UNASSIGNED_TASK_BUCKET.id] = [];
 
     firebaseReady = true;
 
@@ -1359,7 +1301,8 @@ function save(){
     tasks: appState.tasks,
     compra: appState.compra,
     notes: appState.notes,
-    herramientas: appState.herramientas
+    herramientas: appState.herramientas,
+    incidencias: appState.incidencias || []
   });
 }
 
@@ -1418,6 +1361,7 @@ function updateOverview(){
   const compTot=appState.compra.length, compDone=appState.compra.filter(x=>x.comprado).length;
   const gastado=appState.compra.filter(x=>x.comprado&&x.precio).reduce((s,x)=>s+parseFloat(x.precio||0),0);
   document.getElementById('ov-compra-stats').textContent=compDone+' de '+compTot+' artículos'+(gastado?' · '+gastado.toFixed(0)+'€ gastados':'');
+  renderOverviewWorkOS();
 }
 
 function selectRoom(id){
@@ -1489,12 +1433,12 @@ function renderTasks(room){
       let depLabel = '';
       if(!rels.length && t.depId) {
         let depTask = null;
-        taskBuckets().forEach(r => { const f=(appState.tasks[r.id]||[]).find(x=>x.id===t.depId); if(f) depTask=f; });
+        ROOMS_DEF.forEach(r => { const f=(appState.tasks[r.id]||[]).find(x=>x.id===t.depId); if(f) depTask=f; });
         if(depTask) depLabel = `<span class="dep-badge" title="Después de: ${depTask.texto}">⛓ ${depTask.texto.length>25?depTask.texto.slice(0,25)+'…':depTask.texto}</span>`;
       }
       const relLabels = rels.map(rel => {
         let relTask = null;
-        taskBuckets().forEach(r => { const f=(appState.tasks[r.id]||[]).find(x=>x.id===rel.taskId); if(f) relTask=f; });
+        ROOMS_DEF.forEach(r => { const f=(appState.tasks[r.id]||[]).find(x=>x.id===rel.taskId); if(f) relTask=f; });
         if(!relTask) return '';
         const icon = rel.tipo==='before'?'↑':rel.tipo==='during'?'↔':'↓';
         const word = rel.tipo==='before'?'Antes de':rel.tipo==='during'?'Durante':'Después de';
@@ -1504,7 +1448,7 @@ function renderTasks(room){
       // Multi-room badges (other rooms)
       const otherRooms = (t.rooms||[]).filter(r=>r!==room.id);
       const roomBadges = otherRooms.map(rid=>{
-        const rd=taskBuckets().find(x=>x.id===rid);
+        const rd=ROOMS_DEF.find(x=>x.id===rid);
         return rd?`<span class="task-room-badge" style="background:${rd.color}22;color:${rd.color}">${rd.shortName||rd.name}</span>`:'';
       }).join('');
       // Duration
@@ -1513,7 +1457,7 @@ function renderTasks(room){
       <div class="task-item ${t.estado==='hecho'?'task-done':''}">
         <input type="checkbox" class="task-check" ${t.estado==='hecho'?'checked':''} onchange="toggleTask('${room.id}',${i})">
         <div class="task-content">
-          <div class="task-text">${t.texto}</div>
+          <div class="task-text" onclick="openEditModal('${room.id}',${i})">${t.texto}</div>
           <div class="task-meta">
             <span class="tag tag-${t.estado==='hecho'?'done':t.estado==='en curso'?'doing':'pending'}">${t.estado}</span>
             ${t.fecha?`<span class="task-date">📅 ${t.fecha}${t.fechaFin?' → '+t.fechaFin:''}</span>`:''}
@@ -1534,9 +1478,52 @@ function renderTasks(room){
   }
 
   const formArea=document.getElementById('task-form-area');
-  formArea.innerHTML=`<span class="add-toggle" onclick="openNewTaskModal('${room.id}')">+ añadir tarea</span>`;
-}
+  if(appState.showTaskForm[room.id]){
+    // Build list of all tasks for dependency selector
+    const allTasksForDep = [];
+    ROOMS_DEF.forEach(r => {
+      (appState.tasks[r.id]||[]).forEach(t => {
+        allTasksForDep.push({id: t.id, label: `[${r.name}] ${t.texto}`});
+      });
+    });
+    const depOptions = allTasksForDep.map(t =>
+      `<option value="${t.id}">${t.label.length>50?t.label.slice(0,50)+'…':t.label}</option>`
+    ).join('');
 
+    formArea.innerHTML=`
+      <div class="add-form">
+        <input id="nt-text" placeholder="Descripción de la tarea..." onkeydown="if(event.key==='Enter')addTask('${room.id}')">
+        <div class="form-row">
+          <select id="nt-state">
+            <option value="pendiente">pendiente</option>
+            <option value="en curso">en curso</option>
+            <option value="hecho">hecho</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:6px">
+          <div style="flex:1">
+            <div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">INICIO</div>
+            <input id="nt-date" type="date" style="width:100%;margin:0">
+          </div>
+          <div style="flex:1">
+            <div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">FIN PREVISTO</div>
+            <input id="nt-datefin" type="date" style="width:100%;margin:0">
+          </div>
+        </div>
+        ${allTasksForDep.length ? `
+        <div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">DEPENDE DE (se hace después de...)</div>
+        <select id="nt-dep" style="width:100%;margin-bottom:6px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.82rem">
+          <option value="">— Sin dependencia —</option>
+          ${depOptions}
+        </select>` : ''}
+        <input id="nt-nota" placeholder="Nota adicional (opcional)..." style="margin-bottom:8px">
+        <button class="btn-primary" onclick="addTask('${room.id}')">+ Añadir tarea</button>
+      </div>`;
+    setTimeout(()=>document.getElementById('nt-text')?.focus(),50);
+  } else {
+    formArea.innerHTML=`<div class="sticky-add-task"><button class="btn-primary" style="width:100%" onclick="openNewTaskModal('${room.id}')">+ Añadir tarea completa</button></div>`;
+  }
+}
 
 function renderCompra(room){
   const all=appState.compra.filter(x=>x.roomId===room.id);
@@ -1583,62 +1570,52 @@ function renderCompra(room){
 function toggleTaskForm(id){ appState.showTaskForm[id]=!appState.showTaskForm[id]; renderPanel(); }
 function toggleCompraForm(){ appState.showCompraForm=!appState.showCompraForm; renderPanel(); }
 
-function addTask(id){ openNewTaskModal(id); }
+function addTask(id){
+  const txt=document.getElementById('nt-text')?.value?.trim();
+  if(!txt){ showNotif('Escribe una descripción'); return; }
+  const depId = document.getElementById('nt-dep')?.value || '';
+  // Multi-room: primary room is always included; user can add others in edit
+  appState.tasks[id].push({
+    id: uid(),
+    texto: txt,
+    estado: document.getElementById('nt-state')?.value||'pendiente',
+    fecha: document.getElementById('nt-date')?.value||'',
+    fechaFin: document.getElementById('nt-datefin')?.value||'',
+    nota: document.getElementById('nt-nota')?.value||'',
+    depId: depId,
+    rooms: [id],   // multi-room: list of room ids
+    duracion: '',  // estimated days
+    relType: '',   // 'before'|'after'|'during'
+    relTaskId: ''  // related task id for relative positioning
+  });
+  appState.showTaskForm[id]=false;
+  save(); renderPanel(); showNotif('Tarea añadida ✓');
+}
 
 function deleteTask(id,i){ appState.tasks[id].splice(i,1); save(); renderPanel(); }
 
 // ── EDIT TASK MODAL ──────────────────────────────────────────────
 
-let editCtx = null; // { mode:'edit'|'new', roomId, idx }
+let editCtx = null; // { roomId, idx }
 let _allTasksForRel = []; // cached list for relation dropdowns
 
-
-function openNewTaskModal(defaultRoomId='') {
-  editCtx = { mode:'new', roomId: defaultRoomId || UNASSIGNED_TASK_BUCKET.id, idx: -1 };
-
-  document.getElementById('em-title').textContent = 'Añadir tarea';
-  document.getElementById('em-save-btn').textContent = 'Añadir tarea';
-  document.getElementById('em-delete-btn').style.display = 'none';
-
-  document.getElementById('em-text').value = '';
-  document.getElementById('em-state').value = 'pendiente';
-  document.getElementById('em-date').value = '';
-  document.getElementById('em-datefin').value = '';
-  document.getElementById('em-duracion').value = '';
-  document.getElementById('em-nota').value = '';
-
-  const currentRooms = defaultRoomId ? [defaultRoomId] : [];
-  document.getElementById('em-rooms').innerHTML = ROOMS_DEF.map(r => `
-    <label class="room-check-label ${currentRooms.includes(r.id)?'checked':''}" style="color:${r.color}">
-      <input type="checkbox" value="${r.id}" ${currentRooms.includes(r.id)?'checked':''}
-        onchange="this.closest('.room-check-label').classList.toggle('checked',this.checked)">
-      ${r.shortName||r.name}
-    </label>
-  `).join('') + `<label class="room-check-label ${!currentRooms.length?'checked':''}" style="color:${UNASSIGNED_TASK_BUCKET.color}">
-      <input type="checkbox" value="${UNASSIGNED_TASK_BUCKET.id}" ${!currentRooms.length?'checked':''}
-        onchange="this.closest('.room-check-label').classList.toggle('checked',this.checked)">
-      Sin asignar
-    </label>`;
-
-  _allTasksForRel = [];
-  taskBuckets().forEach(r => {
-    (appState.tasks[r.id]||[]).forEach(x => {
-      if(!_allTasksForRel.find(y=>y.id===x.id)) _allTasksForRel.push({id:x.id, label:`[${r.name}] ${x.texto}`});
-    });
-  });
-  renderRelacionRows([]);
-  document.getElementById('edit-modal-overlay').classList.add('open');
-  setTimeout(()=>document.getElementById('em-text')?.focus(), 60);
+function openNewTaskModal(defaultRoomId) {
+  const roomId = defaultRoomId || appState.activeRoom || ROOMS_DEF[0].id;
+  const t = { id: uid(), texto:'', estado:'pendiente', fecha:'', fechaFin:'', duracion:'', nota:'', relaciones:[], rooms: appState.activeRoom ? [appState.activeRoom] : [] };
+  editCtx = { roomId, idx:-1, newTask:true, draft:t };
+  fillTaskModal(t, roomId, true);
 }
 
 function openEditModal(roomId, idx) {
-  const t = appState.tasks[roomId][idx];
+  if(roomId===null || idx===null || idx===undefined) return openNewTaskModal();
+  const t = appState.tasks[roomId]?.[idx];
   if(!t) return;
-  editCtx = { mode:'edit', roomId, idx };
-  document.getElementById('em-title').textContent = 'Editar tarea';
-  document.getElementById('em-save-btn').textContent = 'Guardar cambios';
-  document.getElementById('em-delete-btn').style.display = '';
+  editCtx = { roomId, idx, newTask:false };
+  fillTaskModal(t, roomId, false);
+}
 
+function fillTaskModal(t, roomId, isNew) {
+  document.getElementById('edit-modal-title-text').textContent = isNew ? 'Añadir tarea' : 'Editar tarea';
   document.getElementById('em-text').value = t.texto || '';
   document.getElementById('em-state').value = t.estado || 'pendiente';
   document.getElementById('em-date').value = t.fecha || '';
@@ -1654,15 +1631,11 @@ function openEditModal(roomId, idx) {
         onchange="this.closest('.room-check-label').classList.toggle('checked',this.checked)">
       ${r.shortName||r.name}
     </label>
-  `).join('') + `<label class="room-check-label ${currentRooms.includes(UNASSIGNED_TASK_BUCKET.id)?'checked':''}" style="color:${UNASSIGNED_TASK_BUCKET.color}">
-      <input type="checkbox" value="${UNASSIGNED_TASK_BUCKET.id}" ${currentRooms.includes(UNASSIGNED_TASK_BUCKET.id)?'checked':''}
-        onchange="this.closest('.room-check-label').classList.toggle('checked',this.checked)">
-      Sin asignar
-    </label>`;
+  `).join('');
 
   // Build cached task list for selects (exclude self)
   _allTasksForRel = [];
-  taskBuckets().forEach(r => {
+  ROOMS_DEF.forEach(r => {
     (appState.tasks[r.id]||[]).forEach(x => {
       if(x.id !== t.id && !_allTasksForRel.find(y=>y.id===x.id))
         _allTasksForRel.push({id:x.id, label:`[${r.name}] ${x.texto}`});
@@ -1678,7 +1651,9 @@ function openEditModal(roomId, idx) {
   renderRelacionRows(relaciones);
 
   // Delete button
-  document.getElementById('em-delete-btn').onclick = () => {
+  const delBtn = document.getElementById('em-delete-btn');
+  delBtn.style.display = isNew ? 'none' : '';
+  delBtn.onclick = () => {
     if(confirm('¿Eliminar esta tarea?')) {
       const rooms = t.rooms && t.rooms.length ? t.rooms : [roomId];
       rooms.forEach(rid => {
@@ -1686,7 +1661,7 @@ function openEditModal(roomId, idx) {
         const fi = arr.findIndex(x=>x.id===t.id);
         if(fi>=0) arr.splice(fi,1);
       });
-      closeEditModal(); save(); renderPanel(); showNotif('Tarea eliminada');
+      closeEditModal(); save(); renderEverything(); showNotif('Tarea eliminada');
     }
   };
 
@@ -1718,18 +1693,18 @@ function renderRelacionRows(relaciones) {
   }
   container._relaciones = relaciones;
   container.innerHTML = relaciones.map((rel, i) => `
-    <div class="rel-row" data-i="${i}" style="display:grid;grid-template-columns:150px minmax(0,1fr) 24px;gap:8px;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:6px 8px;width:100%;box-sizing:border-box">
-      <select class="rel-tipo" style="background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:0.68rem;padding:5px 6px;border-radius:4px;width:100%;min-width:0"
+    <div class="rel-row" data-i="${i}" style="background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 7px">
+      <select class="rel-tipo" style="background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:0.68rem;padding:3px 5px;border-radius:4px;flex-shrink:0;white-space:nowrap"
         onchange="updateRelacion(${i},'tipo',this.value)">
-        <option value="before" ${rel.tipo==='before'?'selected':''}>Antes de</option>
         <option value="after"  ${rel.tipo==='after' ?'selected':''}>Después de</option>
-        <option value="during" ${rel.tipo==='during'?'selected':''}>Durante / al mismo tiempo</option>
+        <option value="before" ${rel.tipo==='before'?'selected':''}>Antes de</option>
+        <option value="during" ${rel.tipo==='during'?'selected':''}>Durante</option>
       </select>
-      <select class="rel-task" style="background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.75rem;padding:5px 6px;border-radius:4px;width:100%;min-width:0;overflow:hidden;text-overflow:ellipsis"
+      <select class="rel-task" style="background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.75rem;padding:3px 5px;border-radius:4px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis"
         onchange="updateRelacion(${i},'taskId',this.value)">
         ${relTaskOptions(rel.taskId)}
       </select>
-      <button type="button" onclick="removeRelacion(${i})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:2px 3px;line-height:1;text-align:center" title="Quitar">✕</button>
+      <button type="button" onclick="removeRelacion(${i})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:2px 3px;flex-shrink:0;line-height:1" title="Quitar">✕</button>
     </div>
   `).join('');
 }
@@ -1756,16 +1731,15 @@ function removeRelacion(i) {
 
 function saveEditTask() {
   if(!editCtx) return;
-  const { roomId, idx, mode } = editCtx;
-  const isNew = mode === 'new';
-  const t = isNew ? { id: uid(), estado:'pendiente', rooms: [] } : appState.tasks[roomId][idx];
+  const { roomId, idx } = editCtx;
+  const t = editCtx.newTask ? (editCtx.draft || {id:uid()}) : appState.tasks[roomId]?.[idx];
   if(!t) { closeEditModal(); return; }
 
   const newText = document.getElementById('em-text').value.trim();
   if(!newText) { showNotif('La descripción no puede estar vacía'); return; }
 
   const checkedRooms = [...document.querySelectorAll('#em-rooms input:checked')].map(el=>el.value);
-  if(!checkedRooms.length) checkedRooms.push(UNASSIGNED_TASK_BUCKET.id);
+  if(!checkedRooms.length) checkedRooms.push(roomId || ROOMS_DEF[0].id);
 
   // Collect relaciones, filtering out empty ones
   const container = document.getElementById('em-relaciones-list');
@@ -1794,7 +1768,7 @@ function saveEditTask() {
     rooms: checkedRooms
   };
 
-  const prevRooms = isNew ? [] : (t.rooms && t.rooms.length ? t.rooms : [roomId]);
+  const prevRooms = editCtx.newTask ? [] : (t.rooms && t.rooms.length ? t.rooms : [roomId]);
   prevRooms.forEach(rid => {
     if(!checkedRooms.includes(rid)) {
       const arr = appState.tasks[rid]||[];
@@ -1810,16 +1784,12 @@ function saveEditTask() {
     else arr.push({...updated});
   });
 
-  closeEditModal(); save(); renderPanel();
-  updateHeader(); updateFloorPlan(); updateOverview();
-  if(document.getElementById('overlay-tareas')?.classList.contains('open')) renderGlobalTareas();
-  if(document.getElementById('overlay-gantt')?.classList.contains('open')) renderGantt();
-  showNotif(isNew ? 'Tarea añadida ✓' : 'Tarea guardada ✓');
+  const wasNew = !!editCtx.newTask;
+  closeEditModal(); save(); renderEverything();
+  showNotif(wasNew ? 'Tarea añadida ✓' : 'Tarea guardada ✓');
 }
 
-window.openNewTaskModal = openNewTaskModal;
 window.openEditModal = openEditModal;
-window.openEditModalByTaskId = openEditModalByTaskId;
 window.closeEditModal = closeEditModal;
 window.addRelacionRow = addRelacionRow;
 window.updateRelacion = updateRelacion;
@@ -1860,14 +1830,180 @@ function showNotif(msg){
 }
 
 
+function renderEverything(){
+  updateHeader(); updateOverview(); updateFloorPlan(); renderOverviewWorkOS();
+  if(appState.activeRoom) renderPanel();
+  if(document.getElementById('overlay-tareas')?.classList.contains('open')) renderGlobalTareas();
+  if(document.getElementById('overlay-mando')?.classList.contains('open')) renderCommandCenter();
+  if(document.getElementById('overlay-gantt')?.classList.contains('open')) renderGantt();
+}
+
+function renderOverviewWorkOS(){
+  const el=document.getElementById('overview-work-os'); if(!el) return;
+  const tasks=allTasksFlat();
+  const sinFecha=tasks.filter(t=>!t.fecha&&t.estado!=='hecho').length;
+  const doing=tasks.filter(t=>t.estado==='en curso').length;
+  const overdue=tasks.filter(t=>t.fecha&&t.estado!=='hecho'&&daysUntil(t.fechaFin||t.fecha)<0).length;
+  const blocked=tasks.filter(t=>{const rels=t.relaciones&&t.relaciones.length?t.relaciones:(t.depId?[{tipo:'after',taskId:t.depId}]:[]);return rels.some(r=>r.tipo==='after'&&tasks.find(x=>x.id===r.taskId&&x.estado!=='hecho'));}).length;
+  el.innerHTML=`<div class="work-os"><div class="work-os-head"><div><div class="work-os-title">Sistema operativo de obra</div><div style="color:var(--muted);font-size:.82rem;margin-top:4px">Lo que antes era una lista ahora te dice qué ejecutar, qué bloquea y qué falta colocar.</div></div><button class="btn-primary" onclick="openNewTaskModal()">+ Tarea</button></div><div class="work-os-grid"><div class="work-tile" onclick="openGlobal('gantt')"><b>${sinFecha}</b><span>sin cronograma</span><p>Arrástralas al Gantt o pon fecha/duración desde edición.</p></div><div class="work-tile" onclick="openGlobal('mando')"><b>${blocked}</b><span>bloqueadas</span><p>Dependencias pendientes que pueden parar la obra.</p></div><div class="work-tile" onclick="openGlobal('tareas')"><b>${doing}</b><span>en curso</span><p>Producción abierta ahora mismo.</p></div><div class="work-tile" onclick="openGlobal('mando')"><b>${overdue}</b><span>vencidas</span><p>Alertas rojas para corregir planificación.</p></div></div></div>`;
+}
+
+// ── CENTRO DE MANDO DE OBRA ─────────────────────────────────────
+function allTasksFlat(){
+  const arr=[];
+  ROOMS_DEF.forEach(r=>{
+    (appState.tasks[r.id]||[]).forEach((t,i)=>{
+      if(!arr.find(x=>x.id===t.id)) arr.push({...t,_roomId:r.id,_idx:i,_room:r});
+    });
+  });
+  return arr;
+}
+function htmlSafe(v){
+  return String(v??'').replace(/[&<>'"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+}
+function daysUntil(dateStr){
+  if(!dateStr) return null;
+  const a=new Date(); a.setHours(0,0,0,0);
+  const b=new Date(dateStr); b.setHours(0,0,0,0);
+  return Math.round((b-a)/86400000);
+}
+function findTaskIndexById(id){
+  for(const r of ROOMS_DEF){
+    const i=(appState.tasks[r.id]||[]).findIndex(t=>t.id===id);
+    if(i>=0) return {roomId:r.id,idx:i};
+  }
+  return null;
+}
+function editTaskById(id){
+  const f=findTaskIndexById(id); if(f) openEditModal(f.roomId,f.idx);
+}
+function taskNameById(id){
+  const t=allTasksFlat().find(x=>x.id===id);
+  return t ? t.texto : '';
+}
+function commandOpenGantt(){ openGlobal('gantt'); renderGantt(); }
+function commandTaskOptions(selectedId){
+  const tasks=allTasksFlat().filter(t=>t.estado!=='hecho');
+  return `<option value="">Sin vincular a tarea</option>` + tasks.map(t=>`<option value="${t.id}" ${t.id===selectedId?'selected':''}>${htmlSafe((t._room?.shortName||t._room?.name||'')+' · '+t.texto).slice(0,80)}</option>`).join('');
+}
+function commandAddIncident(){
+  const text=document.getElementById('incident-text')?.value.trim();
+  const level=document.getElementById('incident-level')?.value || 'media';
+  const taskId=document.getElementById('incident-task')?.value || '';
+  if(!text) return showNotif('Escribe la incidencia');
+  appState.incidencias = appState.incidencias || [];
+  appState.incidencias.unshift({id:uid(),texto:text,nivel:level,taskId,fecha:new Date().toISOString().slice(0,10),resuelta:false});
+  save(); renderCommandCenter(); showNotif(taskId?'Incidencia vinculada a tarea':'Incidencia añadida');
+}
+function toggleIncident(id){
+  const it=(appState.incidencias||[]).find(x=>x.id===id); if(!it) return;
+  it.resuelta=!it.resuelta; save(); renderCommandCenter();
+}
+function createTaskFromIncident(id){
+  const inc=(appState.incidencias||[]).find(x=>x.id===id); if(!inc) return;
+  const roomId=appState.activeRoom || ROOMS_DEF[0].id;
+  const t={ id:uid(), texto:inc.texto, estado:'pendiente', fecha:'', fechaFin:'', duracion:'', nota:`Creada desde incidencia ${inc.fecha} · prioridad ${inc.nivel}`, relaciones:[], rooms:[] };
+  editCtx={ roomId, idx:-1, newTask:true, draft:t };
+  fillTaskModal(t, roomId, true);
+}
+function reopenIncident(id){
+  const it=(appState.incidencias||[]).find(x=>x.id===id); if(!it) return;
+  it.resuelta=false; save(); renderCommandCenter();
+}
+function renderCommandCenter(){
+  const body=document.getElementById('command-body'); if(!body) return;
+  const tasks=allTasksFlat();
+  const total=tasks.length, done=tasks.filter(t=>t.estado==='hecho').length, doing=tasks.filter(t=>t.estado==='en curso').length;
+  const dated=tasks.filter(t=>t.fecha);
+  const overdue=dated.filter(t=>t.estado!=='hecho' && daysUntil(t.fechaFin||t.fecha)<0).sort((a,b)=>new Date(a.fechaFin||a.fecha)-new Date(b.fechaFin||b.fecha));
+  const next=dated.filter(t=>t.estado!=='hecho' && daysUntil(t.fecha)>=0).sort((a,b)=>new Date(a.fecha)-new Date(b.fecha)).slice(0,6);
+  const today=dated.filter(t=>t.estado!=='hecho' && daysUntil(t.fecha)<=0 && daysUntil(t.fechaFin||t.fecha)>=0);
+  const blocked=tasks.filter(t=>{
+    const rels=t.relaciones&&t.relaciones.length?t.relaciones:(t.depId?[{tipo:'after',taskId:t.depId}]:[]);
+    return rels.some(r=>r.tipo==='after' && tasks.find(x=>x.id===r.taskId && x.estado!=='hecho'));
+  });
+  const noDate=tasks.filter(t=>!t.fecha && t.estado!=='hecho');
+  const missingBuy=(appState.compra||[]).filter(x=>!x.comprado);
+  const openIncidents=(appState.incidencias||[]).filter(x=>!x.resuelta);
+  const closedIncidents=(appState.incidencias||[]).filter(x=>x.resuelta).slice(0,4);
+  const pct=total?Math.round(done/total*100):0;
+  const highInc=openIncidents.filter(i=>i.nivel==='alta').length;
+  const riskScore=overdue.length*3+blocked.length*2+highInc*3+noDate.length+missingBuy.length;
+  const riskLabel=riskScore>14?'ALTO':riskScore>6?'MEDIO':'CONTROLADO';
+  const riskClass=riskScore>14?'risk-high':riskScore>6?'risk-mid':'risk-ok';
+  const mainAdvice = overdue[0] ? `Corrige primero: ${htmlSafe(overdue[0].texto)}` : openIncidents[0] ? `Resuelve incidencia: ${htmlSafe(openIncidents[0].texto)}` : blocked[0] ? `Desbloquea: ${htmlSafe(blocked[0].texto)}` : next[0] ? `Siguiente tarea: ${htmlSafe(next[0].texto)}` : 'Coloca tareas en el cronograma para activar el plan';
+  const item=t=>`<div class="command-item" onclick="editTaskById('${t.id}')"><div class="ci-dot" style="background:${t._room.color};color:${t._room.color}"></div><div class="ci-main"><div class="ci-title">${htmlSafe(t.texto)}</div><div class="ci-meta">${htmlSafe(t._room.name)}${t.fecha?' · '+t.fecha:''}${t.fechaFin?' → '+t.fechaFin:''}</div></div><div class="ci-tag">${htmlSafe(t.estado||'pendiente')}</div></div>`;
+  const incidentCard=i=>{
+    const linked=i.taskId?taskNameById(i.taskId):'';
+    return `<div class="incident-card">
+      <div class="incident-top"><div><div class="incident-title">${htmlSafe(i.texto)}</div><div class="incident-link">${htmlSafe(i.fecha)} · ${htmlSafe(i.nivel)}${linked?' · vinculada a '+htmlSafe(linked):' · sin tarea vinculada'}</div></div><span class="ci-tag ${i.nivel==='alta'?'risk-high':i.nivel==='media'?'risk-mid':'risk-ok'}">${htmlSafe(i.nivel)}</span></div>
+      <div class="incident-actions">
+        ${i.taskId?`<button class="btn-secondary" onclick="editTaskById('${i.taskId}')">Editar tarea</button>`:`<button class="btn-secondary" onclick="createTaskFromIncident('${i.id}')">Crear tarea</button>`}
+        <button class="btn-secondary" onclick="commandOpenGantt()">Ver cronograma</button>
+        <button class="btn-primary" onclick="toggleIncident('${i.id}')">Cerrar incidencia</button>
+      </div>
+    </div>`;
+  };
+  body.innerHTML=`
+    <div class="command-focus">
+      <div class="command-nextstep">
+        <div class="command-eyebrow">centro de mando real</div>
+        <h2>Prioridad ahora: <span class="${riskClass}">${mainAdvice}</span></h2>
+        <p>Las incidencias ya no se quedan aisladas: pueden vincularse a una tarea, convertirse en tarea nueva, abrir su edición o llevarte al cronograma.</p>
+        <div class="command-lane">
+          <div class="lane-card" onclick="openGlobal('tareas')"><b>${today.length}</b><span>activas hoy</span></div>
+          <div class="lane-card" onclick="renderCommandCenter()"><b class="${riskClass}">${riskLabel}</b><span>riesgo obra</span></div>
+          <div class="lane-card" onclick="commandOpenGantt()"><b>${noDate.length}</b><span>sin fecha</span></div>
+        </div>
+        <div class="command-minibar">
+          <button class="btn-primary" onclick="openNewTaskModal()">+ Nueva tarea</button>
+          <button class="btn-secondary" onclick="commandOpenGantt()">Actualizar cronograma</button>
+          <button class="btn-secondary" onclick="openGlobal('compra')">Compras pendientes: ${missingBuy.length}</button>
+        </div>
+      </div>
+      <div class="pulse-card">
+        <div class="pulse-metric"><span>Avance</span><b>${pct}%</b></div>
+        <div class="pulse-metric"><span>Tareas hechas</span><b>${done}/${total}</b></div>
+        <div class="pulse-metric"><span>En curso</span><b>${doing}</b></div>
+        <div class="pulse-metric"><span>Vencidas</span><b class="${overdue.length?'risk-high':''}">${overdue.length}</b></div>
+        <div class="pulse-metric"><span>Incidencias abiertas</span><b class="${openIncidents.length?'risk-mid':''}">${openIncidents.length}</b></div>
+      </div>
+    </div>
+
+    <div class="command-card" style="margin-bottom:16px">
+      <h3>Registrar incidencia accionable</h3>
+      <div class="incident-form command-form">
+        <input id="incident-text" placeholder="Ej: humedad en baño, falta azulejo, electricista no puede entrar...">
+        <select id="incident-level"><option value="alta">alta</option><option value="media" selected>media</option><option value="baja">baja</option></select>
+        <select id="incident-task">${commandTaskOptions('')}</select>
+        <button class="btn-primary" onclick="commandAddIncident()">Añadir</button>
+      </div>
+    </div>
+
+    <div class="command-two" style="margin-bottom:16px">
+      <div class="command-card"><div class="command-section-title">Incidencias abiertas</div><div class="incident-board">${openIncidents.length?openIncidents.map(incidentCard).join(''):'<div class="empty-state">No hay incidencias abiertas. Cuando registres una, aparecerá aquí con acciones.</div>'}</div></div>
+      <div class="command-card"><div class="command-section-title">Plan de ejecución</div><div class="command-list">${overdue.slice(0,3).map(item).join('')}${blocked.slice(0,3).map(item).join('')}${(!overdue.length&&!blocked.length)?(next.length?next.map(item).join(''):'<div class="empty-state">No hay próximas tareas con fecha. Coloca tareas en el cronograma.</div>'):''}</div></div>
+    </div>
+
+    <div class="command-grid">
+      <div class="command-card"><h3>Próximas tareas</h3><div class="command-list">${next.length?next.map(item).join(''):'<div class="empty-state">No hay tareas próximas con fecha.</div>'}</div></div>
+      <div class="command-card"><h3>Bloqueos por dependencias</h3><div class="command-list">${blocked.length?blocked.slice(0,6).map(item).join(''):'<div class="empty-state risk-ok">No hay bloqueos por dependencias.</div>'}</div></div>
+      <div class="command-card"><h3>Sin colocar en calendario</h3><div class="command-list">${noDate.slice(0,7).map(item).join('') || '<div class="empty-state risk-ok">Todo tiene fecha o está hecho.</div>'}</div></div>
+      <div class="command-card"><h3>Compras que pueden parar obra</h3><div class="command-list">${missingBuy.slice(0,8).map(x=>`<div class="command-item" onclick="openGlobal('compra')"><div class="ci-dot risk-mid" style="background:var(--warn)"></div><div class="ci-main"><div class="ci-title">${htmlSafe(x.nombre||x.texto||'Artículo')}</div><div class="ci-meta">${htmlSafe(x.room||x.habitacion||'global')}${x.precio?' · '+htmlSafe(x.precio)+'€':''}</div></div><div class="ci-tag">comprar</div></div>`).join('') || '<div class="empty-state risk-ok">No hay compras pendientes.</div>'}</div></div>
+      <div class="command-card"><h3>Incidencias cerradas recientes</h3><div class="command-list">${closedIncidents.length?closedIncidents.map(i=>`<div class="incident-row"><span>${htmlSafe(i.texto)}<div class="ci-meta">${htmlSafe(i.fecha)} · ${htmlSafe(i.nivel)}</div></span><button class="btn-secondary" onclick="reopenIncident('${i.id}')">reabrir</button></div>`).join(''):'<div class="empty-state">Aún no has cerrado incidencias.</div>'}</div></div>
+      <div class="command-card"><h3>Regla de decisión</h3><div class="empty-state">No empieces una tarea si tiene una incidencia abierta vinculada, una dependencia sin terminar, compras pendientes o no tiene fecha/duración.</div></div>
+    </div>`;
+}
+
 // ── GLOBAL OVERLAYS ──────────────────────────────────────────────
 
 function openGlobal(which) {
-  ['tareas','compra','herramientas','gantt'].forEach(w => {
+  ['mando','tareas','compra','herramientas','gantt'].forEach(w => {
     document.getElementById('overlay-'+w).classList.toggle('open', w===which);
     const btn = document.getElementById('gnav-'+w);
     if(btn) btn.classList.toggle('active', w===which);
   });
+  if(which==='mando') renderCommandCenter();
   if(which==='tareas') renderGlobalTareas();
   if(which==='compra') renderGlobalCompra();
   if(which==='herramientas') renderHerramientas();
@@ -1893,13 +2029,13 @@ function renderGlobalTareas() {
   // Collect all tasks, deduplicating by id (tasks can belong to multiple rooms)
   let allTasks = [];
   const seenIds = new Set();
-  taskBuckets().forEach(r => {
+  ROOMS_DEF.forEach(r => {
     (appState.tasks[r.id]||[]).forEach((t,i) => {
       if(seenIds.has(t.id)) return;
       seenIds.add(t.id);
       // Use primary room (first in t.rooms, or current room)
       const primaryRoomId = (t.rooms && t.rooms.length) ? t.rooms[0] : r.id;
-      const primaryRoom = taskBuckets().find(x=>x.id===primaryRoomId) || r;
+      const primaryRoom = ROOMS_DEF.find(x=>x.id===primaryRoomId) || r;
       allTasks.push({...t, roomId:primaryRoom.id, roomName:primaryRoom.name, roomColor:primaryRoom.color, idx:i, _origRoomId:r.id, _origIdx:i});
     });
   });
@@ -1924,7 +2060,7 @@ function renderGlobalTareas() {
   document.getElementById('global-task-list').innerHTML = filtered.map(t => {
     const taskRooms = (t.rooms && t.rooms.length) ? t.rooms : [t.roomId];
     const roomBadgesHtml = taskRooms.map(rid=>{
-      const rd=taskBuckets().find(x=>x.id===rid);
+      const rd=ROOMS_DEF.find(x=>x.id===rid);
       return rd?`<span class="gtask-room-badge" style="background:${rd.color}22;color:${rd.color}">${rd.shortName||rd.name}</span>`:'';
     }).join('');
     // For actions, use the room where we found the task and its index there
@@ -1934,7 +2070,7 @@ function renderGlobalTareas() {
     <div class="task-item ${t.estado==='hecho'?'task-done':''}">
       <input type="checkbox" class="task-check" ${t.estado==='hecho'?'checked':''} onchange="globalToggleTask('${actRoomId}',${actIdx})">
       <div class="task-content">
-        <div class="task-text">${t.texto}</div>
+        <div class="task-text" onclick="openEditModal('${actRoomId}',${actIdx})">${t.texto}</div>
         <div class="task-meta">
           ${roomBadgesHtml}
           <span class="tag tag-${t.estado==='hecho'?'done':t.estado==='en curso'?'doing':'pending'}">${t.estado}</span>
@@ -1956,6 +2092,7 @@ function renderGlobalTareas() {
 
 function setGlobalFilter(which, val) {
   appState.globalFilter[which] = val;
+  if(which==='mando') renderCommandCenter();
   if(which==='tareas') renderGlobalTareas();
   if(which==='compra') renderGlobalCompra();
 }
@@ -2164,14 +2301,14 @@ let ganttFilter = 'todas';
 function renderGantt() {
   // Collect all tasks
   let allTasks = [];
-  taskBuckets().forEach(r => {
+  ROOMS_DEF.forEach(r => {
     (appState.tasks[r.id]||[]).forEach(t => {
       // Avoid duplicates when a task belongs to multiple rooms
       if(!allTasks.find(x=>x.id===t.id)) {
         // Determine display rooms
         const taskRooms = (t.rooms && t.rooms.length) ? t.rooms : [r.id];
-        const primaryRoom = taskBuckets().find(x=>x.id===taskRooms[0]) || taskBuckets().find(x=>x.id===r.id);
-        const roomNames = taskRooms.map(rid=>{ const rd=taskBuckets().find(x=>x.id===rid); return rd?rd.shortName||rd.name:''; }).join('+');
+        const primaryRoom = ROOMS_DEF.find(x=>x.id===taskRooms[0]) || ROOMS_DEF.find(x=>x.id===r.id);
+        const roomNames = taskRooms.map(rid=>{ const rd=ROOMS_DEF.find(x=>x.id===rid); return rd?rd.shortName||rd.name:''; }).join('+');
         allTasks.push({...t, roomId:primaryRoom.id, roomName:roomNames, roomColor:primaryRoom.color});
       }
     });
@@ -2281,11 +2418,10 @@ function renderGantt() {
       <option value="en curso" ${ganttFilter==='en curso'?'selected':''}>En curso</option>
       <option value="hecho" ${ganttFilter==='hecho'?'selected':''}>Hechas</option>
     </select>
-    <button class="btn-secondary" onclick="refreshGantt()" title="Recalcular y recolocar las tareas con fecha o relaciones">Actualizar cronograma</button>
   `;
 
   // Legend
-  document.getElementById('gantt-legend').innerHTML = taskBuckets().map(r =>
+  document.getElementById('gantt-legend').innerHTML = ROOMS_DEF.map(r =>
     `<div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:${r.color}"></div>${r.name}</div>`
   ).join('') + `
     <div class="gantt-legend-item" style="margin-left:8px"><div class="gantt-legend-dot" style="background:#555;border:1px solid var(--accent)"></div>Hoy</div>
@@ -2296,7 +2432,7 @@ function renderGantt() {
   const inner = document.getElementById('gantt-inner');
 
   // Tasks with a real or computed date
-  let withDate = allTasks.filter(t => t.fecha || t._computedFecha);
+  const withDate = allTasks.filter(t => t.fecha || t._computedFecha);
   const withoutDate = allTasks.filter(t => !t.fecha && !t._computedFecha);
 
   if(!allTasks.length) {
@@ -2304,7 +2440,10 @@ function renderGantt() {
     return;
   }
 
-  const hasScheduledRows = withDate.length > 0;
+  if(!withDate.length) {
+    inner.innerHTML = `<div class="gantt-empty"><div style="font-size:2rem;opacity:0.3">📅</div>Ninguna tarea tiene fecha ni posición relativa asignada.<br>Edita las tareas para añadir fechas, duración o posición relativa.<br><br><span style="font-size:0.75rem;color:var(--muted)">${withoutDate.length} tarea${withoutDate.length!==1?'s':''} sin colocar</span></div>`;
+    return;
+  }
 
   // Determine date range
   const today = new Date(); today.setHours(0,0,0,0);
@@ -2351,17 +2490,6 @@ function renderGantt() {
     html += `<div class="gantt-header-cell ${isWeekend?'weekend':''} ${isToday?'today-col':''}" style="font-size:0.58rem">${label}</div>`;
   });
 
-  if(!hasScheduledRows) {
-    html += `<div class="gantt-cell col-name"><div class="gantt-task-name">Arrastra aquí</div><div class="gantt-task-room" style="color:var(--muted)">sin tareas colocadas</div></div>`;
-    html += `<div class="gantt-cell gantt-day-cell gantt-grid-row" data-row-task-id="" style="grid-column:span ${days.length};height:${ROW_H}px;position:relative;border-right:none">`;
-    days.forEach((d,di) => {
-      const isWeekend = d.getDay()===0||d.getDay()===6;
-      const isToday = d.toDateString()===today.toDateString();
-      html += `<div style="position:absolute;top:0;bottom:0;left:${di*DAY_W}px;width:${DAY_W}px;${isWeekend?'background:#ffffff04;':''} ${isToday?'background:#1c190080;':''} border-right:1px solid #1a1a1a"></div>`;
-    });
-    html += `<div style="position:absolute;left:10px;top:10px;color:var(--muted);font-size:0.72rem;font-family:'DM Mono',monospace">Suelta una tarea sin asignar para fijar fecha</div></div>`;
-  }
-
   // Task rows
   withDate.forEach(t => {
     const startStr = t.fecha||t._computedFecha;
@@ -2379,13 +2507,13 @@ function renderGantt() {
     const isComputed = !t.fecha; // positioned from relative/duration, no explicit date
 
     // Name cell
-    html += `<div class="gantt-cell col-name" onclick="openEditModalByTaskId('${t.id}')" style="cursor:pointer">
+    html += `<div class="gantt-cell col-name">
       <div class="gantt-task-name" title="${t.texto}">${t.texto}</div>
       <div class="gantt-task-room" style="color:${t.roomColor}">${t.roomName}${isComputed?' <span style="opacity:0.5;font-size:0.55rem">~est</span>':''}</div>
     </div>`;
 
     // Day cells as one wide cell spanning all days
-    html += `<div class="gantt-cell gantt-day-cell gantt-grid-row" data-row-task-id="${t.id}" style="grid-column:span ${days.length};height:${ROW_H}px;position:relative;border-right:none">`;
+    html += `<div class="gantt-cell gantt-day-cell" style="grid-column:span ${days.length};height:${ROW_H}px;position:relative;border-right:none">`;
 
     // Vertical grid lines
     days.forEach((d,di) => {
@@ -2395,8 +2523,8 @@ function renderGantt() {
     });
 
     // The bar
-    html += `<div class="gantt-bar editable" draggable="true" data-id="${t.id}" data-start="${startStr}" data-duration="${Math.max(parseInt(t.duracion)||Math.max(1,endIdx-startIdx+1),1)}" style="left:${barLeft+2}px;width:${barWidth}px;background:${bgColor};border-left:3px solid ${stateColor};${isComputed?'opacity:0.55;border-style:dashed;':''}" title="${t.texto} · ${t.estado}${startStr?' · '+startStr:''}${endStr&&endStr!==startStr?' → '+endStr:''}${isComputed?' (estimado)':''}">
-      <div class="gantt-bar-label">${t.texto.length>20?t.texto.slice(0,20)+'…':t.texto}</div><div class="gantt-resize-handle" title="Arrastra para cambiar duración"></div>
+    html += `<div class="gantt-bar" data-id="${t.id}" style="left:${barLeft+2}px;width:${barWidth}px;background:${bgColor};border-left:3px solid ${stateColor};${isComputed?'opacity:0.55;border-style:dashed;':''}\" title="${t.texto} · ${t.estado}${startStr?' · '+startStr:''}${endStr&&endStr!==startStr?' → '+endStr:''}${isComputed?' (estimado)':''}">
+      <div class="gantt-bar-label">${t.texto.length>20?t.texto.slice(0,20)+'…':t.texto}</div>
     </div>`;
 
     // Today line
@@ -2412,11 +2540,12 @@ function renderGantt() {
 
   // Tasks without date section
   if(withoutDate.length) {
-    html += `<div style="padding:1rem;border-top:1px solid var(--border);margin-top:8px">
-      <div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Sin fecha ni posición asignada (${withoutDate.length})</div>
+    html += `<div class="unscheduled-lane">
+      <div class="gantt-drop-hint big">Arrastra una tarea de aquí al cronograma para ponerle fecha. Luego arrastra el borde derecho para ajustar duración.</div>
+      <div class="unscheduled-lane-title">Sin fecha ni posición asignada (${withoutDate.length})</div>
       <div style="display:flex;flex-wrap:wrap;gap:6px">
         ${withoutDate.map(t => `
-          <div class="gantt-unscheduled-chip" draggable="true" data-id="${t.id}" onclick="openEditModalByTaskId('${t.id}')" title="Arrastra al cronograma para poner fecha" style="background:var(--surface);border:1px solid ${t.roomColor}44;border-radius:4px;padding:5px 10px;font-size:0.75rem;display:flex;align-items:center;gap:6px">
+          <div class="gantt-unscheduled-chip" draggable="true" data-id="${t.id}" style="background:var(--surface);border:1px solid ${t.roomColor}44;border-radius:4px;padding:5px 10px;font-size:0.75rem;display:flex;align-items:center;gap:6px">
             <div style="width:6px;height:6px;border-radius:50%;background:${t.roomColor};flex-shrink:0"></div>
             <span style="color:var(--muted);font-size:0.6rem;font-family:'DM Mono',monospace">${t.roomName}</span>
             <span>${t.texto}</span>
@@ -2430,195 +2559,58 @@ function renderGantt() {
   // Dependency arrows using SVG overlay
   // We render them after HTML using a post-render step
   inner.innerHTML = html;
-
-  // Activate click, drag/drop and resize handlers after HTML is replaced
-  initGanttInteractions(allTasks, days, DAY_W);
+  enableGanttInteractions(days, DAY_W);
 
   // Draw dependency arrows after render
   setTimeout(() => drawDepArrows(withDate, days, DAY_W, ROW_H, NAME_W), 50);
 }
 
 
-function findTaskLocationById(taskId) {
-  for(const bucket of taskBuckets()) {
-    const arr = appState.tasks[bucket.id] || [];
-    const idx = arr.findIndex(t => t.id === taskId);
-    if(idx >= 0) return { roomId: bucket.id, idx, task: arr[idx] };
+function saveTaskDateById(id, startDate, durDays){
+  const f=findTaskIndexById(id); if(!f) return;
+  const t=appState.tasks[f.roomId][f.idx];
+  const d=new Date(startDate); d.setHours(0,0,0,0);
+  const dur=Math.max(1, parseInt(durDays || t.duracion || 1));
+  const e=new Date(d); e.setDate(e.getDate()+dur-1);
+  t.fecha=d.toISOString().slice(0,10); t.fechaFin=e.toISOString().slice(0,10); t.duracion=dur;
+  save(); renderGantt(); updateHeader(); updateOverview(); updateFloorPlan();
+}
+function enableGanttInteractions(days, DAY_W){
+  const container=document.getElementById('gantt-container'); if(!container) return;
+  document.querySelectorAll('.gantt-bar').forEach(bar=>{
+    bar.onclick=(ev)=>{ if(ev.detail===1 && !bar.dataset.dragging) editTaskById(bar.dataset.id); };
+    bar.onpointerdown=(ev)=>{
+      if(ev.button!==0) return;
+      ev.preventDefault();
+      const id=bar.dataset.id, startX=ev.clientX, startLeft=parseFloat(bar.style.left)||0, startW=parseFloat(bar.style.width)||DAY_W;
+      const resizing=ev.offsetX > bar.clientWidth-12;
+      bar.setPointerCapture(ev.pointerId); bar.dataset.dragging='1';
+      bar.onpointermove=(mv)=>{
+        const dx=mv.clientX-startX;
+        if(resizing) bar.style.width=Math.max(DAY_W-4,startW+dx)+'px';
+        else bar.style.left=Math.max(2,startLeft+dx)+'px';
+      };
+      bar.onpointerup=()=>{
+        const left=parseFloat(bar.style.left)||2; const width=parseFloat(bar.style.width)||DAY_W;
+        const dayIdx=Math.max(0,Math.min(days.length-1,Math.round((left-2)/DAY_W)));
+        const dur=Math.max(1,Math.round((width+4)/DAY_W));
+        saveTaskDateById(id, days[dayIdx], dur);
+        setTimeout(()=>{bar.dataset.dragging='';},50);
+      };
+    };
+  });
+  document.querySelectorAll('.gantt-unscheduled-chip').forEach(chip=>{
+    chip.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',chip.dataset.id));
+  });
+  const inner=document.getElementById('gantt-inner');
+  if(inner){
+    inner.ondragover=e=>e.preventDefault();
+    inner.ondrop=e=>{
+      e.preventDefault(); const id=e.dataTransfer.getData('text/plain'); if(!id) return;
+      const rect=inner.getBoundingClientRect(); const x=e.clientX-rect.left-210; const dayIdx=Math.max(0,Math.min(days.length-1,Math.round(x/DAY_W)));
+      saveTaskDateById(id, days[dayIdx], 1); showNotif('Tarea colocada en cronograma');
+    };
   }
-  return null;
-}
-
-function openEditModalByTaskId(taskId) {
-  const loc = findTaskLocationById(taskId);
-  if(loc) openEditModal(loc.roomId, loc.idx);
-}
-
-function setTaskDateById(taskId, startDate, durationDays) {
-  const loc = findTaskLocationById(taskId);
-  if(!loc) return;
-  const base = new Date(startDate); base.setHours(0,0,0,0);
-  const dur = Math.max(parseInt(durationDays || loc.task.duracion || 1) || 1, 1);
-  const end = new Date(base); end.setDate(end.getDate() + dur - 1);
-  const rooms = loc.task.rooms && loc.task.rooms.length ? loc.task.rooms : [loc.roomId];
-  rooms.forEach(rid => {
-    const arr = appState.tasks[rid] || [];
-    const i = arr.findIndex(t => t.id === taskId);
-    if(i >= 0) {
-      arr[i].fecha = base.toISOString().slice(0,10);
-      arr[i].fechaFin = end.toISOString().slice(0,10);
-      arr[i].duracion = String(dur);
-    }
-  });
-  save(); renderGantt(); updateHeader(); updateFloorPlan(); updateOverview();
-  showNotif('Cronograma actualizado ✓');
-}
-
-function initGanttInteractions(allTasks, days, DAY_W) {
-  const firstDay = days[0];
-  const dayFromClientX = (clientX, rowEl) => {
-    const rect = rowEl.getBoundingClientRect();
-    let idx = Math.floor((clientX - rect.left) / DAY_W);
-    idx = Math.max(0, Math.min(days.length - 1, idx));
-    return days[idx];
-  };
-
-  document.querySelectorAll('.gantt-bar').forEach(bar => {
-    let resizing = false;
-    const taskId = bar.dataset.id;
-    bar.addEventListener('click', ev => {
-      if(ev.target.classList.contains('gantt-resize-handle')) return;
-      ev.stopPropagation(); openEditModalByTaskId(taskId);
-    });
-    bar.querySelector('.gantt-resize-handle')?.addEventListener('mousedown', ev => {
-      ev.preventDefault(); ev.stopPropagation(); resizing = true;
-      const startX = ev.clientX;
-      const loc = findTaskLocationById(taskId); if(!loc) return;
-      const startDur = Math.max(parseInt(loc.task.duracion)||1, 1);
-      const onMove = e => {
-        const deltaDays = Math.round((e.clientX - startX) / DAY_W);
-        const dur = Math.max(startDur + deltaDays, 1);
-        bar.style.width = Math.max(dur * DAY_W - 4, DAY_W - 4) + 'px';
-      };
-      const onUp = e => {
-        document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp);
-        const deltaDays = Math.round((e.clientX - startX) / DAY_W);
-        const dur = Math.max(startDur + deltaDays, 1);
-        const start = loc.task.fecha || bar.dataset.start || new Date().toISOString().slice(0,10);
-        setTaskDateById(taskId, start, dur);
-      };
-      document.addEventListener('mousemove', onMove); document.addEventListener('mouseup', onUp);
-    });
-    bar.addEventListener('dragstart', ev => {
-      if(resizing) { ev.preventDefault(); return; }
-      ev.dataTransfer.setData('text/plain', taskId);
-      ev.dataTransfer.effectAllowed = 'move';
-    });
-  });
-
-  document.querySelectorAll('.gantt-unscheduled-chip').forEach(chip => {
-    chip.addEventListener('dragstart', ev => {
-      ev.dataTransfer.setData('text/plain', chip.dataset.id);
-      ev.dataTransfer.effectAllowed = 'move';
-    });
-  });
-
-  document.querySelectorAll('.gantt-grid-row').forEach(row => {
-    row.addEventListener('dragover', ev => { ev.preventDefault(); row.classList.add('gantt-drop-target'); });
-    row.addEventListener('dragleave', () => row.classList.remove('gantt-drop-target'));
-    row.addEventListener('drop', ev => {
-      ev.preventDefault(); row.classList.remove('gantt-drop-target');
-      const taskId = ev.dataTransfer.getData('text/plain');
-      if(!taskId) return;
-      const d = dayFromClientX(ev.clientX, row);
-      const loc = findTaskLocationById(taskId);
-      const dur = Math.max(parseInt(loc?.task?.duracion)||1, 1);
-      setTaskDateById(taskId, d, dur);
-    });
-  });
-
-  // Soporte móvil/tablet: tocar para editar, mantener y mover para recolocar, borde derecho para duración.
-  const rowFromPoint = (x, y) => document.elementFromPoint(x, y)?.closest?.('.gantt-grid-row');
-  const clearDropTargets = () => document.querySelectorAll('.gantt-drop-target').forEach(e => e.classList.remove('gantt-drop-target'));
-
-  document.querySelectorAll('.gantt-bar').forEach(bar => {
-    const taskId = bar.dataset.id;
-    let pointer = null;
-    bar.addEventListener('pointerdown', ev => {
-      if(ev.pointerType === 'mouse') return;
-      const isResize = ev.target.classList.contains('gantt-resize-handle');
-      const loc = findTaskLocationById(taskId);
-      if(!loc) return;
-      pointer = {
-        id: ev.pointerId,
-        mode: isResize ? 'resize' : 'move',
-        startX: ev.clientX,
-        startY: ev.clientY,
-        moved: false,
-        dur: Math.max(parseInt(loc.task.duracion)||1, 1),
-        startDate: loc.task.fecha || bar.dataset.start || new Date().toISOString().slice(0,10)
-      };
-      bar.setPointerCapture?.(ev.pointerId);
-      ev.preventDefault();
-    });
-    bar.addEventListener('pointermove', ev => {
-      if(!pointer || ev.pointerId !== pointer.id) return;
-      if(Math.abs(ev.clientX-pointer.startX) > 5 || Math.abs(ev.clientY-pointer.startY) > 5) pointer.moved = true;
-      if(pointer.mode === 'resize') {
-        const deltaDays = Math.round((ev.clientX - pointer.startX) / DAY_W);
-        const dur = Math.max(pointer.dur + deltaDays, 1);
-        bar.style.width = Math.max(dur * DAY_W - 4, DAY_W - 4) + 'px';
-      } else {
-        clearDropTargets();
-        rowFromPoint(ev.clientX, ev.clientY)?.classList.add('gantt-drop-target');
-      }
-      ev.preventDefault();
-    });
-    bar.addEventListener('pointerup', ev => {
-      if(!pointer || ev.pointerId !== pointer.id) return;
-      const data = pointer;
-      pointer = null;
-      bar.releasePointerCapture?.(ev.pointerId);
-      clearDropTargets();
-      if(!data.moved) { openEditModalByTaskId(taskId); return; }
-      if(data.mode === 'resize') {
-        const deltaDays = Math.round((ev.clientX - data.startX) / DAY_W);
-        setTaskDateById(taskId, data.startDate, Math.max(data.dur + deltaDays, 1));
-      } else {
-        const row = rowFromPoint(ev.clientX, ev.clientY) || bar.closest('.gantt-grid-row');
-        if(row) setTaskDateById(taskId, dayFromClientX(ev.clientX, row), data.dur);
-      }
-      ev.preventDefault();
-    });
-  });
-
-  document.querySelectorAll('.gantt-unscheduled-chip').forEach(chip => {
-    let pointer = null;
-    chip.addEventListener('pointerdown', ev => {
-      if(ev.pointerType === 'mouse') return;
-      pointer = { id: ev.pointerId, startX: ev.clientX, startY: ev.clientY, moved: false };
-      chip.setPointerCapture?.(ev.pointerId);
-      ev.preventDefault();
-    });
-    chip.addEventListener('pointermove', ev => {
-      if(!pointer || ev.pointerId !== pointer.id) return;
-      if(Math.abs(ev.clientX-pointer.startX) > 5 || Math.abs(ev.clientY-pointer.startY) > 5) pointer.moved = true;
-      clearDropTargets();
-      rowFromPoint(ev.clientX, ev.clientY)?.classList.add('gantt-drop-target');
-      ev.preventDefault();
-    });
-    chip.addEventListener('pointerup', ev => {
-      if(!pointer || ev.pointerId !== pointer.id) return;
-      const data = pointer; pointer = null; chip.releasePointerCapture?.(ev.pointerId);
-      clearDropTargets();
-      if(!data.moved) { openEditModalByTaskId(chip.dataset.id); return; }
-      const row = rowFromPoint(ev.clientX, ev.clientY);
-      if(row) {
-        const loc = findTaskLocationById(chip.dataset.id);
-        setTaskDateById(chip.dataset.id, dayFromClientX(ev.clientX, row), Math.max(parseInt(loc?.task?.duracion)||1, 1));
-      }
-      ev.preventDefault();
-    });
-  });
 }
 
 function drawDepArrows(tasks, days, DAY_W, ROW_H, NAME_W) {
@@ -2703,14 +2695,18 @@ function setGanttFilter(val) {
   renderGantt();
 }
 
-function refreshGantt() {
-  renderGantt();
-  showNotif('Cronograma actualizado ✓');
-}
-
 window.setGanttFilter = setGanttFilter;
-window.refreshGantt = refreshGantt;
 
+window.renderCommandCenter = renderCommandCenter;
+window.openNewTaskModal = openNewTaskModal;
+window.renderOverviewWorkOS = renderOverviewWorkOS;
+window.renderEverything = renderEverything;
+window.commandAddIncident = commandAddIncident;
+window.toggleIncident = toggleIncident;
+window.createTaskFromIncident = createTaskFromIncident;
+window.reopenIncident = reopenIncident;
+window.editTaskById = editTaskById;
+window.commandOpenGantt = commandOpenGantt;
 window.openGlobal = openGlobal;
 window.closeGlobal = closeGlobal;
 window.setGlobalFilter = setGlobalFilter;
