@@ -114,10 +114,12 @@ main {
 
 .floor-svg {
   width: 100%;
-  height: auto;
+  height: 100%;
+  max-width: 100%;
   max-height: 100%;
-  aspect-ratio: 735 / 520;
+  aspect-ratio: 860 / 520;
   display: block;
+  object-fit: contain;
 }
 
 /* Room styles */
@@ -454,6 +456,21 @@ select.state-sel {
   font-family: 'DM Mono', monospace;
   padding: 10px 0 4px;
 }
+
+
+
+.compra-item { cursor:pointer; }
+.compra-item input, .compra-item button { cursor:pointer; }
+.compra-main { flex:1; min-width:0; }
+.compra-meta { margin-top:3px; font-size:0.72rem; color:var(--muted); font-family:'DM Mono',monospace; display:flex; gap:6px; flex-wrap:wrap; }
+.compra-detail { margin-top:6px; font-size:0.74rem; color:var(--muted); line-height:1.35; }
+.compra-option-row { border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.04); border-radius:14px; padding:10px; display:flex; flex-direction:column; gap:7px; }
+.compra-option-head { display:flex; align-items:center; justify-content:space-between; gap:8px; font-family:'DM Mono',monospace; font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+.compra-option-grid { display:grid; grid-template-columns:1.4fr .55fr; gap:7px; }
+.compra-option-grid textarea { grid-column:1 / -1; min-height:58px; resize:vertical; }
+.compra-link-chip { color:var(--accent); text-decoration:none; border-bottom:1px dashed rgba(255,207,90,.45); }
+.compra-link-chip:hover { color:#fff; border-bottom-color:#fff; }
+@media(max-width:620px){ .compra-option-grid{grid-template-columns:1fr;} .compra-option-grid textarea{grid-column:auto;} }
 
 /* OVERVIEW (no room selected) */
 .overview {
@@ -850,6 +867,39 @@ select.state-sel {
 }
 .room-check-label input { width:auto; }
 .room-check-label.checked { border-color:currentColor; background:#ffffff08; }
+.person-check-grid { display:flex; flex-wrap:wrap; gap:6px; }
+.person-check-label {
+  display:flex; align-items:center; gap:5px; cursor:pointer;
+  padding:4px 9px; border-radius:4px; border:1px solid var(--border);
+  font-size:0.72rem; font-family:'DM Mono',monospace; transition:all 0.15s;
+  color:var(--text);
+}
+ .person-check-label input { position:absolute; opacity:0; pointer-events:none; }
+.person-check-box {
+  width:13px; height:13px; border-radius:3px; border:1px solid var(--border);
+  display:inline-grid; place-items:center; flex:0 0 auto; font-size:10px; line-height:1;
+  background:#ffffff05; color:#061018; transition:.15s;
+}
+.person-check-label.checked .person-check-box {
+  border-color:var(--accent); background:var(--accent); box-shadow:0 0 0 2px rgba(42,213,255,.12);
+}
+.person-check-label.checked .person-check-box::after { content:"✓"; font-weight:900; }
+.person-check-label.checked { border-color:var(--accent); background:#ffffff08; color:#fff; }
+.person-check-label.person-check-all { border-style:dashed; color:var(--accent); }
+.person-check-all-btn {
+  width:30px; height:28px; padding:0; justify-content:center;
+  font-size:0.95rem; border-color:var(--accent); background:#ffffff05;
+}
+.person-check-all-btn.checked { background:rgba(42,213,255,.13); box-shadow:0 0 0 1px rgba(42,213,255,.2) inset; }
+.person-check-all-btn .all-check-mark {
+  position:absolute; transform:translate(8px,-8px); font-size:.58rem;
+  width:12px; height:12px; border-radius:50%; display:grid; place-items:center;
+  background:var(--accent); color:#061018; opacity:0; transition:.15s;
+}
+.person-check-all-btn.checked .all-check-mark { opacity:1; }
+.edit-modal #em-rooms { flex-wrap:nowrap; overflow-x:auto; padding-bottom:2px; }
+.edit-modal #em-rooms .room-check-label { flex:0 0 auto; padding:4px 8px; }
+@media(max-width:760px){ .edit-modal #em-rooms { flex-wrap:wrap; overflow-x:visible; } }
 .task-rooms-badges { display:flex; flex-wrap:wrap; gap:4px; margin-top:3px; }
 .task-room-badge {
   font-size:0.58rem; padding:2px 6px; border-radius:3px;
@@ -874,7 +924,7 @@ select.state-sel {
 }
 body{background:radial-gradient(circle at 20% 0%,#1c293b 0,#080b10 42%,#05070a 100%);}
 header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px solid #ffffff14;box-shadow:0 18px 60px #0008;}
-.logo{font-size:1.25rem;color:var(--accent);text-shadow:0 0 22px #ffcf5a44}.logo:after{content:' 2.0';font-size:.58rem;color:var(--blue);vertical-align:super;margin-left:4px}.gnav-btn{border:1px solid #ffffff18;background:#ffffff08;border-radius:999px}.gnav-btn.active,.gnav-btn:hover{background:linear-gradient(135deg,#ffcf5a22,#65a7ff22);border-color:#ffcf5a66;color:#fff}.floor-section{background:linear-gradient(180deg,#ffffff05,#0000)}.detail-panel{background:var(--glass);backdrop-filter:blur(18px);box-shadow:inset 1px 0 0 #ffffff0c}.overview,.panel-header,.global-add-form,.task-item,.compra-item,.herr-item{border-radius:18px;background:linear-gradient(180deg,#ffffff08,#ffffff03);border:1px solid #ffffff12;box-shadow:0 12px 40px #0005}.overview{padding:1rem}.room-row{border-radius:14px;background:#ffffff05;margin-bottom:8px}.global-overlay{background:rgba(8,11,16,.96);backdrop-filter:blur(18px)}.global-overlay-header{background:linear-gradient(90deg,#101927,#0b1018);border-bottom:1px solid #ffffff12}.global-overlay-title{font-size:.78rem;color:#fff}.btn-primary{background:linear-gradient(135deg,#ffcf5a,#ff9f43);color:#15100a;border:0;border-radius:12px;font-weight:700}.btn-secondary,.btn-icon{border-radius:12px}.edit-modal{border-radius:24px;background:#101722;box-shadow:0 30px 100px #000c;border:1px solid #ffffff18}.edit-modal input,.edit-modal select,.edit-modal textarea,.global-add-form input,.global-add-form select{border-radius:12px;background:#0b111a;border-color:#ffffff18}.floor-svg{filter:drop-shadow(0 24px 70px #0009)}.room rect,.room path{filter:drop-shadow(0 10px 24px #0006)}
+.logo{font-size:1.25rem;color:var(--accent);text-shadow:0 0 22px #ffcf5a44}.logo:after{content:' 3.0';font-size:.58rem;color:var(--blue);vertical-align:super;margin-left:4px}.gnav-btn{border:1px solid #ffffff18;background:#ffffff08;border-radius:999px}.gnav-btn.active,.gnav-btn:hover{background:linear-gradient(135deg,#ffcf5a22,#65a7ff22);border-color:#ffcf5a66;color:#fff}.floor-section{background:linear-gradient(180deg,#ffffff05,#0000)}.detail-panel{background:var(--glass);backdrop-filter:blur(18px);box-shadow:inset 1px 0 0 #ffffff0c}.overview,.panel-header,.global-add-form,.task-item,.compra-item,.herr-item{border-radius:18px;background:linear-gradient(180deg,#ffffff08,#ffffff03);border:1px solid #ffffff12;box-shadow:0 12px 40px #0005}.overview{padding:1rem}.room-row{border-radius:14px;background:#ffffff05;margin-bottom:8px}.global-overlay{background:rgba(8,11,16,.96);backdrop-filter:blur(18px)}.global-overlay-header{background:linear-gradient(90deg,#101927,#0b1018);border-bottom:1px solid #ffffff12}.global-overlay-title{font-size:.78rem;color:#fff}.btn-primary{background:linear-gradient(135deg,#ffcf5a,#ff9f43);color:#15100a;border:0;border-radius:12px;font-weight:700}.btn-secondary,.btn-icon{border-radius:12px}.edit-modal{border-radius:24px;background:#101722;box-shadow:0 30px 100px #000c;border:1px solid #ffffff18}.edit-modal input,.edit-modal select,.edit-modal textarea,.global-add-form input,.global-add-form select{border-radius:12px;background:#0b111a;border-color:#ffffff18}.floor-svg{filter:drop-shadow(0 24px 70px #0009)}.room rect,.room path{filter:drop-shadow(0 10px 24px #0006)}
 .command-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.command-hero{border:1px solid #ffffff14;background:linear-gradient(135deg,#152033,#10151f 60%,#201a0c);border-radius:26px;padding:20px;display:grid;grid-template-columns:1.2fr .8fr;gap:18px;box-shadow:0 24px 80px #0007}.command-eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--accent);letter-spacing:.16em;text-transform:uppercase}.command-title{font-size:2rem;line-height:1;margin:8px 0 12px}.command-sub{color:var(--muted);line-height:1.45}.pulse-card{background:#0000002e;border:1px solid #ffffff12;border-radius:20px;padding:14px}.pulse-metric{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #ffffff0d}.pulse-metric:last-child{border-bottom:0}.pulse-metric b{font-family:'DM Mono',monospace;color:#fff}.command-card{background:linear-gradient(180deg,#ffffff08,#ffffff03);border:1px solid #ffffff12;border-radius:22px;padding:16px;min-height:120px;box-shadow:0 16px 50px #0005}.command-card h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:12px;font-family:'DM Mono',monospace}.command-list{display:flex;flex-direction:column;gap:8px}.command-item{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px;border:1px solid #ffffff10;border-radius:14px;background:#00000022;cursor:pointer}.command-item:hover{border-color:#ffcf5a66;background:#ffcf5a0b}.ci-dot{width:9px;height:9px;border-radius:50%;box-shadow:0 0 18px currentColor}.ci-main{min-width:0}.ci-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ci-meta{font-size:.68rem;color:var(--muted);margin-top:2px;font-family:'DM Mono',monospace}.ci-tag{font-size:.62rem;border-radius:999px;padding:4px 7px;background:#ffffff0b;color:var(--muted);font-family:'DM Mono',monospace}.risk-high{color:var(--danger)}.risk-mid{color:var(--warn)}.risk-ok{color:var(--ok)}.quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.quick-action{padding:13px;border-radius:16px;border:1px solid #ffffff12;background:#ffffff06;color:#fff;text-align:left;cursor:pointer}.quick-action:hover{border-color:#65a7ff77;background:#65a7ff14}.quick-action span{display:block;font-size:.68rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:4px}.incident-form{display:grid;grid-template-columns:1fr 150px auto;gap:8px}.incident-form input,.incident-form select{background:#0b111a;border:1px solid #ffffff18;color:var(--text);border-radius:12px;padding:10px}.incident-row{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:10px;border-radius:14px;background:#00000026;border:1px solid #ffffff10}.gantt-bar{cursor:grab}.gantt-bar:active{cursor:grabbing}.gantt-bar::after{content:'';position:absolute;right:0;top:0;width:9px;height:100%;background:#0005;border-left:1px solid #fff5;cursor:ew-resize}.gantt-unscheduled-chip{cursor:grab;user-select:none}.gantt-drop-hint{border:1px dashed #65a7ff77;background:#65a7ff0c;border-radius:14px;padding:10px;color:var(--muted);font-family:'DM Mono',monospace;font-size:.68rem;margin-top:8px}
 
 .command-focus{display:grid;grid-template-columns:1.4fr .8fr;gap:16px;margin-bottom:16px}.command-nextstep{border:1px solid #ffcf5a33;background:linear-gradient(135deg,#211b0b,#111827);border-radius:24px;padding:18px}.command-nextstep h2{font-size:1.55rem;margin:8px 0 8px}.command-nextstep p{color:var(--muted);line-height:1.45}.command-lane{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.lane-card{border:1px solid #ffffff12;background:#00000026;border-radius:16px;padding:12px;cursor:pointer}.lane-card:hover{border-color:#ffcf5a66}.lane-card b{font-family:'DM Mono',monospace;font-size:1.4rem;color:var(--accent)}.lane-card span{display:block;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.09em}.incident-board{display:grid;grid-template-columns:1fr;gap:10px}.incident-card{border:1px solid #ffffff12;background:#0000002c;border-radius:16px;padding:12px;display:grid;gap:8px}.incident-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.incident-title{font-weight:600}.incident-actions{display:flex;gap:6px;flex-wrap:wrap}.incident-link{font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace}.incident-form.command-form{grid-template-columns:1fr 170px 180px auto}.command-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.empty-state{border:1px dashed #ffffff1b;border-radius:16px;padding:16px;color:var(--muted);background:#ffffff04}.command-section-title{font-family:'DM Mono',monospace;color:var(--accent);font-size:.72rem;text-transform:uppercase;letter-spacing:.13em;margin:2px 0 10px}.command-minibar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.command-minibar button{padding:9px 11px;border-radius:999px}
@@ -915,7 +965,7 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
   overflow-x:hidden!important;
 }
 .edit-modal{
-  width:min(680px,calc(100vw - 24px))!important;
+  width:min(860px,calc(100vw - 24px))!important;
 }
 @media(max-width:520px){
   .rel-row{grid-template-columns:92px minmax(0,1fr) 24px!important;gap:4px!important;padding:5px!important}
@@ -942,48 +992,410 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
 .person-section-title{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin:18px 0 8px}
 .person-empty{border:1px dashed #ffffff18;border-radius:14px;padding:14px;color:var(--muted);font-size:.85rem}
 .person-assign-select{min-width:120px}
-.person-assign-select{min-width:145px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px}.person-help{font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px}
+.person-assign-select{min-width:145px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px}.person-help{font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px}.question-persons-wrap{width:100%;margin-top:8px}.question-persons-wrap .person-check-grid{gap:6px}.question-actions .person-check-grid{min-width:260px;max-width:520px}
+
+
+
+/* ==== REDISEÑO MODERNO 2026 · DARK GLASS UI ==== */
+:root{
+  --bg:#05070d;
+  --surface:#0c111b;
+  --surface2:#111827;
+  --surface3:#172033;
+  --glass:rgba(13,19,31,.72);
+  --border:rgba(255,255,255,.11);
+  --border-strong:rgba(255,255,255,.2);
+  --text:#f7f9ff;
+  --muted:#8f9bb2;
+  --accent:#7cf7d4;
+  --accent2:#8aa7ff;
+  --warn:#ffd166;
+  --danger:#ff6b8a;
+  --ok:#5cff9d;
+  --h1:#ffd166;
+  --h2:#ff6b8a;
+  --h3:#5cff9d;
+  --h4:#8aa7ff;
+  --bano:#ff8fc7;
+  --cocina:#60efff;
+  --despensa:#c7935b;
+  --pasillo:#a7b6ff;
+}
+
+html{background:var(--bg)}
+body{
+  background:
+    radial-gradient(circle at 14% 10%,rgba(124,247,212,.16),transparent 30%),
+    radial-gradient(circle at 84% 16%,rgba(138,167,255,.2),transparent 34%),
+    radial-gradient(circle at 70% 92%,rgba(255,107,138,.1),transparent 28%),
+    linear-gradient(135deg,#05070d 0%,#090d16 42%,#070a10 100%);
+  color:var(--text);
+  font-family:'DM Sans',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+body:before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:44px 44px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.8),transparent 72%);
+}
+
+header{
+  margin:14px 16px 0;padding:12px 14px;border:1px solid var(--border);
+  border-radius:24px;background:rgba(7,10,17,.74);backdrop-filter:blur(22px) saturate(1.25);
+  box-shadow:0 20px 70px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.logo{font-size:1rem;color:#fff;letter-spacing:.16em;text-shadow:0 0 30px rgba(124,247,212,.36)}
+.logo span{color:var(--accent)}
+.logo:after{content:' 3.0';margin-left:10px;padding:4px 8px;border:1px solid rgba(124,247,212,.28);border-radius:999px;background:rgba(124,247,212,.1);color:var(--accent);font-size:.58rem;vertical-align:middle;letter-spacing:.12em}
+.global-nav{gap:8px;padding:3px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.045)}
+.gnav-btn{border:0;background:transparent;border-radius:999px;color:var(--muted);padding:9px 12px;font-size:.64rem}
+.gnav-btn:hover,.gnav-btn.active{background:linear-gradient(135deg,rgba(124,247,212,.18),rgba(138,167,255,.18));color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 8px 24px rgba(0,0,0,.25)}
+.header-stats{gap:10px}.hstat{min-width:78px;padding:8px 10px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.045)}
+.hstat-val{color:#fff;font-size:1rem}.hstat-label{color:var(--muted);font-size:.58rem}
+
+main{height:calc(100vh - 90px);grid-template-columns:minmax(0,1fr) 430px;gap:16px;padding:16px}
+.floor-section,.detail-panel{border:1px solid var(--border);border-radius:28px;background:var(--glass);backdrop-filter:blur(24px) saturate(1.18);box-shadow:0 26px 90px rgba(0,0,0,.52),inset 0 1px 0 rgba(255,255,255,.07);overflow:hidden}
+.floor-section{padding:18px;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.03)),var(--glass)}
+.floor-title{display:inline-flex;align-items:center;gap:8px;width:max-content;margin-bottom:14px;padding:8px 12px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(255,255,255,.05);font-size:.66rem;color:var(--muted)}
+.floor-title:before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px var(--accent)}
+.floor-plan{border:1px solid rgba(255,255,255,.08);border-radius:24px;background:radial-gradient(circle at 50% 35%,rgba(124,247,212,.08),transparent 38%),rgba(0,0,0,.16);padding:14px}
+.floor-svg{filter:drop-shadow(0 26px 60px rgba(0,0,0,.74)) saturate(1.12)}
+.room{transition:opacity .18s ease,filter .18s ease}.room:hover{filter:brightness(1.18)}
+.room:hover rect,.room:hover path{stroke-width:2.4}.room.active rect,.room.active path{stroke-width:3;filter:drop-shadow(0 0 16px currentColor)}
+.room-label{font-size:12px;letter-spacing:.05em}.room-sublabel{font-size:9px}.room-progress-text{font-size:10px}
+
+.detail-panel{border-left:1px solid var(--border);background:rgba(8,12,20,.76)}
+.panel-header{padding:18px;border:0;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(124,247,212,.08),rgba(138,167,255,.06))}
+.panel-room-name{font-size:1.45rem;font-weight:700;letter-spacing:-.03em}.room-dot{width:13px;height:13px;box-shadow:0 0 22px currentColor}
+.panel-progress-bar,.overview-total-bar,.room-row-bar{height:8px;background:rgba(255,255,255,.08);border-radius:999px}.panel-progress-fill,.overview-total-fill,.room-row-fill{border-radius:999px;box-shadow:0 0 18px currentColor}
+.panel-tabs{gap:8px;padding:10px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.025)}
+.ptab{border:0;border-radius:14px;padding:10px;color:var(--muted);background:rgba(255,255,255,.04)}
+.ptab.active,.ptab:hover{color:#fff;background:linear-gradient(135deg,rgba(124,247,212,.15),rgba(138,167,255,.12));box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.panel-body{padding:14px}
+
+.overview,.global-add-form,.add-form,.command-card,.command-hero,.work-os,.question-card,.person-card,.gstat-pill,.filter-btn,.tool-item,.task-item,.compra-item,.room-row,.global-add-strip,.unscheduled-lane,.incident-card,.lane-card,.pulse-card{
+  border:1px solid rgba(255,255,255,.1)!important;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.032))!important;box-shadow:0 14px 42px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+.overview{margin:14px;border-radius:24px;padding:18px}.overview-big{font-size:4rem;color:#fff;letter-spacing:-.08em;text-shadow:0 0 34px rgba(124,247,212,.28)}
+.overview-title,.compra-section-title,.global-overlay-title,.command-section-title,.person-section-title,.work-os-title{color:var(--accent)}
+.room-row{padding:12px;border-radius:17px;margin-bottom:9px}.room-row:hover{opacity:1;transform:translateY(-1px);border-color:rgba(124,247,212,.3)!important}
+.room-row-dot{width:10px;height:10px;box-shadow:0 0 18px currentColor}.room-row-name{font-weight:600}.room-row-pct{color:#fff}
+
+.task-item,.compra-item,.tool-item{border-radius:18px;margin-bottom:9px;padding:12px;border-bottom:1px solid rgba(255,255,255,.1)}
+.task-text,.compra-text,.tool-name{font-size:.9rem}.task-done .task-text,.compra-done .compra-text{opacity:.62}.task-note{color:#aab4c8}.tag,.tool-status,.gtask-room-badge,.question-badge,.ci-tag,.dep-badge{border-radius:999px;padding:4px 8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.07)}
+.tag-pending,.tool-fuera{color:var(--warn);background:rgba(255,209,102,.12)}.tag-doing{color:var(--accent2);background:rgba(138,167,255,.12)}.tag-done,.tool-aqui{color:var(--ok);background:rgba(92,255,157,.12)}.tool-falta{color:var(--danger);background:rgba(255,107,138,.12)}
+input,select,textarea,.add-form input,.add-form select,.global-add-form input,.global-add-form select,.edit-modal input,.edit-modal select,.edit-modal textarea,.incident-form input,.incident-form select,.question-answer{border-radius:14px!important;background:rgba(4,8,14,.72)!important;border:1px solid rgba(255,255,255,.12)!important;color:var(--text)!important;outline:none;transition:border-color .16s,box-shadow .16s}
+input:focus,select:focus,textarea:focus{border-color:rgba(124,247,212,.55)!important;box-shadow:0 0 0 4px rgba(124,247,212,.1)}
+.btn-primary{border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#041014;font-weight:800;box-shadow:0 12px 28px rgba(124,247,212,.18)}
+.btn-primary:hover{opacity:1;transform:translateY(-1px);box-shadow:0 16px 36px rgba(124,247,212,.25)}
+.btn-secondary,.btn-icon{border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--muted)}
+.btn-secondary:hover,.btn-icon:hover{color:#fff;border-color:rgba(124,247,212,.32);background:rgba(124,247,212,.08)}
+.add-toggle{color:var(--accent);border-bottom:1px dashed rgba(124,247,212,.5)}
+
+.global-overlay{background:rgba(5,7,13,.82);backdrop-filter:blur(26px) saturate(1.2)}
+.global-overlay-header{margin:14px;border:1px solid var(--border);border-radius:24px;background:rgba(12,17,27,.82)}
+.global-overlay-body{padding:8px 22px 22px}.filter-bar{gap:8px}.filter-btn{border-radius:999px;padding:8px 12px}.filter-btn.active,.filter-btn:hover{color:#041014;background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}
+.gantt-container{border-radius:24px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.1)}
+.gantt-header-cell,.gantt-cell.col-name{background:rgba(17,24,39,.92);backdrop-filter:blur(12px)}
+.gantt-cell{background:rgba(8,12,20,.72)}.gantt-day-cell.weekend{background:rgba(255,255,255,.035)}.gantt-day-cell.today-col{background:rgba(124,247,212,.08)}
+.gantt-bar{border-radius:999px;box-shadow:0 8px 18px rgba(0,0,0,.34);opacity:.95}.gantt-today-line{background:var(--accent);box-shadow:0 0 16px var(--accent)}
+.edit-modal{border-radius:28px;background:linear-gradient(180deg,rgba(20,29,45,.98),rgba(9,13,22,.98));box-shadow:0 34px 120px rgba(0,0,0,.76);border:1px solid rgba(255,255,255,.16)}
+.edit-modal-overlay{background:rgba(0,0,0,.66);backdrop-filter:blur(12px)}
+.notif{border-radius:18px;background:rgba(11,17,27,.88);border:1px solid rgba(124,247,212,.42);box-shadow:0 20px 50px rgba(0,0,0,.42);color:#fff}
+.empty-state{border-radius:18px;background:rgba(255,255,255,.035);border:1px dashed rgba(255,255,255,.14)}
+
+@media(max-width:1100px){main{grid-template-columns:1fr;height:auto}.detail-panel{min-height:560px}.floor-section{min-height:520px}}
+@media(max-width:900px){header{border-radius:22px}.global-nav{border-radius:18px;overflow-x:auto;max-width:100%}main{padding:10px;gap:10px}.floor-section,.detail-panel{border-radius:22px}.floor-plan{border-radius:18px}.header-stats{width:100%;display:grid;grid-template-columns:repeat(3,1fr)}.hstat{text-align:center}.overview-big{font-size:3rem}}
+@media(max-width:560px){header{margin:8px;padding:10px}.logo:after{display:none}main{padding:8px}.floor-section{padding:10px;min-height:380px}.panel-tabs{overflow-x:auto}.ptab{min-width:92px}.header-stats{grid-template-columns:1fr 1fr 1fr}.hstat{min-width:0;padding:7px}.hstat-val{font-size:.86rem}}
+
+
+/* Ajustes de tarjetas de tareas: lectura vertical y más armónica */
+.task-item{
+  align-items:flex-start;
+  gap:12px;
+}
+.task-content{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.task-text{
+  font-size:.94rem;
+  font-weight:650;
+  letter-spacing:-.01em;
+  line-height:1.25;
+}
+.task-details{
+  display:grid;
+  gap:7px;
+  margin-top:2px;
+}
+.task-detail-row{
+  display:grid;
+  grid-template-columns:86px 1fr;
+  gap:10px;
+  align-items:start;
+  font-size:.74rem;
+}
+.task-detail-label{
+  color:var(--muted);
+  font-family:'DM Mono',monospace;
+  font-size:.62rem;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  padding-top:3px;
+}
+.task-detail-value{
+  min-width:0;
+  color:#dce5f5;
+}
+.task-chip-wrap{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+.task-mini-select{
+  width:100%;
+  max-width:180px;
+  background:#0b111a;
+  border:1px solid rgba(255,255,255,.14);
+  color:var(--text);
+  border-radius:10px;
+  padding:6px 8px;
+  font-size:.72rem;
+  font-family:'DM Mono',monospace;
+}
+.task-note{
+  margin-top:0;
+  color:#aab4c8;
+  line-height:1.45;
+  font-style:normal;
+}
+.task-actions{
+  align-self:flex-start;
+  padding-top:2px;
+}
+.task-actions .state-sel,.task-actions .person-assign-select{display:none;}
+.task-empty-value{color:var(--muted);font-style:italic;}
+.task-status-pill{display:inline-flex;align-items:center;gap:6px;text-transform:capitalize;}
+.task-status-pill::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.9;}
+.task-state-rail{width:7px;align-self:stretch;min-height:54px;border-radius:999px;background:linear-gradient(180deg,#ffcf5a,#65a7ff);opacity:.75;flex:0 0 7px;margin-top:3px;}
+.task-done .task-state-rail{background:linear-gradient(180deg,#5ce1a8,#65a7ff);}
+.trash-nav{min-width:auto;padding-inline:10px}.trash-nav span{font-family:'DM Mono',monospace;color:var(--accent)}.admin-only{display:none!important}body.is-admin .admin-only{display:inline-flex!important}.activity-list{display:flex;flex-direction:column;gap:8px}.activity-item{border:1px solid var(--border);background:rgba(255,255,255,.045);border-radius:14px;padding:10px 12px}.activity-main{font-size:.86rem;color:var(--text);font-weight:700}.activity-meta{margin-top:4px;font-size:.68rem;color:var(--muted);font-family:'DM Mono',monospace}.activity-filters{display:grid;grid-template-columns:repeat(4,minmax(130px,1fr));gap:10px;margin:12px 0 14px}.activity-filters select,.activity-filters input{width:100%;border:1px solid var(--border);background:rgba(5,8,13,.72);color:var(--text);border-radius:12px;padding:10px 11px;font-size:.78rem}.activity-filter-actions{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-bottom:10px}.activity-chip{display:inline-flex;align-items:center;gap:5px;margin-left:7px;padding:3px 7px;border-radius:999px;border:1px solid var(--border);color:var(--muted);font-size:.64rem;font-family:'DM Mono',monospace}@media(max-width:760px){.activity-filters{grid-template-columns:1fr 1fr}}
+.gantt-bar{border-radius:7px!important;}
+.gantt-container{border-radius:14px!important;}
+.gantt-bar::after{border-radius:0 7px 7px 0;}
+@media(max-width:720px){.task-detail-row{grid-template-columns:1fr;gap:3px}.task-detail-label{padding-top:0}}
+
+/* Usuario por dispositivo + Mi zona */
+.user-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(124,247,212,.22);background:rgba(124,247,212,.08);color:var(--text);border-radius:999px;padding:8px 12px;font-size:.78rem;font-family:'DM Mono',monospace;cursor:pointer;white-space:nowrap}
+.user-pill b{color:var(--accent);font-weight:600}.user-pill .bell{color:var(--warn)}
+.user-select-overlay{position:fixed;inset:0;background:rgba(5,8,13,.86);backdrop-filter:blur(14px);z-index:9999;display:none;align-items:center;justify-content:center;padding:18px}.user-select-overlay.open{display:flex}
+.user-select-card{width:min(520px,100%);background:linear-gradient(145deg,rgba(18,27,41,.96),rgba(9,13,21,.98));border:1px solid rgba(255,255,255,.12);border-radius:22px;box-shadow:0 26px 80px rgba(0,0,0,.55);padding:22px}
+.user-select-title{font-size:1.25rem;font-weight:700;margin-bottom:6px}.user-select-sub{color:var(--muted);font-size:.9rem;line-height:1.45;margin-bottom:16px}.user-select-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}.user-choice{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;color:var(--text);padding:14px 12px;text-align:left;cursor:pointer;transition:.16s}.user-choice:hover,.user-choice.active{border-color:var(--accent);background:rgba(124,247,212,.1);transform:translateY(-1px)}
+.user-choice-avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(124,247,212,.12);color:var(--accent);font-weight:800;margin-bottom:8px}.my-zone-head{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;margin-bottom:14px}.my-zone-title{font-size:1.35rem;font-weight:800}.my-zone-sub{color:var(--muted);font-size:.9rem;margin-top:4px}.my-zone-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:16px}.my-zone-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px}.my-zone-stat b{display:block;font-size:1.5rem;color:var(--accent)}.my-zone-stat span{font-size:.72rem;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase}.my-zone-section{margin-top:18px}.my-zone-section h3{font-size:.82rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 8px}.asker-chip{color:var(--accent);font-size:.75rem;font-family:'DM Mono',monospace}.question-card.mine-unread{border-color:rgba(255,209,102,.35);box-shadow:0 0 0 1px rgba(255,209,102,.08) inset}
+@media(max-width:720px){.my-zone-grid{grid-template-columns:1fr}.my-zone-head{grid-template-columns:1fr}.user-pill{width:100%;justify-content:center}}
+
+
+/* CABECERA COMPACTA V12 */
+header{gap:14px;}
+.global-nav{flex:1;min-width:0;justify-content:center;overflow-x:auto;padding:2px 0;}
+.gnav-btn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:42px;line-height:1.05;text-align:center;white-space:nowrap;}
+.gnav-main{display:block;}
+.gnav-count{display:block;font-size:.68rem;letter-spacing:0;color:var(--accent);opacity:.95;margin-top:2px;}
+#current-user-pill{margin-left:auto;order:5;}
+#current-user-pill.active{border-color:rgba(124,247,212,.55);background:rgba(124,247,212,.14);box-shadow:0 0 0 1px rgba(124,247,212,.1) inset;}
+.header-stats{display:none!important;}
+.floor-title{display:none!important;}
+@media(max-width:900px){header{flex-direction:row!important;align-items:center!important;flex-wrap:wrap}.global-nav{order:3;flex-basis:100%;justify-content:flex-start}.user-pill{width:auto!important;justify-content:center;margin-left:auto}}
+
+
+/* Ajuste v16: punto medio entre la altura original y la version demasiado compacta */
+body.home-compact .overview{
+  margin:10px;
+  padding:16px;
+  gap:.72rem;
+  overflow:hidden;
+}
+body.home-compact .overview-title{
+  font-size:.68rem;
+  margin-bottom:.12rem;
+}
+body.home-compact .overview-big{
+  font-size:3.65rem;
+  line-height:.94;
+}
+body.home-compact .overview-total-bar{
+  height:7px;
+  margin-top:.26rem;
+}
+body.home-compact .room-row{
+  padding:9px 11px;
+  margin-bottom:7px;
+  min-height:0;
+}
+body.home-compact .room-row-name{
+  font-size:.9rem;
+}
+body.home-compact .room-row-pct{
+  font-size:.86rem;
+}
+body.home-compact .room-row-bar{
+  height:7px;
+}
+body.home-compact .room-row-dot{
+  width:9px;
+  height:9px;
+}
+
+.tenemos-item{display:flex;align-items:flex-start;gap:10px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border-radius:18px;padding:12px;margin-bottom:9px;box-shadow:0 12px 40px #0005}
+.tenemos-name{font-weight:700;color:#fff;font-size:.92rem;line-height:1.25;cursor:pointer}.tenemos-name:hover{color:var(--accent)}
+.tenemos-note{margin-top:5px;color:var(--muted);font-size:.78rem;line-height:1.35}.tenemos-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.tenemos-room-chip{border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:4px 8px;font-size:.68rem;font-family:'DM Mono',monospace;background:rgba(255,255,255,.06)}
+.tenemos-trash-chip{border-color:rgba(224,80,80,.35);background:rgba(224,80,80,.13);color:#ffb1b1}
+.tenemos-room-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px}.tenemos-room-option{display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.045);color:var(--muted);border-radius:13px;padding:9px 8px;font-size:.76rem;font-family:'DM Mono',monospace;cursor:pointer;user-select:none}.tenemos-room-option input{display:none}.tenemos-room-option.selected{background:linear-gradient(135deg,rgba(124,247,212,.18),rgba(138,167,255,.13));border-color:rgba(124,247,212,.45);color:#fff;box-shadow:0 0 0 1px rgba(124,247,212,.12) inset}.tenemos-room-option.trash.selected{background:rgba(224,80,80,.18);border-color:rgba(224,80,80,.55);color:#ffd0d0}
+
+/* Vista ampliada al seleccionar habitación */
+#room-view.room-expanded { animation: roomZoomIn .28s ease-out; }
+@keyframes roomZoomIn { from { opacity:0; transform:scale(.965) translateY(10px); } to { opacity:1; transform:scale(1) translateY(0); } }
+#room-view.room-expanded .panel-tabs { display:none; }
+#room-view.room-expanded .panel-body { display:grid; grid-template-columns:1fr; gap:12px; overflow:auto; }
+#room-view.room-expanded .tab-content { display:block !important; border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.045); border-radius:18px; padding:12px; }
+#room-view.room-expanded .tab-content::before { display:block; font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.11em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+#room-view.room-expanded #tc-tasks::before { content:'Tareas'; }
+#room-view.room-expanded #tc-compra::before { content:'Compras'; }
+#room-view.room-expanded #tc-tenemos::before { content:'Qué tenemos'; }
+#room-view.room-expanded #tc-notas::before { content:'Notas'; }
+.room-mini-list .tenemos-item, #room-view.room-expanded .compra-item, #room-view.room-expanded .task-item { margin-bottom:8px; }
+.room-mini-empty { color:var(--muted); font-size:.82rem; padding:10px; border:1px dashed rgba(255,255,255,.12); border-radius:12px; }
+@media(min-width:1200px){ #room-view.room-expanded .panel-body { grid-template-columns:1fr 1fr; } #room-view.room-expanded #tc-notas { grid-column:1 / -1; } }
+
+
+
+/* v23: selección de habitación en dos mitades reales */
+body.room-selected main{
+  grid-template-columns:minmax(0,1fr) minmax(420px,1fr);
+}
+body.room-selected .floor-section{
+  padding:1.15rem;
+}
+body.room-selected .floor-plan{
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:22px;
+  box-shadow:0 24px 80px rgba(0,0,0,.45);
+  overflow:hidden;
+}
+body.room-selected .floor-svg{
+  padding:10px;
+  transform-origin:center center;
+  animation:floorFocusPop .34s cubic-bezier(.2,.9,.2,1);
+}
+@keyframes floorFocusPop{
+  from{opacity:.72;transform:scale(.94)}
+  to{opacity:1;transform:scale(1)}
+}
+body.room-selected .detail-panel{
+  min-width:0;
+}
+body.room-selected #room-view.room-expanded .panel-tabs{
+  display:none!important;
+}
+body.room-selected #room-view.room-expanded .panel-body{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  padding:14px;
+  overflow:auto;
+}
+body.room-selected #room-view.room-expanded .tab-content{
+  display:block!important;
+}
+body.room-selected #room-view.room-expanded #tc-notas{
+  grid-column:1 / -1;
+}
+body.room-selected #room-view.room-expanded .add-form,
+body.room-selected #room-view.room-expanded .sticky-add-task{
+  display:none;
+}
+@media(max-width:900px){
+  body.room-selected main{
+    display:flex;
+    flex-direction:column;
+    height:auto;
+    min-height:calc(100vh - 57px);
+  }
+  body.room-selected .floor-section{
+    height:45vh;
+    min-height:320px;
+    flex:none;
+  }
+  body.room-selected .detail-panel{
+    min-height:55vh;
+  }
+  body.room-selected #room-view.room-expanded .panel-body{
+    grid-template-columns:1fr;
+  }
+  body.room-selected #room-view.room-expanded #tc-notas{
+    grid-column:auto;
+  }
+}
+
+
+
+/* v24: detalle por habitación reorganizado */
+body.room-selected #room-view.room-expanded .panel-body{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:12px;
+  padding:14px;
+  overflow:auto;
+}
+body.room-selected #room-view.room-expanded #tc-tasks,
+body.room-selected #room-view.room-expanded #tc-preguntas,
+body.room-selected #room-view.room-expanded #tc-notas{
+  grid-column:1 / -1;
+}
+body.room-selected #room-view.room-expanded #tc-compra,
+body.room-selected #room-view.room-expanded #tc-tenemos{
+  grid-column:auto;
+}
+#room-view.room-expanded #tc-preguntas::before{content:'Preguntas'}
+.room-task-filter{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;padding:8px 10px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.035)}
+.room-task-filter-title{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.room-task-filter-btn{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--text);border-radius:999px;padding:6px 10px;font-size:.72rem;cursor:pointer}
+.room-question-card{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);border-radius:14px;padding:10px;margin-bottom:8px}
+.room-question-title{font-weight:700;color:#fff;font-size:.88rem;line-height:1.25}.room-question-meta{margin-top:4px;color:var(--muted);font-size:.72rem;font-family:'DM Mono',monospace}.room-question-answer{margin-top:8px;color:var(--muted);font-size:.78rem;line-height:1.35}
+@media(max-width:900px){body.room-selected #room-view.room-expanded .panel-body{grid-template-columns:1fr!important}body.room-selected #room-view.room-expanded #tc-compra,body.room-selected #room-view.room-expanded #tc-tenemos{grid-column:1 / -1}}
 
 </style>
 </head>
-<body>
+<body class="home-compact">
 
 <header>
   <div class="logo">REFORMA<span>·</span>GT</div>
   <div class="global-nav">
-    <button class="gnav-btn" id="gnav-mando" onclick="openGlobal('mando')">Centro de mando</button>
-    <button class="gnav-btn" id="gnav-tareas" onclick="openGlobal('tareas')">Todas las tareas</button>
-    <button class="gnav-btn" id="gnav-compra" onclick="openGlobal('compra')">Toda la compra</button>
-    <button class="gnav-btn" id="gnav-herramientas" onclick="openGlobal('herramientas')">Herramientas</button>
-    <button class="gnav-btn" id="gnav-preguntas" onclick="openGlobal('preguntas')">Preguntas</button>
-    <button class="gnav-btn" id="gnav-personas" onclick="openGlobal('personas')">Personas</button>
-    <button class="gnav-btn" id="gnav-gantt" onclick="openGlobal('gantt')">Cronograma</button>
+    <button class="gnav-btn" id="gnav-mando" onclick="openGlobal('mando')"><span class="gnav-main">Centro de mando</span></button>
+    <button class="gnav-btn" id="gnav-tareas" onclick="openGlobal('tareas')"><span class="gnav-main">Tareas</span><span class="gnav-count" id="stat-tasks">0/0</span></button>
+    <button class="gnav-btn" id="gnav-compra" onclick="openGlobal('compra')"><span class="gnav-main">Compras</span><span class="gnav-count" id="stat-compra">0/0</span></button>
+    <button class="gnav-btn" id="gnav-tenemos" onclick="openGlobal('tenemos')"><span class="gnav-main">¿Qué tenemos?</span><span class="gnav-count" id="stat-tenemos">0</span></button>
+    <button class="gnav-btn" id="gnav-herramientas" onclick="openGlobal('herramientas')"><span class="gnav-main">Herramientas</span></button>
+    <button class="gnav-btn" id="gnav-preguntas" onclick="openGlobal('preguntas')"><span class="gnav-main">Preguntas</span><span class="gnav-count" id="stat-preguntas">0/0</span></button>
+    <button class="gnav-btn" id="gnav-personas" onclick="openGlobal('personas')"><span class="gnav-main">Personas</span></button>
+    <button class="gnav-btn" id="gnav-gantt" onclick="openGlobal('gantt')"><span class="gnav-main">Cronograma</span></button>
+    <button class="gnav-btn admin-only" id="gnav-registro" onclick="openGlobal('registro')"><span class="gnav-main">Registro</span></button>
+    <button class="gnav-btn trash-nav admin-only" id="gnav-papelera" onclick="openGlobal('papelera')" title="Papelera"><span class="gnav-main">🗑</span><span class="gnav-count" id="trash-count">0</span></button>
   </div>
-  <div class="header-stats">
-    <div class="hstat">
-      <div class="hstat-val" id="stat-pct">0%</div>
-      <div class="hstat-label">completado</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-val" id="stat-tasks">0/0</div>
-      <div class="hstat-label">tareas</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-val" id="stat-compra">0/0</div>
-      <div class="hstat-label">compra</div>
-    </div>
-  </div>
+  <button class="user-pill" id="current-user-pill" onclick="openGlobal('mizona')" title="Abrir mi zona">👤 <b id="current-user-name">Elegir usuario</b> <span class="bell" id="current-user-alerts"></span></button>
 </header>
 
 <main>
   <!-- FLOOR PLAN -->
   <div class="floor-section">
-    <div class="floor-title">Plano del bajo · click para ver detalle</div>
     <div class="floor-plan">
-      <svg class="floor-svg" viewBox="0 0 730 520" xmlns="http://www.w3.org/2000/svg" id="floorsvg">
+      <svg class="floor-svg" viewBox="0 0 860 520" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" id="floorsvg">
 
 <!-- Outer wall suggestion -->
-<rect x="10" y="10" width="680" height="500" rx="2" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="4,4"/>
+<rect x="10" y="10" width="840" height="500" rx="2" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="4,4"/>
 
 
 <!-- Fachada - franja vertical exterior añadida a la izquierda sin tocar H1/H2 -->
@@ -1011,10 +1423,10 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
 
 <!-- H4 - Habitación 4 -->
 <g class="room" id="room-h4" onclick="selectRoom('h4')">
-  <rect x="455" y="20" width="225" height="215" rx="4" fill="#5b9bd515" stroke="#5b9bd5" stroke-width="1.5"/>
-  <text class="room-label" x="567" y="108" fill="#5b9bd5">H4</text>
-  <text class="room-sublabel" x="567" y="122" fill="#5b9bd5">Habitación 4</text>
-  <text class="room-progress-text" x="567" y="138" fill="#5b9bd599" id="prog-h4">0%</text>
+  <rect x="455" y="20" width="264" height="215" rx="4" fill="#5b9bd515" stroke="#5b9bd5" stroke-width="1.5"/>
+  <text class="room-label" x="587" y="108" fill="#5b9bd5">H4</text>
+  <text class="room-sublabel" x="587" y="122" fill="#5b9bd5">Habitación 4</text>
+  <text class="room-progress-text" x="587" y="138" fill="#5b9bd599" id="prog-h4">0%</text>
 </g>
 
 <!-- H1 - Habitación 1 -->
@@ -1050,9 +1462,9 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
 
 <!-- Baño -->
 <g class="room" id="room-bano" onclick="selectRoom('bano')">
-  <rect x="540" y="240" width="140" height="85" rx="4" fill="#d4739a15" stroke="#d4739a" stroke-width="1.5"/>
-  <text class="room-label" x="610" y="278" fill="#d4739a">Baño</text>
-  <text class="room-progress-text" x="610" y="296" fill="#d4739a99" id="prog-bano">0%</text>
+  <rect x="540" y="240" width="179" height="85" rx="4" fill="#d4739a15" stroke="#d4739a" stroke-width="1.5"/>
+  <text class="room-label" x="630" y="278" fill="#d4739a">Baño</text>
+  <text class="room-progress-text" x="630" y="296" fill="#d4739a99" id="prog-bano">0%</text>
 </g>
 
 <!-- Despensa -->
@@ -1064,9 +1476,16 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
 
 <!-- Cocina -->
 <g class="room" id="room-cocina" onclick="selectRoom('cocina')">
-  <rect x="455" y="330" width="225" height="170" rx="4" fill="#7ec8c815" stroke="#7ec8c8" stroke-width="1.5"/>
-  <text class="room-label" x="567" y="405" fill="#7ec8c8">Cocina</text>
-  <text class="room-progress-text" x="567" y="425" fill="#7ec8c899" id="prog-cocina">0%</text>
+  <rect x="455" y="330" width="264" height="170" rx="4" fill="#7ec8c815" stroke="#7ec8c8" stroke-width="1.5"/>
+  <text class="room-label" x="587" y="405" fill="#7ec8c8">Cocina</text>
+  <text class="room-progress-text" x="587" y="425" fill="#7ec8c899" id="prog-cocina">0%</text>
+</g>
+
+<!-- Patio - reducido otro 25%; el espacio se suma a H4, Baño y Cocina -->
+<g class="room" id="room-patio" onclick="selectRoom('patio')">
+  <rect x="724" y="20" width="116" height="480" rx="4" fill="#8a8a8a18" stroke="#8a8a8a" stroke-width="1.5"/>
+  <text class="room-label" x="782" y="250" fill="#8a8a8a">Patio</text>
+  <text class="room-progress-text" x="782" y="270" fill="#8a8a8a99" id="prog-patio">0%</text>
 </g>
 
 <!-- Compass / scale hint -->
@@ -1086,13 +1505,6 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
         <div class="overview-total-bar"><div class="overview-total-fill" id="ov-bar" style="width:0%"></div></div>
       </div>
       <div id="ov-rooms"></div>
-      <div>
-        <div class="overview-title" style="margin-bottom:8px">Lista de la compra</div>
-        <div id="ov-compra-stats" style="font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--muted)"></div>
-        <button class="btn-primary" style="width:100%;margin-top:12px" onclick="openGlobal('mando')">Abrir centro de mando de obra</button>
-        <button class="btn-secondary" style="width:100%;margin-top:8px" onclick="openNewTaskModal()">+ Añadir tarea completa</button>
-        <div id="overview-work-os"></div>
-      </div>
     </div>
 
     <!-- ROOM DETAIL (hidden until room selected) -->
@@ -1128,6 +1540,16 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
           <div id="compra-form-area"></div>
         </div>
 
+        <!-- QUÉ TENEMOS -->
+        <div class="tab-content" id="tc-tenemos">
+          <div id="tenemos-room-list"></div>
+        </div>
+
+        <!-- PREGUNTAS -->
+        <div class="tab-content" id="tc-preguntas">
+          <div id="preguntas-room-list"></div>
+        </div>
+
         <!-- NOTAS -->
         <div class="tab-content" id="tc-notas">
           <div style="margin-bottom:8px;font-size:0.75rem;color:var(--muted);font-family:'DM Mono',monospace">Notas generales de la habitación</div>
@@ -1142,6 +1564,28 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
 
 <div class="notif" id="notif"></div>
 
+<!-- SELECTOR DE USUARIO POR DISPOSITIVO -->
+<div class="user-select-overlay" id="user-select-overlay">
+  <div class="user-select-card">
+    <div class="user-select-title">¿Quién está usando este dispositivo?</div>
+    <div class="user-select-sub">Se guardará solo en este navegador/móvil/ordenador. La próxima vez entrará directamente con este usuario.</div>
+    <div class="user-select-grid" id="user-select-grid"></div>
+    <button class="btn-secondary" style="width:100%;margin-top:14px" onclick="closeUserSelector()">Cancelar</button>
+  </div>
+</div>
+
+<!-- GLOBAL: MI ZONA -->
+<div class="global-overlay" id="overlay-mizona">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">MI ZONA · TAREAS Y NOTIFICACIONES</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn-secondary" onclick="openUserSelector(false)">Cambiar usuario</button>
+      <button class="btn-icon" onclick="closeGlobal('mizona')" style="font-size:18px;color:var(--muted)">✕</button>
+    </div>
+  </div>
+  <div class="global-overlay-body" id="my-zone-body"></div>
+</div>
+
 <!-- EDIT TASK MODAL -->
 <div class="edit-modal-overlay" id="edit-modal-overlay" onclick="if(event.target===this)closeEditModal()">
   <div class="edit-modal">
@@ -1151,7 +1595,7 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
     </div>
     <div><label>Descripción</label><input id="em-text" placeholder="Descripción de la tarea..."></div>
     <div><label>Estado</label><select id="em-state"><option value="pendiente">pendiente</option><option value="en curso">en curso</option><option value="hecho">hecho</option></select></div>
-    <div><label>Personas asignadas</label><select id="em-person" class="person-assign-select"></select></div>
+    <div><label>Personas asignadas</label><div class="person-check-grid" id="em-persons"></div></div>
     <div><label>Habitaciones (puede ser varias)</label><div class="room-check-grid" id="em-rooms"></div></div>
     <div class="form-row"><div style="flex:1"><label>Inicio</label><input id="em-date" type="date"></div><div style="flex:1"><label>Fin previsto</label><input id="em-datefin" type="date"></div></div>
     <div><label>Duración estimada (días) — si no hay fechas</label><input id="em-duracion" type="number" min="1" placeholder="Ej: 3"></div>
@@ -1162,6 +1606,26 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
     </div>
     <div><label>Nota adicional</label><input id="em-nota" placeholder="Nota (opcional)..."></div>
     <div class="edit-modal-actions"><button class="btn-danger" id="em-delete-btn">Eliminar</button><button class="btn-secondary" onclick="closeEditModal()">Cancelar</button><button class="btn-primary" style="flex:2" onclick="saveEditTask()">Guardar cambios</button></div>
+  </div>
+</div>
+
+
+<!-- EDIT COMPRA MODAL -->
+<div class="edit-modal-overlay" id="compra-modal-overlay" onclick="if(event.target===this)closeCompraModal()">
+  <div class="edit-modal">
+    <div class="edit-modal-title">
+      <span>Editar compra</span>
+      <button class="btn-icon" onclick="closeCompraModal()" style="font-size:18px">✕</button>
+    </div>
+    <div><label>Artículo</label><input id="cm-text" placeholder="Ej: Pladur"></div>
+    <div class="form-row"><div style="flex:1"><label>Habitación</label><select id="cm-room"></select></div><div style="flex:1"><label>Estado</label><select id="cm-status"><option value="no">Pendiente</option><option value="si">Comprado</option></select></div></div>
+    <div><label>Notas generales</label><textarea id="cm-nota" placeholder="Medidas, dudas, decisión tomada..."></textarea></div>
+    <div>
+      <label>Links / opciones para comparar</label>
+      <div id="cm-options" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px"></div>
+      <button type="button" class="btn-secondary" style="width:100%" onclick="addCompraOptionRow()">+ Añadir link/opción</button>
+    </div>
+    <div class="edit-modal-actions"><button class="btn-danger" onclick="deleteCompraFromModal()">Eliminar</button><button class="btn-secondary" onclick="closeCompraModal()">Cancelar</button><button class="btn-primary" style="flex:2" onclick="saveCompraModal()">Guardar compra</button></div>
   </div>
 </div>
 
@@ -1211,6 +1675,43 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
   </div>
 </div>
 
+
+<!-- GLOBAL: ¿QUE TENEMOS? -->
+<div class="global-overlay" id="overlay-tenemos">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">¿QUÉ TENEMOS? · COSAS QUE SE QUEDAN O SE TIRAN</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="filter-bar" id="filter-bar-tenemos" style="margin:0"></div>
+      <button class="btn-icon" onclick="closeGlobal('tenemos')" style="font-size:18px;color:var(--muted)">✕</button>
+    </div>
+  </div>
+  <div class="global-overlay-body">
+    <div class="gstats-row" id="gstats-tenemos"></div>
+    <div id="tenemos-list"></div>
+    <div class="global-add-form" style="margin-top:1rem">
+      <div style="font-size:0.7rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em">Añadir cosa que ya tenemos</div>
+      <input id="nt-text" placeholder="Ej: sofá, mesa, lámpara..." onkeydown="if(event.key==='Enter')addTenemos()">
+      <div style="margin-top:10px"><label style="display:block;margin-bottom:7px;color:var(--muted);font-size:.72rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em">Habitación destino o tirar</label><div class="tenemos-room-grid" id="nt-rooms"></div></div>
+      <textarea id="nt-nota" placeholder="Nota opcional: estado, medidas, dónde está ahora..." style="width:100%;min-height:62px;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:12px;padding:10px;font-family:'DM Sans',sans-serif;margin-top:8px"></textarea>
+      <button class="btn-primary" style="margin-top:8px" onclick="addTenemos()">+ Añadir</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT TENEMOS MODAL -->
+<div class="edit-modal-overlay" id="tenemos-modal-overlay" onclick="if(event.target===this)closeTenemosModal()">
+  <div class="edit-modal">
+    <div class="edit-modal-title">
+      <span>Editar cosa</span>
+      <button class="btn-icon" onclick="closeTenemosModal()" style="font-size:18px">✕</button>
+    </div>
+    <div><label>Nombre</label><input id="tm-text" placeholder="Ej: Sofá"></div>
+    <div><label>Habitación destino o tirar</label><div class="tenemos-room-grid" id="tm-rooms"></div></div>
+    <div><label>Notas</label><textarea id="tm-nota" placeholder="Medidas, estado, decisión..."></textarea></div>
+    <div class="edit-modal-actions"><button class="btn-danger" onclick="deleteTenemosFromModal()">Eliminar</button><button class="btn-secondary" onclick="closeTenemosModal()">Cancelar</button><button class="btn-primary" style="flex:2" onclick="saveTenemosModal()">Guardar</button></div>
+  </div>
+</div>
+
 <!-- GLOBAL: HERRAMIENTAS -->
 <div class="global-overlay" id="overlay-herramientas">
   <div class="global-overlay-header">
@@ -1254,7 +1755,10 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
         <select id="pregunta-room"></select>
         <select id="pregunta-task"></select>
         <select id="pregunta-priority"><option value="media">Prioridad media</option><option value="alta">Alta / bloqueante</option><option value="baja">Baja</option></select>
-        <select id="pregunta-person"></select>
+      </div>
+      <div class="question-persons-wrap">
+        <div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em">Personas a las que va dirigida</div>
+        <div class="person-check-grid" id="pregunta-persons"></div>
       </div>
       <button class="btn-primary" onclick="addPregunta()">Guardar pregunta</button>
     </div>
@@ -1301,6 +1805,38 @@ header{background:rgba(8,11,16,.86);backdrop-filter:blur(18px);border-bottom:1px
   </div>
 </div>
 
+<!-- GLOBAL: REGISTRO -->
+<div class="global-overlay" id="overlay-registro">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">REGISTRO · ACTIVIDAD</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn-secondary" onclick="clearActivityLog()">Vaciar registro</button>
+      <button class="btn-icon" onclick="closeGlobal('registro')" style="font-size:18px;color:var(--muted)">✕</button>
+    </div>
+  </div>
+  <div class="global-overlay-body">
+    <div class="global-add-strip"><div><strong>Solo Rubén</strong><br><span>Aquí queda guardado quién ha hecho cambios, con fecha y hora del dispositivo.</span></div></div>
+    <div id="activity-log-filters"></div>
+    <div id="activity-log-list" class="activity-list"></div>
+  </div>
+</div>
+
+<!-- GLOBAL: PAPELERA -->
+<div class="global-overlay" id="overlay-papelera">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">PAPELERA · TAREAS BORRADAS</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn-secondary" onclick="emptyTaskTrash()">Vaciar papelera</button>
+      <button class="btn-icon" onclick="closeGlobal('papelera')" style="font-size:18px;color:var(--muted)">✕</button>
+    </div>
+  </div>
+  <div class="global-overlay-body">
+    <div class="global-add-strip"><div><strong>Histórico de eliminadas</strong><br><span>Las tareas borradas desde el editor aparecen aquí. Puedes restaurarlas o eliminarlas definitivamente.</span></div></div>
+    <div id="trash-task-list"></div>
+  </div>
+</div>
+
+
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -1334,7 +1870,9 @@ const PERSONS_DEF = [
   { id:'javi', name:'Javi' },
   { id:'ruben', name:'Rubén' }
 ];
-let activePersonId = 'mama';
+const USER_STORAGE_KEY = 'reformaGT.currentUser.' + proyectoId;
+let activePersonId = localStorage.getItem(USER_STORAGE_KEY) || '';
+let userSelectorForced = false;
 
 const ROOMS_DEF = [
   { id:'fachada', name:'Fachada',       color:'#ffffff', shortName:'FAC' },
@@ -1346,9 +1884,77 @@ const ROOMS_DEF = [
   { id:'bano',   name:'Baño',          color:'#d4739a', shortName:'BAÑ' },
   { id:'despensa',name:'Despensa',     color:'#8b5a2b', shortName:'DES' },
   { id:'cocina', name:'Cocina',        color:'#7ec8c8', shortName:'COC' },
+  { id:'patio',  name:'Patio',         color:'#8a8a8a', shortName:'PAT' },
 ];
 
-let appState = { tasks:{}, compra:[], notes:{}, herramientas:[], incidencias:[], preguntas:[], showTaskForm:{}, showCompraForm:false, activeRoom:null, activeTab:'tasks', globalFilter:{tareas:'todas', compra:'todas'} };
+let appState = { tasks:{}, compra:[], notes:{}, herramientas:[], incidencias:[], preguntas:[], tenemos:[], deletedTasks:[], activityLog:[], showTaskForm:{}, showCompraForm:false, showCompletedRoomTasks:false, activeRoom:null, activeTab:'tasks', globalFilter:{tareas:'todas', compra:'todas'}, activityFilters:{user:'',room:'',section:'',from:'',to:''} };
+let lastAuditSnapshot = null;
+function auditCloneState(){
+  return {
+    tasks: appState.tasks || {},
+    compra: appState.compra || [],
+    notes: appState.notes || {},
+    herramientas: appState.herramientas || [],
+    incidencias: appState.incidencias || [],
+    preguntas: appState.preguntas || [],
+    tenemos: appState.tenemos || [],
+    deletedTasks: appState.deletedTasks || []
+  };
+}
+function auditString(v){ try { return JSON.stringify(v || null); } catch(e){ return ''; } }
+function auditSectionRoom(section){
+  if(section==='notas' && appState.activeRoom) return appState.activeRoom;
+  if(section==='tareas' && appState.activeRoom) return appState.activeRoom;
+  const changedRooms=[];
+  try{
+    const before=(lastAuditSnapshot&&lastAuditSnapshot[section])||{};
+    const after=auditCloneState()[section]||{};
+    if(section==='tasks'){}
+    if(section==='tareas'){}
+  }catch(e){}
+  return '';
+}
+function recentExplicitActivity(section){
+  const last=(appState.activityLog||[])[0];
+  if(!last) return false;
+  const age=Math.abs(new Date(nowStamp())-new Date(last.at||0));
+  return age<2500 && (!section || last.section===section) && last.by===(activePersonId||'');
+}
+function maybeLogAutomaticChanges(){
+  if(!firebaseReady || cargandoDesdeFirebase) return;
+  const current=auditCloneState();
+  if(!lastAuditSnapshot){ lastAuditSnapshot=JSON.parse(JSON.stringify(current)); return; }
+  const defs=[
+    ['tasks','tareas','Tareas actualizadas'],
+    ['compra','compras','Compras actualizadas'],
+    ['notes','notas','Notas actualizadas'],
+    ['herramientas','herramientas','Herramientas actualizadas'],
+    ['incidencias','incidencias','Incidencias actualizadas'],
+    ['preguntas','preguntas','Preguntas actualizadas'],
+    ['tenemos','tenemos','¿Qué tenemos? actualizado'],
+    ['deletedTasks','tareas','Papelera actualizada']
+  ];
+  defs.forEach(([key,section,action])=>{
+    if(auditString(lastAuditSnapshot[key])!==auditString(current[key])){
+      const hasExplicit = recentExplicitActivity(section) || (key==='tasks' && recentExplicitActivity('cronograma'));
+      if(!hasExplicit){
+        let rid = appState.activeRoom || '';
+        if(section==='compras'){
+          const last=(appState.compra||[]).slice(-1)[0]; if(last&&last.roomId) rid=last.roomId;
+        }
+        if(section==='preguntas'){
+          const last=(appState.preguntas||[]).slice(-1)[0]; if(last&&last.roomId) rid=last.roomId;
+        }
+        if(section==='tenemos'){
+          const last=(appState.tenemos||[]).slice(-1)[0]; if(last&&(last.roomIds||[])[0]) rid=(last.roomIds||[])[0];
+        }
+        logActivity(action,'', {section, roomId:rid});
+      }
+    }
+  });
+  lastAuditSnapshot=JSON.parse(JSON.stringify(auditCloneState()));
+}
+
 ROOMS_DEF.forEach(r => { appState.tasks[r.id]=[]; appState.notes[r.id]=''; appState.showTaskForm[r.id]=false; });
 
 function load(){
@@ -1363,6 +1969,9 @@ function load(){
     if (d.herramientas) appState.herramientas = d.herramientas;
     if (d.incidencias) appState.incidencias = d.incidencias;
     if (d.preguntas) appState.preguntas = d.preguntas;
+    if (d.tenemos) appState.tenemos = d.tenemos;
+    if (d.deletedTasks) appState.deletedTasks = d.deletedTasks;
+    if (d.activityLog) appState.activityLog = d.activityLog;
 
     ROOMS_DEF.forEach(r => {
       if (!appState.tasks[r.id]) appState.tasks[r.id] = [];
@@ -1371,11 +1980,15 @@ function load(){
     });
 
     firebaseReady = true;
+    lastAuditSnapshot = JSON.parse(JSON.stringify(auditCloneState()));
 
     updateHeader();
     updateOverview();
     updateFloorPlan();
     renderPanel();
+    renderCurrentUserUI();
+    updateAdminVisibility();
+    if(!activePersonId) openUserSelector(true);
 
     cargandoDesdeFirebase = false;
   });
@@ -1383,21 +1996,63 @@ function load(){
 
 function save(){
   if (!firebaseReady || cargandoDesdeFirebase) return;
-
+  maybeLogAutomaticChanges();
   set(proyectoRef, {
     tasks: appState.tasks,
     compra: appState.compra,
     notes: appState.notes,
     herramientas: appState.herramientas,
     incidencias: appState.incidencias || [],
-    preguntas: appState.preguntas || []
+    preguntas: appState.preguntas || [],
+    tenemos: appState.tenemos || [],
+    deletedTasks: appState.deletedTasks || [],
+    activityLog: appState.activityLog || []
   });
 }
 
 load();
 
 function uid(){ return Math.random().toString(36).slice(2,9); }
+function isAdmin(){ return activePersonId === 'ruben'; }
+function adminGuard(){ if(!isAdmin()){ showNotif('Solo Rubén puede acceder a esto'); return false; } return true; }
+function nowStamp(){ return new Date().toISOString(); }
+function activityDate(iso){ try{return new Date(iso).toLocaleString('es-ES',{dateStyle:'short',timeStyle:'short'});}catch(e){return iso||'';} }
+function logActivity(action, detail='', meta={}){
+  if(action === 'Cambio guardado') return;
+  appState.activityLog = appState.activityLog || [];
+  const entry = {
+    id: uid(),
+    at: nowStamp(),
+    by: activePersonId || '',
+    byName: personName(activePersonId) || 'Sin usuario',
+    action,
+    detail,
+    section: meta.section || inferActivitySection(action),
+    roomId: meta.roomId || '',
+    roomName: meta.roomName || (meta.roomId ? roomName(meta.roomId) : '')
+  };
+  appState.activityLog.unshift(entry);
+  appState.activityLog = appState.activityLog.filter(x=>x.action!=='Cambio guardado').slice(0,400);
+}
+function inferActivitySection(action=''){
+  const a=String(action).toLowerCase();
+  if(a.includes('cronograma') || a.includes('gantt')) return 'cronograma';
+  if(a.includes('pregunta')) return 'preguntas';
+  if(a.includes('papelera') || a.includes('tarea')) return 'tareas';
+  if(a.includes('compra')) return 'compras';
+  if(a.includes('tenemos')) return 'tenemos';
+  if(a.includes('nota')) return 'notas';
+  if(a.includes('registro')) return 'registro';
+  return 'otros';
+}
+function updateAdminVisibility(){
+  document.body.classList.toggle('is-admin', isAdmin());
+  const trash=document.getElementById('gnav-papelera'); if(trash) trash.style.display=isAdmin()?'inline-flex':'none';
+  const reg=document.getElementById('gnav-registro'); if(reg) reg.style.display=isAdmin()?'inline-flex':'none';
+}
 
+
+function roomName(id){ const r=ROOMS_DEF.find(x=>x.id===id); return r?r.name:(id||''); }
 function roomProgress(id){
   const t=appState.tasks[id]||[];
   if(!t.length) return {pct:0,done:0,total:0};
@@ -1414,9 +2069,49 @@ function totalStats(){
 
 function updateHeader(){
   const s=totalStats();
-  document.getElementById('stat-pct').textContent=s.pct+'%';
-  document.getElementById('stat-tasks').textContent=s.done+'/'+s.total;
-  document.getElementById('stat-compra').textContent=s.cb+'/'+s.cp;
+  const tasksStat=document.getElementById('stat-tasks');
+  const compraStat=document.getElementById('stat-compra');
+  if(tasksStat) tasksStat.textContent=s.done+'/'+s.total;
+  if(compraStat) compraStat.textContent=s.cb+'/'+s.cp;
+  updateTenemosHeader();
+  updatePreguntasHeader();
+  renderCurrentUserUI();
+    updateAdminVisibility();
+}
+
+
+const ROOM_FOCUS_VIEWBOX={
+  fachada:[0,0,330,430], h2:[18,0,315,275], h3:[270,0,220,275], h4:[425,0,330,275],
+  h1:[18,205,245,220], pasillo:[185,205,385,220], bano:[510,205,245,155],
+  despensa:[270,300,220,220], cocina:[420,300,335,220], patio:[690,0,160,520]
+};
+let currentFloorViewBox=[0,0,860,520];
+let floorAnimFrame=null;
+function animateFloorViewBox(target){
+  const svg=document.getElementById('floorsvg');
+  if(!svg) return;
+  if(floorAnimFrame) cancelAnimationFrame(floorAnimFrame);
+  const start=currentFloorViewBox.slice();
+  const end=target.slice();
+  const t0=performance.now();
+  const dur=360;
+  function ease(t){ return 1-Math.pow(1-t,3); }
+  function step(now){
+    const k=Math.min(1,(now-t0)/dur);
+    const e=ease(k);
+    const vals=start.map((v,i)=>v+(end[i]-v)*e);
+    svg.setAttribute('viewBox', vals.map(v=>Number(v.toFixed(2))).join(' '));
+    if(k<1) floorAnimFrame=requestAnimationFrame(step);
+    else currentFloorViewBox=end;
+  }
+  floorAnimFrame=requestAnimationFrame(step);
+}
+function focusFloorRoom(id){
+  const target=ROOM_FOCUS_VIEWBOX[id] || [0,0,860,520];
+  animateFloorViewBox(target);
+}
+function resetFloorFocus(){
+  animateFloorViewBox([0,0,860,520]);
 }
 
 function updateFloorPlan(){
@@ -1446,14 +2141,13 @@ function updateOverview(){
       <div class="room-row-pct">${p.pct}%</div>
     </div>`;
   }).join('');
-  const compTot=appState.compra.length, compDone=appState.compra.filter(x=>x.comprado).length;
-  const gastado=appState.compra.filter(x=>x.comprado&&x.precio).reduce((s,x)=>s+parseFloat(x.precio||0),0);
-  document.getElementById('ov-compra-stats').textContent=compDone+' de '+compTot+' artículos'+(gastado?' · '+gastado.toFixed(0)+'€ gastados':'');
-  renderOverviewWorkOS();
+  // Pantalla principal limpia: solo progreso y plano.
 }
 
 function selectRoom(id){
   appState.activeRoom=id;
+  document.body.classList.add('room-selected');
+  focusFloorRoom(id);
   appState.showTaskForm[id]=false;
   appState.showCompraForm=false;
   appState.activeTab='tasks';
@@ -1463,8 +2157,11 @@ function selectRoom(id){
 
 function closeRoom(){
   appState.activeRoom=null;
+  document.body.classList.remove('room-selected');
+  resetFloorFocus();
   document.getElementById('overview-view').style.display='flex';
   document.getElementById('room-view').style.display='none';
+  document.getElementById('room-view')?.classList.remove('room-expanded');
   updateOverview();
   updateFloorPlan();
   updateHeader();
@@ -1472,9 +2169,9 @@ function closeRoom(){
 
 function setTab(tab){
   appState.activeTab=tab;
-  ['tasks','compra','notas'].forEach(t=>{
-    document.getElementById('tc-'+t).classList.toggle('active',t===tab);
-    document.getElementById('tab-'+t).classList.toggle('active',t===tab);
+  ['tasks','compra','tenemos','preguntas','notas'].forEach(t=>{
+    document.getElementById('tc-'+t)?.classList.toggle('active',t===tab);
+    document.getElementById('tab-'+t)?.classList.toggle('active',t===tab);
   });
 }
 
@@ -1484,6 +2181,9 @@ function renderPanel(){
 
   document.getElementById('overview-view').style.display='none';
   document.getElementById('room-view').style.display='flex';
+  document.getElementById('room-view')?.classList.remove('room-expanded');
+  void document.getElementById('room-view')?.offsetWidth;
+  document.getElementById('room-view')?.classList.add('room-expanded');
 
   document.getElementById('panel-dot').style.background=room.color;
   document.getElementById('name' in room ? 'panel-name':'panel-name').textContent=room.name;
@@ -1497,6 +2197,8 @@ function renderPanel(){
   setTab(appState.activeTab);
   renderTasks(room);
   renderCompra(room);
+  renderTenemosRoom(room);
+  renderPreguntasRoom(room);
 
   const notesEl=document.getElementById('room-notes');
   if(notesEl) notesEl.value=appState.notes[room.id]||'';
@@ -1506,13 +2208,23 @@ function renderPanel(){
 }
 
 function renderTasks(room){
-  const tasks=appState.tasks[room.id]||[];
   const list=document.getElementById('task-list');
+  const allRoomTasks = allTasksFlat().filter(t=>{
+    const rooms = (t.rooms && t.rooms.length) ? t.rooms : [t._roomId || t.roomId || room.id];
+    return rooms.includes(room.id) || t._roomId===room.id;
+  });
+  const pendingTasks = allRoomTasks.filter(t=>t.estado!=='hecho');
+  const doneTasks = allRoomTasks.filter(t=>t.estado==='hecho');
+  const showDone = !!appState.showCompletedRoomTasks;
+  const tasks = showDone ? allRoomTasks : pendingTasks;
+  const filterHtml = `<div class="room-task-filter"><div class="room-task-filter-title">Pendientes ${pendingTasks.length} · completadas ${doneTasks.length}</div><button class="room-task-filter-btn" onclick="toggleRoomCompletedTasks()">${showDone?'Ocultar completadas':'Ver completadas'}</button></div>`;
 
   if(!tasks.length){
-    list.innerHTML=`<div class="empty-state">Sin tareas todavía.<br>Añade la primera abajo.</div>`;
+    list.innerHTML=filterHtml + `<div class="empty-state">${showDone?'No hay tareas en esta habitación.':'No quedan tareas pendientes en esta habitación.'}</div>`;
   } else {
-    list.innerHTML=tasks.map((t,i)=>{
+    list.innerHTML=filterHtml + tasks.map((t)=>{
+      const editRoomId = t._roomId || t.roomId || room.id;
+      const editIdx = Number.isInteger(t._idx) ? t._idx : (Number.isInteger(t.idx) ? t.idx : 0);
       // Relation badges (multi) — define first so depLabel can reference it
       const rels = t.relaciones && t.relaciones.length ? t.relaciones
         : (t.relType && t.relTaskId ? [{tipo:t.relType, taskId:t.relTaskId}]
@@ -1522,7 +2234,7 @@ function renderTasks(room){
       if(!rels.length && t.depId) {
         let depTask = null;
         ROOMS_DEF.forEach(r => { const f=(appState.tasks[r.id]||[]).find(x=>x.id===t.depId); if(f) depTask=f; });
-        if(depTask) depLabel = `<span class="dep-badge" title="Después de: ${depTask.texto}">⛓ ${depTask.texto.length>25?depTask.texto.slice(0,25)+'…':depTask.texto}</span>`;
+        if(depTask) depLabel = `<span class="dep-badge" title="Después de: ${htmlSafe(depTask.texto)}">⛓ ${htmlSafe(depTask.texto.length>25?depTask.texto.slice(0,25)+'…':depTask.texto)}</span>`;
       }
       const relLabels = rels.map(rel => {
         let relTask = null;
@@ -1531,88 +2243,74 @@ function renderTasks(room){
         const icon = rel.tipo==='before'?'↑':rel.tipo==='during'?'↔':'↓';
         const word = rel.tipo==='before'?'Antes de':rel.tipo==='during'?'Durante':'Después de';
         const name = relTask.texto.length>18?relTask.texto.slice(0,18)+'…':relTask.texto;
-        return `<span class="dep-badge" title="${word}: ${relTask.texto}">${icon} ${name}</span>`;
+        return `<span class="dep-badge" title="${word}: ${htmlSafe(relTask.texto)}">${icon} ${htmlSafe(name)}</span>`;
       }).join('');
-      // Multi-room badges (other rooms)
-      const otherRooms = (t.rooms||[]).filter(r=>r!==room.id);
-      const roomBadges = otherRooms.map(rid=>{
+      const affectedRooms = [...new Set(((t.rooms&&t.rooms.length)?t.rooms:[editRoomId]).concat(room.id))];
+      const roomBadges = affectedRooms.map(rid=>{
         const rd=ROOMS_DEF.find(x=>x.id===rid);
-        return rd?`<span class="task-room-badge" style="background:${rd.color}22;color:${rd.color}">${rd.shortName||rd.name}</span>`:'';
-      }).join('');
-      // Duration
-      const durLabel = (!t.fecha && t.duracion)?`<span class="dep-badge">⏱ ${t.duracion}d</span>`:'';
+        return rd?`<span class="task-room-badge" style="background:${rd.color}22;color:${rd.color}">${htmlSafe(rd.shortName||rd.name)}</span>`:'';
+      }).join('') || '<span class="task-empty-value">Sin habitación</span>';
+      const people = personIds(t);
+      const personBadges = people.length ? people.map(pid=>`<span class="dep-badge">${htmlSafe(personName(pid))}</span>`).join('') : '';
+      const personBlock = people.length ? `<div class="task-detail-row"><div class="task-detail-label">Personas</div><div class="task-detail-value task-chip-wrap">${personBadges}</div></div>` : '';
+      const stateBlock = t.estado ? `<div class="task-detail-row"><div class="task-detail-label">Estado</div><div class="task-detail-value"><span class="dep-badge task-status-pill">${htmlSafe(t.estado)}</span></div></div>` : '';
+      const fechaLabel = t.fecha ? `${htmlSafe(t.fecha)}${t.fechaFin?' → '+htmlSafe(t.fechaFin):''}` : (t.duracion ? `${htmlSafe(t.duracion)} días sin fecha fija` : '<span class="task-empty-value">Sin fecha</span>');
       return `
       <div class="task-item ${t.estado==='hecho'?'task-done':''}">
-        <input type="checkbox" class="task-check" ${t.estado==='hecho'?'checked':''} onchange="toggleTask('${room.id}',${i})">
+        <div class="task-state-rail" aria-hidden="true"></div>
         <div class="task-content">
-          <div class="task-text" onclick="openEditModal('${room.id}',${i})">${t.texto}</div>
-          <div class="task-meta">
-            <span class="tag tag-${t.estado==='hecho'?'done':t.estado==='en curso'?'doing':'pending'}">${t.estado}</span>
-            ${t.fecha?`<span class="task-date">📅 ${t.fecha}${t.fechaFin?' → '+t.fechaFin:''}</span>`:''}
-            ${depLabel}${relLabels}${durLabel}
-            ${roomBadges}
+          <div class="task-text" onclick="openEditModal('${editRoomId}',${editIdx})">${htmlSafe(t.texto)}</div>
+          <div class="task-details">
+            <div class="task-detail-row"><div class="task-detail-label">Habitaciones</div><div class="task-detail-value task-chip-wrap">${roomBadges}</div></div>
+            ${personBlock}
+            ${stateBlock}
+            <div class="task-detail-row"><div class="task-detail-label">Fecha</div><div class="task-detail-value task-date">${fechaLabel}</div></div>
+            <div class="task-detail-row"><div class="task-detail-label">Notas</div><div class="task-detail-value task-note">${t.nota?htmlSafe(t.nota):'<span class="task-empty-value">Sin notas</span>'}</div></div>
           </div>
-          ${t.nota?`<div class="task-note">${t.nota}</div>`:''}
         </div>
-        <div class="task-actions">
-          <select class="person-assign-select" onchange="updateTaskPersonsById('${t.id}',personSelectToIds(this.value))">${personSelectOptions(personIds(t))}</select>
-          <button class="btn-icon" onclick="openEditModal('${room.id}',${i})" title="Editar" style="color:var(--accent);font-size:13px">✎</button>
-          <select class="state-sel" onchange="changeState('${room.id}',${i},this.value)">
-            ${['pendiente','en curso','hecho'].map(s=>`<option value="${s}"${t.estado===s?' selected':''}>${s}</option>`).join('')}
-          </select>
-          <button class="btn-icon" onclick="deleteTask('${room.id}',${i})">✕</button>
-        </div>
-      </div>
-    `}).join('');
+        <div class="task-actions"><button class="btn-icon" onclick="openEditModal('${editRoomId}',${editIdx})" title="Editar" style="color:var(--accent);font-size:13px">✎</button></div>
+      </div>`;
+    }).join('');
   }
 
   const formArea=document.getElementById('task-form-area');
   if(appState.showTaskForm[room.id]){
-    // Build list of all tasks for dependency selector
     const allTasksForDep = [];
-    ROOMS_DEF.forEach(r => {
-      (appState.tasks[r.id]||[]).forEach(t => {
-        allTasksForDep.push({id: t.id, label: `[${r.name}] ${t.texto}`});
-      });
-    });
-    const depOptions = allTasksForDep.map(t =>
-      `<option value="${t.id}">${t.label.length>50?t.label.slice(0,50)+'…':t.label}</option>`
-    ).join('');
-
+    ROOMS_DEF.forEach(r => { (appState.tasks[r.id]||[]).forEach(t => { allTasksForDep.push({id: t.id, label: `[${r.name}] ${t.texto}`}); }); });
+    const depOptions = allTasksForDep.map(t => `<option value="${t.id}">${htmlSafe(t.label.length>50?t.label.slice(0,50)+'…':t.label)}</option>`).join('');
     formArea.innerHTML=`
       <div class="add-form">
         <input id="nt-text" placeholder="Descripción de la tarea..." onkeydown="if(event.key==='Enter')addTask('${room.id}')">
-        <div class="form-row">
-          <select id="nt-state">
-            <option value="pendiente">pendiente</option>
-            <option value="en curso">en curso</option>
-            <option value="hecho">hecho</option>
-          </select>
-          <select id="nt-person" class="person-assign-select">${personSelectOptions([])}</select>
-        </div>
-        <div style="display:flex;gap:6px;margin-bottom:6px">
-          <div style="flex:1">
-            <div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">INICIO</div>
-            <input id="nt-date" type="date" style="width:100%;margin:0">
-          </div>
-          <div style="flex:1">
-            <div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">FIN PREVISTO</div>
-            <input id="nt-datefin" type="date" style="width:100%;margin:0">
-          </div>
-        </div>
-        ${allTasksForDep.length ? `
-        <div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">DEPENDE DE (se hace después de...)</div>
-        <select id="nt-dep" style="width:100%;margin-bottom:6px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.82rem">
-          <option value="">— Sin dependencia —</option>
-          ${depOptions}
-        </select>` : ''}
-        <input id="nt-nota" placeholder="Nota adicional (opcional)..." style="margin-bottom:8px">
-        <button class="btn-primary" onclick="addTask('${room.id}')">+ Añadir tarea</button>
+        <div class="form-row"><select id="nt-state"><option value="pendiente">pendiente</option><option value="en curso">en curso</option><option value="hecho">hecho</option></select><select id="nt-person" class="person-assign-select">${personSelectOptions([])}</select></div>
+        <div style="display:flex;gap:6px;margin-bottom:6px"><div style="flex:1"><div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">INICIO</div><input id="nt-date" type="date" style="width:100%;margin:0"></div><div style="flex:1"><div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">FIN PREVISTO</div><input id="nt-datefin" type="date" style="width:100%;margin:0"></div></div>
+        ${allTasksForDep.length ? `<div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">DEPENDE DE (se hace después de...)</div><select id="nt-dep" style="width:100%;margin-bottom:6px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.82rem"><option value="">— Sin dependencia —</option>${depOptions}</select>` : ''}
+        <input id="nt-nota" placeholder="Nota adicional (opcional)..." style="margin-bottom:8px"><button class="btn-primary" onclick="addTask('${room.id}')">+ Añadir tarea</button>
       </div>`;
     setTimeout(()=>document.getElementById('nt-text')?.focus(),50);
   } else {
     formArea.innerHTML=`<div class="sticky-add-task"><button class="btn-primary" style="width:100%" onclick="openNewTaskModal('${room.id}')">+ Añadir tarea completa</button></div>`;
   }
+}
+
+function toggleRoomCompletedTasks(){ appState.showCompletedRoomTasks=!appState.showCompletedRoomTasks; renderPanel(); }
+
+function renderPreguntasRoom(room){
+  const el=document.getElementById('preguntas-room-list');
+  if(!el) return;
+  const qs=(appState.preguntas||[]).filter(q=>q.roomId===room.id);
+  const abiertas=qs.filter(q=>!q.resuelta);
+  const cerradas=qs.filter(q=>q.resuelta);
+  const ordered=[...abiertas,...cerradas];
+  el.innerHTML = ordered.map(q=>{
+    const people=personIds(q).map(personName).filter(Boolean).join(', ');
+    const asker=q.createdBy?personName(q.createdBy):'Sin usuario';
+    const created=q.createdAt?activityDate(q.createdAt):(q.fecha||'');
+    return `<div class="room-question-card ${q.resuelta?'is-done':''}">
+      <div class="room-question-title">${htmlSafe(q.texto)}</div>
+      <div class="room-question-meta">${htmlSafe(created)} · pregunta: ${htmlSafe(asker)}${people?' · para: '+htmlSafe(people):''} · ${htmlSafe(q.prioridad||'media')} · ${q.resuelta?'respondida':'pendiente'}</div>
+      ${q.respuesta?`<div class="room-question-answer">${htmlSafe(q.respuesta)}</div>`:''}
+    </div>`;
+  }).join('') || '<div class="room-mini-empty">No hay preguntas asignadas a esta habitación.</div>';
 }
 
 function renderCompra(room){
@@ -1626,17 +2324,11 @@ function renderCompra(room){
   else {
     if(pendientes.length){ html+=`<div class="compra-section-title">Por comprar (${pendientes.length})</div>`+pendientes.map(it=>{
       const i=appState.compra.indexOf(it);
-      return `<div class="compra-item"><input type="checkbox" class="task-check" onchange="toggleCompra(${i})">
-        <span class="compra-text">${it.texto}</span>
-        ${it.precio?`<span class="compra-price">${parseFloat(it.precio).toFixed(0)}€</span>`:''}
-        <button class="btn-icon" onclick="deleteCompra(${i})">✕</button></div>`;
+      return renderCompraItem(it, i);
     }).join(''); }
     if(comprados.length){ html+=`<div class="compra-section-title">Ya comprado (${comprados.length})</div>`+comprados.map(it=>{
       const i=appState.compra.indexOf(it);
-      return `<div class="compra-item compra-done"><input type="checkbox" class="task-check" checked onchange="toggleCompra(${i})">
-        <span class="compra-text">${it.texto}</span>
-        ${it.precio?`<span class="compra-price">${parseFloat(it.precio).toFixed(0)}€</span>`:''}
-        <button class="btn-icon" onclick="deleteCompra(${i})">✕</button></div>`;
+      return renderCompraItem(it, i);
     }).join(''); }
   }
   list.innerHTML=html;
@@ -1647,7 +2339,6 @@ function renderCompra(room){
       <div class="add-form">
         <input id="nc-text" placeholder="Artículo a comprar..." onkeydown="if(event.key==='Enter')addCompra('${room.id}')">
         <div class="form-row">
-          <input id="nc-price" type="number" placeholder="Precio €">
           <button class="btn-primary" onclick="addCompra('${room.id}')" style="width:auto;padding:7px 16px">+ Añadir</button>
         </div>
       </div>`;
@@ -1684,7 +2375,26 @@ function addTask(id){
   save(); renderPanel(); showNotif('Tarea añadida ✓');
 }
 
-function deleteTask(id,i){ appState.tasks[id].splice(i,1); save(); renderPanel(); }
+function moveTaskToTrash(task, roomId){
+  if(!task) return;
+  if(!appState.deletedTasks) appState.deletedTasks=[];
+  const rooms = task.rooms && task.rooms.length ? task.rooms : [roomId];
+  const deleted = {...task, rooms, deletedAt:new Date().toISOString(), deletedFrom:roomId};
+  appState.deletedTasks.unshift(deleted);
+  logActivity('Tarea movida a papelera', task.texto||'Tarea sin título', {section:'tareas', roomId:roomId});
+  rooms.forEach(rid => {
+    const arr = appState.tasks[rid]||[];
+    const fi = arr.findIndex(x=>x.id===task.id);
+    if(fi>=0) arr.splice(fi,1);
+  });
+}
+function deleteTask(id,i){
+  const t=appState.tasks[id]?.[i];
+  if(!t) return;
+  if(confirm('¿Mover esta tarea a la papelera?')){
+    moveTaskToTrash(t,id); save(); renderEverything(); showNotif('Tarea movida a papelera');
+  }
+}
 
 // ── EDIT TASK MODAL ──────────────────────────────────────────────
 
@@ -1714,7 +2424,7 @@ function fillTaskModal(t, roomId, isNew) {
   document.getElementById('em-datefin').value = t.fechaFin || '';
   document.getElementById('em-duracion').value = t.duracion || '';
   document.getElementById('em-nota').value = t.nota || '';
-  const personSel=document.getElementById('em-person'); if(personSel) personSel.innerHTML=personSelectOptions(personIds(t));
+  renderPersonChecks(personIds(t));
 
   // Multi-room checkboxes
   const currentRooms = t.rooms && t.rooms.length ? t.rooms : [roomId];
@@ -1748,13 +2458,8 @@ function fillTaskModal(t, roomId, isNew) {
   delBtn.style.display = isNew ? 'none' : '';
   delBtn.onclick = () => {
     if(confirm('¿Eliminar esta tarea?')) {
-      const rooms = t.rooms && t.rooms.length ? t.rooms : [roomId];
-      rooms.forEach(rid => {
-        const arr = appState.tasks[rid]||[];
-        const fi = arr.findIndex(x=>x.id===t.id);
-        if(fi>=0) arr.splice(fi,1);
-      });
-      closeEditModal(); save(); renderEverything(); showNotif('Tarea eliminada');
+      moveTaskToTrash(t, roomId);
+      closeEditModal(); save(); renderEverything(); showNotif('Tarea movida a papelera');
     }
   };
 
@@ -1854,8 +2559,8 @@ function saveEditTask() {
     fechaFin: document.getElementById('em-datefin').value,
     duracion: document.getElementById('em-duracion').value,
     nota: document.getElementById('em-nota').value,
-    personIds: personSelectToIds(document.getElementById('em-person')?.value||''),
-    personId: personSelectToIds(document.getElementById('em-person')?.value||'')[0] || '',
+    personIds: getSelectedPersonChecks(),
+    personId: getSelectedPersonChecks()[0] || '',
     relaciones,
     relType,    // legacy compat
     relTaskId,  // legacy compat
@@ -1902,7 +2607,7 @@ function changeState(id,i,val){ appState.tasks[id][i].estado=val; save(); render
 function addCompra(roomId){
   const txt=document.getElementById('nc-text')?.value?.trim();
   if(!txt){ showNotif('Escribe un artículo'); return; }
-  appState.compra.push({ id:uid(), roomId, texto:txt, precio:document.getElementById('nc-price')?.value||'', comprado:false });
+  appState.compra.push({ id:uid(), roomId, texto:txt, precio:'', nota:'', opciones:[], comprado:false });
   appState.showCompraForm=false;
   save(); renderPanel(); updateHeader(); showNotif('Artículo añadido ✓');
 }
@@ -1929,10 +2634,15 @@ function renderEverything(){
   updateHeader(); updateOverview(); updateFloorPlan(); renderOverviewWorkOS();
   if(appState.activeRoom) renderPanel();
   if(document.getElementById('overlay-tareas')?.classList.contains('open')) renderGlobalTareas();
+  if(document.getElementById('overlay-compra')?.classList.contains('open')) renderGlobalCompra();
+  if(document.getElementById('overlay-tenemos')?.classList.contains('open')) renderTenemos();
   if(document.getElementById('overlay-mando')?.classList.contains('open')) renderCommandCenter();
   if(document.getElementById('overlay-preguntas')?.classList.contains('open')) renderPreguntas();
   if(document.getElementById('overlay-personas')?.classList.contains('open')) renderPersonas();
+  if(document.getElementById('overlay-mizona')?.classList.contains('open')) renderMyZone();
   if(document.getElementById('overlay-gantt')?.classList.contains('open')) renderGantt();
+  if(document.getElementById('overlay-papelera')?.classList.contains('open')) renderTaskTrash();
+  if(document.getElementById('overlay-registro')?.classList.contains('open')) renderActivityLog();
 }
 
 function renderOverviewWorkOS(){
@@ -1984,6 +2694,64 @@ function personSelectOptions(selectedIds=[]){
   return `<option value="__none__" ${val==='__none__'?'selected':''}>Nadie</option>`+
     `<option value="__all__" ${val==='__all__'?'selected':''}>Todos</option>`+
     PERSONS_DEF.map(p=>`<option value="${p.id}" ${val===p.id?'selected':''}>${htmlSafe(p.name)}</option>`).join('');
+}
+
+function renderPersonChecks(selectedIds=[]){
+  const box = document.getElementById('em-persons');
+  if(!box) return;
+  const ids = personIds({personIds:selectedIds});
+  const allChecked = PERSONS_DEF.length && PERSONS_DEF.every(p=>ids.includes(p.id));
+  const allLabel = `
+    <button type="button" id="em-person-all"
+      class="person-check-label person-check-all person-check-all-btn ${allChecked?'checked':''}"
+      title="Asignar o quitar a todas las personas" aria-label="Asignar o quitar a todas las personas"
+     >
+      <span aria-hidden="true">👥</span><span class="all-check-mark" aria-hidden="true">✓</span>
+    </button>`;
+  const personLabels = PERSONS_DEF.map(p=>`
+    <label class="person-check-label ${ids.includes(p.id)?'checked':''}">
+      <input type="checkbox" value="${p.id}" ${ids.includes(p.id)?'checked':''}
+>
+      <span class="person-check-box" aria-hidden="true"></span>
+      <span>${htmlSafe(p.name)}</span>
+    </label>
+  `).join('');
+  box.innerHTML = allLabel + personLabels;
+  const allBtn = box.querySelector('#em-person-all');
+  if(allBtn) allBtn.addEventListener('click', toggleAllPersons);
+  box.querySelectorAll('input[type="checkbox"]').forEach(ch=>{
+    ch.addEventListener('change', syncPersonCheckLabels);
+  });
+  syncPersonCheckLabels();
+}
+function toggleAllPersons(){
+  const personChecks = [...document.querySelectorAll('#em-persons input[type="checkbox"]')];
+  const shouldCheck = !(personChecks.length>0 && personChecks.every(ch=>ch.checked));
+  personChecks.forEach(ch=>{
+    ch.checked = shouldCheck;
+    ch.setAttribute('aria-checked', shouldCheck ? 'true' : 'false');
+  });
+  syncPersonCheckLabels();
+}
+function syncPersonCheckLabels(){
+  const personChecks = [...document.querySelectorAll('#em-persons input[type="checkbox"]')];
+  personChecks.forEach(ch=>{
+    ch.setAttribute('aria-checked', ch.checked ? 'true' : 'false');
+    ch.closest('.person-check-label')?.classList.toggle('checked', ch.checked);
+  });
+  const all = document.getElementById('em-person-all');
+  if(all){
+    const allChecked = personChecks.length>0 && personChecks.every(ch=>ch.checked);
+    all.classList.toggle('checked', allChecked);
+    all.setAttribute('aria-pressed', allChecked ? 'true' : 'false');
+  }
+}
+
+window.toggleAllPersons = toggleAllPersons;
+window.syncPersonCheckLabels = syncPersonCheckLabels;
+
+function getSelectedPersonChecks(){
+  return [...document.querySelectorAll('#em-persons input[type="checkbox"]:checked')].map(ch=>ch.value).filter(Boolean);
 }
 function personName(id){ const p=PERSONS_DEF.find(x=>x.id===id); return p?p.name:''; }
 function updateTaskPersonsById(taskId, ids){
@@ -2143,40 +2911,106 @@ function preguntaTaskOptions(selectedId){
   const tasks=allTasksFlat();
   return `<option value="">Sin tarea</option>` + tasks.map(t=>`<option value="${t.id}" ${t.id===selectedId?'selected':''}>${htmlSafe((t._room?.shortName||t._room?.name||'')+' · '+t.texto).slice(0,95)}</option>`).join('');
 }
+function preguntaAuthorOptions(selectedId){
+  return `<option value="">Sin autor</option>` + PERSONS_DEF.map(p=>`<option value="${p.id}" ${p.id===selectedId?'selected':''}>${htmlSafe(p.name)}</option>`).join('');
+}
 function renderPreguntaFormOptions(){
   const room=document.getElementById('pregunta-room');
   const task=document.getElementById('pregunta-task');
   if(room) room.innerHTML=preguntaRoomOptions('');
   if(task) task.innerHTML=preguntaTaskOptions('');
-  const person=document.getElementById('pregunta-person'); if(person){ person.multiple=false; person.removeAttribute('size'); person.classList.add('person-assign-select'); person.innerHTML=personSelectOptions([]); }
+  renderPreguntaPersonChecks([]);
+}
+function renderPreguntaPersonChecks(selectedIds=[]){
+  const box=document.getElementById('pregunta-persons');
+  if(!box) return;
+  const ids=personIds({personIds:selectedIds});
+  const allChecked=PERSONS_DEF.length && PERSONS_DEF.every(p=>ids.includes(p.id));
+  box.innerHTML = `<button type="button" id="pregunta-person-all" class="person-check-label person-check-all person-check-all-btn ${allChecked?'checked':''}" title="Marcar o quitar a todas las personas" aria-label="Marcar o quitar a todas las personas"><span aria-hidden="true">👥</span><span class="all-check-mark" aria-hidden="true">✓</span></button>` + PERSONS_DEF.map(p=>`
+    <label class="person-check-label ${ids.includes(p.id)?'checked':''}">
+      <input type="checkbox" value="${p.id}" ${ids.includes(p.id)?'checked':''}>
+      <span class="person-check-box" aria-hidden="true"></span>
+      <span>${htmlSafe(p.name)}</span>
+    </label>`).join('');
+  document.getElementById('pregunta-person-all')?.addEventListener('click', toggleAllPreguntaFormPersons);
+  box.querySelectorAll('input[type="checkbox"]').forEach(ch=>ch.addEventListener('change', syncPreguntaFormPersonLabels));
+  syncPreguntaFormPersonLabels();
+}
+function toggleAllPreguntaFormPersons(){
+  const checks=[...document.querySelectorAll('#pregunta-persons input[type="checkbox"]')];
+  const shouldCheck=!(checks.length && checks.every(ch=>ch.checked));
+  checks.forEach(ch=>ch.checked=shouldCheck);
+  syncPreguntaFormPersonLabels();
+}
+function syncPreguntaFormPersonLabels(){
+  const checks=[...document.querySelectorAll('#pregunta-persons input[type="checkbox"]')];
+  checks.forEach(ch=>ch.closest('.person-check-label')?.classList.toggle('checked', ch.checked));
+  const all=document.getElementById('pregunta-person-all');
+  if(all){
+    const allChecked=checks.length && checks.every(ch=>ch.checked);
+    all.classList.toggle('checked', allChecked);
+    all.setAttribute('aria-pressed', allChecked?'true':'false');
+  }
+}
+function getSelectedPreguntaPersonChecks(){
+  return [...document.querySelectorAll('#pregunta-persons input[type="checkbox"]:checked')].map(ch=>ch.value).filter(Boolean);
 }
 function addPregunta(){
   const text=document.getElementById('pregunta-text')?.value.trim();
   if(!text) return showNotif('Escribe la pregunta');
   appState.preguntas=appState.preguntas||[];
-  appState.preguntas.unshift({id:uid(),texto:text,respuesta:'',roomId:document.getElementById('pregunta-room')?.value||'',taskId:document.getElementById('pregunta-task')?.value||'',prioridad:document.getElementById('pregunta-priority')?.value||'media',personIds:personSelectToIds(document.getElementById('pregunta-person')?.value||''),personId:personSelectToIds(document.getElementById('pregunta-person')?.value||'')[0]||'',resuelta:false,fecha:new Date().toISOString().slice(0,10)});
+  appState.preguntas.unshift({id:uid(),texto:text,respuesta:'',roomId:document.getElementById('pregunta-room')?.value||'',taskId:document.getElementById('pregunta-task')?.value||'',prioridad:document.getElementById('pregunta-priority')?.value||'media',personIds:getSelectedPreguntaPersonChecks(),personId:getSelectedPreguntaPersonChecks()[0]||'',createdBy:activePersonId||'',createdAt:new Date().toISOString(),resuelta:false,fecha:new Date().toISOString().slice(0,10)});
+  logActivity('Pregunta creada', text, {section:'preguntas', roomId:document.getElementById('pregunta-room')?.value||''});
   document.getElementById('pregunta-text').value='';
-  save(); renderPreguntas(); renderCommandCenter?.(); showNotif('Pregunta añadida');
+  save(); renderPreguntas(); if(appState.activeRoom) renderPanel(); renderCommandCenter?.(); showNotif('Pregunta añadida');
 }
 function setPreguntasFilter(f){ preguntasFilter=f; renderPreguntas(); }
 function savePreguntaRespuesta(id,val){
   const q=(appState.preguntas||[]).find(x=>x.id===id); if(!q) return;
-  q.respuesta=val; q.resuelta=!!val.trim(); q.fechaRespuesta=q.resuelta?new Date().toISOString().slice(0,10):'';
-  save(); renderPreguntasStatsOnly();
+  q.respuesta=val; q.resuelta=!!val.trim();
+  if(val.trim()) logActivity('Pregunta respondida', q.texto||'Pregunta', {section:'preguntas', roomId:q.roomId||''}); q.fechaRespuesta=q.resuelta?new Date().toISOString().slice(0,10):'';
+  save(); renderPreguntasStatsOnly(); if(appState.activeRoom) renderPanel();
 }
 function togglePregunta(id){
   const q=(appState.preguntas||[]).find(x=>x.id===id); if(!q) return;
-  q.resuelta=!q.resuelta; if(q.resuelta&&!q.fechaRespuesta) q.fechaRespuesta=new Date().toISOString().slice(0,10);
-  save(); renderPreguntas();
+  q.resuelta=!q.resuelta; logActivity(q.resuelta?'Pregunta marcada respondida':'Pregunta reabierta', q.texto||'Pregunta', {section:'preguntas', roomId:q.roomId||''}); if(q.resuelta&&!q.fechaRespuesta) q.fechaRespuesta=new Date().toISOString().slice(0,10);
+  save(); renderPreguntas(); if(appState.activeRoom) renderPanel();
 }
 function deletePregunta(id){
+  const q=(appState.preguntas||[]).find(x=>x.id===id);
   if(!confirm('¿Eliminar esta pregunta?')) return;
-  appState.preguntas=(appState.preguntas||[]).filter(x=>x.id!==id); save(); renderPreguntas();
+  logActivity('Pregunta eliminada', q?.texto||'Pregunta', {section:'preguntas', roomId:q?.roomId||''});
+  appState.preguntas=(appState.preguntas||[]).filter(x=>x.id!==id); save(); renderPreguntas(); if(appState.activeRoom) renderPanel();
 }
 function editLinkedTaskFromQuestion(taskId){ if(taskId) editTaskById(taskId); }
-function updatePreguntaRoom(id,val){ const q=(appState.preguntas||[]).find(x=>x.id===id); if(q){q.roomId=val; save(); renderPreguntas();} }
+function updatePreguntaRoom(id,val){ const q=(appState.preguntas||[]).find(x=>x.id===id); if(q){q.roomId=val; save(); renderPreguntas(); if(appState.activeRoom) renderPanel();} }
 function updatePreguntaTask(id,val){ const q=(appState.preguntas||[]).find(x=>x.id===id); if(q){q.taskId=val; save(); renderPreguntas();} }
+function updatePreguntaAuthor(id,val){ const q=(appState.preguntas||[]).find(x=>x.id===id); if(q){ const before=q.createdBy?personName(q.createdBy):'Sin autor'; q.createdBy=val||''; if(!q.createdAt) q.createdAt=new Date().toISOString(); logActivity('Autor de pregunta actualizado', (q.texto||'Pregunta')+' · '+before+' → '+(personName(val)||'Sin autor'), {section:'preguntas', roomId:q.roomId||''}); save(); renderPreguntas(); if(appState.activeRoom) renderPanel(); if(document.getElementById('overlay-personas')?.classList.contains('open')) renderPersonas(); } }
+function preguntaPersonChecksHtml(q){
+  const ids=personIds(q);
+  const allChecked=PERSONS_DEF.length && PERSONS_DEF.every(p=>ids.includes(p.id));
+  return `<button type="button" class="person-check-label person-check-all person-check-all-btn ${allChecked?'checked':''}" title="Marcar o quitar a todas las personas" aria-label="Marcar o quitar a todas las personas" onclick="togglePreguntaAllPersons('${q.id}')"><span aria-hidden="true">👥</span><span class="all-check-mark" aria-hidden="true">✓</span></button>` + PERSONS_DEF.map(p=>`
+    <label class="person-check-label ${ids.includes(p.id)?'checked':''}">
+      <input type="checkbox" value="${p.id}" ${ids.includes(p.id)?'checked':''} onchange="togglePreguntaSinglePerson('${q.id}','${p.id}',this.checked)">
+      <span class="person-check-box" aria-hidden="true"></span>
+      <span>${htmlSafe(p.name)}</span>
+    </label>`).join('');
+}
+function togglePreguntaSinglePerson(id, personId, checked){
+  const q=(appState.preguntas||[]).find(x=>x.id===id); if(!q) return;
+  const ids=new Set(personIds(q));
+  if(checked) ids.add(personId); else ids.delete(personId);
+  updatePreguntaPersons(id,[...ids]);
+}
+function togglePreguntaAllPersons(id){
+  const q=(appState.preguntas||[]).find(x=>x.id===id); if(!q) return;
+  const ids=personIds(q);
+  const allChecked=PERSONS_DEF.length && PERSONS_DEF.every(p=>ids.includes(p.id));
+  updatePreguntaPersons(id, allChecked ? [] : PERSONS_DEF.map(p=>p.id));
+}
+function updatePreguntasHeader(){ const qs=appState.preguntas||[]; const el=document.getElementById('stat-preguntas'); if(el) el.textContent=qs.filter(q=>q.resuelta).length+'/'+qs.length; }
 function renderPreguntasStatsOnly(){
+  updatePreguntasHeader();
   const qs=appState.preguntas||[]; const open=qs.filter(q=>!q.resuelta).length; const high=qs.filter(q=>!q.resuelta&&q.prioridad==='alta').length;
   const el=document.getElementById('preguntas-stats'); if(el) el.innerHTML=`<div class="gstat"><div class="gstat-num">${open}</div><div class="gstat-label">abiertas</div></div><div class="gstat"><div class="gstat-num">${high}</div><div class="gstat-label">bloqueantes</div></div><div class="gstat"><div class="gstat-num">${qs.length-open}</div><div class="gstat-label">respondidas</div></div>`;
 }
@@ -2191,14 +3025,15 @@ function renderPreguntas(){
   if(preguntasFilter==='respondidas') list=qs.filter(q=>q.resuelta);
   const tasks=allTasksFlat();
   const html=list.map(q=>{
-    const room=ROOMS_DEF.find(r=>r.id===q.roomId); const task=tasks.find(t=>t.id===q.taskId);
+    const room=ROOMS_DEF.find(r=>r.id===q.roomId); const task=tasks.find(t=>t.id===q.taskId); const asker=q.createdBy?personName(q.createdBy):'Sin usuario'; const created=q.createdAt?activityDate(q.createdAt):(q.fecha||'');
     return `<div class="question-card">
-      <div class="question-head"><div><div class="question-title">${htmlSafe(q.texto)}</div><div class="question-meta">${htmlSafe(q.fecha||'')} ${room?' · '+htmlSafe(room.name):''} ${task?' · tarea: '+htmlSafe(task.texto):''}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="question-badge ${htmlSafe(q.prioridad||'media')}">${htmlSafe(q.prioridad||'media')}</span>${q.resuelta?'<span class="question-badge resuelta">respondida</span>':'<span class="question-badge">pendiente</span>'}</div></div>
+      <div class="question-head"><div><div class="question-title">${htmlSafe(q.texto)}</div><div class="question-meta">${htmlSafe(created)} · pregunta: ${htmlSafe(asker)}${room?' · '+htmlSafe(room.name):''} ${task?' · tarea: '+htmlSafe(task.texto):''}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="question-badge ${htmlSafe(q.prioridad||'media')}">${htmlSafe(q.prioridad||'media')}</span>${q.resuelta?'<span class="question-badge resuelta">respondida</span>':'<span class="question-badge">pendiente</span>'}</div></div>
       <textarea class="question-answer" placeholder="Escribe la respuesta cuando se sepa..." onblur="savePreguntaRespuesta('${q.id}',this.value)">${htmlSafe(q.respuesta||'')}</textarea>
       <div class="question-actions">
-        <select onchange="updatePreguntaRoom('${q.id}',this.value)">${preguntaRoomOptions(q.roomId)}</select>
-        <select onchange="updatePreguntaTask('${q.id}',this.value)">${preguntaTaskOptions(q.taskId)}</select>
-        <select class="person-assign-select" onchange="updatePreguntaPersons('${q.id}',personSelectToIds(this.value))">${personSelectOptions(personIds(q))}</select>
+        <select title="Quién hizo la pregunta" onchange="updatePreguntaAuthor('${q.id}',this.value)">${preguntaAuthorOptions(q.createdBy||'')}</select>
+        <select title="Habitación" onchange="updatePreguntaRoom('${q.id}',this.value)">${preguntaRoomOptions(q.roomId)}</select>
+        <select title="Tarea vinculada" onchange="updatePreguntaTask('${q.id}',this.value)">${preguntaTaskOptions(q.taskId)}</select>
+        <div class="person-check-grid question-persons-inline">${preguntaPersonChecksHtml(q)}</div>
         ${q.taskId?`<button class="btn-secondary" onclick="editLinkedTaskFromQuestion('${q.taskId}')">Editar tarea</button>`:''}
         <button class="btn-secondary" onclick="togglePregunta('${q.id}')">${q.resuelta?'Reabrir':'Marcar resuelta'}</button>
         <button class="btn-icon" onclick="deletePregunta('${q.id}')">✕</button>
@@ -2207,11 +3042,66 @@ function renderPreguntas(){
   }).join('');
   document.getElementById('preguntas-list').innerHTML = html || '<div class="empty-state">No hay preguntas en este filtro.</div>';
 }
-window.addPregunta=addPregunta; window.setPreguntasFilter=setPreguntasFilter; window.savePreguntaRespuesta=savePreguntaRespuesta; window.togglePregunta=togglePregunta; window.deletePregunta=deletePregunta; window.editLinkedTaskFromQuestion=editLinkedTaskFromQuestion; window.updatePreguntaRoom=updatePreguntaRoom; window.updatePreguntaTask=updatePreguntaTask; window.updatePreguntaPerson=updatePreguntaPerson; window.renderPreguntas=renderPreguntas;
+window.updatePreguntasHeader=updatePreguntasHeader; window.toggleAllPreguntaFormPersons=toggleAllPreguntaFormPersons; window.syncPreguntaFormPersonLabels=syncPreguntaFormPersonLabels; window.togglePreguntaSinglePerson=togglePreguntaSinglePerson; window.togglePreguntaAllPersons=togglePreguntaAllPersons; window.addPregunta=addPregunta; window.setPreguntasFilter=setPreguntasFilter; window.savePreguntaRespuesta=savePreguntaRespuesta; window.togglePregunta=togglePregunta; window.deletePregunta=deletePregunta; window.editLinkedTaskFromQuestion=editLinkedTaskFromQuestion; window.updatePreguntaRoom=updatePreguntaRoom; window.updatePreguntaTask=updatePreguntaTask; window.updatePreguntaAuthor=updatePreguntaAuthor; window.updatePreguntaPerson=updatePreguntaPerson; window.updatePreguntaPersons=updatePreguntaPersons; window.renderPreguntas=renderPreguntas;
+
+
+// ── USUARIO POR DISPOSITIVO / MI ZONA ──────────────────────────────
+function currentUser(){ return PERSONS_DEF.find(p=>p.id===activePersonId) || null; }
+function openUserSelector(force=false){
+  userSelectorForced = !!force;
+  const ov=document.getElementById('user-select-overlay');
+  const grid=document.getElementById('user-select-grid');
+  if(!ov||!grid) return;
+  grid.innerHTML=PERSONS_DEF.map(p=>`<button class="user-choice ${activePersonId===p.id?'active':''}" onclick="chooseDeviceUser('${p.id}')"><div class="user-choice-avatar">${htmlSafe(p.name.slice(0,1))}</div><strong>${htmlSafe(p.name)}</strong><br><span style="color:var(--muted);font-size:.78rem">Usar en este dispositivo</span></button>`).join('');
+  ov.classList.add('open');
+}
+function closeUserSelector(){
+  if(userSelectorForced && !activePersonId) return;
+  document.getElementById('user-select-overlay')?.classList.remove('open');
+}
+function chooseDeviceUser(id){
+  activePersonId=id;
+  localStorage.setItem(USER_STORAGE_KEY,id);
+  document.getElementById('user-select-overlay')?.classList.remove('open');
+  renderEverything();
+  showNotif('Dispositivo asignado a '+personName(id));
+}
+function renderCurrentUserUI(){
+  updateAdminVisibility?.();
+  const p=currentUser();
+  const name=document.getElementById('current-user-name');
+  const alerts=document.getElementById('current-user-alerts');
+  if(name) name.textContent=p?p.name:'Elegir usuario';
+  if(alerts){
+    const qs=(appState.preguntas||[]).filter(q=>activePersonId && personIds(q).includes(activePersonId) && !q.resuelta);
+    const ts=allTasksFlat().filter(t=>activePersonId && personIds(t).includes(activePersonId) && t.estado!=='hecho');
+    alerts.textContent=(qs.length||ts.length)?`· ${qs.length} preguntas · ${ts.length} tareas`:'';
+  }
+}
+function renderMyZone(){
+  const el=document.getElementById('my-zone-body'); if(!el) return;
+  const p=currentUser();
+  if(!p){
+    el.innerHTML=`<div class="empty-state">Elige primero quién eres en este dispositivo.<br><button class="btn-primary" style="margin-top:12px" onclick="openUserSelector(true)">Elegir usuario</button></div>`;
+    return;
+  }
+  const tasks=allTasksFlat().filter(t=>personIds(t).includes(p.id));
+  const openTasks=tasks.filter(t=>t.estado!=='hecho');
+  const qs=(appState.preguntas||[]).filter(q=>personIds(q).includes(p.id));
+  const openQs=qs.filter(q=>!q.resuelta);
+  const taskHtml=openTasks.map(t=>`<div class="task-item ${t.estado==='hecho'?'task-done':''}"><div class="task-state-rail"></div><div class="task-content"><div class="task-text">${htmlSafe(t.texto)}</div><div class="task-details"><div class="task-detail-row"><div class="task-detail-label">Habitación</div><div class="task-detail-value">${htmlSafe(t._room?.name||'')}</div></div><div class="task-detail-row"><div class="task-detail-label">Estado</div><div class="task-detail-value"><span class="dep-badge task-status-pill">${htmlSafe(t.estado||'pendiente')}</span></div></div><div class="task-detail-row"><div class="task-detail-label">Fecha</div><div class="task-detail-value">${htmlSafe(t.fecha||'Sin fecha')}${t.fechaFin?' → '+htmlSafe(t.fechaFin):''}</div></div></div></div><div class="task-actions"><button class="btn-secondary" onclick="editTaskById('${t.id}')">Editar</button></div></div>`).join('') || '<div class="empty-state">No tienes tareas pendientes asignadas.</div>';
+  const qHtml=openQs.map(q=>{ const room=ROOMS_DEF.find(r=>r.id===q.roomId); const asker=q.createdBy?personName(q.createdBy):''; return `<div class="question-card mine-unread"><div class="question-head"><div><div class="question-title">${htmlSafe(q.texto)}</div><div class="question-meta">${htmlSafe(q.fecha||'')}${room?' · '+htmlSafe(room.name):''}${asker?' · ':''}${asker?`<span class="asker-chip">${htmlSafe(asker)} te ha hecho una pregunta</span>`:''}</div></div><div><span class="question-badge ${htmlSafe(q.prioridad||'media')}">${htmlSafe(q.prioridad||'media')}</span> <span class="question-badge">pendiente</span></div></div><textarea class="question-answer" placeholder="Responder..." onblur="savePreguntaRespuesta('${q.id}',this.value)">${htmlSafe(q.respuesta||'')}</textarea><div class="question-actions"><button class="btn-secondary" onclick="togglePregunta('${q.id}')">Marcar respondida</button>${q.taskId?`<button class="btn-secondary" onclick="editLinkedTaskFromQuestion('${q.taskId}')">Ver tarea</button>`:''}</div></div>`; }).join('') || '<div class="empty-state">No tienes preguntas pendientes.</div>';
+  el.innerHTML=`<div class="my-zone-head"><div><div class="my-zone-title">Hola, ${htmlSafe(p.name)}</div><div class="my-zone-sub">Este dispositivo entra automáticamente como tú. Puedes cambiar de usuario desde aquí.</div></div><button class="btn-secondary" onclick="openUserSelector(false)">Cambiar usuario</button></div><div class="my-zone-grid"><div class="my-zone-stat"><b>${openTasks.length}</b><span>tareas pendientes</span></div><div class="my-zone-stat"><b>${openQs.length}</b><span>preguntas para ti</span></div><div class="my-zone-stat"><b>${tasks.filter(t=>t.estado==='hecho').length}</b><span>tareas hechas</span></div></div><div class="my-zone-section"><h3>Mis preguntas</h3>${qHtml}</div><div class="my-zone-section"><h3>Mis tareas</h3>${taskHtml}</div>`;
+}
+window.openUserSelector=openUserSelector;
+window.closeUserSelector=closeUserSelector;
+window.chooseDeviceUser=chooseDeviceUser;
+window.renderMyZone=renderMyZone;
 
 
 // ── PERSONAS ───────────────────────────────────────────────────
-function setActivePerson(id){ activePersonId=id; renderPersonas(); }
+function setActivePerson(id){ activePersonId=id; localStorage.setItem(USER_STORAGE_KEY,id); renderCurrentUserUI();
+    updateAdminVisibility(); renderPersonas(); if(document.getElementById('overlay-mizona')?.classList.contains('open')) renderMyZone(); }
 function renderPersonas(){
   const grid=document.getElementById('person-grid'); const detail=document.getElementById('person-detail'); if(!grid||!detail) return;
   const tasks=allTasksFlat(); const qs=appState.preguntas||[];
@@ -2228,27 +3118,154 @@ function renderPersonas(){
 }
 window.setActivePerson=setActivePerson; window.renderPersonas=renderPersonas; window.updateTaskPersonById=updateTaskPersonById; window.updateTaskPersonsById=updateTaskPersonsById; window.updatePreguntaPerson=updatePreguntaPerson; window.updatePreguntaPersons=updatePreguntaPersons; window.removeTaskPersonById=removeTaskPersonById; window.removePreguntaPerson=removePreguntaPerson; window.selectedValues=selectedValues; window.personSelectToIds=personSelectToIds;
 
+
+// ── PAPELERA DE TAREAS ──────────────────────────────────────────────
+function renderTaskTrash(){
+  if(!adminGuard()){ closeGlobal('papelera'); return; }
+  const list=document.getElementById('trash-task-list');
+  if(!list) return;
+  const deleted=appState.deletedTasks||[];
+  if(!deleted.length){
+    list.innerHTML='<div class="empty-state">La papelera está vacía.</div>';
+    return;
+  }
+  list.innerHTML=deleted.map((t,i)=>{
+    const rooms=(t.rooms&&t.rooms.length?t.rooms:[t.deletedFrom]).filter(Boolean).map(rid=>ROOMS_DEF.find(r=>r.id===rid)?.name||rid).join(', ');
+    const people=personIds(t).map(pid=>PERSONS_DEF.find(p=>p.id===pid)?.name||pid).join(', ');
+    const date=t.deletedAt?new Date(t.deletedAt).toLocaleString('es-ES',{dateStyle:'short',timeStyle:'short'}):'';
+    return `<div class="task-item">
+      <div class="task-content">
+        <div class="task-text">${htmlSafe(t.texto||'Tarea sin título')}</div>
+        <div class="task-details">
+          <div class="task-detail-row"><div class="task-detail-label">Habitaciones</div><div class="task-detail-value">${htmlSafe(rooms||'—')}</div></div>
+          ${people?`<div class="task-detail-row"><div class="task-detail-label">Personas</div><div class="task-detail-value">${htmlSafe(people)}</div></div>`:''}
+          <div class="task-detail-row"><div class="task-detail-label">Estado</div><div class="task-detail-value">${htmlSafe(t.estado||'pendiente')}</div></div>
+          <div class="task-detail-row"><div class="task-detail-label">Borrada</div><div class="task-detail-value">${htmlSafe(date||'—')}</div></div>
+        </div>
+      </div>
+      <div class="task-actions" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
+        <button class="btn-secondary" onclick="restoreTaskFromTrash(${i})">Restaurar</button>
+        <button class="btn-icon" onclick="deleteTaskForever(${i})" title="Eliminar definitivamente">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function restoreTaskFromTrash(i){
+  if(!adminGuard()) return;
+  const deleted=appState.deletedTasks||[];
+  const t=deleted[i];
+  if(!t) return;
+  const rooms=(t.rooms&&t.rooms.length?t.rooms:[t.deletedFrom||ROOMS_DEF[0].id]).filter(Boolean);
+  const restored={...t};
+  delete restored.deletedAt; delete restored.deletedFrom;
+  rooms.forEach(rid=>{
+    if(!appState.tasks[rid]) appState.tasks[rid]=[];
+    if(!appState.tasks[rid].some(x=>x.id===restored.id)) appState.tasks[rid].push({...restored, rooms});
+  });
+  deleted.splice(i,1);
+  logActivity('Tarea restaurada desde papelera', restored.texto||'Tarea sin título', {section:'tareas', roomId:rooms[0]||''});
+  save(); renderEverything(); showNotif('Tarea restaurada ✓');
+}
+function deleteTaskForever(i){
+  if(!adminGuard()) return;
+  if(!confirm('¿Eliminar definitivamente esta tarea?')) return;
+  const removed=(appState.deletedTasks||[])[i];
+  (appState.deletedTasks||[]).splice(i,1);
+  logActivity('Tarea eliminada definitivamente', removed?.texto||'Tarea sin título', {section:'tareas', roomId:removed?.deletedFrom||(removed?.rooms?.[0]||'')});
+  save(); renderEverything(); showNotif('Tarea eliminada definitivamente');
+}
+function emptyTaskTrash(){
+  if(!adminGuard()) return;
+  if(!(appState.deletedTasks||[]).length){ showNotif('La papelera ya está vacía'); return; }
+  if(!confirm('¿Vaciar definitivamente la papelera?')) return;
+  logActivity('Papelera vaciada', `${(appState.deletedTasks||[]).length} tareas`, {section:'tareas'});
+  appState.deletedTasks=[];
+  save(); renderEverything(); showNotif('Papelera vaciada');
+}
+window.renderTaskTrash=renderTaskTrash;
+window.restoreTaskFromTrash=restoreTaskFromTrash;
+window.deleteTaskForever=deleteTaskForever;
+window.emptyTaskTrash=emptyTaskTrash;
+
+// ── REGISTRO DE ACTIVIDAD ─────────────────────────────────────────
+function sectionLabel(s){ return ({tareas:'Tareas',compras:'Compras',preguntas:'Preguntas',tenemos:'¿Qué tenemos?',notas:'Notas',herramientas:'Herramientas',incidencias:'Incidencias',registro:'Registro',otros:'Otros'})[s] || (s||'Otros'); }
+function renderActivityFilters(){
+  const host=document.getElementById('activity-log-filters'); if(!host) return;
+  const f=appState.activityFilters || {user:'',room:'',section:'',from:'',to:''};
+  const sections=['tareas','compras','preguntas','tenemos','notas','herramientas','incidencias','registro','otros'];
+  host.innerHTML = `
+    <div class="activity-filters">
+      <select onchange="setActivityFilter('user',this.value)"><option value="">Todos los usuarios</option>${PERSONS_DEF.map(p=>`<option value="${p.id}" ${f.user===p.id?'selected':''}>${htmlSafe(p.name)}</option>`).join('')}</select>
+      <select onchange="setActivityFilter('room',this.value)"><option value="">Todas las habitaciones</option>${ROOMS_DEF.map(r=>`<option value="${r.id}" ${f.room===r.id?'selected':''}>${htmlSafe(r.name)}</option>`).join('')}<option value="sin" ${f.room==='sin'?'selected':''}>Sin habitación</option></select>
+      <select onchange="setActivityFilter('section',this.value)"><option value="">Todas las secciones</option>${sections.map(sec=>`<option value="${sec}" ${f.section===sec?'selected':''}>${sectionLabel(sec)}</option>`).join('')}</select>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input type="date" value="${htmlSafe(f.from||'')}" onchange="setActivityFilter('from',this.value)"><input type="date" value="${htmlSafe(f.to||'')}" onchange="setActivityFilter('to',this.value)"></div>
+    </div>
+    <div class="activity-filter-actions"><button class="btn-secondary" onclick="resetActivityFilters()">Limpiar filtros</button></div>`;
+}
+function setActivityFilter(k,v){ appState.activityFilters=appState.activityFilters||{}; appState.activityFilters[k]=v; renderActivityLog(); }
+function resetActivityFilters(){ appState.activityFilters={user:'',room:'',section:'',from:'',to:''}; renderActivityLog(); }
+function logMatchesFilters(x){
+  if(x.action==='Cambio guardado') return false;
+  const f=appState.activityFilters||{};
+  if(f.user && x.by!==f.user) return false;
+  const roomId=x.roomId||'';
+  if(f.room==='sin' && roomId) return false;
+  if(f.room && f.room!=='sin' && roomId!==f.room) return false;
+  const sec=x.section||inferActivitySection(x.action||'');
+  if(f.section && sec!==f.section) return false;
+  const day=(x.at||'').slice(0,10);
+  if(f.from && day < f.from) return false;
+  if(f.to && day > f.to) return false;
+  return true;
+}
+function renderActivityLog(){
+  if(!adminGuard()){ closeGlobal('registro'); return; }
+  renderActivityFilters();
+  const el=document.getElementById('activity-log-list'); if(!el) return;
+  const all=(appState.activityLog||[]).filter(x=>x.action!=='Cambio guardado');
+  const logs=all.filter(logMatchesFilters);
+  el.innerHTML = logs.map(x=>{
+    const sec=x.section||inferActivitySection(x.action||'');
+    const room=x.roomName||(x.roomId?roomName(x.roomId):'');
+    return `<div class="activity-item"><div class="activity-main">${htmlSafe(x.action||'Cambio')}${sec?`<span class="activity-chip">${htmlSafe(sectionLabel(sec))}</span>`:''}${room?`<span class="activity-chip">${htmlSafe(room)}</span>`:''}</div><div class="activity-meta">${htmlSafe(activityDate(x.at))} · ${htmlSafe(x.byName||personName(x.by)||'Sin usuario')}${x.detail?' · '+htmlSafe(x.detail):''}</div></div>`;
+  }).join('') || `<div class="empty-state">${all.length?'No hay actividad con esos filtros.':'Todavía no hay actividad registrada.'}</div>`;
+}
+function clearActivityLog(){
+  if(!adminGuard()) return;
+  if(!confirm('¿Vaciar el registro de actividad?')) return;
+  appState.activityLog=[];
+  save(); renderActivityLog();
+}
+window.renderActivityLog=renderActivityLog; window.clearActivityLog=clearActivityLog; window.setActivityFilter=setActivityFilter; window.resetActivityFilters=resetActivityFilters;
+
 // ── GLOBAL OVERLAYS ──────────────────────────────────────────────
 
 function openGlobal(which) {
-  ['mando','tareas','compra','herramientas','preguntas','personas','gantt'].forEach(w => {
+  if((which==='papelera'||which==='registro') && !adminGuard()) return;
+  ['mando','tareas','compra','tenemos','herramientas','preguntas','personas','mizona','gantt','registro','papelera'].forEach(w => {
     document.getElementById('overlay-'+w).classList.toggle('open', w===which);
     const btn = document.getElementById('gnav-'+w);
     if(btn) btn.classList.toggle('active', w===which);
   });
+  document.getElementById('current-user-pill')?.classList.toggle('active', which==='mizona');
   if(which==='mando') renderCommandCenter();
   if(which==='tareas') renderGlobalTareas();
   if(which==='compra') renderGlobalCompra();
+  if(which==='tenemos') renderTenemos();
   if(which==='herramientas') renderHerramientas();
   if(which==='preguntas') renderPreguntas();
   if(which==='personas') renderPersonas();
+  if(which==='mizona') renderMyZone();
   if(which==='gantt') renderGantt();
+  if(which==='registro') renderActivityLog();
+  if(which==='papelera') renderTaskTrash();
 }
 
 function closeGlobal(which) {
   document.getElementById('overlay-'+which).classList.remove('open');
   const btn = document.getElementById('gnav-'+which);
   if(btn) btn.classList.remove('active');
+  if(which==='mizona') document.getElementById('current-user-pill')?.classList.remove('active');
 }
 
 // ── GLOBAL TAREAS ──────────────────────────────────────────────
@@ -2330,6 +3347,7 @@ function setGlobalFilter(which, val) {
   if(which==='mando') renderCommandCenter();
   if(which==='tareas') renderGlobalTareas();
   if(which==='compra') renderGlobalCompra();
+  if(which==='tenemos') renderTenemos();
 }
 
 function globalToggleTask(roomId, i) {
@@ -2349,6 +3367,102 @@ function globalDeleteTask(roomId, i) {
   appState.tasks[roomId].splice(i,1);
   save(); renderGlobalTareas(); updateHeader(); updateFloorPlan();
   if(appState.activeRoom===roomId) renderPanel();
+}
+
+
+function compraOptions(item){
+  if(!Array.isArray(item.opciones)) item.opciones = [];
+  return item.opciones;
+}
+function renderCompraItem(it, i, isGlobal=false){
+  compraOptions(it);
+  const opts = it.opciones.filter(o => (o.link||'').trim() || (o.precio||'').trim() || (o.nota||'').trim());
+  const note = (it.nota||'').trim();
+  const meta = [];
+  if(opts.length) meta.push(`${opts.length} link${opts.length!==1?'s':''}`);
+  if(note) meta.push('nota');
+  const bestPrices = opts.filter(o=>o.precio).slice(0,2).map((o,idx)=>`Op. ${idx+1}: ${htmlSafe(o.precio)}€`).join(' · ');
+  return `<div class="compra-item ${it.comprado?'compra-done':''}" onclick="openCompraModal(${i})">
+    <input type="checkbox" class="task-check" ${it.comprado?'checked':''} onclick="event.stopPropagation()" onchange="${isGlobal?`globalToggleCompra(${i})`:`toggleCompra(${i})`}">
+    <div class="compra-main">
+      <div class="compra-text">${htmlSafe(it.texto)}</div>
+      ${meta.length?`<div class="compra-meta">${meta.map(x=>`<span>${x}</span>`).join('')}</div>`:''}
+      ${bestPrices?`<div class="compra-detail">${bestPrices}</div>`:''}
+    </div>
+    <button class="btn-icon" onclick="event.stopPropagation();openCompraModal(${i})" title="Editar" style="color:var(--accent);font-size:13px">✎</button>
+  </div>`;
+}
+
+let editingCompraIndex = null;
+function openCompraModal(i){
+  editingCompraIndex = i;
+  const it = appState.compra[i];
+  if(!it) return;
+  compraOptions(it);
+  document.getElementById('cm-text').value = it.texto || '';
+  document.getElementById('cm-room').innerHTML = `<option value="">Sin habitación</option>` + ROOMS_DEF.map(r=>`<option value="${r.id}" ${it.roomId===r.id?'selected':''}>${r.name}</option>`).join('');
+  document.getElementById('cm-status').value = it.comprado ? 'si' : 'no';
+  document.getElementById('cm-nota').value = it.nota || '';
+  renderCompraOptionRows();
+  document.getElementById('compra-modal-overlay').classList.add('open');
+}
+function closeCompraModal(){
+  document.getElementById('compra-modal-overlay').classList.remove('open');
+  editingCompraIndex = null;
+}
+function renderCompraOptionRows(){
+  const it = appState.compra[editingCompraIndex];
+  if(!it) return;
+  compraOptions(it);
+  if(!it.opciones.length) it.opciones.push({link:'', precio:'', nota:''});
+  document.getElementById('cm-options').innerHTML = it.opciones.map((o,idx)=>`
+    <div class="compra-option-row">
+      <div class="compra-option-head"><span>Opción ${idx+1}</span><button class="btn-icon" onclick="removeCompraOptionRow(${idx})" title="Quitar opción">✕</button></div>
+      <div class="compra-option-grid">
+        <input id="cm-opt-link-${idx}" placeholder="Link de compra" value="${htmlSafe(o.link||'')}">
+        <input id="cm-opt-price-${idx}" placeholder="Precio €" value="${htmlSafe(o.precio||'')}">
+        <textarea id="cm-opt-note-${idx}" placeholder="Nota de esta opción: tienda, entrega, calidad, diferencia...">${htmlSafe(o.nota||'')}</textarea>
+      </div>
+    </div>`).join('');
+}
+function collectCompraOptionRows(){
+  const rows = [...document.querySelectorAll('#cm-options .compra-option-row')];
+  return rows.map((_,idx)=>({
+    link: document.getElementById(`cm-opt-link-${idx}`)?.value?.trim() || '',
+    precio: document.getElementById(`cm-opt-price-${idx}`)?.value?.trim() || '',
+    nota: document.getElementById(`cm-opt-note-${idx}`)?.value?.trim() || ''
+  })).filter(o=>o.link || o.precio || o.nota);
+}
+function addCompraOptionRow(){
+  const it = appState.compra[editingCompraIndex];
+  if(!it) return;
+  it.opciones = collectCompraOptionRows();
+  it.opciones.push({link:'', precio:'', nota:''});
+  renderCompraOptionRows();
+}
+function removeCompraOptionRow(idx){
+  const it = appState.compra[editingCompraIndex];
+  if(!it) return;
+  it.opciones = collectCompraOptionRows();
+  it.opciones.splice(idx,1);
+  renderCompraOptionRows();
+}
+function saveCompraModal(){
+  const it = appState.compra[editingCompraIndex];
+  if(!it) return;
+  const txt = document.getElementById('cm-text')?.value?.trim();
+  if(!txt){ showNotif('El artículo necesita nombre'); return; }
+  it.texto = txt;
+  it.roomId = document.getElementById('cm-room')?.value || '';
+  it.comprado = document.getElementById('cm-status')?.value === 'si';
+  it.nota = document.getElementById('cm-nota')?.value?.trim() || '';
+  it.opciones = collectCompraOptionRows();
+  closeCompraModal(); save(); renderGlobalCompra(); renderPanel(); updateHeader(); showNotif('Compra guardada ✓');
+}
+function deleteCompraFromModal(){
+  if(editingCompraIndex===null) return;
+  appState.compra.splice(editingCompraIndex,1);
+  closeCompraModal(); save(); renderGlobalCompra(); renderPanel(); updateHeader(); showNotif('Compra eliminada');
 }
 
 // ── GLOBAL COMPRA ──────────────────────────────────────────────
@@ -2387,12 +3501,7 @@ function renderGlobalCompra() {
       </div>
       ${items.map(it => {
         const i = appState.compra.indexOf(it);
-        return `<div class="compra-item ${it.comprado?'compra-done':''}">
-          <input type="checkbox" class="task-check" ${it.comprado?'checked':''} onchange="globalToggleCompra(${i})">
-          <span class="compra-text">${it.texto}</span>
-          ${it.precio?`<span class="compra-price">${parseFloat(it.precio).toFixed(0)}€</span>`:''}
-          <button class="btn-icon" onclick="globalDeleteCompra(${i})">✕</button>
-        </div>`;
+        return renderCompraItem(it, i, true);
       }).join('')}
     </div>`;
   });
@@ -2407,12 +3516,7 @@ function renderGlobalCompra() {
       <div class="gcompra-room-header"><div class="gcompra-room-dot" style="background:var(--muted)"></div>Sin habitación asignada</div>
       ${sinRoomFiltered.map(it => {
         const i = appState.compra.indexOf(it);
-        return `<div class="compra-item ${it.comprado?'compra-done':''}">
-          <input type="checkbox" class="task-check" ${it.comprado?'checked':''} onchange="globalToggleCompra(${i})">
-          <span class="compra-text">${it.texto}</span>
-          ${it.precio?`<span class="compra-price">${parseFloat(it.precio).toFixed(0)}€</span>`:''}
-          <button class="btn-icon" onclick="globalDeleteCompra(${i})">✕</button>
-        </div>`;
+        return renderCompraItem(it, i, true);
       }).join('')}
     </div>`;
   }
@@ -2430,7 +3534,6 @@ function renderGlobalCompra() {
           <option value="">Sin habitación</option>
           ${ROOMS_DEF.map(r=>`<option value="${r.id}">${r.name}</option>`).join('')}
         </select>
-        <input id="gnc-price" type="number" placeholder="Precio €">
       </div>
       <button class="btn-primary" onclick="addGlobalCompra()">+ Añadir a la lista</button>
     </div>
@@ -2456,11 +3559,123 @@ function addGlobalCompra() {
     id: uid(),
     roomId: document.getElementById('gnc-room')?.value || '',
     texto: txt,
-    precio: document.getElementById('gnc-price')?.value || '',
+    precio: '',
+    nota: '',
+    opciones: [],
     comprado: false
   });
   save(); renderGlobalCompra(); updateHeader(); showNotif('Artículo añadido ✓');
 }
+
+
+// ── ¿QUÉ TENEMOS? ──────────────────────────────────────────────
+let editingTenemosIndex = null;
+
+function renderTenemosRoom(room){
+  const list=document.getElementById('tenemos-room-list');
+  if(!list) return;
+  const items=(appState.tenemos||[]).filter(x=>!x.trash && (x.roomIds||[]).includes(room.id));
+  if(!items.length){ list.innerHTML='<div class="room-mini-empty">No hay cosas asignadas a esta habitación.</div>'; return; }
+  list.innerHTML='<div class="room-mini-list">'+items.map(it=>renderTenemosItem(it, appState.tenemos.indexOf(it))).join('')+'</div>';
+}
+function renderTenemos(){
+  if(!appState.tenemos) appState.tenemos=[];
+  const filter = appState.globalFilter.tenemos || 'todas';
+  const filters = ['todas','sin asignar','tirar'];
+  const fb=document.getElementById('filter-bar-tenemos');
+  if(fb) fb.innerHTML = filters.map(f=>`<button class="filter-btn ${filter===f?'active':''}" onclick="setGlobalFilter('tenemos','${f}')">${f}</button>`).join('');
+  const total=appState.tenemos.length;
+  const tirar=appState.tenemos.filter(x=>x.trash).length;
+  const asignadas=appState.tenemos.filter(x=>!x.trash && x.roomIds && x.roomIds.length).length;
+  const st=document.getElementById('gstats-tenemos');
+  if(st) st.innerHTML=`<div class="gstat-pill"><strong>${total}</strong> cosas</div><div class="gstat-pill"><strong style="color:#7cf7d4">${asignadas}</strong> asignadas</div><div class="gstat-pill"><strong style="color:#e8b84b">${total-asignadas-tirar}</strong> sin asignar</div><div class="gstat-pill"><strong style="color:#e05050">${tirar}</strong> para tirar</div>`;
+  let items=[...appState.tenemos];
+  if(filter==='sin asignar') items=items.filter(x=>!x.trash && (!x.roomIds||!x.roomIds.length));
+  if(filter==='tirar') items=items.filter(x=>x.trash);
+  renderNuevoTenemosDestino();
+  const list=document.getElementById('tenemos-list');
+  if(!list) return;
+  if(!items.length){ list.innerHTML=`<div class="empty-state">No hay cosas${filter!=='todas'?' en esta categoría':''}.</div>`; updateTenemosHeader(); return; }
+  list.innerHTML=items.map(it=>renderTenemosItem(it, appState.tenemos.indexOf(it))).join('');
+  updateTenemosHeader();
+}
+function renderTenemosItem(it,i){
+  const roomIds=it.roomIds||[];
+  const chips = it.trash ? `<span class="tenemos-room-chip tenemos-trash-chip">🗑 tirar</span>` : (roomIds.length?roomIds.map(rid=>{const r=ROOMS_DEF.find(x=>x.id===rid);return r?`<span class="tenemos-room-chip" style="color:${r.color}">${r.shortName||r.name}</span>`:''}).join(''):`<span class="tenemos-room-chip">sin asignar</span>`);
+  return `<div class="tenemos-item">
+    <div style="flex:1;min-width:0">
+      <div class="tenemos-name" onclick="openTenemosModal(${i})">${htmlSafe(it.texto||'Sin nombre')}</div>
+      ${it.nota?`<div class="tenemos-note">${htmlSafe(it.nota)}</div>`:''}
+      <div class="tenemos-meta">${chips}</div>
+    </div>
+    <button class="btn-icon" onclick="openTenemosModal(${i})" title="Editar">✎</button>
+  </div>`;
+}
+let nuevoTenemosDestinoActual = '';
+function renderNuevoTenemosDestino(){
+  const wrap=document.getElementById('nt-rooms'); if(!wrap) return;
+  const roomBtns = ROOMS_DEF.map(r=>`<button type="button" class="tenemos-room-option ${nuevoTenemosDestinoActual===r.id?'selected':''}" onclick="selectNuevoTenemosDestino('${r.id}')"><span>${r.shortName||r.name}</span></button>`).join('');
+  wrap.innerHTML = roomBtns + `<button type="button" class="tenemos-room-option trash ${nuevoTenemosDestinoActual==='trash'?'selected':''}" onclick="selectNuevoTenemosDestino('trash')"><span>🗑 Tirar</span></button>`;
+}
+function selectNuevoTenemosDestino(destino){
+  nuevoTenemosDestinoActual = (nuevoTenemosDestinoActual===destino) ? '' : destino;
+  renderNuevoTenemosDestino();
+}
+function addTenemos(){
+  const txt=document.getElementById('nt-text')?.value?.trim();
+  const nota=document.getElementById('nt-nota')?.value?.trim()||'';
+  if(!txt){ showNotif('Escribe qué cosa es'); return; }
+  const trash = nuevoTenemosDestinoActual === 'trash';
+  const rooms = (!trash && nuevoTenemosDestinoActual) ? [nuevoTenemosDestinoActual] : [];
+  appState.tenemos.push({id:uid(), texto:txt, nota, roomIds:rooms, trash});
+  logActivity('Cosa añadida a ¿Qué tenemos?', txt + (trash ? ' · tirar' : (rooms[0] ? ' · ' + roomName(rooms[0]) : ' · sin asignar')), {section:'tenemos', roomId:rooms[0]||''});
+  const t=document.getElementById('nt-text'); if(t) t.value=''; const n=document.getElementById('nt-nota'); if(n) n.value='';
+  nuevoTenemosDestinoActual='';
+  save(); renderTenemos(); showNotif('Añadido ✓');
+}
+let tenemosDestinoActual = '';
+function renderTenemosDestinos(){
+  const wrap=document.getElementById('tm-rooms');
+  if(!wrap) return;
+  const roomBtns = ROOMS_DEF.map(r=>`<button type="button" class="tenemos-room-option ${tenemosDestinoActual===r.id?'selected':''}" onclick="selectTenemosDestino('${r.id}')"><span>${r.shortName||r.name}</span></button>`).join('');
+  wrap.innerHTML = roomBtns + `<button type="button" class="tenemos-room-option trash ${tenemosDestinoActual==='trash'?'selected':''}" onclick="selectTenemosDestino('trash')"><span>🗑 Tirar</span></button>`;
+}
+function selectTenemosDestino(destino){
+  tenemosDestinoActual = (tenemosDestinoActual===destino) ? '' : destino;
+  renderTenemosDestinos();
+}
+function openTenemosModal(i){
+  editingTenemosIndex=i;
+  const it=appState.tenemos[i]; if(!it) return;
+  document.getElementById('tm-text').value=it.texto||'';
+  document.getElementById('tm-nota').value=it.nota||'';
+  tenemosDestinoActual = it.trash ? 'trash' : ((it.roomIds||[])[0] || '');
+  renderTenemosDestinos();
+  document.getElementById('tenemos-modal-overlay')?.classList.add('open');
+}
+function closeTenemosModal(){ document.getElementById('tenemos-modal-overlay')?.classList.remove('open'); editingTenemosIndex=null; tenemosDestinoActual=''; }
+function saveTenemosModal(){
+  const i=editingTenemosIndex; if(i===null || !appState.tenemos[i]) return;
+  const before={...appState.tenemos[i], roomIds:[...(appState.tenemos[i].roomIds||[])]};
+  const trash = tenemosDestinoActual === 'trash';
+  const rooms = (!trash && tenemosDestinoActual) ? [tenemosDestinoActual] : [];
+  const newText=document.getElementById('tm-text').value.trim()||'Sin nombre';
+  const newNota=document.getElementById('tm-nota').value.trim();
+  appState.tenemos[i]={...appState.tenemos[i], texto:newText, nota:newNota, roomIds:rooms, trash};
+  const beforeDest = before.trash ? 'tirar' : ((before.roomIds||[])[0] ? roomName((before.roomIds||[])[0]) : 'sin asignar');
+  const afterDest = trash ? 'tirar' : (rooms[0] ? roomName(rooms[0]) : 'sin asignar');
+  const changed = before.texto!==newText || (before.nota||'')!==newNota || beforeDest!==afterDest;
+  if(changed) logActivity('Cosa editada en ¿Qué tenemos?', newText + ' · ' + beforeDest + ' → ' + afterDest, {section:'tenemos', roomId:rooms[0]||((before.roomIds||[])[0]||'')});
+  save(); closeTenemosModal(); renderTenemos(); if(appState.activeRoom) renderPanel(); showNotif('Guardado ✓');
+}
+function deleteTenemosFromModal(){
+  const i=editingTenemosIndex; if(i===null || !appState.tenemos[i]) return;
+  const removed=appState.tenemos[i];
+  const rid=(removed.roomIds||[])[0]||'';
+  logActivity('Cosa eliminada de ¿Qué tenemos?', removed.texto||'Sin nombre', {section:'tenemos', roomId:rid});
+  appState.tenemos.splice(i,1); save(); closeTenemosModal(); renderTenemos(); if(appState.activeRoom) renderPanel(); showNotif('Eliminado');
+}
+function updateTenemosHeader(){ const el=document.getElementById('stat-tenemos'); if(el) el.textContent=(appState.tenemos||[]).length; }
 
 // ── HERRAMIENTAS ──────────────────────────────────────────────
 
@@ -2807,10 +4022,20 @@ function renderGantt() {
 function saveTaskDateById(id, startDate, durDays){
   const f=findTaskIndexById(id); if(!f) return;
   const t=appState.tasks[f.roomId][f.idx];
+  const beforeFecha=t.fecha||'';
+  const beforeFin=t.fechaFin||'';
+  const beforeDur=t.duracion||'';
   const d=new Date(startDate); d.setHours(0,0,0,0);
   const dur=Math.max(1, parseInt(durDays || t.duracion || 1));
   const e=new Date(d); e.setDate(e.getDate()+dur-1);
-  t.fecha=d.toISOString().slice(0,10); t.fechaFin=e.toISOString().slice(0,10); t.duracion=dur;
+  const afterFecha=d.toISOString().slice(0,10);
+  const afterFin=e.toISOString().slice(0,10);
+  t.fecha=afterFecha; t.fechaFin=afterFin; t.duracion=dur;
+  if(beforeFecha!==afterFecha || beforeFin!==afterFin || String(beforeDur)!==String(dur)){
+    const beforeTxt = beforeFecha ? `${beforeFecha}${beforeFin && beforeFin!==beforeFecha ? ' → '+beforeFin : ''}${beforeDur ? ' · '+beforeDur+'d' : ''}` : 'sin fecha';
+    const afterTxt = `${afterFecha}${afterFin && afterFin!==afterFecha ? ' → '+afterFin : ''} · ${dur}d`;
+    logActivity('Cronograma actualizado', `${t.texto||'Tarea sin título'} · ${beforeTxt} → ${afterTxt}`, {section:'cronograma', roomId:f.roomId});
+  }
   save(); renderGantt(); updateHeader(); updateOverview(); updateFloorPlan();
 }
 function enableGanttInteractions(days, DAY_W){
@@ -2958,7 +4183,23 @@ window.globalChangeState = globalChangeState;
 window.globalDeleteTask = globalDeleteTask;
 window.globalToggleCompra = globalToggleCompra;
 window.globalDeleteCompra = globalDeleteCompra;
+window.openCompraModal = openCompraModal;
+window.closeCompraModal = closeCompraModal;
+window.addCompraOptionRow = addCompraOptionRow;
+window.removeCompraOptionRow = removeCompraOptionRow;
+window.saveCompraModal = saveCompraModal;
+window.deleteCompraFromModal = deleteCompraFromModal;
 window.addGlobalCompra = addGlobalCompra;
+window.renderTenemos = renderTenemos;
+window.addTenemos = addTenemos;
+window.renderNuevoTenemosDestino = renderNuevoTenemosDestino;
+window.selectNuevoTenemosDestino = selectNuevoTenemosDestino;
+window.openTenemosModal = openTenemosModal;
+window.selectTenemosDestino = selectTenemosDestino;
+window.renderTenemosDestinos = renderTenemosDestinos;
+window.closeTenemosModal = closeTenemosModal;
+window.saveTenemosModal = saveTenemosModal;
+window.deleteTenemosFromModal = deleteTenemosFromModal;
 window.addHerramienta = addHerramienta;
 window.changeHerr = changeHerr;
 window.deleteHerr = deleteHerr;
@@ -2966,11 +4207,13 @@ window.deleteHerr = deleteHerr;
 window.selectRoom = selectRoom;
 window.closeRoom = closeRoom;
 window.setTab = setTab;
+window.toggleRoomCompletedTasks = toggleRoomCompletedTasks;
 window.saveNotes = saveNotes;
 
 window.toggleTask = toggleTask;
 window.changeState = changeState;
 window.deleteTask = deleteTask;
+window.moveTaskToTrash = moveTaskToTrash;
 window.addTask = addTask;
 window.toggleTaskForm = toggleTaskForm;
 
@@ -2983,6 +4226,7 @@ window.toggleCompraForm = toggleCompraForm;
 updateHeader();
 updateOverview();
 updateFloorPlan();
+updateTenemosHeader();
 </script>
 </body>
 </html>
