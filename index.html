@@ -1367,6 +1367,25 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
 .room-question-title{font-weight:700;color:#fff;font-size:.88rem;line-height:1.25}.room-question-meta{margin-top:4px;color:var(--muted);font-size:.72rem;font-family:'DM Mono',monospace}.room-question-answer{margin-top:8px;color:var(--muted);font-size:.78rem;line-height:1.35}
 @media(max-width:900px){body.room-selected #room-view.room-expanded .panel-body{grid-template-columns:1fr!important}body.room-selected #room-view.room-expanded #tc-compra,body.room-selected #room-view.room-expanded #tc-tenemos{grid-column:1 / -1}}
 
+
+
+/* v33: barra móvil en dos filas + usuario junto al logo + sin  */
+@media(max-width:700px){
+  header{display:grid!important;grid-template-columns:1fr auto!important;align-items:center!important;gap:8px!important;}
+  .logo{grid-column:1;grid-row:1;white-space:nowrap;}
+  #current-user-pill{grid-column:2;grid-row:1;margin-left:0!important;max-width:46vw;overflow:hidden;text-overflow:ellipsis;padding:7px 9px;font-size:.68rem;}
+  #current-user-name{max-width:26vw;overflow:hidden;text-overflow:ellipsis;display:inline-block;vertical-align:bottom;}
+  .global-nav{grid-column:1 / -1;grid-row:2;display:grid!important;grid-template-columns:repeat(3,1fr);gap:6px;width:100%;overflow:visible!important;padding:0!important;border:0!important;background:transparent!important;}
+  .global-nav .gnav-btn{min-width:0;width:100%;justify-content:center;padding:7px 4px;border-radius:14px;white-space:normal;min-height:44px;}
+  .global-nav .gnav-main{font-size:.68rem;line-height:1.05;}
+  .global-nav .gnav-count{font-size:.62rem;margin-left:0;}
+  #gnav-personas{display:none!important;}
+  #gnav-tareas{order:1} #gnav-compra{order:2} #gnav-tenemos{order:3}
+  #gnav-herramientas{order:4} #gnav-preguntas{order:5} #gnav-gantt{order:6}
+}
+.user-admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.user-admin-actions .btn-secondary{flex:1;min-width:130px}
+
 </style>
 </head>
 <body class="home-compact">
@@ -1374,7 +1393,6 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
 <header>
   <div class="logo">REFORMA<span>·</span>GT</div>
   <div class="global-nav">
-    <button class="gnav-btn" id="gnav-mando" onclick="openGlobal('mando')"><span class="gnav-main">Centro de mando</span></button>
     <button class="gnav-btn" id="gnav-tareas" onclick="openGlobal('tareas')"><span class="gnav-main">Tareas</span><span class="gnav-count" id="stat-tasks">0/0</span></button>
     <button class="gnav-btn" id="gnav-compra" onclick="openGlobal('compra')"><span class="gnav-main">Compras</span><span class="gnav-count" id="stat-compra">0/0</span></button>
     <button class="gnav-btn" id="gnav-tenemos" onclick="openGlobal('tenemos')"><span class="gnav-main">¿Qué tenemos?</span><span class="gnav-count" id="stat-tenemos">0</span></button>
@@ -1382,8 +1400,6 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
     <button class="gnav-btn" id="gnav-preguntas" onclick="openGlobal('preguntas')"><span class="gnav-main">Preguntas</span><span class="gnav-count" id="stat-preguntas">0/0</span></button>
     <button class="gnav-btn" id="gnav-personas" onclick="openGlobal('personas')"><span class="gnav-main">Personas</span></button>
     <button class="gnav-btn" id="gnav-gantt" onclick="openGlobal('gantt')"><span class="gnav-main">Cronograma</span></button>
-    <button class="gnav-btn admin-only" id="gnav-registro" onclick="openGlobal('registro')"><span class="gnav-main">Registro</span></button>
-    <button class="gnav-btn trash-nav admin-only" id="gnav-papelera" onclick="openGlobal('papelera')" title="Papelera"><span class="gnav-main">🗑</span><span class="gnav-count" id="trash-count">0</span></button>
   </div>
   <button class="user-pill" id="current-user-pill" onclick="openGlobal('mizona')" title="Abrir mi zona">👤 <b id="current-user-name">Elegir usuario</b> <span class="bell" id="current-user-alerts"></span></button>
 </header>
@@ -1630,18 +1646,7 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
 </div>
 
 
-<!-- GLOBAL: CENTRO DE MANDO -->
-<div class="global-overlay" id="overlay-mando">
-  <div class="global-overlay-header">
-    <span class="global-overlay-title">CENTRO DE MANDO · OBRA VIVA</span>
-    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <button class="btn-secondary" onclick="renderCommandCenter()">Actualizar diagnóstico</button>
-      <button class="btn-primary" onclick="openNewTaskModal()">+ Nueva tarea completa</button>
-      <button class="btn-icon" onclick="closeGlobal('mando')" style="font-size:18px;color:var(--muted)">✕</button>
-    </div>
-  </div>
-  <div class="global-overlay-body" id="command-body"></div>
-</div>
+<!--  eliminado -->
 
 <!-- GLOBAL: TODAS LAS TAREAS -->
 <div class="global-overlay" id="overlay-tareas">
@@ -2075,6 +2080,7 @@ function updateHeader(){
   if(compraStat) compraStat.textContent=s.cb+'/'+s.cp;
   updateTenemosHeader();
   updatePreguntasHeader();
+  const trashUser=document.getElementById('trash-count-user'); if(trashUser) trashUser.textContent=String((appState.deletedTasks||[]).length);
   renderCurrentUserUI();
     updateAdminVisibility();
 }
@@ -2636,7 +2642,6 @@ function renderEverything(){
   if(document.getElementById('overlay-tareas')?.classList.contains('open')) renderGlobalTareas();
   if(document.getElementById('overlay-compra')?.classList.contains('open')) renderGlobalCompra();
   if(document.getElementById('overlay-tenemos')?.classList.contains('open')) renderTenemos();
-  if(document.getElementById('overlay-mando')?.classList.contains('open')) renderCommandCenter();
   if(document.getElementById('overlay-preguntas')?.classList.contains('open')) renderPreguntas();
   if(document.getElementById('overlay-personas')?.classList.contains('open')) renderPersonas();
   if(document.getElementById('overlay-mizona')?.classList.contains('open')) renderMyZone();
@@ -2652,7 +2657,7 @@ function renderOverviewWorkOS(){
   const doing=tasks.filter(t=>t.estado==='en curso').length;
   const overdue=tasks.filter(t=>t.fecha&&t.estado!=='hecho'&&daysUntil(t.fechaFin||t.fecha)<0).length;
   const blocked=tasks.filter(t=>{const rels=t.relaciones&&t.relaciones.length?t.relaciones:(t.depId?[{tipo:'after',taskId:t.depId}]:[]);return rels.some(r=>r.tipo==='after'&&tasks.find(x=>x.id===r.taskId&&x.estado!=='hecho'));}).length;
-  el.innerHTML=`<div class="work-os"><div class="work-os-head"><div><div class="work-os-title">Sistema operativo de obra</div><div style="color:var(--muted);font-size:.82rem;margin-top:4px">Lo que antes era una lista ahora te dice qué ejecutar, qué bloquea y qué falta colocar.</div></div><button class="btn-primary" onclick="openNewTaskModal()">+ Tarea</button></div><div class="work-os-grid"><div class="work-tile" onclick="openGlobal('gantt')"><b>${sinFecha}</b><span>sin cronograma</span><p>Arrástralas al Gantt o pon fecha/duración desde edición.</p></div><div class="work-tile" onclick="openGlobal('mando')"><b>${blocked}</b><span>bloqueadas</span><p>Dependencias pendientes que pueden parar la obra.</p></div><div class="work-tile" onclick="openGlobal('tareas')"><b>${doing}</b><span>en curso</span><p>Producción abierta ahora mismo.</p></div><div class="work-tile" onclick="openGlobal('mando')"><b>${overdue}</b><span>vencidas</span><p>Alertas rojas para corregir planificación.</p></div></div></div>`;
+  el.innerHTML=`<div class="work-os"><div class="work-os-head"><div><div class="work-os-title">Resumen de obra</div><div style="color:var(--muted);font-size:.82rem;margin-top:4px">Lo que antes era una lista ahora te dice qué ejecutar, qué bloquea y qué falta colocar.</div></div><button class="btn-primary" onclick="openNewTaskModal()">+ Tarea</button></div><div class="work-os-grid"><div class="work-tile" onclick="openGlobal('gantt')"><b>${sinFecha}</b><span>sin cronograma</span><p>Arrástralas al Gantt o pon fecha/duración desde edición.</p></div><div class="work-tile" onclick="openGlobal('tareas')"><b>${blocked}</b><span>bloqueadas</span><p>Dependencias pendientes que pueden parar la obra.</p></div><div class="work-tile" onclick="openGlobal('tareas')"><b>${doing}</b><span>en curso</span><p>Producción abierta ahora mismo.</p></div><div class="work-tile" onclick="openGlobal('tareas')"><b>${overdue}</b><span>vencidas</span><p>Alertas rojas para corregir planificación.</p></div></div></div>`;
 }
 
 // ── CENTRO DE MANDO DE OBRA ─────────────────────────────────────
@@ -2853,7 +2858,7 @@ function renderCommandCenter(){
   body.innerHTML=`
     <div class="command-focus">
       <div class="command-nextstep">
-        <div class="command-eyebrow">centro de mando real</div>
+        <div class="command-eyebrow">resumen de obra</div>
         <h2>Prioridad ahora: <span class="${riskClass}">${mainAdvice}</span></h2>
         <p>Las incidencias ya no se quedan aisladas: pueden vincularse a una tarea, convertirse en tarea nueva, abrir su edición o llevarte al cronograma.</p>
         <div class="command-lane">
@@ -3091,7 +3096,7 @@ function renderMyZone(){
   const openQs=qs.filter(q=>!q.resuelta);
   const taskHtml=openTasks.map(t=>`<div class="task-item ${t.estado==='hecho'?'task-done':''}"><div class="task-state-rail"></div><div class="task-content"><div class="task-text">${htmlSafe(t.texto)}</div><div class="task-details"><div class="task-detail-row"><div class="task-detail-label">Habitación</div><div class="task-detail-value">${htmlSafe(t._room?.name||'')}</div></div><div class="task-detail-row"><div class="task-detail-label">Estado</div><div class="task-detail-value"><span class="dep-badge task-status-pill">${htmlSafe(t.estado||'pendiente')}</span></div></div><div class="task-detail-row"><div class="task-detail-label">Fecha</div><div class="task-detail-value">${htmlSafe(t.fecha||'Sin fecha')}${t.fechaFin?' → '+htmlSafe(t.fechaFin):''}</div></div></div></div><div class="task-actions"><button class="btn-secondary" onclick="editTaskById('${t.id}')">Editar</button></div></div>`).join('') || '<div class="empty-state">No tienes tareas pendientes asignadas.</div>';
   const qHtml=openQs.map(q=>{ const room=ROOMS_DEF.find(r=>r.id===q.roomId); const asker=q.createdBy?personName(q.createdBy):''; return `<div class="question-card mine-unread"><div class="question-head"><div><div class="question-title">${htmlSafe(q.texto)}</div><div class="question-meta">${htmlSafe(q.fecha||'')}${room?' · '+htmlSafe(room.name):''}${asker?' · ':''}${asker?`<span class="asker-chip">${htmlSafe(asker)} te ha hecho una pregunta</span>`:''}</div></div><div><span class="question-badge ${htmlSafe(q.prioridad||'media')}">${htmlSafe(q.prioridad||'media')}</span> <span class="question-badge">pendiente</span></div></div><textarea class="question-answer" placeholder="Responder..." onblur="savePreguntaRespuesta('${q.id}',this.value)">${htmlSafe(q.respuesta||'')}</textarea><div class="question-actions"><button class="btn-secondary" onclick="togglePregunta('${q.id}')">Marcar respondida</button>${q.taskId?`<button class="btn-secondary" onclick="editLinkedTaskFromQuestion('${q.taskId}')">Ver tarea</button>`:''}</div></div>`; }).join('') || '<div class="empty-state">No tienes preguntas pendientes.</div>';
-  el.innerHTML=`<div class="my-zone-head"><div><div class="my-zone-title">Hola, ${htmlSafe(p.name)}</div><div class="my-zone-sub">Este dispositivo entra automáticamente como tú. Puedes cambiar de usuario desde aquí.</div></div><button class="btn-secondary" onclick="openUserSelector(false)">Cambiar usuario</button></div><div class="my-zone-grid"><div class="my-zone-stat"><b>${openTasks.length}</b><span>tareas pendientes</span></div><div class="my-zone-stat"><b>${openQs.length}</b><span>preguntas para ti</span></div><div class="my-zone-stat"><b>${tasks.filter(t=>t.estado==='hecho').length}</b><span>tareas hechas</span></div></div><div class="my-zone-section"><h3>Mis preguntas</h3>${qHtml}</div><div class="my-zone-section"><h3>Mis tareas</h3>${taskHtml}</div>`;
+  el.innerHTML=`<div class="my-zone-head"><div><div class="my-zone-title">Hola, ${htmlSafe(p.name)}</div><div class="my-zone-sub">Este dispositivo entra automáticamente como tú. Puedes cambiar de usuario desde aquí.</div></div><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><button class="btn-secondary" onclick="openUserSelector(false)">Cambiar usuario</button><button class="btn-secondary" onclick="openGlobal('personas')">Ver personas</button></div></div>${isAdmin()?`<div class="user-admin-actions"><button class="btn-secondary" onclick="openGlobal('registro')">Registro</button><button class="btn-secondary" onclick="openGlobal('papelera')">Papelera <span id="trash-count-user"></span></button></div>`:''}<div class="my-zone-grid"><div class="my-zone-stat"><b>${openTasks.length}</b><span>tareas pendientes</span></div><div class="my-zone-stat"><b>${openQs.length}</b><span>preguntas para ti</span></div><div class="my-zone-stat"><b>${tasks.filter(t=>t.estado==='hecho').length}</b><span>tareas hechas</span></div></div><div class="my-zone-section"><h3>Mis preguntas</h3>${qHtml}</div><div class="my-zone-section"><h3>Mis tareas</h3>${taskHtml}</div>`;
 }
 window.openUserSelector=openUserSelector;
 window.closeUserSelector=closeUserSelector;
@@ -3188,7 +3193,7 @@ window.deleteTaskForever=deleteTaskForever;
 window.emptyTaskTrash=emptyTaskTrash;
 
 // ── REGISTRO DE ACTIVIDAD ─────────────────────────────────────────
-function sectionLabel(s){ return ({tareas:'Tareas',compras:'Compras',preguntas:'Preguntas',tenemos:'¿Qué tenemos?',notas:'Notas',herramientas:'Herramientas',incidencias:'Incidencias',registro:'Registro',otros:'Otros'})[s] || (s||'Otros'); }
+function sectionLabel(s){ return ({tareas:'Tareas',compras:'Compras',preguntas:'Preguntas',tenemos:'¿Qué tenemos?',notas:'Notas',herramientas:'Herramientas',incidencias:'Incidencias',cronograma:'Cronograma',registro:'Registro',otros:'Otros'})[s] || (s||'Otros'); }
 function renderActivityFilters(){
   const host=document.getElementById('activity-log-filters'); if(!host) return;
   const f=appState.activityFilters || {user:'',room:'',section:'',from:'',to:''};
@@ -3242,13 +3247,12 @@ window.renderActivityLog=renderActivityLog; window.clearActivityLog=clearActivit
 
 function openGlobal(which) {
   if((which==='papelera'||which==='registro') && !adminGuard()) return;
-  ['mando','tareas','compra','tenemos','herramientas','preguntas','personas','mizona','gantt','registro','papelera'].forEach(w => {
+  ['tareas','compra','tenemos','herramientas','preguntas','personas','mizona','gantt','registro','papelera'].forEach(w => {
     document.getElementById('overlay-'+w).classList.toggle('open', w===which);
     const btn = document.getElementById('gnav-'+w);
     if(btn) btn.classList.toggle('active', w===which);
   });
   document.getElementById('current-user-pill')?.classList.toggle('active', which==='mizona');
-  if(which==='mando') renderCommandCenter();
   if(which==='tareas') renderGlobalTareas();
   if(which==='compra') renderGlobalCompra();
   if(which==='tenemos') renderTenemos();
@@ -3262,7 +3266,7 @@ function openGlobal(which) {
 }
 
 function closeGlobal(which) {
-  document.getElementById('overlay-'+which).classList.remove('open');
+  document.getElementById('overlay-'+which)?.classList.remove('open');
   const btn = document.getElementById('gnav-'+which);
   if(btn) btn.classList.remove('active');
   if(which==='mizona') document.getElementById('current-user-pill')?.classList.remove('active');
@@ -3344,7 +3348,6 @@ function renderGlobalTareas() {
 
 function setGlobalFilter(which, val) {
   appState.globalFilter[which] = val;
-  if(which==='mando') renderCommandCenter();
   if(which==='tareas') renderGlobalTareas();
   if(which==='compra') renderGlobalCompra();
   if(which==='tenemos') renderTenemos();
