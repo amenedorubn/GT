@@ -1462,8 +1462,17 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
 .gcal-dot{width:8px;height:8px;border-radius:999px;background:#777;box-shadow:0 0 14px currentColor}.gcal-dot.ok{background:var(--ok);color:var(--ok)}.gcal-dot.warn{background:var(--warn);color:var(--warn)}.gcal-dot.bad{background:var(--danger);color:var(--danger)}
 .calendar-task-time{font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);background:#0005;border:1px solid #ffffff10;border-radius:999px;padding:2px 5px;white-space:nowrap}
 .gcal-badge{font-family:'DM Mono',monospace;font-size:.55rem;color:#071017;background:linear-gradient(135deg,#8ab4f8,#34a853);border-radius:999px;padding:2px 5px;font-weight:700}
+.gcal-fixed-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.gcal-fixed-note{font-size:.72rem;color:var(--muted);line-height:1.35}
+.gcal-access-box{border:1px solid #ffffff12;background:#00000022;border-radius:16px;padding:10px;display:grid;gap:8px}
+.gcal-access-row{display:grid;grid-template-columns:minmax(180px,1fr) auto;gap:8px;align-items:center}
+.gcal-access-row input{background:#0b111a;border:1px solid #ffffff18;color:var(--text);border-radius:12px;padding:10px 11px;font-size:.82rem}
+.gcal-request-list{display:flex;flex-wrap:wrap;gap:6px}
+.gcal-request-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid #ffffff14;background:#ffffff08;border-radius:999px;padding:6px 9px;font-family:'DM Mono',monospace;font-size:.64rem;color:var(--muted)}
+.gcal-admin-only{display:none}
+body.is-admin .gcal-admin-only{display:flex}
 @media(max-width:980px){.gcal-controls{grid-template-columns:1fr 1fr}.gcal-controls button{width:100%}}
-@media(max-width:640px){.gcal-controls{grid-template-columns:1fr}.gcal-panel-head{align-items:flex-start}}
+@media(max-width:640px){.gcal-controls{grid-template-columns:1fr}.gcal-panel-head{align-items:flex-start}.gcal-access-row{grid-template-columns:1fr}.gcal-fixed-actions button{flex:1}}
 
 
 /* GALERÍA GLOBAL DE FOTOS */
@@ -1953,17 +1962,25 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
   <div class="global-overlay-body" style="display:flex;flex-direction:column;height:calc(100% - 60px);padding-bottom:0">
     <div class="gcal-panel" id="gcal-panel">
       <div class="gcal-panel-head">
-        <div><div class="gcal-panel-title">Google Calendar</div><div class="gcal-panel-sub">Sincronización bidireccional por OAuth. Para cambios desde Google, refresca automáticamente cada 30 segundos mientras esta pestaña está abierta.</div></div>
-        <div class="gcal-status"><span class="gcal-dot" id="gcal-dot"></span><span id="gcal-status-text">Sin configurar</span></div>
+        <div>
+          <div class="gcal-panel-title">Google Calendar · Reforma GT</div>
+          <div class="gcal-panel-sub">Calendario fijo de la reforma. Nadie puede modificar la API, el enlace ni el Calendar ID desde la web.</div>
+        </div>
+        <div class="gcal-status"><span class="gcal-dot" id="gcal-dot"></span><span id="gcal-status-text">Calendario fijo configurado</span></div>
       </div>
-      <div class="gcal-controls">
-        <div><label>Client ID OAuth</label><input id="gcal-client-id" placeholder="xxxxx.apps.googleusercontent.com"></div>
-        <div><label>API Key</label><input id="gcal-api-key" placeholder="AIza..." type="password"></div>
-        <div><label>Calendar ID</label><input id="gcal-calendar-id" placeholder="primary o ID del calendario"></div>
-        <button class="btn-secondary" onclick="saveGoogleCalendarSettings()">Guardar</button>
-        <button class="btn-primary" id="gcal-connect-btn" onclick="connectGoogleCalendar()">Conectar</button>
+      <div class="gcal-fixed-actions">
+        <button class="btn-primary" onclick="addReformaCalendarToGoogle()">+ Añadir este calendario a mi Google Calendar</button>
+        <button class="btn-secondary" id="gcal-connect-btn" onclick="connectGoogleCalendar()">Conectar mi Google</button>
+        <button class="btn-secondary" onclick="syncGoogleCalendarNow()">Sincronizar ahora</button>
+        <button class="btn-secondary" onclick="disconnectGoogleCalendar()">Desconectar</button>
+        <span class="gcal-status" id="gcal-last-sync">—</span>
       </div>
-      <div class="gcal-status"><button class="btn-secondary" onclick="syncGoogleCalendarNow()">Sincronizar ahora</button><button class="btn-secondary" onclick="disconnectGoogleCalendar()">Desconectar</button><span id="gcal-last-sync">—</span></div>
+      <div class="gcal-access-box">
+        <div class="gcal-fixed-note"><b>¿No tienes acceso?</b> Escribe tu correo de Google aquí. Rubén lo verá en esta misma pantalla y tendrá que añadirlo como editor del calendario y como usuario de prueba de Google.</div>
+        <div class="gcal-access-row"><input id="gcal-request-email" type="email" placeholder="tu correo de Google"><button class="btn-secondary" onclick="requestGoogleCalendarAccess()">Pedir acceso</button></div>
+        <div class="gcal-request-list gcal-admin-only" id="gcal-request-list"></div>
+      </div>
+      <div class="gcal-fixed-note">Para sincronizar, cada persona pulsa “Conectar mi Google”. Si su correo ya tiene permiso de edición en el calendario compartido, podrá crear y modificar eventos desde Google Calendar o desde esta web.</div>
     </div>
     <div class="gantt-legend" id="gantt-legend"></div>
     <div class="gantt-container" id="gantt-container">
@@ -2116,7 +2133,7 @@ const ROOMS_DEF = [
   { id:'fachada', name:'Fachada',      color:'#ffffff', shortName:'FAC' },
 ];
 
-let appState = { tasks:{}, compra:[], notes:{}, herramientas:[], incidencias:[], preguntas:[], tenemos:[], deletedTasks:[], activityLog:[], showTaskForm:{}, showCompraForm:false, showCompletedRoomTasks:false, activeRoom:null, activeTab:'tasks', globalFilter:{tareas:'todas', compra:'todas'}, activityFilters:{user:'',room:'',section:'',from:'',to:''} };
+let appState = { tasks:{}, compra:[], notes:{}, herramientas:[], incidencias:[], preguntas:[], tenemos:[], deletedTasks:[], activityLog:[], calendarAccessRequests:[], showTaskForm:{}, showCompraForm:false, showCompletedRoomTasks:false, activeRoom:null, activeTab:'tasks', globalFilter:{tareas:'todas', compra:'todas'}, activityFilters:{user:'',room:'',section:'',from:'',to:''} };
 let lastAuditSnapshot = null;
 function auditCloneState(){
   return {
@@ -2173,6 +2190,7 @@ function load(){
     if (d.tenemos) appState.tenemos = d.tenemos;
     if (d.deletedTasks) appState.deletedTasks = d.deletedTasks;
     if (d.activityLog) appState.activityLog = d.activityLog;
+    if (d.calendarAccessRequests) appState.calendarAccessRequests = d.calendarAccessRequests;
 
     ROOMS_DEF.forEach(r => {
       if (!appState.tasks[r.id]) appState.tasks[r.id] = [];
@@ -2190,6 +2208,7 @@ function load(){
     renderPanel();
     renderCurrentUserUI();
     updateAdminVisibility();
+    renderGoogleCalendarAccessRequests();
     if(!activePersonId) openUserSelector(true);
 
     // Notificaciones: al arrancar (primera carga) avisa de pendientes acumuladas
@@ -2217,7 +2236,8 @@ function save(){
     preguntas: appState.preguntas || [],
     tenemos: appState.tenemos || [],
     deletedTasks: appState.deletedTasks || [],
-    activityLog: appState.activityLog || []
+    activityLog: appState.activityLog || [],
+    calendarAccessRequests: appState.calendarAccessRequests || []
   });
 }
 
@@ -2332,6 +2352,7 @@ function totalStats(){
 }
 
 function updateHeader(){
+  document.body.classList.toggle('is-admin', isAdmin());
   const s=totalStats();
   const tasksStat=document.getElementById('stat-tasks');
   const compraStat=document.getElementById('stat-compra');
@@ -5232,6 +5253,12 @@ function enableCalendarInteractions(){
 // ── GOOGLE CALENDAR SYNC ──────────────────────────────────────────────
 const GCAL_DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
 const GCAL_SCOPES = 'https://www.googleapis.com/auth/calendar.events';
+const GCAL_FIXED_CONFIG = Object.freeze({
+  clientId: '1076573491909-9m797kp72it0iufbetg6qs6p9b9cthbk.apps.googleusercontent.com',
+  apiKey: 'AIzaSyAo3wnOZct6VxgZQx3I__S1Eod4jhTP_18',
+  calendarId: '3df5393d1b2a8ee850579a2b4094f120ea2f87a29a7cb2f8842b9d8e08f9f3c1@group.calendar.google.com'
+});
+const GCAL_ADD_URL = 'https://calendar.google.com/calendar/u/0/r?cid=' + encodeURIComponent(GCAL_FIXED_CONFIG.calendarId);
 const GCAL_SETTINGS_KEY = 'reformaGT.googleCalendar.' + proyectoId;
 let gcalTokenClient = null;
 let gcalReady = false;
@@ -5240,26 +5267,58 @@ let gcalSyncing = false;
 let gcalLastPullISO = localStorage.getItem(GCAL_SETTINGS_KEY + '.lastPull') || '';
 
 function googleCalendarSettings(){
-  try { return JSON.parse(localStorage.getItem(GCAL_SETTINGS_KEY) || '{}'); } catch(e){ return {}; }
+  let saved={};
+  try { saved = JSON.parse(localStorage.getItem(GCAL_SETTINGS_KEY) || '{}'); } catch(e){ saved = {}; }
+  return { ...GCAL_FIXED_CONFIG, connected: !!saved.connected };
 }
-function setGoogleCalendarSettings(cfg){ localStorage.setItem(GCAL_SETTINGS_KEY, JSON.stringify(cfg||{})); }
+function setGoogleCalendarSettings(cfg){
+  localStorage.setItem(GCAL_SETTINGS_KEY, JSON.stringify({connected: !!cfg?.connected}));
+}
+function addReformaCalendarToGoogle(){
+  window.open(GCAL_ADD_URL, '_blank', 'noopener,noreferrer');
+}
+function normalizeEmail(v){ return String(v||'').trim().toLowerCase(); }
+function requestGoogleCalendarAccess(){
+  const input=document.getElementById('gcal-request-email');
+  const email=normalizeEmail(input?.value);
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showNotif('Escribe un correo válido'); return; }
+  appState.calendarAccessRequests = appState.calendarAccessRequests || [];
+  const existing=appState.calendarAccessRequests.find(x=>normalizeEmail(x.email)===email);
+  if(existing){ showNotif('Ese correo ya está en la lista de solicitudes'); if(input) input.value=''; renderGoogleCalendarAccessRequests(); return; }
+  const person=currentUser();
+  appState.calendarAccessRequests.unshift({id:uid(), email, by:activePersonId||'', name:person?.name||'', at:nowStamp(), done:false});
+  logActivity('Solicitud de acceso a Google Calendar', email, {section:'cronograma'});
+  save();
+  if(input) input.value='';
+  renderGoogleCalendarAccessRequests();
+  showNotif('Solicitud guardada. Rubén debe añadir ese correo en Google Calendar y en usuarios de prueba.');
+}
+function markGoogleCalendarAccessDone(id){
+  appState.calendarAccessRequests = appState.calendarAccessRequests || [];
+  const req=appState.calendarAccessRequests.find(x=>x.id===id);
+  if(req){ req.done=!req.done; save(); renderGoogleCalendarAccessRequests(); }
+}
+function copyGoogleCalendarAccessEmail(email){
+  navigator.clipboard?.writeText(email).then(()=>showNotif('Correo copiado')).catch(()=>showNotif(email));
+}
+function renderGoogleCalendarAccessRequests(){
+  const el=document.getElementById('gcal-request-list');
+  if(!el || !isAdmin()) return;
+  const list=(appState.calendarAccessRequests||[]).filter(x=>!x.done);
+  if(!list.length){ el.innerHTML='<span class="gcal-request-chip">Sin solicitudes pendientes</span>'; return; }
+  el.innerHTML=list.map(x=>`<span class="gcal-request-chip" title="${htmlSafe(activityDate(x.at))}${x.name?' · '+htmlSafe(x.name):''}">${htmlSafe(x.email)} <button class="btn-icon" onclick="copyGoogleCalendarAccessEmail('${htmlSafe(x.email)}')" title="Copiar">📋</button><button class="btn-icon" onclick="markGoogleCalendarAccessDone('${x.id}')" title="Marcar añadido">✓</button></span>`).join('');
+}
 function initGoogleCalendarPanel(){
+  document.body.classList.toggle('is-admin', isAdmin());
   const cfg=googleCalendarSettings();
-  const cid=document.getElementById('gcal-client-id'); if(cid && !cid.value) cid.value=cfg.clientId||'';
-  const api=document.getElementById('gcal-api-key'); if(api && !api.value) api.value=cfg.apiKey||'';
-  const cal=document.getElementById('gcal-calendar-id'); if(cal && !cal.value) cal.value=cfg.calendarId||'primary';
-  updateGoogleCalendarStatus(cfg.connected?'Configurado · pulsa Conectar si no hay sesión':'Sin configurar', cfg.connected?'warn':'');
+  updateGoogleCalendarStatus(cfg.connected?'Sincronización conectada':'Calendario fijo configurado', cfg.connected?'ok':'warn');
+  renderGoogleCalendarAccessRequests();
 }
 function saveGoogleCalendarSettings(){
-  const cfg={
-    clientId:(document.getElementById('gcal-client-id')?.value||'').trim(),
-    apiKey:(document.getElementById('gcal-api-key')?.value||'').trim(),
-    calendarId:normalizeGoogleCalendarId(document.getElementById('gcal-calendar-id')?.value||'primary'),
-    connected:false
-  };
-  setGoogleCalendarSettings(cfg);
+  const cfg=googleCalendarSettings();
+  setGoogleCalendarSettings({...cfg, connected:false});
   gcalReady=false; gcalTokenClient=null;
-  updateGoogleCalendarStatus('Configuración guardada. Ahora pulsa Conectar.', 'warn');
+  updateGoogleCalendarStatus('Calendario fijo listo. Conecta tu Google para sincronizar.', 'warn');
 }
 function updateGoogleCalendarStatus(text, kind=''){
   const t=document.getElementById('gcal-status-text'); if(t) t.textContent=text;
@@ -5296,7 +5355,7 @@ async function ensureGoogleCalendarReady(){
   return true;
 }
 async function connectGoogleCalendar(){
-  saveGoogleCalendarSettings();
+  if(!adminGuard()) return;
   const ok=await ensureGoogleCalendarReady().catch(err=>{ updateGoogleCalendarStatus(err.message||'Error al cargar Google', 'bad'); return false; });
   if(!ok) return;
   updateGoogleCalendarStatus('Esperando permiso de Google…', 'warn');
@@ -5310,6 +5369,7 @@ async function connectGoogleCalendar(){
   gcalTokenClient.requestAccessToken({prompt:'consent'});
 }
 function disconnectGoogleCalendar(){
+  if(!adminGuard()) return;
   try{
     const token=window.gapi?.client?.getToken?.();
     if(token?.access_token) window.google?.accounts?.oauth2?.revoke?.(token.access_token);
@@ -5324,6 +5384,7 @@ function startGoogleCalendarAutoSync(){
   gcalSyncTimer=setInterval(()=>{ if(document.visibilityState==='visible') syncGoogleCalendarNow(false); }, 30000);
 }
 function queueGoogleCalendarSync(){
+  if(!isAdmin()) return;
   const cfg=googleCalendarSettings();
   if(!cfg.connected) return;
   clearTimeout(window._gcalQueueTimer);
