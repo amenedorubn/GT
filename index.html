@@ -1390,8 +1390,8 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
   .global-nav .gnav-count{font-size:.62rem;margin-left:0;}
   #gnav-personas{display:none!important;}
   #gnav-tareas{order:1} #gnav-compra{order:2} #gnav-tenemos{order:3}
-  #gnav-herramientas{order:4} #gnav-preguntas{order:5} #gnav-gantt{order:6}
-  #gnav-hoy{order:7} #gnav-novedades{order:8}
+  #gnav-herramientas{order:4} #gnav-preguntas{order:5} #gnav-fotos{order:6}
+  #gnav-hoy{order:7} #gnav-novedades{order:8} #gnav-gantt{order:9}
 }
 .user-admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .user-admin-actions .btn-secondary{flex:1;min-width:130px}
@@ -1444,6 +1444,34 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
 .img-lightbox img{max-width:min(92vw,860px);max-height:88vh;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
 .img-lightbox-close{position:fixed;top:18px;right:22px;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:22px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
 
+
+
+/* ==== CALENDARIO DE OBRA · sustituye el cronograma Gantt sin tocar datos ==== */
+.schedule-shell{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}.schedule-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}.schedule-title{display:flex;flex-direction:column;gap:3px}.schedule-title strong{font-size:1.45rem;color:#fff;letter-spacing:-.03em}.schedule-title span{font-size:.78rem;color:var(--muted);font-family:'DM Mono',monospace}.schedule-nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.schedule-nav button{white-space:nowrap}.calendar-board{border:1px solid #ffffff14;background:linear-gradient(180deg,#09111c,#070b12);border-radius:24px;overflow:hidden;box-shadow:0 24px 80px #0006}.calendar-weekdays{display:grid;grid-template-columns:repeat(7,1fr);background:#ffffff07;border-bottom:1px solid #ffffff10}.calendar-weekday{padding:10px 8px;font-family:'DM Mono',monospace;font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;text-align:center}.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(112px,1fr));}.calendar-day{min-height:138px;border-right:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d;padding:8px;background:rgba(255,255,255,.018);position:relative;transition:.15s}.calendar-day:nth-child(7n){border-right:0}.calendar-day.other-month{opacity:.42;background:rgba(255,255,255,.01)}.calendar-day.today{background:linear-gradient(180deg,rgba(255,207,90,.13),rgba(101,167,255,.055));box-shadow:inset 0 0 0 1px rgba(255,207,90,.25)}.calendar-day.drag-over{outline:2px dashed var(--accent);outline-offset:-6px;background:rgba(255,207,90,.1)}.calendar-day-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:8px}.calendar-day-num{font-family:'DM Mono',monospace;font-size:.78rem;color:#fff}.calendar-day.today .calendar-day-num{color:var(--accent)}.calendar-day-count{font-size:.58rem;color:var(--muted);font-family:'DM Mono',monospace}.calendar-task{display:flex;align-items:center;gap:6px;width:100%;margin:4px 0;padding:6px 7px;border-radius:10px;border:1px solid #ffffff18;background:#ffffff08;cursor:grab;min-height:30px;box-shadow:0 8px 18px #0003}.calendar-task:active{cursor:grabbing}.calendar-task:hover{border-color:#ffcf5a77;transform:translateY(-1px)}.calendar-task.done{opacity:.55;text-decoration:none}.calendar-task.overdue{border-color:rgba(255,93,93,.55);background:rgba(255,93,93,.08)}.calendar-task.computed{border-style:dashed;opacity:.72}.calendar-task-dot{width:8px;height:8px;border-radius:999px;flex:0 0 auto;box-shadow:0 0 14px currentColor}.calendar-task-text{font-size:.72rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}.calendar-task-meta{margin-left:auto;font-size:.58rem;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap}.calendar-more{margin-top:5px;border:0;background:#ffffff08;color:var(--accent);font-family:'DM Mono',monospace;font-size:.62rem;border-radius:999px;padding:5px 8px;cursor:pointer}.schedule-side{display:flex;flex-direction:column;gap:12px}.schedule-card{border:1px solid #ffffff14;background:linear-gradient(180deg,#ffffff08,#ffffff03);border-radius:22px;padding:14px;box-shadow:0 18px 50px #0004}.schedule-card h3{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:.13em;margin-bottom:10px}.schedule-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}.schedule-metric{border:1px solid #ffffff10;background:#00000024;border-radius:14px;padding:10px}.schedule-metric b{font-family:'DM Mono',monospace;font-size:1.2rem;color:#fff;display:block}.schedule-metric span{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.schedule-unscheduled-list{display:flex;flex-direction:column;gap:7px;max-height:360px;overflow:auto;padding-right:2px}.schedule-chip{display:flex;align-items:center;gap:8px;border:1px solid #ffffff14;background:#00000025;border-radius:13px;padding:9px;cursor:grab}.schedule-chip:hover{border-color:#65a7ff77;background:#65a7ff0e}.schedule-chip:active{cursor:grabbing}.schedule-chip-main{min-width:0;flex:1}.schedule-chip-title{font-size:.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}.schedule-chip-sub{font-size:.62rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px}.schedule-empty{border:1px dashed #ffffff20;border-radius:16px;padding:18px;color:var(--muted);text-align:center;background:#ffffff04}.schedule-mini-list{display:flex;flex-direction:column;gap:6px}.schedule-mini-item{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:8px;border:1px solid #ffffff10;border-radius:12px;background:#00000022;cursor:pointer}.schedule-mini-item:hover{border-color:#ffcf5a66}.schedule-mini-date{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted)}@media(max-width:1050px){.schedule-shell{grid-template-columns:1fr}.schedule-side{display:grid;grid-template-columns:1fr 1fr}.calendar-grid{grid-template-columns:repeat(7,minmax(92px,1fr))}.calendar-day{min-height:125px}}@media(max-width:760px){.schedule-side{display:flex}.calendar-board{overflow-x:auto}.calendar-weekdays,.calendar-grid{min-width:760px}.schedule-top{align-items:flex-start}.schedule-title strong{font-size:1.15rem}.schedule-nav{width:100%}.schedule-nav button,.schedule-nav select{flex:1}}
+
+
+/* GALERÍA GLOBAL DE FOTOS */
+.gallery-hero{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;margin-bottom:14px;border:1px solid #ffffff14;background:linear-gradient(135deg,#7cf7d414,#8aa7ff12);border-radius:22px;padding:16px}
+.gallery-hero h2{font-size:1.2rem;color:#fff;margin-bottom:4px;letter-spacing:-.02em}
+.gallery-hero p{color:var(--muted);font-size:.86rem;line-height:1.4}
+.gallery-count-pill{font-family:'DM Mono',monospace;font-size:.72rem;color:#071017;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:9px 12px;border-radius:999px;font-weight:700;white-space:nowrap}
+.gallery-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.gallery-filter-group{display:flex;gap:6px;flex-wrap:wrap;align-items:center;border:1px solid #ffffff10;background:#ffffff05;border-radius:16px;padding:7px}
+.gallery-filter-label{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin:0 4px}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.gallery-card{border:1px solid #ffffff14;background:linear-gradient(180deg,#ffffff08,#ffffff03);border-radius:18px;overflow:hidden;box-shadow:0 16px 45px #0004;cursor:pointer;transition:.15s}
+.gallery-card:hover{transform:translateY(-2px);border-color:rgba(124,247,212,.55);box-shadow:0 22px 60px #0006}
+.gallery-thumb{position:relative;aspect-ratio:4/3;background:#000;overflow:hidden}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:.18s}
+.gallery-card:hover .gallery-thumb img{transform:scale(1.04)}
+.gallery-badge{position:absolute;left:9px;top:9px;font-family:'DM Mono',monospace;font-size:.58rem;padding:5px 7px;border-radius:999px;background:rgba(0,0,0,.62);backdrop-filter:blur(8px);color:#fff;border:1px solid #ffffff20}
+.gallery-info{padding:10px;display:grid;gap:5px}
+.gallery-title{font-size:.82rem;font-weight:700;color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gallery-meta{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap}
+.gallery-meta span{background:#ffffff08;border:1px solid #ffffff0d;border-radius:999px;padding:3px 6px}
+.gallery-empty{border:1px dashed #ffffff22;border-radius:22px;padding:28px;text-align:center;color:var(--muted);background:#ffffff04}
+@media(max-width:700px){.gallery-hero{grid-template-columns:1fr}.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}.gallery-title{font-size:.76rem}}
+
 </style>
 </head>
 <body class="home-compact">
@@ -1456,8 +1484,9 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
     <button class="gnav-btn" id="gnav-tenemos" onclick="openGlobal('tenemos')"><span class="gnav-main">¿Qué tenemos?</span><span class="gnav-count" id="stat-tenemos">0</span></button>
     <button class="gnav-btn" id="gnav-herramientas" onclick="openGlobal('herramientas')"><span class="gnav-main">Herramientas</span></button>
     <button class="gnav-btn" id="gnav-preguntas" onclick="openGlobal('preguntas')"><span class="gnav-main">Preguntas</span><span class="gnav-count" id="stat-preguntas">0/0</span></button>
-    <button class="gnav-btn" id="gnav-personas" onclick="openGlobal('personas')"><span class="gnav-main">Personas</span></button>
+    <button class="gnav-btn" id="gnav-fotos" onclick="openGlobal('fotos')"><span class="gnav-main">Fotos</span><span class="gnav-count" id="stat-fotos">0</span></button>
     <button class="gnav-btn" id="gnav-gantt" onclick="openGlobal('gantt')"><span class="gnav-main">Cronograma</span></button>
+    <button class="gnav-btn" id="gnav-personas" onclick="openGlobal('personas')"><span class="gnav-main">Personas</span></button>
     <button class="gnav-btn" id="gnav-hoy" onclick="openGlobal('hoy')"><span class="gnav-main">Hoy</span><span class="gnav-count" id="stat-hoy">0</span></button>
     <button class="gnav-btn" id="gnav-novedades" onclick="openGlobal('novedades')"><span class="gnav-main">Novedades</span><span class="gnav-count" id="stat-novedades">·</span></button>
   </div>
@@ -1832,7 +1861,15 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
           <option value="falta">Falta comprar</option>
         </select>
       </div>
+      <select id="herr-room" style="margin-bottom:8px"></select>
       <input id="herr-nota" placeholder="Nota (ubicación, quién la tiene...)" style="margin-bottom:8px">
+      <div class="img-section" style="margin-bottom:10px">
+        <label>Fotos de la herramienta</label>
+        <label class="img-upload-btn">+ Subir fotos
+          <input type="file" accept="image/*" multiple onchange="handleImgUpload('herramientas-form', event)">
+        </label>
+        <div id="herr-form-img-grid" class="img-grid"></div>
+      </div>
       <button class="btn-primary" onclick="addHerramienta()">+ Añadir herramienta</button>
     </div>
     <div class="gstats-row" id="gstats-herr"></div>
@@ -1963,6 +2000,29 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
   </div>
   <div class="global-overlay-body">
     <div id="novedades-body"></div>
+  </div>
+</div>
+
+
+<!-- GLOBAL: FOTOS -->
+<div class="global-overlay" id="overlay-fotos">
+  <div class="global-overlay-header">
+    <span class="global-overlay-title">FOTOS · GALERÍA DE LA REFORMA</span>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn-secondary" onclick="renderImageGallery()">Actualizar galería</button>
+      <button class="btn-icon" onclick="closeGlobal('fotos')" style="font-size:18px;color:var(--muted)">✕</button>
+    </div>
+  </div>
+  <div class="global-overlay-body">
+    <div class="gallery-hero">
+      <div>
+        <h2>Todas las imágenes en un solo sitio</h2>
+        <p>Recoge automáticamente las fotos subidas en tareas, compras, “qué tenemos”, herramientas y preguntas. Al pulsar una imagen se abre en grande.</p>
+      </div>
+      <div class="gallery-count-pill" id="gallery-total-pill">0 fotos</div>
+    </div>
+    <div id="gallery-filters" class="gallery-filters"></div>
+    <div id="gallery-grid" class="gallery-grid"></div>
   </div>
 </div>
 
@@ -2247,6 +2307,7 @@ function updateHeader(){
   if(compraStat) compraStat.textContent=s.cb+'/'+s.cp;
   updateTenemosHeader();
   updatePreguntasHeader();
+  updateFotosHeader();
   const trashUser=document.getElementById('trash-count-user'); if(trashUser) trashUser.textContent=String((appState.deletedTasks||[]).length);
   renderCurrentUserUI();
   updateAdminVisibility();
@@ -2942,6 +3003,7 @@ function renderEverything(){
   if(document.getElementById('overlay-compra')?.classList.contains('open')) renderGlobalCompra();
   if(document.getElementById('overlay-tenemos')?.classList.contains('open')) renderTenemos();
   if(document.getElementById('overlay-preguntas')?.classList.contains('open')) renderPreguntas();
+  if(document.getElementById('overlay-fotos')?.classList.contains('open')) renderImageGallery();
   if(document.getElementById('overlay-personas')?.classList.contains('open')) renderPersonas();
   if(document.getElementById('overlay-mizona')?.classList.contains('open')) renderMyZone();
   if(document.getElementById('overlay-gantt')?.classList.contains('open')) renderGantt();
@@ -3978,7 +4040,7 @@ window.markNovSeen = markNovSeen;
 
 function openGlobal(which) {
   if((which==='papelera'||which==='registro') && !adminGuard()) return;
-  ['tareas','compra','tenemos','herramientas','preguntas','personas','mizona','gantt','registro','papelera','hoy','novedades'].forEach(w => {
+  ['tareas','compra','tenemos','herramientas','preguntas','fotos','personas','mizona','gantt','registro','papelera','hoy','novedades'].forEach(w => {
     document.getElementById('overlay-'+w)?.classList.toggle('open', w===which);
     const btn = document.getElementById('gnav-'+w);
     if(btn) btn.classList.toggle('active', w===which);
@@ -3989,6 +4051,7 @@ function openGlobal(which) {
   if(which==='tenemos') renderTenemos();
   if(which==='herramientas') renderHerramientas();
   if(which==='preguntas') renderPreguntas();
+  if(which==='fotos') renderImageGallery();
   if(which==='personas') renderPersonas();
   if(which==='mizona') renderMyZone();
   if(which==='gantt') renderGantt();
@@ -4159,10 +4222,154 @@ function renderCompraItem(it, i, isGlobal=false){
   </div>`;
 }
 
+
+// ── GALERÍA GLOBAL DE IMÁGENES ─────────────────────────────
+let galleryFilters = { tipo:'todas', room:'' };
+
+function imageTypeLabel(tipo){
+  return ({tareas:'Tarea', compra:'Compra', tenemos:'Qué tenemos', herramientas:'Herramienta', preguntas:'Pregunta'})[tipo] || 'Imagen';
+}
+
+function imageItemTitle(item){
+  const raw = item.title || item.texto || item.pregunta || item.label || '';
+  return raw.trim ? raw.trim() : String(raw || 'Imagen');
+}
+
+function collectAllImages(){
+  const out = [];
+  const seenTasks = new Set();
+
+  ROOMS_DEF.forEach(room => {
+    (appState.tasks?.[room.id] || []).forEach((t, taskIdx) => {
+      const tid = t.id || `${room.id}-${taskIdx}`;
+      if(seenTasks.has(tid)) return;
+      seenTasks.add(tid);
+      const taskRooms = (t.rooms && t.rooms.length) ? t.rooms : [room.id];
+      (t.images || []).forEach((src, imgIdx) => out.push({
+        src, tipo:'tareas', title:t.texto || 'Tarea sin título',
+        roomIds:taskRooms, roomId:taskRooms[0] || room.id,
+        estado:t.estado || '', fecha:t.fecha || t.fechaFin || '',
+        key:`task-${tid}-${imgIdx}`
+      }));
+    });
+  });
+
+  (appState.compra || []).forEach((it, idx) => {
+    (it.images || []).forEach((src, imgIdx) => out.push({
+      src, tipo:'compra', title:it.texto || 'Compra sin título',
+      roomIds:it.roomId ? [it.roomId] : [], roomId:it.roomId || '',
+      estado:it.comprado ? 'comprado' : 'pendiente', fecha:'',
+      key:`compra-${idx}-${imgIdx}`
+    }));
+  });
+
+  (appState.tenemos || []).forEach((it, idx) => {
+    (it.images || []).forEach((src, imgIdx) => out.push({
+      src, tipo:'tenemos', title:it.texto || 'Elemento sin título',
+      roomIds:it.roomId ? [it.roomId] : [], roomId:it.roomId || '',
+      estado:it.estado || '', fecha:'',
+      key:`tenemos-${idx}-${imgIdx}`
+    }));
+  });
+
+  (appState.herramientas || []).forEach((h, idx) => {
+    (h.images || []).forEach((src, imgIdx) => out.push({
+      src, tipo:'herramientas', title:h.nombre || 'Herramienta sin nombre',
+      roomIds:h.roomId ? [h.roomId] : [], roomId:h.roomId || '',
+      estado:h.estado || '', fecha:'',
+      key:`herramienta-${h.id || idx}-${imgIdx}`
+    }));
+  });
+
+  (appState.preguntas || []).forEach((q, idx) => {
+    (q.images || []).forEach((src, imgIdx) => out.push({
+      src, tipo:'preguntas', title:q.text || q.texto || q.pregunta || 'Pregunta sin título',
+      roomIds:q.roomId ? [q.roomId] : [], roomId:q.roomId || '',
+      estado:q.resuelta ? 'resuelta' : (q.priority || q.prioridad || ''), fecha:'',
+      key:`pregunta-${q.id || idx}-${imgIdx}`
+    }));
+  });
+
+  return out;
+}
+
+function updateFotosHeader(){
+  const stat = document.getElementById('stat-fotos');
+  if(stat) stat.textContent = String(collectAllImages().length);
+}
+
+function setGalleryFilter(which, value){
+  galleryFilters[which] = value;
+  renderImageGallery();
+}
+
+function openGalleryImage(src){
+  openLightbox(src);
+}
+
+function renderImageGallery(){
+  const all = collectAllImages();
+  const filtered = all.filter(img => {
+    if(galleryFilters.tipo !== 'todas' && img.tipo !== galleryFilters.tipo) return false;
+    if(galleryFilters.room && !(img.roomIds || []).includes(galleryFilters.room)) return false;
+    return true;
+  });
+
+  const totalPill = document.getElementById('gallery-total-pill');
+  if(totalPill) totalPill.textContent = `${filtered.length} foto${filtered.length===1?'':'s'}`;
+
+  const filterEl = document.getElementById('gallery-filters');
+  if(filterEl){
+    const typeBtns = ['todas','tareas','compra','tenemos','herramientas','preguntas'].map(t =>
+      `<button class="filter-btn ${galleryFilters.tipo===t?'active':''}" onclick="setGalleryFilter('tipo','${t}')">${t==='todas'?'Todas':imageTypeLabel(t)}</button>`
+    ).join('');
+    const roomBtns = [`<button class="filter-btn ${!galleryFilters.room?'active':''}" onclick="setGalleryFilter('room','')">Todas las zonas</button>`]
+      .concat(ROOMS_DEF.filter(r=>r.id!=='fachada').map(r =>
+        `<button class="filter-btn ${galleryFilters.room===r.id?'active':''}" onclick="setGalleryFilter('room','${r.id}')">${htmlSafe(r.shortName || r.name)}</button>`
+      )).join('');
+    filterEl.innerHTML = `
+      <div class="gallery-filter-group"><span class="gallery-filter-label">Tipo</span>${typeBtns}</div>
+      <div class="gallery-filter-group"><span class="gallery-filter-label">Zona</span>${roomBtns}</div>
+    `;
+  }
+
+  const grid = document.getElementById('gallery-grid');
+  if(!grid) return;
+  if(!filtered.length){
+    grid.innerHTML = `<div class="gallery-empty" style="grid-column:1/-1">Todavía no hay fotos con esos filtros. Las imágenes que subas desde tareas, compras, “qué tenemos”, herramientas o preguntas aparecerán aquí automáticamente.</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(img => {
+    const rooms = (img.roomIds || []).map(roomName).filter(Boolean).join(', ') || 'Sin zona';
+    const title = htmlSafe(imageItemTitle(img));
+    const meta = [rooms, img.estado, img.fecha].filter(Boolean).map(x=>`<span>${htmlSafe(x)}</span>`).join('');
+    return `
+      <div class="gallery-card" onclick='openGalleryImage(${JSON.stringify(img.src)})'>
+        <div class="gallery-thumb">
+          <img src="${img.src}" alt="${title}">
+          <div class="gallery-badge">${imageTypeLabel(img.tipo)}</div>
+        </div>
+        <div class="gallery-info">
+          <div class="gallery-title">${title}</div>
+          <div class="gallery-meta">${meta}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  updateFotosHeader();
+}
+
+window.renderImageGallery = renderImageGallery;
+window.setGalleryFilter = setGalleryFilter;
+window.openGalleryImage = openGalleryImage;
+window.updateFotosHeader = updateFotosHeader;
+
 // ── IMÁGENES (compra, tenemos, preguntas) ─────────────────────
 // Contexto activo de subida: { section, id? }
 let imgUploadCtx = { section: null };
 let _taskImgBuffer = []; // imágenes temporales del modal de tarea abierto
+let _herrImgBuffer = []; // imágenes temporales del alta de herramienta
 
 function openLightbox(src){
   document.getElementById('img-lightbox-src').src = src;
@@ -4198,7 +4405,26 @@ function handleImgUpload(section, event) {
     if(section === 'tareas') {
       _taskImgBuffer = [..._taskImgBuffer, ...newImgs].slice(0, MAX);
       renderImgGrid('em-img-grid', _taskImgBuffer, 'tareas');
-    } else if(section === 'compra') {
+    } else if(section === 'herramientas-form') {
+      _herrImgBuffer = [..._herrImgBuffer, ...newImgs].slice(0, MAX);
+      renderImgGrid('herr-form-img-grid', _herrImgBuffer, 'herramientas-form');
+    } else if(section === 'herramientas') {
+      const h = appState.herramientas?.[imgUploadCtx.herramientaIndex];
+      if(!h) return;
+      h.images = [...(h.images || []), ...newImgs].slice(0, MAX);
+      save();
+      renderHerramientas();
+      showNotif('Foto añadida ✓');
+    } else if(section === 'herramientas-form') {
+    _herrImgBuffer = _herrImgBuffer.filter((_,i) => i !== idx);
+    renderImgGrid('herr-form-img-grid', _herrImgBuffer, 'herramientas-form');
+  } else if(section === 'herramientas') {
+    const h = appState.herramientas?.[imgUploadCtx.herramientaIndex];
+    if(!h) return;
+    h.images = (h.images || []).filter((_,i) => i !== idx);
+    save();
+    renderHerramientas();
+  } else if(section === 'compra') {
       const it = appState.compra[editingCompraIndex];
       if(!it) return;
       it.images = [...(it.images || []), ...newImgs].slice(0, MAX);
@@ -4217,6 +4443,8 @@ function handleImgUpload(section, event) {
       if(appState.activeRoom) renderPanel();
       showNotif('Foto añadida ✓');
     }
+    updateFotosHeader();
+    if(document.getElementById('overlay-fotos')?.classList.contains('open')) renderImageGallery();
     // Reset file input so same file can be re-added
     event.target.value = '';
   });
@@ -4226,6 +4454,15 @@ function deleteImg(section, idx) {
   if(section === 'tareas') {
     _taskImgBuffer = _taskImgBuffer.filter((_,i) => i !== idx);
     renderImgGrid('em-img-grid', _taskImgBuffer, 'tareas');
+  } else if(section === 'herramientas-form') {
+    _herrImgBuffer = _herrImgBuffer.filter((_,i) => i !== idx);
+    renderImgGrid('herr-form-img-grid', _herrImgBuffer, 'herramientas-form');
+  } else if(section === 'herramientas') {
+    const h = appState.herramientas?.[imgUploadCtx.herramientaIndex];
+    if(!h) return;
+    h.images = (h.images || []).filter((_,i) => i !== idx);
+    save();
+    renderHerramientas();
   } else if(section === 'compra') {
     const it = appState.compra[editingCompraIndex];
     if(!it) return;
@@ -4244,6 +4481,8 @@ function deleteImg(section, idx) {
     renderPreguntas();
     if(appState.activeRoom) renderPanel();
   }
+  updateFotosHeader();
+  if(document.getElementById('overlay-fotos')?.classList.contains('open')) renderImageGallery();
 }
 window.handleImgUpload = handleImgUpload;
 window.deleteImg = deleteImg;
@@ -4276,6 +4515,8 @@ function deletePreguntaImg(id, idx) {
   save();
   renderPreguntas();
   if(appState.activeRoom) renderPanel();
+  updateFotosHeader();
+  if(document.getElementById('overlay-fotos')?.classList.contains('open')) renderImageGallery();
 }
 window.deletePreguntaImg = deletePreguntaImg;
 
@@ -4575,6 +4816,12 @@ function updateTenemosHeader(){ const el=document.getElementById('stat-tenemos')
 // ── HERRAMIENTAS ──────────────────────────────────────────────
 
 function renderHerramientas() {
+  const roomSelect = document.getElementById('herr-room');
+  if(roomSelect && !roomSelect.dataset.ready){
+    roomSelect.innerHTML = `<option value="">Sin habitación / general</option>` + ROOMS_DEF.map(r=>`<option value="${r.id}">${r.name}</option>`).join('');
+    roomSelect.dataset.ready = '1';
+  }
+  renderImgGrid('herr-form-img-grid', _herrImgBuffer, 'herramientas-form');
   const herr = appState.herramientas || [];
   const aqui = herr.filter(h=>h.estado==='aqui').length;
   const fuera = herr.filter(h=>h.estado==='fuera').length;
@@ -4596,12 +4843,19 @@ function renderHerramientas() {
   const statusClass = { aqui:'tool-aqui', fuera:'tool-fuera', falta:'tool-falta' };
 
   document.getElementById('herr-list').innerHTML = herr.map((h,i) => `
-    <div class="tool-item">
+    <div class="tool-item" style="align-items:flex-start">
       <div style="flex:1;min-width:0">
-        <div class="tool-name">${h.nombre}</div>
-        ${h.nota?`<div class="tool-note">${h.nota}</div>`:''}
+        <div class="tool-name">${htmlSafe(h.nombre)}</div>
+        <div class="tool-note" style="display:flex;gap:6px;flex-wrap:wrap">
+          ${h.roomId?`<span>${htmlSafe(roomName(h.roomId))}</span>`:''}
+          ${h.nota?`<span>${htmlSafe(h.nota)}</span>`:''}
+        </div>
+        ${(h.images||[]).length?`<div class="img-grid" style="grid-template-columns:repeat(auto-fill,minmax(58px,1fr));max-width:360px;margin-top:8px">${(h.images||[]).map((src,idx)=>`<div class="img-thumb"><img src="${src}" alt="foto herramienta" onclick="openLightbox('${src}')"><button class="img-thumb-del" onclick="deleteHerrImg(${i},${idx})">✕</button></div>`).join('')}</div>`:''}
+        <label class="img-upload-btn" style="max-width:220px;margin-top:8px">+ Foto
+          <input type="file" accept="image/*" multiple onchange="uploadHerrImg(${i}, event)">
+        </label>
       </div>
-      ${h.qty?`<div class="tool-qty">${h.qty}</div>`:''}
+      ${h.qty?`<div class="tool-qty">${htmlSafe(h.qty)}</div>`:''}
       <select class="tool-status ${statusClass[h.estado]||'tool-aqui'}" onchange="changeHerr(${i},this.value)">
         <option value="aqui" ${h.estado==='aqui'?'selected':''}>Aquí ✓</option>
         <option value="fuera" ${h.estado==='fuera'?'selected':''}>Fuera</option>
@@ -4619,13 +4873,26 @@ function addHerramienta() {
   const qty = document.getElementById('herr-qty')?.value?.trim() || '';
   const estado = document.getElementById('herr-estado')?.value || 'aqui';
   const nota = document.getElementById('herr-nota')?.value?.trim() || '';
-  appState.herramientas.push({ id: uid(), nombre, qty, estado, nota });
+  const roomId = document.getElementById('herr-room')?.value || '';
+  appState.herramientas.push({ id: uid(), nombre, qty, estado, nota, roomId, images:[..._herrImgBuffer] });
   const estadoLabel = {aqui:'está aquí', fuera:'fuera/prestada', falta:'falta comprar'}[estado]||estado;
   logActivity('Herramienta añadida', `"${nombre}"${qty?' · cantidad: '+qty:''} · ${estadoLabel}${nota?' · nota: '+nota:''}`, {section:'herramientas'});
   document.getElementById('herr-nombre').value = '';
   document.getElementById('herr-qty').value = '';
   document.getElementById('herr-nota').value = '';
-  save(); renderHerramientas(); showNotif('Herramienta añadida ✓');
+  const roomSelect = document.getElementById('herr-room'); if(roomSelect) roomSelect.value = '';
+  _herrImgBuffer = [];
+  renderImgGrid('herr-form-img-grid', _herrImgBuffer, 'herramientas-form');
+  save(); renderHerramientas(); updateFotosHeader(); if(document.getElementById('overlay-fotos')?.classList.contains('open')) renderImageGallery(); showNotif('Herramienta añadida ✓');
+}
+
+function uploadHerrImg(i, event){
+  imgUploadCtx.herramientaIndex = i;
+  handleImgUpload('herramientas', event);
+}
+function deleteHerrImg(i, idx){
+  imgUploadCtx.herramientaIndex = i;
+  deleteImg('herramientas', idx);
 }
 
 function changeHerr(i, val) {
@@ -4641,127 +4908,51 @@ function deleteHerr(i) {
   const h = appState.herramientas[i];
   logActivity('Herramienta eliminada', `"${h?.nombre||'Sin nombre'}"`, {section:'herramientas'});
   appState.herramientas.splice(i,1);
-  save(); renderHerramientas();
+  save(); renderHerramientas(); updateFotosHeader(); if(document.getElementById('overlay-fotos')?.classList.contains('open')) renderImageGallery();
 }
+window.uploadHerrImg = uploadHerrImg;
+window.deleteHerrImg = deleteHerrImg;
 
 // ── GANTT ENGINE ──────────────────────────────────────────────
 
 let ganttFilter = 'todas';
 
 function renderGantt() {
-  // Collect all tasks
-  let allTasks = [];
-  ROOMS_DEF.forEach(r => {
-    (appState.tasks[r.id]||[]).forEach(t => {
-      // Avoid duplicates when a task belongs to multiple rooms
-      if(!allTasks.find(x=>x.id===t.id)) {
-        // Determine display rooms
-        const taskRooms = (t.rooms && t.rooms.length) ? t.rooms : [r.id];
-        const primaryRoom = ROOMS_DEF.find(x=>x.id===taskRooms[0]) || ROOMS_DEF.find(x=>x.id===r.id);
-        const roomNames = taskRooms.map(rid=>{ const rd=ROOMS_DEF.find(x=>x.id===rid); return rd?rd.shortName||rd.name:''; }).join('+');
-        allTasks.push({...t, roomId:primaryRoom.id, roomName:roomNames, roomColor:primaryRoom.color});
-      }
-    });
-  });
+  const inner = document.getElementById('gantt-inner');
+  const toolbar = document.getElementById('gantt-toolbar');
+  const legend = document.getElementById('gantt-legend');
+  if(!inner) return;
 
+  const today = new Date(); today.setHours(0,0,0,0);
+  if(!window.scheduleCursorDate) window.scheduleCursorDate = new Date(today.getFullYear(), today.getMonth(), 1);
+
+  let allTasks = collectScheduleTasks();
   if(ganttFilter !== 'todas') allTasks = allTasks.filter(t => t.estado === ganttFilter);
+  resolveScheduleDates(allTasks);
 
-  // ── Resolve relative positions for tasks without dates ──
-  const taskById = {};
-  allTasks.forEach(t => { taskById[t.id]=t; });
+  const withDate = allTasks.filter(t => t.fecha || t._computedFecha);
+  const withoutDate = allTasks.filter(t => !t.fecha && !t._computedFecha);
 
-  const resolved = {};
-  allTasks.forEach(t => { if(t.fecha) resolved[t.id]=true; });
+  const cursor = new Date(window.scheduleCursorDate);
+  cursor.setDate(1);
+  const monthStart = new Date(cursor.getFullYear(), cursor.getMonth(), 1);
+  const monthEnd = new Date(cursor.getFullYear(), cursor.getMonth()+1, 0);
+  const gridStart = new Date(monthStart);
+  gridStart.setDate(gridStart.getDate() - ((gridStart.getDay()+6)%7)); // lunes
+  const gridEnd = new Date(monthEnd);
+  gridEnd.setDate(gridEnd.getDate() + (6-((gridEnd.getDay()+6)%7)));
 
-  // Helper: get effective start/end of a task (computed or explicit)
-  function taskWindow(t) {
-    const s = t._computedFecha || t.fecha;
-    const e = t._computedFechaFin || t.fechaFin || s;
-    return s ? { start: new Date(s), end: new Date(e) } : null;
-  }
+  const days = [];
+  for(let d=new Date(gridStart); d<=gridEnd; d.setDate(d.getDate()+1)) days.push(new Date(d));
 
-  // Iterate until convergence
-  for(let pass=0; pass<allTasks.length+1; pass++) {
-    let changed = false;
-    allTasks.forEach(t => {
-      if(resolved[t.id]) return;
-      const dur = Math.max(parseInt(t.duracion)||1, 1);
+  const fmtMonth = monthStart.toLocaleDateString('es-ES',{month:'long',year:'numeric'});
+  const monthTasks = withDate.filter(t => taskTouchesRange(t, monthStart, monthEnd));
+  const overdue = allTasks.filter(t => isTaskOverdue(t, today));
+  const activeToday = withDate.filter(t => taskTouchesRange(t, today, today));
+  const blocked = allTasks.filter(t => taskIsBlocked(t, allTasks)).length;
 
-      // Collect all relations: new multi-array and legacy fields
-      const rels = t.relaciones && t.relaciones.length ? t.relaciones
-        : (t.relType && t.relTaskId ? [{tipo:t.relType, taskId:t.relTaskId}]
-          : (t.depId ? [{tipo:'after', taskId:t.depId}] : []));
-
-      if(!rels.length) return; // no anchor at all
-
-      // Check all anchors are resolved
-      const allResolved = rels.every(r => {
-        const a = taskById[r.taskId];
-        return a && (a.fecha || a._computedFecha);
-      });
-      if(!allResolved) return;
-
-      // Compute start date from each relation, then pick the most constraining
-      // "after X" → must start after X ends (latest wins)
-      // "before X" → must finish before X starts (earliest X start wins → push our start back)
-      // "during X" → start = X start (latest X start wins)
-
-      let earliestStart = null; // will be maximized for 'after' / 'during'
-      let latestBeforeEnd = null; // for 'before': our end must be ≤ min(X.start - 1)
-
-      for(const rel of rels) {
-        const anchor = taskById[rel.taskId];
-        if(!anchor) continue;
-        const w = taskWindow(anchor);
-        if(!w) continue;
-        if(rel.tipo === 'after') {
-          const candidate = new Date(w.end); candidate.setDate(candidate.getDate()+1);
-          if(!earliestStart || candidate > earliestStart) earliestStart = candidate;
-        } else if(rel.tipo === 'during') {
-          if(!earliestStart || w.start > earliestStart) earliestStart = new Date(w.start);
-        } else if(rel.tipo === 'before') {
-          // Our end = start - 1; our start = end - dur + 1
-          const lastDay = new Date(w.start); lastDay.setDate(lastDay.getDate()-1);
-          if(!latestBeforeEnd || lastDay < latestBeforeEnd) latestBeforeEnd = lastDay;
-        }
-      }
-
-      let start;
-      if(latestBeforeEnd && !earliestStart) {
-        // Only "before" constraints: place as late as possible before the earliest deadline
-        start = new Date(latestBeforeEnd);
-        start.setDate(start.getDate() - dur + 1);
-      } else if(earliestStart && latestBeforeEnd) {
-        // Mixed: respect earliestStart but also finish before latestBeforeEnd
-        start = new Date(earliestStart);
-        // (If this violates the before constraint, we can't fully satisfy both — best effort)
-      } else if(earliestStart) {
-        start = new Date(earliestStart);
-      } else {
-        return; // no constraint resolved yet
-      }
-
-      const end = new Date(start.getTime()+(dur-1)*86400000);
-      t._computedFecha = start.toISOString().slice(0,10);
-      t._computedFechaFin = end.toISOString().slice(0,10);
-      resolved[t.id]=true;
-      changed=true;
-    });
-    if(!changed) break;
-  }
-
-  // Sort by effective start date
-  allTasks.sort((a,b) => {
-    const da = a.fecha||a._computedFecha, db = b.fecha||b._computedFecha;
-    if(!da && !db) return 0;
-    if(!da) return 1;
-    if(!db) return -1;
-    return da.localeCompare(db);
-  });
-
-  // Toolbar
-  document.getElementById('gantt-toolbar').innerHTML = `
-    <label>Filtrar:</label>
+  if(toolbar) toolbar.innerHTML = `
+    <label>Estado</label>
     <select onchange="setGanttFilter(this.value)">
       <option value="todas" ${ganttFilter==='todas'?'selected':''}>Todas</option>
       <option value="pendiente" ${ganttFilter==='pendiente'?'selected':''}>Pendientes</option>
@@ -4770,154 +4961,239 @@ function renderGantt() {
     </select>
   `;
 
-  // Legend
-  document.getElementById('gantt-legend').innerHTML = ROOMS_DEF.map(r =>
-    `<div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:${r.color}"></div>${r.name}</div>`
+  if(legend) legend.innerHTML = ROOMS_DEF.map(r =>
+    `<div class="gantt-legend-item"><div class="gantt-legend-dot" style="background:${r.color}"></div>${htmlSafe(r.name)}</div>`
   ).join('') + `
-    <div class="gantt-legend-item" style="margin-left:8px"><div class="gantt-legend-dot" style="background:#555;border:1px solid var(--accent)"></div>Hoy</div>
-    <div class="gantt-legend-item">→ flecha = depende de</div>
-    <div class="gantt-legend-item" style="opacity:0.55">░ barra tenue = fecha estimada</div>
+    <div class="gantt-legend-item" style="margin-left:8px"><div class="gantt-legend-dot" style="background:var(--accent)"></div>Hoy</div>
+    <div class="gantt-legend-item" style="opacity:.7">Arrastra una tarea a otro día para moverla</div>
   `;
 
-  const inner = document.getElementById('gantt-inner');
-
-  // Tasks with a real or computed date
-  const withDate = allTasks.filter(t => t.fecha || t._computedFecha);
-  const withoutDate = allTasks.filter(t => !t.fecha && !t._computedFecha);
-
   if(!allTasks.length) {
-    inner.innerHTML = `<div class="gantt-empty"><div style="font-size:2rem;opacity:0.3">📅</div>No hay tareas todavía.<br>Añade tareas con fecha de inicio desde cada habitación.</div>`;
+    inner.innerHTML = `<div class="schedule-empty" style="margin:20px"><div style="font-size:2rem;margin-bottom:6px">📅</div>No hay tareas todavía.<br>Añade tareas con fecha desde cada habitación o con el botón + Tarea.</div>`;
     return;
   }
 
-  if(!withDate.length) {
-    const today0 = new Date(); today0.setHours(0,0,0,0);
-    const days0 = []; for(let i=0;i<45;i++){ const d=new Date(today0); d.setDate(d.getDate()+i); days0.push(d); }
-    inner.innerHTML = `<div class="gantt-empty"><div style="font-size:2rem;opacity:0.3">📅</div>Ninguna tarea tiene fecha todavía.<br>Arrastra una tarea pendiente a la banda del cronograma o edítala para darle inicio y duración.</div><div class="unscheduled-lane"><div class="gantt-drop-hint big">Arrastra una tarea desde aquí hacia la zona superior para ponerle fecha.</div><div class="unscheduled-lane-title">Sin fecha ni posición asignada (${withoutDate.length})</div><div style="display:flex;flex-wrap:wrap;gap:6px">${withoutDate.map(t => `<div class="gantt-unscheduled-chip" draggable="true" data-id="${t.id}" style="background:var(--surface);border:1px solid ${t.roomColor}44;border-radius:4px;padding:5px 10px;font-size:0.75rem;display:flex;align-items:center;gap:6px"><div style="width:6px;height:6px;border-radius:50%;background:${t.roomColor};flex-shrink:0"></div><span style="color:var(--muted);font-size:0.6rem;font-family:'DM Mono',monospace">${t.roomName}</span><span>${t.texto}</span></div>`).join('')}</div></div>`;
-    enableGanttInteractions(days0, 32);
-    return;
-  }
+  const dayHtml = days.map(day => {
+    const dateStr = toISODateLocal(day);
+    const inMonth = day.getMonth() === monthStart.getMonth();
+    const isToday = day.toDateString() === today.toDateString();
+    const tasks = withDate.filter(t => taskTouchesRange(t, day, day))
+      .sort((a,b)=>(a.fecha||a._computedFecha||'').localeCompare(b.fecha||b._computedFecha||''));
+    const shown = tasks.slice(0,4);
+    return `
+      <div class="calendar-day ${inMonth?'':'other-month'} ${isToday?'today':''}" data-date="${dateStr}">
+        <div class="calendar-day-head">
+          <div class="calendar-day-num">${day.getDate()}</div>
+          ${tasks.length?`<div class="calendar-day-count">${tasks.length}</div>`:''}
+        </div>
+        ${shown.map(t => calendarTaskHtml(t, today)).join('')}
+        ${tasks.length>4?`<button class="calendar-more" onclick="showCalendarDay('${dateStr}')">+${tasks.length-4} más</button>`:''}
+      </div>`;
+  }).join('');
 
-  // Determine date range
-  const today = new Date(); today.setHours(0,0,0,0);
-  const allDates = [];
-  withDate.forEach(t => {
-    const s = t.fecha||t._computedFecha;
-    const e = t.fechaFin||t._computedFechaFin||s;
-    if(s) allDates.push(new Date(s));
-    if(e) allDates.push(new Date(e));
-  });
-  allDates.push(today);
+  const upcoming = withDate
+    .filter(t => new Date((t.fecha||t._computedFecha)+'T00:00:00') >= today && (t.estado||'pendiente') !== 'hecho')
+    .sort((a,b)=>(a.fecha||a._computedFecha||'').localeCompare(b.fecha||b._computedFecha||''))
+    .slice(0,8);
 
-  let minDate = new Date(Math.min(...allDates.map(d=>d.getTime())));
-  let maxDate = new Date(Math.max(...allDates.map(d=>d.getTime())));
-
-  // Add padding
-  minDate.setDate(minDate.getDate() - 2);
-  maxDate.setDate(maxDate.getDate() + 5);
-
-  // Build day array
-  const days = [];
-  let cur = new Date(minDate);
-  while(cur <= maxDate) {
-    days.push(new Date(cur));
-    cur.setDate(cur.getDate() + 1);
-  }
-
-  const DAY_W = 32; // px per day
-  const ROW_H = 40;
-  const NAME_W = 210;
-
-  // Grid template columns: name col + one per day
-  const gridCols = `${NAME_W}px ` + days.map(()=>`${DAY_W}px`).join(' ');
-
-  // Build HTML
-  let html = `<div class="gantt-table" style="grid-template-columns:${gridCols}">`;
-
-  // Header row
-  html += `<div class="gantt-header-cell col-name">Tarea</div>`;
-  days.forEach((d,di) => {
-    const isWeekend = d.getDay()===0||d.getDay()===6;
-    const isToday = d.toDateString()===today.toDateString();
-    const label = d.getDate()===1||di===0 ? `${d.getDate()}/${d.getMonth()+1}` : (d.getDate()%5===0?d.getDate():'');
-    html += `<div class="gantt-header-cell ${isWeekend?'weekend':''} ${isToday?'today-col':''}" style="font-size:0.58rem">${label}</div>`;
-  });
-
-  // Task rows
-  withDate.forEach(t => {
-    const startStr = t.fecha||t._computedFecha;
-    const endStr = t.fechaFin||t._computedFechaFin||startStr;
-    const startDate = new Date(startStr);
-    const endDate = new Date(endStr);
-    const startIdx = days.findIndex(d => d.toDateString()===startDate.toDateString());
-    const endIdx = days.findIndex(d => d.toDateString()===endDate.toDateString());
-
-    const barLeft = (startIdx >= 0 ? startIdx : 0) * DAY_W;
-    const barWidth = Math.max((endIdx >= startIdx && endIdx >= 0 ? (endIdx - startIdx + 1) : 1) * DAY_W - 4, DAY_W - 4);
-
-    const stateColor = t.estado==='hecho' ? '#3a7a3a' : t.estado==='en curso' ? '#2a5a8a' : '#5a4a1a';
-    const bgColor = t.roomColor;
-    const isComputed = !t.fecha; // positioned from relative/duration, no explicit date
-
-    // Name cell
-    html += `<div class="gantt-cell col-name">
-      <div class="gantt-task-name" title="${t.texto}">${t.texto}</div>
-      <div class="gantt-task-room" style="color:${t.roomColor}">${t.roomName}${isComputed?' <span style="opacity:0.5;font-size:0.55rem">~est</span>':''}</div>
-    </div>`;
-
-    // Day cells as one wide cell spanning all days
-    html += `<div class="gantt-cell gantt-day-cell" style="grid-column:span ${days.length};height:${ROW_H}px;position:relative;border-right:none">`;
-
-    // Vertical grid lines
-    days.forEach((d,di) => {
-      const isWeekend = d.getDay()===0||d.getDay()===6;
-      const isToday = d.toDateString()===today.toDateString();
-      html += `<div style="position:absolute;top:0;bottom:0;left:${di*DAY_W}px;width:${DAY_W}px;${isWeekend?'background:#ffffff04;':''} ${isToday?'background:#1c190080;':''} border-right:1px solid #1a1a1a"></div>`;
-    });
-
-    // The bar
-    html += `<div class="gantt-bar" data-id="${t.id}" style="left:${barLeft+2}px;width:${barWidth}px;background:${bgColor};border-left:3px solid ${stateColor};${isComputed?'opacity:0.55;border-style:dashed;':''}\" title="${t.texto} · ${t.estado}${startStr?' · '+startStr:''}${endStr&&endStr!==startStr?' → '+endStr:''}${isComputed?' (estimado)':''}">
-      <div class="gantt-bar-label">${t.texto.length>20?t.texto.slice(0,20)+'…':t.texto}</div>
-    </div>`;
-
-    // Today line
-    const todayIdx = days.findIndex(d => d.toDateString()===today.toDateString());
-    if(todayIdx>=0) {
-      html += `<div class="gantt-today-line" style="left:${todayIdx*DAY_W + DAY_W/2}px"></div>`;
-    }
-
-    html += `</div>`; // close day span cell
-  });
-
-  html += `</div>`; // close gantt-table
-
-  // Tasks without date section
-  if(withoutDate.length) {
-    html += `<div class="unscheduled-lane">
-      <div class="gantt-drop-hint big">Arrastra una tarea de aquí al cronograma para ponerle fecha. Luego arrastra el borde derecho para ajustar duración.</div>
-      <div class="unscheduled-lane-title">Sin fecha ni posición asignada (${withoutDate.length})</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">
-        ${withoutDate.map(t => `
-          <div class="gantt-unscheduled-chip" draggable="true" data-id="${t.id}" style="background:var(--surface);border:1px solid ${t.roomColor}44;border-radius:4px;padding:5px 10px;font-size:0.75rem;display:flex;align-items:center;gap:6px">
-            <div style="width:6px;height:6px;border-radius:50%;background:${t.roomColor};flex-shrink:0"></div>
-            <span style="color:var(--muted);font-size:0.6rem;font-family:'DM Mono',monospace">${t.roomName}</span>
-            <span>${t.texto}</span>
-            <span class="tag tag-${t.estado==='hecho'?'done':t.estado==='en curso'?'doing':'pending'}" style="font-size:0.58rem">${t.estado}</span>
+  inner.innerHTML = `
+    <div class="schedule-shell">
+      <section>
+        <div class="schedule-top">
+          <div class="schedule-title">
+            <strong>${fmtMonth.charAt(0).toUpperCase()+fmtMonth.slice(1)}</strong>
+            <span>${monthTasks.length} tareas en el mes · ${withoutDate.length} sin fecha</span>
           </div>
-        `).join('')}
-      </div>
+          <div class="schedule-nav">
+            <button class="btn-secondary" onclick="moveScheduleMonth(-1)">← Mes anterior</button>
+            <button class="btn-secondary" onclick="goScheduleToday()">Hoy</button>
+            <button class="btn-secondary" onclick="moveScheduleMonth(1)">Mes siguiente →</button>
+          </div>
+        </div>
+        <div class="calendar-board">
+          <div class="calendar-weekdays">${['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'].map(d=>`<div class="calendar-weekday">${d}</div>`).join('')}</div>
+          <div class="calendar-grid">${dayHtml}</div>
+        </div>
+      </section>
+      <aside class="schedule-side">
+        <div class="schedule-card">
+          <h3>Estado del calendario</h3>
+          <div class="schedule-metrics">
+            <div class="schedule-metric"><b>${activeToday.length}</b><span>hoy</span></div>
+            <div class="schedule-metric"><b>${withoutDate.length}</b><span>sin fecha</span></div>
+            <div class="schedule-metric"><b style="color:${overdue.length?'var(--danger)':'var(--ok)'}">${overdue.length}</b><span>vencidas</span></div>
+            <div class="schedule-metric"><b style="color:${blocked?'var(--warn)':'var(--ok)'}">${blocked}</b><span>bloqueadas</span></div>
+          </div>
+        </div>
+        <div class="schedule-card">
+          <h3>Sin fecha</h3>
+          ${withoutDate.length ? `<div class="schedule-unscheduled-list">${withoutDate.map(t => scheduleChipHtml(t)).join('')}</div>` : `<div class="schedule-empty">Todo tiene fecha asignada.</div>`}
+        </div>
+        <div class="schedule-card">
+          <h3>Próximas tareas</h3>
+          ${upcoming.length ? `<div class="schedule-mini-list">${upcoming.map(t => scheduleMiniHtml(t)).join('')}</div>` : `<div class="schedule-empty">No hay próximas tareas pendientes.</div>`}
+        </div>
+      </aside>
     </div>`;
-  }
 
-  // Dependency arrows using SVG overlay
-  // We render them after HTML using a post-render step
-  inner.innerHTML = html;
-  enableGanttInteractions(days, DAY_W);
-
-  // Draw dependency arrows after render
-  setTimeout(() => drawDepArrows(withDate, days, DAY_W, ROW_H, NAME_W), 50);
+  enableCalendarInteractions();
 }
 
+function collectScheduleTasks(){
+  const allTasks=[];
+  ROOMS_DEF.forEach(r => {
+    (appState.tasks[r.id]||[]).forEach(t => {
+      if(!allTasks.find(x=>x.id===t.id)) {
+        const taskRooms = (t.rooms && t.rooms.length) ? t.rooms : [r.id];
+        const primaryRoom = ROOMS_DEF.find(x=>x.id===taskRooms[0]) || ROOMS_DEF.find(x=>x.id===r.id) || r;
+        const roomNames = taskRooms.map(rid=>{ const rd=ROOMS_DEF.find(x=>x.id===rid); return rd?rd.shortName||rd.name:''; }).filter(Boolean).join('+');
+        allTasks.push({...t, roomId:primaryRoom.id, roomName:roomNames || primaryRoom.name, roomColor:primaryRoom.color});
+      }
+    });
+  });
+  return allTasks;
+}
+
+function resolveScheduleDates(allTasks){
+  const taskById={};
+  allTasks.forEach(t=>{ taskById[t.id]=t; delete t._computedFecha; delete t._computedFechaFin; });
+  const resolved={};
+  allTasks.forEach(t=>{ if(t.fecha) resolved[t.id]=true; });
+
+  function taskWindow(t){
+    const s=t._computedFecha || t.fecha;
+    const e=t._computedFechaFin || t.fechaFin || s;
+    return s ? {start:new Date(s+'T00:00:00'), end:new Date(e+'T00:00:00')} : null;
+  }
+
+  for(let pass=0; pass<allTasks.length+1; pass++){
+    let changed=false;
+    allTasks.forEach(t=>{
+      if(resolved[t.id]) return;
+      const dur=Math.max(parseInt(t.duracion)||1,1);
+      const rels = t.relaciones && t.relaciones.length ? t.relaciones
+        : (t.relType && t.relTaskId ? [{tipo:t.relType, taskId:t.relTaskId}]
+          : (t.depId ? [{tipo:'after', taskId:t.depId}] : []));
+      if(!rels.length) return;
+      const allResolved = rels.every(r => { const a=taskById[r.taskId]; return a && (a.fecha || a._computedFecha); });
+      if(!allResolved) return;
+      let earliestStart=null, latestBeforeEnd=null;
+      rels.forEach(rel=>{
+        const anchor=taskById[rel.taskId]; if(!anchor) return;
+        const w=taskWindow(anchor); if(!w) return;
+        if(rel.tipo==='after'){
+          const candidate=new Date(w.end); candidate.setDate(candidate.getDate()+1);
+          if(!earliestStart || candidate>earliestStart) earliestStart=candidate;
+        }else if(rel.tipo==='during'){
+          if(!earliestStart || w.start>earliestStart) earliestStart=new Date(w.start);
+        }else if(rel.tipo==='before'){
+          const lastDay=new Date(w.start); lastDay.setDate(lastDay.getDate()-1);
+          if(!latestBeforeEnd || lastDay<latestBeforeEnd) latestBeforeEnd=lastDay;
+        }
+      });
+      let start=null;
+      if(latestBeforeEnd && !earliestStart){ start=new Date(latestBeforeEnd); start.setDate(start.getDate()-dur+1); }
+      else if(earliestStart){ start=new Date(earliestStart); }
+      if(!start) return;
+      const end=new Date(start); end.setDate(end.getDate()+dur-1);
+      t._computedFecha=toISODateLocal(start);
+      t._computedFechaFin=toISODateLocal(end);
+      resolved[t.id]=true; changed=true;
+    });
+    if(!changed) break;
+  }
+}
+
+function toISODateLocal(d){
+  const x=new Date(d); x.setHours(12,0,0,0);
+  return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0');
+}
+
+function scheduleTaskStart(t){ return new Date((t.fecha||t._computedFecha)+'T00:00:00'); }
+function scheduleTaskEnd(t){ return new Date((t.fechaFin||t._computedFechaFin||t.fecha||t._computedFecha)+'T00:00:00'); }
+function taskTouchesRange(t, a, b){
+  if(!(t.fecha||t._computedFecha)) return false;
+  const s=scheduleTaskStart(t), e=scheduleTaskEnd(t);
+  const start=new Date(a); start.setHours(0,0,0,0);
+  const end=new Date(b); end.setHours(23,59,59,999);
+  return s <= end && e >= start;
+}
+function isTaskOverdue(t, today){
+  if((t.estado||'pendiente')==='hecho' || !(t.fecha||t._computedFecha)) return false;
+  const e=scheduleTaskEnd(t); e.setHours(23,59,59,999);
+  return e < today;
+}
+function taskRelations(t){
+  return t.relaciones && t.relaciones.length ? t.relaciones
+    : (t.relType && t.relTaskId ? [{tipo:t.relType,taskId:t.relTaskId}] : (t.depId ? [{tipo:'after',taskId:t.depId}] : []));
+}
+function taskIsBlocked(t, allTasks){
+  if((t.estado||'pendiente')==='hecho') return false;
+  return taskRelations(t).some(r=>{
+    if(r.tipo!=='after') return false;
+    const dep=allTasks.find(x=>x.id===r.taskId);
+    return dep && (dep.estado||'pendiente')!=='hecho';
+  });
+}
+function calendarTaskHtml(t, today){
+  const state=t.estado||'pendiente';
+  const dur=Math.max(1, Math.round((scheduleTaskEnd(t)-scheduleTaskStart(t))/86400000)+1);
+  const cls = `${state==='hecho'?'done ':''}${isTaskOverdue(t,today)?'overdue ':''}${!t.fecha?'computed ':''}`;
+  return `<div class="calendar-task ${cls}" draggable="true" data-id="${t.id}" title="${htmlSafe(t.texto||'Tarea')} · ${htmlSafe(state)}${!t.fecha?' · fecha estimada':''}">
+    <span class="calendar-task-dot" style="background:${t.roomColor};color:${t.roomColor}"></span>
+    <span class="calendar-task-text">${htmlSafe(t.texto||'Sin título')}</span>
+    <span class="calendar-task-meta">${dur>1?dur+'d':''}${!t.fecha?'~':''}</span>
+  </div>`;
+}
+function scheduleChipHtml(t){
+  return `<div class="schedule-chip" draggable="true" data-id="${t.id}" onclick="editTaskById('${t.id}')">
+    <span class="calendar-task-dot" style="background:${t.roomColor};color:${t.roomColor}"></span>
+    <div class="schedule-chip-main"><div class="schedule-chip-title">${htmlSafe(t.texto||'Sin título')}</div><div class="schedule-chip-sub">${htmlSafe(t.roomName||'')} · ${htmlSafe(t.estado||'pendiente')}</div></div>
+  </div>`;
+}
+function scheduleMiniHtml(t){
+  const s=t.fecha||t._computedFecha;
+  return `<div class="schedule-mini-item" onclick="editTaskById('${t.id}')"><span class="calendar-task-dot" style="background:${t.roomColor};color:${t.roomColor}"></span><div class="schedule-chip-title">${htmlSafe(t.texto||'Sin título')}</div><div class="schedule-mini-date">${htmlSafe(s)}</div></div>`;
+}
+function enableCalendarInteractions(){
+  document.querySelectorAll('.calendar-task,.schedule-chip').forEach(el=>{
+    el.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', el.dataset.id); });
+    el.addEventListener('click', e => { e.stopPropagation(); editTaskById(el.dataset.id); });
+  });
+  document.querySelectorAll('.calendar-day').forEach(day=>{
+    day.addEventListener('dragover', e => { e.preventDefault(); day.classList.add('drag-over'); });
+    day.addEventListener('dragleave', () => day.classList.remove('drag-over'));
+    day.addEventListener('drop', e => {
+      e.preventDefault(); day.classList.remove('drag-over');
+      const id=e.dataTransfer.getData('text/plain'); if(!id) return;
+      const f=findTaskIndexById(id); if(!f) return;
+      const t=appState.tasks[f.roomId][f.idx];
+      const dur=Math.max(1, parseInt(t.duracion)|| (t.fecha&&t.fechaFin ? Math.round((new Date(t.fechaFin)-new Date(t.fecha))/86400000)+1 : 1));
+      saveTaskDateById(id, day.dataset.date, dur);
+      showNotif('Tarea movida al calendario');
+    });
+  });
+}
+function moveScheduleMonth(delta){
+  const base = window.scheduleCursorDate ? new Date(window.scheduleCursorDate) : new Date();
+  base.setMonth(base.getMonth()+delta,1);
+  window.scheduleCursorDate = base;
+  renderGantt();
+}
+function goScheduleToday(){
+  const t=new Date(); window.scheduleCursorDate = new Date(t.getFullYear(), t.getMonth(), 1); renderGantt();
+}
+function showCalendarDay(dateStr){
+  const tasks=collectScheduleTasks(); resolveScheduleDates(tasks);
+  const d=new Date(dateStr+'T00:00:00');
+  const list=tasks.filter(t=>taskTouchesRange(t,d,d)).sort((a,b)=>(a.fecha||a._computedFecha||'').localeCompare(b.fecha||b._computedFecha||''));
+  if(!list.length){ showNotif('No hay tareas ese día'); return; }
+  const msg=list.slice(0,8).map(t=>'• '+(t.texto||'Sin título')).join('\n');
+  alert('Tareas del '+dateStr+'\n\n'+msg+(list.length>8?'\n…':'') );
+}
+window.moveScheduleMonth = moveScheduleMonth;
+window.goScheduleToday = goScheduleToday;
+window.showCalendarDay = showCalendarDay;
 
 function saveTaskDateById(id, startDate, durDays){
   const f=findTaskIndexById(id); if(!f) return;
@@ -5130,3 +5406,27 @@ updateTenemosHeader();
 </script>
 </body>
 </html>
+<!-- FIX visible Fotos nav v2 -->
+<style>
+/* Asegura que la pestaña Fotos se vea en escritorio y no quede escondida por overflow */
+@media (min-width:701px){
+  header{flex-wrap:wrap!important;align-items:center!important;}
+  .global-nav{display:flex!important;flex-wrap:wrap!important;overflow:visible!important;justify-content:center!important;row-gap:7px!important;max-width:none!important;}
+  #gnav-tareas{order:1!important}
+  #gnav-compra{order:2!important}
+  #gnav-tenemos{order:3!important}
+  #gnav-herramientas{order:4!important}
+  #gnav-preguntas{order:5!important}
+  #gnav-fotos{order:6!important;display:inline-flex!important;visibility:visible!important;opacity:1!important;border-color:rgba(124,247,212,.45)!important;background:linear-gradient(135deg,rgba(124,247,212,.16),rgba(138,167,255,.12))!important;color:#fff!important;}
+  #gnav-fotos .gnav-main::before{content:'📷 ';letter-spacing:0;}
+  #gnav-gantt{order:7!important}
+  #gnav-personas{order:8!important}
+  #gnav-hoy{order:9!important}
+  #gnav-novedades{order:10!important}
+}
+@media (max-width:700px){
+  #gnav-tareas{order:1!important} #gnav-compra{order:2!important} #gnav-tenemos{order:3!important}
+  #gnav-herramientas{order:4!important} #gnav-preguntas{order:5!important} #gnav-fotos{order:6!important;display:inline-flex!important;visibility:visible!important;opacity:1!important;border-color:rgba(124,247,212,.4)!important;background:rgba(124,247,212,.1)!important;color:#fff!important;}
+  #gnav-hoy{order:7!important} #gnav-novedades{order:8!important} #gnav-gantt{order:9!important}
+}
+</style>
