@@ -1450,6 +1450,22 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
 .schedule-shell{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}.schedule-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}.schedule-title{display:flex;flex-direction:column;gap:3px}.schedule-title strong{font-size:1.45rem;color:#fff;letter-spacing:-.03em}.schedule-title span{font-size:.78rem;color:var(--muted);font-family:'DM Mono',monospace}.schedule-nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.schedule-nav button{white-space:nowrap}.calendar-board{border:1px solid #ffffff14;background:linear-gradient(180deg,#09111c,#070b12);border-radius:24px;overflow:hidden;box-shadow:0 24px 80px #0006}.calendar-weekdays{display:grid;grid-template-columns:repeat(7,1fr);background:#ffffff07;border-bottom:1px solid #ffffff10}.calendar-weekday{padding:10px 8px;font-family:'DM Mono',monospace;font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;text-align:center}.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(112px,1fr));}.calendar-day{min-height:138px;border-right:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d;padding:8px;background:rgba(255,255,255,.018);position:relative;transition:.15s}.calendar-day:nth-child(7n){border-right:0}.calendar-day.other-month{opacity:.42;background:rgba(255,255,255,.01)}.calendar-day.today{background:linear-gradient(180deg,rgba(255,207,90,.13),rgba(101,167,255,.055));box-shadow:inset 0 0 0 1px rgba(255,207,90,.25)}.calendar-day.drag-over{outline:2px dashed var(--accent);outline-offset:-6px;background:rgba(255,207,90,.1)}.calendar-day-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:8px}.calendar-day-num{font-family:'DM Mono',monospace;font-size:.78rem;color:#fff}.calendar-day.today .calendar-day-num{color:var(--accent)}.calendar-day-count{font-size:.58rem;color:var(--muted);font-family:'DM Mono',monospace}.calendar-task{display:flex;align-items:center;gap:6px;width:100%;margin:4px 0;padding:6px 7px;border-radius:10px;border:1px solid #ffffff18;background:#ffffff08;cursor:grab;min-height:30px;box-shadow:0 8px 18px #0003}.calendar-task:active{cursor:grabbing}.calendar-task:hover{border-color:#ffcf5a77;transform:translateY(-1px)}.calendar-task.done{opacity:.55;text-decoration:none}.calendar-task.overdue{border-color:rgba(255,93,93,.55);background:rgba(255,93,93,.08)}.calendar-task.computed{border-style:dashed;opacity:.72}.calendar-task-dot{width:8px;height:8px;border-radius:999px;flex:0 0 auto;box-shadow:0 0 14px currentColor}.calendar-task-text{font-size:.72rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}.calendar-task-meta{margin-left:auto;font-size:.58rem;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap}.calendar-more{margin-top:5px;border:0;background:#ffffff08;color:var(--accent);font-family:'DM Mono',monospace;font-size:.62rem;border-radius:999px;padding:5px 8px;cursor:pointer}.schedule-side{display:flex;flex-direction:column;gap:12px}.schedule-card{border:1px solid #ffffff14;background:linear-gradient(180deg,#ffffff08,#ffffff03);border-radius:22px;padding:14px;box-shadow:0 18px 50px #0004}.schedule-card h3{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:.13em;margin-bottom:10px}.schedule-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}.schedule-metric{border:1px solid #ffffff10;background:#00000024;border-radius:14px;padding:10px}.schedule-metric b{font-family:'DM Mono',monospace;font-size:1.2rem;color:#fff;display:block}.schedule-metric span{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.schedule-unscheduled-list{display:flex;flex-direction:column;gap:7px;max-height:360px;overflow:auto;padding-right:2px}.schedule-chip{display:flex;align-items:center;gap:8px;border:1px solid #ffffff14;background:#00000025;border-radius:13px;padding:9px;cursor:grab}.schedule-chip:hover{border-color:#65a7ff77;background:#65a7ff0e}.schedule-chip:active{cursor:grabbing}.schedule-chip-main{min-width:0;flex:1}.schedule-chip-title{font-size:.78rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff}.schedule-chip-sub{font-size:.62rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px}.schedule-empty{border:1px dashed #ffffff20;border-radius:16px;padding:18px;color:var(--muted);text-align:center;background:#ffffff04}.schedule-mini-list{display:flex;flex-direction:column;gap:6px}.schedule-mini-item{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:8px;border:1px solid #ffffff10;border-radius:12px;background:#00000022;cursor:pointer}.schedule-mini-item:hover{border-color:#ffcf5a66}.schedule-mini-date{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted)}@media(max-width:1050px){.schedule-shell{grid-template-columns:1fr}.schedule-side{display:grid;grid-template-columns:1fr 1fr}.calendar-grid{grid-template-columns:repeat(7,minmax(92px,1fr))}.calendar-day{min-height:125px}}@media(max-width:760px){.schedule-side{display:flex}.calendar-board{overflow-x:auto}.calendar-weekdays,.calendar-grid{min-width:760px}.schedule-top{align-items:flex-start}.schedule-title strong{font-size:1.15rem}.schedule-nav{width:100%}.schedule-nav button,.schedule-nav select{flex:1}}
 
 
+/* GOOGLE CALENDAR SYNC */
+.gcal-panel{border:1px solid #ffffff14;background:linear-gradient(135deg,#4285f414,#34a85310);border-radius:18px;padding:12px;margin:0 0 12px 0;display:grid;gap:10px}
+.gcal-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.gcal-panel-title{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:.14em}
+.gcal-panel-sub{font-size:.76rem;color:var(--muted);line-height:1.35;margin-top:2px}
+.gcal-controls{display:grid;grid-template-columns:minmax(220px,1fr) minmax(180px,.8fr) minmax(180px,.8fr) auto auto;gap:8px;align-items:end}
+.gcal-controls label{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:4px}
+.gcal-controls input{width:100%;background:#0b111a;border:1px solid #ffffff18;color:var(--text);border-radius:12px;padding:9px 10px}
+.gcal-status{font-family:'DM Mono',monospace;font-size:.64rem;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.gcal-dot{width:8px;height:8px;border-radius:999px;background:#777;box-shadow:0 0 14px currentColor}.gcal-dot.ok{background:var(--ok);color:var(--ok)}.gcal-dot.warn{background:var(--warn);color:var(--warn)}.gcal-dot.bad{background:var(--danger);color:var(--danger)}
+.calendar-task-time{font-family:'DM Mono',monospace;font-size:.56rem;color:var(--muted);background:#0005;border:1px solid #ffffff10;border-radius:999px;padding:2px 5px;white-space:nowrap}
+.gcal-badge{font-family:'DM Mono',monospace;font-size:.55rem;color:#071017;background:linear-gradient(135deg,#8ab4f8,#34a853);border-radius:999px;padding:2px 5px;font-weight:700}
+@media(max-width:980px){.gcal-controls{grid-template-columns:1fr 1fr}.gcal-controls button{width:100%}}
+@media(max-width:640px){.gcal-controls{grid-template-columns:1fr}.gcal-panel-head{align-items:flex-start}}
+
+
 /* GALERÍA GLOBAL DE FOTOS */
 .gallery-hero{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;margin-bottom:14px;border:1px solid #ffffff14;background:linear-gradient(135deg,#7cf7d414,#8aa7ff12);border-radius:22px;padding:16px}
 .gallery-hero h2{font-size:1.2rem;color:#fff;margin-bottom:4px;letter-spacing:-.02em}
@@ -1715,7 +1731,8 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
     <div><label>Estado</label><select id="em-state"><option value="pendiente">pendiente</option><option value="en curso">en curso</option><option value="hecho">hecho</option></select></div>
     <div><label>Personas asignadas</label><div class="person-check-grid" id="em-persons"></div></div>
     <div><label>Habitaciones (puede ser varias)</label><div class="room-check-grid" id="em-rooms"></div></div>
-    <div class="form-row"><div style="flex:1"><label>Inicio</label><input id="em-date" type="date"></div><div style="flex:1"><label>Fin previsto</label><input id="em-datefin" type="date"></div></div>
+    <div class="form-row"><div style="flex:1"><label>Inicio</label><input id="em-date" type="date"></div><div style="flex:1"><label>Hora inicio</label><input id="em-time" type="time"></div></div>
+    <div class="form-row"><div style="flex:1"><label>Fin previsto</label><input id="em-datefin" type="date"></div><div style="flex:1"><label>Hora fin</label><input id="em-timefin" type="time"></div></div>
     <div><label>Duración estimada (días) — si no hay fechas</label><input id="em-duracion" type="number" min="1" placeholder="Ej: 3"></div>
     <div>
       <label>Relaciones de orden en el cronograma</label>
@@ -1934,12 +1951,26 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
     </div>
   </div>
   <div class="global-overlay-body" style="display:flex;flex-direction:column;height:calc(100% - 60px);padding-bottom:0">
+    <div class="gcal-panel" id="gcal-panel">
+      <div class="gcal-panel-head">
+        <div><div class="gcal-panel-title">Google Calendar</div><div class="gcal-panel-sub">Sincronización bidireccional por OAuth. Para cambios desde Google, refresca automáticamente cada 30 segundos mientras esta pestaña está abierta.</div></div>
+        <div class="gcal-status"><span class="gcal-dot" id="gcal-dot"></span><span id="gcal-status-text">Sin configurar</span></div>
+      </div>
+      <div class="gcal-controls">
+        <div><label>Client ID OAuth</label><input id="gcal-client-id" placeholder="xxxxx.apps.googleusercontent.com"></div>
+        <div><label>API Key</label><input id="gcal-api-key" placeholder="AIza..." type="password"></div>
+        <div><label>Calendar ID</label><input id="gcal-calendar-id" placeholder="primary o ID del calendario"></div>
+        <button class="btn-secondary" onclick="saveGoogleCalendarSettings()">Guardar</button>
+        <button class="btn-primary" id="gcal-connect-btn" onclick="connectGoogleCalendar()">Conectar</button>
+      </div>
+      <div class="gcal-status"><button class="btn-secondary" onclick="syncGoogleCalendarNow()">Sincronizar ahora</button><button class="btn-secondary" onclick="disconnectGoogleCalendar()">Desconectar</button><span id="gcal-last-sync">—</span></div>
+    </div>
     <div class="gantt-legend" id="gantt-legend"></div>
     <div class="gantt-container" id="gantt-container">
       <div id="gantt-inner"></div>
     </div>
     <div style="padding:10px 0;font-size:0.68rem;color:var(--muted);font-family:'DM Mono',monospace;flex-shrink:0">
-      Las fechas de inicio/fin se toman de las tareas. Las flechas indican dependencias (una tarea debe completarse antes de la siguiente).
+      Las fechas y horas se toman de las tareas. Si conectas Google Calendar, los cambios se envían en ambos sentidos mientras la web esté abierta.
     </div>
   </div>
 </div>
@@ -2191,6 +2222,7 @@ function save(){
 }
 
 load();
+setTimeout(()=>{ const cfg=googleCalendarSettings(); if(cfg.connected) startGoogleCalendarAutoSync(); }, 1500);
 
 function uid(){ return Math.random().toString(36).slice(2,9); }
 function isAdmin(){ return activePersonId === 'ruben'; }
@@ -2569,7 +2601,7 @@ function renderTasks(room){
       <div class="add-form">
         <input id="nt-text" placeholder="Descripción de la tarea..." onkeydown="if(event.key==='Enter')addTask('${room.id}')">
         <div class="form-row"><select id="nt-state"><option value="pendiente">pendiente</option><option value="en curso">en curso</option><option value="hecho">hecho</option></select><select id="nt-person" class="person-assign-select">${personSelectOptions([])}</select></div>
-        <div style="display:flex;gap:6px;margin-bottom:6px"><div style="flex:1"><div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">INICIO</div><input id="nt-date" type="date" style="width:100%;margin:0"></div><div style="flex:1"><div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">FIN PREVISTO</div><input id="nt-datefin" type="date" style="width:100%;margin:0"></div></div>
+        <div style="display:grid;grid-template-columns:1fr 110px;gap:6px;margin-bottom:6px"><div><div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">INICIO</div><input id="nt-date" type="date" style="width:100%;margin:0"></div><div><div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">HORA</div><input id="nt-time" type="time" style="width:100%;margin:0"></div><div><div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">FIN PREVISTO</div><input id="nt-datefin" type="date" style="width:100%;margin:0"></div><div><div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">HORA FIN</div><input id="nt-timefin" type="time" style="width:100%;margin:0"></div></div>
         ${allTasksForDep.length ? `<div style="font-size:0.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:3px">DEPENDE DE (se hace después de...)</div><select id="nt-dep" style="width:100%;margin-bottom:6px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:0.82rem"><option value="">— Sin dependencia —</option>${depOptions}</select>` : ''}
         <input id="nt-nota" placeholder="Nota adicional (opcional)..." style="margin-bottom:8px"><button class="btn-primary" onclick="addTask('${room.id}')">+ Añadir tarea</button>
       </div>`;
@@ -2673,12 +2705,14 @@ function addTask(id){
   if(!txt){ showNotif('Escribe una descripción'); return; }
   const depId = document.getElementById('nt-dep')?.value || '';
   // Multi-room: primary room is always included; user can add others in edit
-  appState.tasks[id].push({
+  const newTask = {
     id: uid(),
     texto: txt,
     estado: document.getElementById('nt-state')?.value||'pendiente',
     fecha: document.getElementById('nt-date')?.value||'',
     fechaFin: document.getElementById('nt-datefin')?.value||'',
+    horaInicio: document.getElementById('nt-time')?.value||'',
+    horaFin: document.getElementById('nt-timefin')?.value||'',
     nota: document.getElementById('nt-nota')?.value||'',
     personIds: personSelectToIds(document.getElementById('nt-person')?.value||''),
     personId: personSelectToIds(document.getElementById('nt-person')?.value||'')[0]||'',
@@ -2686,10 +2720,12 @@ function addTask(id){
     rooms: [id],   // multi-room: list of room ids
     duracion: '',  // estimated days
     relType: '',   // 'before'|'after'|'during'
-    relTaskId: ''  // related task id for relative positioning
-  });
+    relTaskId: '',  // related task id for relative positioning
+    googleNeedsSync: true
+  };
+  appState.tasks[id].push(newTask);
   appState.showTaskForm[id]=false;
-  save(); renderPanel(); showNotif('Tarea añadida ✓');
+  save(); renderPanel(); queueGoogleCalendarSync(); showNotif('Tarea añadida ✓');
 }
 
 function moveTaskToTrash(task, roomId){
@@ -2720,7 +2756,7 @@ let _allTasksForRel = []; // cached list for relation dropdowns
 
 function openNewTaskModal(defaultRoomId) {
   const roomId = defaultRoomId || appState.activeRoom || ROOMS_DEF[0].id;
-  const t = { id: uid(), texto:'', estado:'pendiente', fecha:'', fechaFin:'', duracion:'', nota:'', relaciones:[], rooms: appState.activeRoom ? [appState.activeRoom] : [] };
+  const t = { id: uid(), texto:'', estado:'pendiente', fecha:'', fechaFin:'', horaInicio:'', horaFin:'', duracion:'', nota:'', relaciones:[], rooms: appState.activeRoom ? [appState.activeRoom] : [] };
   editCtx = { roomId, idx:-1, newTask:true, draft:t };
   fillTaskModal(t, roomId, true);
 }
@@ -2739,6 +2775,8 @@ function fillTaskModal(t, roomId, isNew) {
   document.getElementById('em-state').value = t.estado || 'pendiente';
   document.getElementById('em-date').value = t.fecha || '';
   document.getElementById('em-datefin').value = t.fechaFin || '';
+  document.getElementById('em-time').value = t.horaInicio || '';
+  document.getElementById('em-timefin').value = t.horaFin || '';
   document.getElementById('em-duracion').value = t.duracion || '';
   document.getElementById('em-nota').value = t.nota || '';
   renderPersonChecks(personIds(t));
@@ -2876,6 +2914,8 @@ function saveEditTask() {
     estado: document.getElementById('em-state').value,
     fecha: document.getElementById('em-date').value,
     fechaFin: document.getElementById('em-datefin').value,
+    horaInicio: document.getElementById('em-time').value,
+    horaFin: document.getElementById('em-timefin').value,
     duracion: document.getElementById('em-duracion').value,
     nota: document.getElementById('em-nota').value,
     personIds: getSelectedPersonChecks(),
@@ -2928,6 +2968,8 @@ function saveEditTask() {
     if((t.estado||'pendiente') !== updated.estado) changes.push(`estado: ${t.estado||'pendiente'} → ${updated.estado}`);
     if((t.fecha||'') !== updated.fecha) changes.push(`inicio: ${t.fecha||'—'} → ${updated.fecha||'—'}`);
     if((t.fechaFin||'') !== updated.fechaFin) changes.push(`fin: ${t.fechaFin||'—'} → ${updated.fechaFin||'—'}`);
+    if((t.horaInicio||'') !== updated.horaInicio) changes.push(`hora inicio: ${t.horaInicio||'—'} → ${updated.horaInicio||'—'}`);
+    if((t.horaFin||'') !== updated.horaFin) changes.push(`hora fin: ${t.horaFin||'—'} → ${updated.horaFin||'—'}`);
     const prevPeople = personIds(t).map(personName).filter(Boolean).sort().join(', ');
     const newPeople = (updated.personIds||[]).map(personName).filter(Boolean).sort().join(', ');
     if(prevPeople !== newPeople) changes.push(`personas: ${prevPeople||'nadie'} → ${newPeople||'nadie'}`);
@@ -2938,7 +2980,9 @@ function saveEditTask() {
       logActivity('Tarea editada', `"${updated.texto}" · ${changes.join(' · ')}`, {section:'tareas', roomId:checkedRooms[0]||roomId});
     }
   }
+  markTaskNeedsGoogleSync(updated);
   closeEditModal(); save(); renderEverything();
+  queueGoogleCalendarSync();
   showNotif(wasNew ? 'Tarea añadida ✓' : 'Tarea guardada ✓');
 }
 
@@ -4918,6 +4962,7 @@ window.deleteHerrImg = deleteHerrImg;
 let ganttFilter = 'todas';
 
 function renderGantt() {
+  initGoogleCalendarPanel();
   const inner = document.getElementById('gantt-inner');
   const toolbar = document.getElementById('gantt-toolbar');
   const legend = document.getElementById('gantt-legend');
@@ -4978,7 +5023,7 @@ function renderGantt() {
     const inMonth = day.getMonth() === monthStart.getMonth();
     const isToday = day.toDateString() === today.toDateString();
     const tasks = withDate.filter(t => taskTouchesRange(t, day, day))
-      .sort((a,b)=>(a.fecha||a._computedFecha||'').localeCompare(b.fecha||b._computedFecha||''));
+      .sort((a,b)=>((a.fecha||a._computedFecha||'')+(a.horaInicio||'99:99')).localeCompare((b.fecha||b._computedFecha||'')+(b.horaInicio||'99:99')));
     const shown = tasks.slice(0,4);
     return `
       <div class="calendar-day ${inMonth?'':'other-month'} ${isToday?'today':''}" data-date="${dateStr}">
@@ -4993,7 +5038,7 @@ function renderGantt() {
 
   const upcoming = withDate
     .filter(t => new Date((t.fecha||t._computedFecha)+'T00:00:00') >= today && (t.estado||'pendiente') !== 'hecho')
-    .sort((a,b)=>(a.fecha||a._computedFecha||'').localeCompare(b.fecha||b._computedFecha||''))
+    .sort((a,b)=>((a.fecha||a._computedFecha||'')+(a.horaInicio||'99:99')).localeCompare((b.fecha||b._computedFecha||'')+(b.horaInicio||'99:99')))
     .slice(0,8);
 
   inner.innerHTML = `
@@ -5008,6 +5053,7 @@ function renderGantt() {
             <button class="btn-secondary" onclick="moveScheduleMonth(-1)">← Mes anterior</button>
             <button class="btn-secondary" onclick="goScheduleToday()">Hoy</button>
             <button class="btn-secondary" onclick="moveScheduleMonth(1)">Mes siguiente →</button>
+            <button class="btn-secondary" onclick="syncGoogleCalendarNow()">Sync Google</button>
           </div>
         </div>
         <div class="calendar-board">
@@ -5109,8 +5155,13 @@ function toISODateLocal(d){
   return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0');
 }
 
-function scheduleTaskStart(t){ return new Date((t.fecha||t._computedFecha)+'T00:00:00'); }
-function scheduleTaskEnd(t){ return new Date((t.fechaFin||t._computedFechaFin||t.fecha||t._computedFecha)+'T00:00:00'); }
+function taskDateTimeISO(dateStr, timeStr, endOfDay=false){
+  if(!dateStr) return '';
+  const cleanTime = timeStr || (endOfDay ? '23:59' : '00:00');
+  return dateStr + 'T' + cleanTime + ':00';
+}
+function scheduleTaskStart(t){ return new Date(taskDateTimeISO(t.fecha||t._computedFecha, t.horaInicio, false)); }
+function scheduleTaskEnd(t){ return new Date(taskDateTimeISO(t.fechaFin||t._computedFechaFin||t.fecha||t._computedFecha, t.horaFin, !(t.horaInicio||t.horaFin))); }
 function taskTouchesRange(t, a, b){
   if(!(t.fecha||t._computedFecha)) return false;
   const s=scheduleTaskStart(t), e=scheduleTaskEnd(t);
@@ -5139,21 +5190,24 @@ function calendarTaskHtml(t, today){
   const state=t.estado||'pendiente';
   const dur=Math.max(1, Math.round((scheduleTaskEnd(t)-scheduleTaskStart(t))/86400000)+1);
   const cls = `${state==='hecho'?'done ':''}${isTaskOverdue(t,today)?'overdue ':''}${!t.fecha?'computed ':''}`;
+  const timeLabel = t.horaInicio ? (t.horaFin ? `${t.horaInicio}-${t.horaFin}` : t.horaInicio) : '';
   return `<div class="calendar-task ${cls}" draggable="true" data-id="${t.id}" title="${htmlSafe(t.texto||'Tarea')} · ${htmlSafe(state)}${!t.fecha?' · fecha estimada':''}">
     <span class="calendar-task-dot" style="background:${t.roomColor};color:${t.roomColor}"></span>
     <span class="calendar-task-text">${htmlSafe(t.texto||'Sin título')}</span>
+    ${timeLabel?`<span class="calendar-task-time">${htmlSafe(timeLabel)}</span>`:''}
+    ${t.googleEventId?'<span class="gcal-badge">G</span>':''}
     <span class="calendar-task-meta">${dur>1?dur+'d':''}${!t.fecha?'~':''}</span>
   </div>`;
 }
 function scheduleChipHtml(t){
   return `<div class="schedule-chip" draggable="true" data-id="${t.id}" onclick="editTaskById('${t.id}')">
     <span class="calendar-task-dot" style="background:${t.roomColor};color:${t.roomColor}"></span>
-    <div class="schedule-chip-main"><div class="schedule-chip-title">${htmlSafe(t.texto||'Sin título')}</div><div class="schedule-chip-sub">${htmlSafe(t.roomName||'')} · ${htmlSafe(t.estado||'pendiente')}</div></div>
+    <div class="schedule-chip-main"><div class="schedule-chip-title">${htmlSafe(t.texto||'Sin título')}</div><div class="schedule-chip-sub">${htmlSafe(t.roomName||'')} · ${htmlSafe(t.estado||'pendiente')}${t.horaInicio?' · '+htmlSafe(t.horaInicio):''}${t.googleEventId?' · Google':''}</div></div>
   </div>`;
 }
 function scheduleMiniHtml(t){
   const s=t.fecha||t._computedFecha;
-  return `<div class="schedule-mini-item" onclick="editTaskById('${t.id}')"><span class="calendar-task-dot" style="background:${t.roomColor};color:${t.roomColor}"></span><div class="schedule-chip-title">${htmlSafe(t.texto||'Sin título')}</div><div class="schedule-mini-date">${htmlSafe(s)}</div></div>`;
+  return `<div class="schedule-mini-item" onclick="editTaskById('${t.id}')"><span class="calendar-task-dot" style="background:${t.roomColor};color:${t.roomColor}"></span><div class="schedule-chip-title">${htmlSafe(t.texto||'Sin título')}</div><div class="schedule-mini-date">${htmlSafe(s)}${t.horaInicio?' · '+htmlSafe(t.horaInicio):''}</div></div>`;
 }
 function enableCalendarInteractions(){
   document.querySelectorAll('.calendar-task,.schedule-chip').forEach(el=>{
@@ -5174,6 +5228,269 @@ function enableCalendarInteractions(){
     });
   });
 }
+
+// ── GOOGLE CALENDAR SYNC ──────────────────────────────────────────────
+const GCAL_DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
+const GCAL_SCOPES = 'https://www.googleapis.com/auth/calendar.events';
+const GCAL_SETTINGS_KEY = 'reformaGT.googleCalendar.' + proyectoId;
+let gcalTokenClient = null;
+let gcalReady = false;
+let gcalSyncTimer = null;
+let gcalSyncing = false;
+let gcalLastPullISO = localStorage.getItem(GCAL_SETTINGS_KEY + '.lastPull') || '';
+
+function googleCalendarSettings(){
+  try { return JSON.parse(localStorage.getItem(GCAL_SETTINGS_KEY) || '{}'); } catch(e){ return {}; }
+}
+function setGoogleCalendarSettings(cfg){ localStorage.setItem(GCAL_SETTINGS_KEY, JSON.stringify(cfg||{})); }
+function initGoogleCalendarPanel(){
+  const cfg=googleCalendarSettings();
+  const cid=document.getElementById('gcal-client-id'); if(cid && !cid.value) cid.value=cfg.clientId||'';
+  const api=document.getElementById('gcal-api-key'); if(api && !api.value) api.value=cfg.apiKey||'';
+  const cal=document.getElementById('gcal-calendar-id'); if(cal && !cal.value) cal.value=cfg.calendarId||'primary';
+  updateGoogleCalendarStatus(cfg.connected?'Configurado · pulsa Conectar si no hay sesión':'Sin configurar', cfg.connected?'warn':'');
+}
+function saveGoogleCalendarSettings(){
+  const cfg={
+    clientId:(document.getElementById('gcal-client-id')?.value||'').trim(),
+    apiKey:(document.getElementById('gcal-api-key')?.value||'').trim(),
+    calendarId:(document.getElementById('gcal-calendar-id')?.value||'primary').trim()||'primary',
+    connected:false
+  };
+  setGoogleCalendarSettings(cfg);
+  gcalReady=false; gcalTokenClient=null;
+  updateGoogleCalendarStatus('Configuración guardada. Ahora pulsa Conectar.', 'warn');
+}
+function updateGoogleCalendarStatus(text, kind=''){
+  const t=document.getElementById('gcal-status-text'); if(t) t.textContent=text;
+  const dot=document.getElementById('gcal-dot'); if(dot){ dot.className='gcal-dot '+(kind||''); }
+  const last=document.getElementById('gcal-last-sync');
+  if(last){
+    const v=localStorage.getItem(GCAL_SETTINGS_KEY + '.lastSyncLabel')||'—';
+    last.textContent = v==='—' ? 'Sin sincronizar todavía' : 'Última sync: '+v;
+  }
+}
+function loadScriptOnce(src){
+  return new Promise((resolve,reject)=>{
+    if(document.querySelector(`script[src="${src}"]`)) return resolve();
+    const sc=document.createElement('script'); sc.src=src; sc.async=true; sc.defer=true;
+    sc.onload=()=>resolve(); sc.onerror=()=>reject(new Error('No se pudo cargar '+src));
+    document.head.appendChild(sc);
+  });
+}
+async function ensureGoogleCalendarReady(){
+  const cfg=googleCalendarSettings();
+  if(!cfg.clientId || !cfg.apiKey){ updateGoogleCalendarStatus('Falta Client ID o API Key', 'bad'); return false; }
+  if(gcalReady) return true;
+  updateGoogleCalendarStatus('Cargando Google API…', 'warn');
+  await loadScriptOnce('https://apis.google.com/js/api.js');
+  await loadScriptOnce('https://accounts.google.com/gsi/client');
+  await new Promise(resolve=>window.gapi.load('client', resolve));
+  await window.gapi.client.init({ apiKey: cfg.apiKey, discoveryDocs: [GCAL_DISCOVERY_DOC] });
+  gcalTokenClient = window.google.accounts.oauth2.initTokenClient({
+    client_id: cfg.clientId,
+    scope: GCAL_SCOPES,
+    callback: () => {}
+  });
+  gcalReady=true;
+  return true;
+}
+async function connectGoogleCalendar(){
+  saveGoogleCalendarSettings();
+  const ok=await ensureGoogleCalendarReady().catch(err=>{ updateGoogleCalendarStatus(err.message||'Error al cargar Google', 'bad'); return false; });
+  if(!ok) return;
+  updateGoogleCalendarStatus('Esperando permiso de Google…', 'warn');
+  gcalTokenClient.callback = async (resp) => {
+    if(resp.error){ updateGoogleCalendarStatus('Permiso denegado: '+resp.error, 'bad'); return; }
+    const cfg=googleCalendarSettings(); cfg.connected=true; setGoogleCalendarSettings(cfg);
+    updateGoogleCalendarStatus('Conectado con Google Calendar', 'ok');
+    startGoogleCalendarAutoSync();
+    await syncGoogleCalendarNow();
+  };
+  gcalTokenClient.requestAccessToken({prompt:'consent'});
+}
+function disconnectGoogleCalendar(){
+  try{
+    const token=window.gapi?.client?.getToken?.();
+    if(token?.access_token) window.google?.accounts?.oauth2?.revoke?.(token.access_token);
+    window.gapi?.client?.setToken?.('');
+  }catch(e){}
+  const cfg=googleCalendarSettings(); cfg.connected=false; setGoogleCalendarSettings(cfg);
+  if(gcalSyncTimer) clearInterval(gcalSyncTimer); gcalSyncTimer=null;
+  updateGoogleCalendarStatus('Desconectado', '');
+}
+function startGoogleCalendarAutoSync(){
+  if(gcalSyncTimer) clearInterval(gcalSyncTimer);
+  gcalSyncTimer=setInterval(()=>{ if(document.visibilityState==='visible') syncGoogleCalendarNow(false); }, 30000);
+}
+function queueGoogleCalendarSync(){
+  const cfg=googleCalendarSettings();
+  if(!cfg.connected) return;
+  clearTimeout(window._gcalQueueTimer);
+  window._gcalQueueTimer=setTimeout(()=>syncGoogleCalendarNow(false), 1200);
+}
+function markTaskNeedsGoogleSync(t){ if(t) t.googleNeedsSync=true; }
+function taskGoogleHash(t){
+  return JSON.stringify({texto:t.texto||'',estado:t.estado||'',fecha:t.fecha||'',fechaFin:t.fechaFin||'',horaInicio:t.horaInicio||'',horaFin:t.horaFin||'',nota:t.nota||'',rooms:t.rooms||[],personIds:t.personIds||[]});
+}
+function taskToGoogleEvent(t){
+  const roomText=(t.rooms&&t.rooms.length?t.rooms:[t.roomId]).map(roomName).filter(Boolean).join(', ');
+  const people=(t.personIds||[]).map(personName).filter(Boolean).join(', ');
+  const description=[t.nota||'', roomText?'Habitación: '+roomText:'', people?'Personas: '+people:'', 'ID Reforma GT: '+t.id].filter(Boolean).join('\n');
+  const startDate=t.fecha || t._computedFecha;
+  const endDate=t.fechaFin || t._computedFechaFin || t.fecha || t._computedFecha;
+  const hasTime=!!(t.horaInicio||t.horaFin);
+  const ev={
+    summary: (t.texto||'Tarea reforma').slice(0,1024),
+    description,
+    extendedProperties:{ private:{ reformaGtTaskId:t.id, reformaGtProject:proyectoId } }
+  };
+  if(hasTime){
+    const startTime=t.horaInicio || '09:00';
+    const endTime=t.horaFin || addOneHour(startTime);
+    ev.start={dateTime:taskDateTimeISO(startDate,startTime,false), timeZone:'Europe/Madrid'};
+    ev.end={dateTime:taskDateTimeISO(endDate,endTime,false), timeZone:'Europe/Madrid'};
+  } else {
+    const exclusiveEnd=new Date((endDate||startDate)+'T12:00:00'); exclusiveEnd.setDate(exclusiveEnd.getDate()+1);
+    ev.start={date:startDate};
+    ev.end={date:toISODateLocal(exclusiveEnd)};
+  }
+  return ev;
+}
+function addOneHour(hhmm){
+  const [h,m]=(hhmm||'09:00').split(':').map(x=>parseInt(x,10)||0);
+  const d=new Date(); d.setHours(h,m,0,0); d.setHours(d.getHours()+1);
+  return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+}
+async function pushTasksToGoogle(calendarId){
+  const tasks=collectScheduleTasks(); resolveScheduleDates(tasks);
+  for(const t of tasks){
+    if(!(t.fecha||t._computedFecha)) continue;
+    const f=findTaskIndexById(t.id); if(!f) continue;
+    const real=appState.tasks[f.roomId][f.idx];
+    const currentHash=taskGoogleHash(real);
+    if(real.googleSyncedHash===currentHash && !real.googleNeedsSync) continue;
+    const body=taskToGoogleEvent({...real, roomId:t.roomId, _computedFecha:t._computedFecha, _computedFechaFin:t._computedFechaFin});
+    try{
+      let res;
+      if(real.googleEventId){
+        res=await window.gapi.client.calendar.events.update({calendarId, eventId:real.googleEventId, resource:body});
+      } else {
+        res=await window.gapi.client.calendar.events.insert({calendarId, resource:body});
+      }
+      real.googleEventId=res.result.id;
+      real.googleCalendarId=calendarId;
+      real.googleUpdated=res.result.updated||new Date().toISOString();
+      real.googleSyncedHash=currentHash;
+      delete real.googleNeedsSync;
+    }catch(err){
+      if(err?.status===404 || err?.result?.error?.code===404){
+        real.googleEventId=''; real.googleNeedsSync=true;
+      } else throw err;
+    }
+  }
+}
+async function pullGoogleToTasks(calendarId){
+  const updatedMin = gcalLastPullISO || new Date(Date.now()-1000*60*60*24*90).toISOString();
+  let pageToken='';
+  do{
+    const res=await window.gapi.client.calendar.events.list({
+      calendarId,
+      showDeleted:true,
+      singleEvents:true,
+      orderBy:'updated',
+      updatedMin,
+      maxResults:250,
+      pageToken:pageToken||undefined
+    });
+    const items=res.result.items||[];
+    for(const ev of items) await importGoogleEvent(calendarId, ev);
+    pageToken=res.result.nextPageToken||'';
+  }while(pageToken);
+  gcalLastPullISO=new Date(Date.now()-5000).toISOString();
+  localStorage.setItem(GCAL_SETTINGS_KEY + '.lastPull', gcalLastPullISO);
+}
+async function importGoogleEvent(calendarId, ev){
+  const privateProps=ev.extendedProperties?.private||{};
+  const reformaId=privateProps.reformaGtTaskId||'';
+  const existing = reformaId ? findTaskIndexById(reformaId) : findTaskIndexByGoogleEventId(ev.id);
+  if(ev.status==='cancelled'){
+    if(existing){ const t=appState.tasks[existing.roomId][existing.idx]; t.googleEventId=''; t.googleCalendarId=''; t.googleNeedsSync=true; }
+    return;
+  }
+  if(!ev.start || !ev.end) return;
+  const parsed=parseGoogleEventDates(ev);
+  if(!parsed.fecha) return;
+  if(existing){
+    const t=appState.tasks[existing.roomId][existing.idx];
+    if(t.googleUpdated && ev.updated && new Date(ev.updated) <= new Date(t.googleUpdated)) return;
+    t.texto=ev.summary||t.texto||'Evento Google';
+    t.fecha=parsed.fecha; t.fechaFin=parsed.fechaFin; t.horaInicio=parsed.horaInicio; t.horaFin=parsed.horaFin;
+    if(ev.description && !t.nota) t.nota=ev.description;
+    t.googleEventId=ev.id; t.googleCalendarId=calendarId; t.googleUpdated=ev.updated||new Date().toISOString();
+    t.googleSyncedHash=taskGoogleHash(t); delete t.googleNeedsSync;
+    return;
+  }
+  const roomId=guessRoomFromGoogleEvent(ev) || 'global';
+  const newTask={
+    id: uid(), texto: ev.summary||'Evento Google', estado:'pendiente', fecha:parsed.fecha, fechaFin:parsed.fechaFin,
+    horaInicio:parsed.horaInicio, horaFin:parsed.horaFin, nota:ev.description||'', personIds:[], personId:'', rooms:[roomId], duracion:'', relaciones:[], relType:'', relTaskId:'', depId:'',
+    googleEventId:ev.id, googleCalendarId:calendarId, googleUpdated:ev.updated||new Date().toISOString(), googleOrigin:'google'
+  };
+  newTask.googleSyncedHash=taskGoogleHash(newTask);
+  appState.tasks[roomId]=appState.tasks[roomId]||[];
+  appState.tasks[roomId].push(newTask);
+  logActivity('Evento importado de Google Calendar', newTask.texto, {section:'cronograma', roomId});
+}
+function parseGoogleEventDates(ev){
+  if(ev.start.date){
+    const end=new Date(ev.end.date+'T12:00:00'); end.setDate(end.getDate()-1);
+    return {fecha:ev.start.date, fechaFin:toISODateLocal(end), horaInicio:'', horaFin:''};
+  }
+  const s=new Date(ev.start.dateTime), e=new Date(ev.end.dateTime);
+  return {fecha:toISODateLocal(s), fechaFin:toISODateLocal(e), horaInicio:String(s.getHours()).padStart(2,'0')+':'+String(s.getMinutes()).padStart(2,'0'), horaFin:String(e.getHours()).padStart(2,'0')+':'+String(e.getMinutes()).padStart(2,'0')};
+}
+function guessRoomFromGoogleEvent(ev){
+  const text=((ev.summary||'')+' '+(ev.description||'')).toLowerCase();
+  const rd=ROOMS_DEF.find(r=> text.includes((r.shortName||'').toLowerCase()) || text.includes(r.name.toLowerCase()));
+  return rd?.id || '';
+}
+function findTaskIndexByGoogleEventId(eventId){
+  for(const rid of Object.keys(appState.tasks||{})){
+    const idx=(appState.tasks[rid]||[]).findIndex(t=>t.googleEventId===eventId);
+    if(idx>=0) return {roomId:rid, idx};
+  }
+  return null;
+}
+async function syncGoogleCalendarNow(show=true){
+  const cfg=googleCalendarSettings();
+  if(!cfg.connected && show){ updateGoogleCalendarStatus('Primero pulsa Conectar', 'warn'); return; }
+  if(gcalSyncing) return;
+  const ok=await ensureGoogleCalendarReady().catch(err=>{ updateGoogleCalendarStatus(err.message||'Error con Google', 'bad'); return false; });
+  if(!ok) return;
+  const token=window.gapi.client.getToken();
+  if(!token){
+    if(show) connectGoogleCalendar();
+    return;
+  }
+  gcalSyncing=true;
+  updateGoogleCalendarStatus('Sincronizando…', 'warn');
+  try{
+    const calendarId=cfg.calendarId||'primary';
+    await pullGoogleToTasks(calendarId);
+    await pushTasksToGoogle(calendarId);
+    save();
+    renderGantt(); updateHeader(); updateOverview(); updateFloorPlan();
+    const label=new Date().toLocaleString('es-ES',{dateStyle:'short',timeStyle:'short'});
+    localStorage.setItem(GCAL_SETTINGS_KEY + '.lastSyncLabel', label);
+    updateGoogleCalendarStatus('Sincronizado con Google Calendar', 'ok');
+  }catch(err){
+    console.error(err);
+    const msg=err?.result?.error?.message || err?.message || 'Error al sincronizar';
+    updateGoogleCalendarStatus(msg, 'bad');
+  }finally{ gcalSyncing=false; }
+}
+
 function moveScheduleMonth(delta){
   const base = window.scheduleCursorDate ? new Date(window.scheduleCursorDate) : new Date();
   base.setMonth(base.getMonth()+delta,1);
@@ -5186,7 +5503,7 @@ function goScheduleToday(){
 function showCalendarDay(dateStr){
   const tasks=collectScheduleTasks(); resolveScheduleDates(tasks);
   const d=new Date(dateStr+'T00:00:00');
-  const list=tasks.filter(t=>taskTouchesRange(t,d,d)).sort((a,b)=>(a.fecha||a._computedFecha||'').localeCompare(b.fecha||b._computedFecha||''));
+  const list=tasks.filter(t=>taskTouchesRange(t,d,d)).sort((a,b)=>((a.fecha||a._computedFecha||'')+(a.horaInicio||'99:99')).localeCompare((b.fecha||b._computedFecha||'')+(b.horaInicio||'99:99')));
   if(!list.length){ showNotif('No hay tareas ese día'); return; }
   const msg=list.slice(0,8).map(t=>'• '+(t.texto||'Sin título')).join('\n');
   alert('Tareas del '+dateStr+'\n\n'+msg+(list.length>8?'\n…':'') );
@@ -5194,6 +5511,10 @@ function showCalendarDay(dateStr){
 window.moveScheduleMonth = moveScheduleMonth;
 window.goScheduleToday = goScheduleToday;
 window.showCalendarDay = showCalendarDay;
+window.saveGoogleCalendarSettings=saveGoogleCalendarSettings;
+window.connectGoogleCalendar=connectGoogleCalendar;
+window.disconnectGoogleCalendar=disconnectGoogleCalendar;
+window.syncGoogleCalendarNow=syncGoogleCalendarNow;
 
 function saveTaskDateById(id, startDate, durDays){
   const f=findTaskIndexById(id); if(!f) return;
@@ -5207,6 +5528,7 @@ function saveTaskDateById(id, startDate, durDays){
   const afterFecha=d.toISOString().slice(0,10);
   const afterFin=e.toISOString().slice(0,10);
   t.fecha=afterFecha; t.fechaFin=afterFin; t.duracion=dur;
+  markTaskNeedsGoogleSync(t);
   if(beforeFecha!==afterFecha || beforeFin!==afterFin || String(beforeDur)!==String(dur)){
     const beforeTxt = beforeFecha ? `${beforeFecha}${beforeFin && beforeFin!==beforeFecha ? ' → '+beforeFin : ''}${beforeDur ? ' · '+beforeDur+'d' : ''}` : 'sin fecha';
     const afterTxt = `${afterFecha}${afterFin && afterFin!==afterFecha ? ' → '+afterFin : ''} · ${dur}d`;
