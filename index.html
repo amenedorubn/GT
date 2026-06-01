@@ -1441,7 +1441,7 @@ body.room-selected #room-view.room-expanded #tc-tenemos{
 .img-thumb-del{position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,.72);border:none;color:#fff;font-size:11px;cursor:pointer;display:grid;place-items:center;opacity:0;transition:.15s}
 .img-thumb:hover .img-thumb-del{opacity:1}
 .img-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px}
-.img-lightbox img{max-width:min(92vw,860px);max-height:88vh;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.img-lightbox img{max-width:96vw;max-height:92vh;width:auto;height:auto;object-fit:contain;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.6);background:#000}
 .img-lightbox-close{position:fixed;top:18px;right:22px;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:22px;width:40px;height:40px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
 
 
@@ -2078,7 +2078,7 @@ body.is-admin .gcal-admin-only{display:flex}
 <!-- LIGHTBOX IMÁGENES -->
 <div class="img-lightbox" id="img-lightbox" style="display:none" onclick="closeLightbox()">
   <button class="img-lightbox-close" onclick="closeLightbox()">✕</button>
-  <img id="img-lightbox-src" src="" alt="">
+  <img id="img-lightbox-src" src="" alt="" onclick="event.stopPropagation()">
 </div>
 
 <script type="module">
@@ -4554,23 +4554,12 @@ function deleteImg(section, idx) {
 window.handleImgUpload = handleImgUpload;
 window.deleteImg = deleteImg;
 
-// Convierte un File a base64 comprimido (máx 800px)
+// Convierte un File a base64 sin recomprimir para conservar la calidad original.
+// Las miniaturas se reducen solo visualmente por CSS; al abrir una foto se usa este original.
 function fileToBase64(file) {
   return new Promise(resolve => {
     const reader = new FileReader();
-    reader.onload = e => {
-      const img = new Image();
-      img.onload = () => {
-        const MAX_PX = 800;
-        const scale = Math.min(1, MAX_PX / Math.max(img.width, img.height));
-        const canvas = document.createElement('canvas');
-        canvas.width = Math.round(img.width * scale);
-        canvas.height = Math.round(img.height * scale);
-        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-        resolve(canvas.toDataURL('image/jpeg', 0.78));
-      };
-      img.src = e.target.result;
-    };
+    reader.onload = e => resolve(e.target.result);
     reader.readAsDataURL(file);
   });
 }
