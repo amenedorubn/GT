@@ -1497,6 +1497,75 @@ body.is-admin .gcal-admin-only{display:flex}
 .gallery-empty{border:1px dashed #ffffff22;border-radius:22px;padding:28px;text-align:center;color:var(--muted);background:#ffffff04}
 @media(max-width:700px){.gallery-hero{grid-template-columns:1fr}.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}.gallery-title{font-size:.76rem}}
 
+
+
+/* ==== AJUSTE CALENDARIO: foco en el calendario y móvil sin scroll horizontal ==== */
+#overlay-gantt .global-overlay-header{flex:0 0 auto;min-height:auto;padding:10px 14px;margin:10px 10px 6px!important;border-radius:16px!important}
+#overlay-gantt .global-overlay-title{white-space:nowrap;font-size:.72rem}
+#overlay-gantt .global-overlay-header>div{gap:7px!important}
+#overlay-gantt .global-overlay-header .btn-primary,
+#overlay-gantt .global-overlay-header .btn-secondary{padding:8px 10px;font-size:.7rem}
+#overlay-gantt .calendar-focus-body{padding:0 10px 10px!important;gap:8px;overflow:hidden!important;min-height:0;height:calc(100vh - 86px)!important}
+#overlay-gantt .gantt-container{flex:1 1 auto;min-height:0;margin:0;overflow:auto;border-radius:18px!important}
+#overlay-gantt .calendar-options-panel{flex:0 0 auto;border:1px solid #ffffff14;background:#ffffff06;border-radius:14px;margin:0;padding:0;overflow:hidden}
+#overlay-gantt .calendar-options-panel summary{cursor:pointer;list-style:none;padding:10px 12px;font-family:'DM Mono',monospace;font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);display:flex;align-items:center;justify-content:space-between;gap:8px}
+#overlay-gantt .calendar-options-panel summary::-webkit-details-marker{display:none}
+#overlay-gantt .calendar-options-panel summary:after{content:'+';font-size:1rem;color:var(--accent)}
+#overlay-gantt .calendar-options-panel[open] summary:after{content:'−'}
+#overlay-gantt .calendar-options-panel[open]{max-height:42vh;overflow:auto}
+#overlay-gantt .calendar-options-panel .gcal-panel{margin:0 10px 10px}
+#overlay-gantt .calendar-options-panel .gantt-legend{margin:0 10px 10px}
+#overlay-gantt .calendar-help-text{padding:0 10px 10px;font-size:.68rem;color:var(--muted);font-family:'DM Mono',monospace}
+#overlay-gantt .schedule-shell{height:100%;min-height:0}
+#overlay-gantt .schedule-shell>section{min-width:0;min-height:0;display:flex;flex-direction:column}
+#overlay-gantt .schedule-top{flex:0 0 auto;margin:0 0 8px;padding:8px 8px 0}
+#overlay-gantt .schedule-title strong{font-size:1.12rem}
+#overlay-gantt .schedule-title span{font-size:.68rem}
+#overlay-gantt .schedule-nav{gap:6px}
+#overlay-gantt .schedule-nav button{padding:8px 10px;font-size:.68rem}
+#overlay-gantt .calendar-board{flex:1 1 auto;min-height:0;overflow:auto;border-radius:18px;box-shadow:none}
+#overlay-gantt .calendar-weekdays{position:sticky;top:0;z-index:5}
+#overlay-gantt .calendar-grid{grid-template-columns:repeat(7,minmax(0,1fr));min-width:0;width:100%}
+#overlay-gantt .calendar-weekdays{grid-template-columns:repeat(7,minmax(0,1fr));min-width:0;width:100%}
+
+@media(max-width:760px){
+  #overlay-gantt .global-overlay-header{margin:6px 6px 4px!important;padding:8px!important;gap:6px;align-items:center}
+  #overlay-gantt .global-overlay-title{font-size:.62rem;max-width:118px;overflow:hidden;text-overflow:ellipsis}
+  #overlay-gantt .global-overlay-header>div{flex-wrap:nowrap!important;gap:5px!important}
+  #overlay-gantt .global-overlay-header .btn-primary,
+  #overlay-gantt .global-overlay-header .btn-secondary{padding:7px 8px;font-size:.62rem;white-space:nowrap}
+  #overlay-gantt .global-overlay-header .btn-icon{width:32px;height:32px;min-width:32px}
+  #overlay-gantt .calendar-focus-body{height:calc(100vh - 58px)!important;padding:0 6px 6px!important;gap:6px}
+  #overlay-gantt .gantt-container{border-radius:14px!important;overflow:auto}
+  #overlay-gantt .schedule-shell{display:block;height:auto}
+  #overlay-gantt .schedule-shell>section{display:block}
+  #overlay-gantt .schedule-top{padding:6px 6px 0;margin:0 0 6px;display:grid;grid-template-columns:1fr;gap:6px}
+  #overlay-gantt .schedule-title strong{font-size:1rem;line-height:1.05}
+  #overlay-gantt .schedule-title span{display:none}
+  #overlay-gantt .schedule-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;width:100%}
+  #overlay-gantt .schedule-nav button{min-width:0;padding:7px 3px;font-size:.56rem;border-radius:9px;overflow:hidden;text-overflow:ellipsis}
+  #overlay-gantt .calendar-board{overflow:hidden;border-radius:12px;width:100%}
+  #overlay-gantt .calendar-weekdays,
+  #overlay-gantt .calendar-grid{min-width:0!important;width:100%!important;grid-template-columns:repeat(7,minmax(0,1fr))!important}
+  #overlay-gantt .calendar-weekday{padding:6px 1px;font-size:.48rem;letter-spacing:.03em}
+  #overlay-gantt .calendar-day{min-width:0;min-height:76px;padding:3px 2px;border-right-color:#ffffff0a;border-bottom-color:#ffffff0a}
+  #overlay-gantt .calendar-day-head{margin-bottom:3px;gap:2px}
+  #overlay-gantt .calendar-day-num{font-size:.62rem}
+  #overlay-gantt .calendar-day-count{display:none}
+  #overlay-gantt .calendar-task{gap:2px;margin:2px 0;padding:3px 3px;border-radius:6px;min-height:19px;box-shadow:none}
+  #overlay-gantt .calendar-task-dot{width:4px;height:12px;border-radius:3px;align-self:stretch;margin:0 1px 0 0}
+  #overlay-gantt .calendar-task-text{font-size:.52rem;line-height:1.05;max-width:100%;white-space:nowrap}
+  #overlay-gantt .calendar-task-time,
+  #overlay-gantt .calendar-task-meta,
+  #overlay-gantt .gcal-badge{display:none!important}
+  #overlay-gantt .calendar-more{margin-top:2px;padding:2px 4px;font-size:.5rem;border-radius:6px;width:100%;text-align:center}
+  #overlay-gantt .schedule-side{display:none!important}
+  #overlay-gantt .calendar-options-panel summary{padding:8px 10px;font-size:.58rem}
+  #overlay-gantt .calendar-options-panel[open]{max-height:50vh}
+  #overlay-gantt .gcal-fixed-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  #overlay-gantt .gcal-access-row{display:grid;grid-template-columns:1fr;gap:6px}
+}
+
 </style>
 </head>
 <body class="home-compact">
@@ -1959,36 +2028,37 @@ body.is-admin .gcal-admin-only{display:flex}
       <button class="btn-icon" onclick="closeGlobal('gantt')" style="font-size:18px;color:var(--muted)">✕</button>
     </div>
   </div>
-  <div class="global-overlay-body" style="display:flex;flex-direction:column;height:calc(100% - 60px);padding-bottom:0">
-    <div class="gcal-panel" id="gcal-panel">
-      <div class="gcal-panel-head">
-        <div>
-          <div class="gcal-panel-title">Google Calendar · Reforma GT</div>
-          <div class="gcal-panel-sub">Calendario fijo de la reforma. Nadie puede modificar la API, el enlace ni el Calendar ID desde la web.</div>
-        </div>
-        <div class="gcal-status"><span class="gcal-dot" id="gcal-dot"></span><span id="gcal-status-text">Calendario fijo configurado</span></div>
-      </div>
-      <div class="gcal-fixed-actions">
-        <button class="btn-primary" onclick="addReformaCalendarToGoogle()">+ Añadir este calendario a mi Google Calendar</button>
-        <button class="btn-secondary" id="gcal-connect-btn" onclick="connectGoogleCalendar()">Conectar mi Google</button>
-        <button class="btn-secondary" onclick="syncGoogleCalendarNow()">Sincronizar ahora</button>
-        <button class="btn-secondary" onclick="disconnectGoogleCalendar()">Desconectar</button>
-        <span class="gcal-status" id="gcal-last-sync">—</span>
-      </div>
-      <div class="gcal-access-box">
-        <div class="gcal-fixed-note"><b>¿No tienes acceso?</b> Escribe tu correo de Google aquí. Rubén lo verá en esta misma pantalla y tendrá que añadirlo como editor del calendario y como usuario de prueba de Google.</div>
-        <div class="gcal-access-row"><input id="gcal-request-email" type="email" placeholder="tu correo de Google"><button class="btn-secondary" onclick="requestGoogleCalendarAccess()">Pedir acceso</button></div>
-        <div class="gcal-request-list gcal-admin-only" id="gcal-request-list"></div>
-      </div>
-      <div class="gcal-fixed-note">Para sincronizar, cada persona pulsa “Conectar mi Google”. Si su correo ya tiene permiso de edición en el calendario compartido, podrá crear y modificar eventos desde Google Calendar o desde esta web.</div>
-    </div>
-    <div class="gantt-legend" id="gantt-legend"></div>
+  <div class="global-overlay-body calendar-focus-body" style="display:flex;flex-direction:column;height:calc(100% - 60px);padding-bottom:0">
     <div class="gantt-container" id="gantt-container">
       <div id="gantt-inner"></div>
     </div>
-    <div style="padding:10px 0;font-size:0.68rem;color:var(--muted);font-family:'DM Mono',monospace;flex-shrink:0">
-      Las fechas y horas se toman de las tareas. Si conectas Google Calendar, los cambios se envían en ambos sentidos mientras la web esté abierta.
-    </div>
+    <details class="calendar-options-panel">
+      <summary>Google Calendar, leyenda y ayuda</summary>
+      <div class="gcal-panel" id="gcal-panel">
+        <div class="gcal-panel-head">
+          <div>
+            <div class="gcal-panel-title">Google Calendar · Reforma GT</div>
+            <div class="gcal-panel-sub">Calendario fijo de la reforma. Nadie puede modificar la API, el enlace ni el Calendar ID desde la web.</div>
+          </div>
+          <div class="gcal-status"><span class="gcal-dot" id="gcal-dot"></span><span id="gcal-status-text">Calendario fijo configurado</span></div>
+        </div>
+        <div class="gcal-fixed-actions">
+          <button class="btn-primary" onclick="addReformaCalendarToGoogle()">+ Añadir este calendario a mi Google Calendar</button>
+          <button class="btn-secondary" id="gcal-connect-btn" onclick="connectGoogleCalendar()">Conectar mi Google</button>
+          <button class="btn-secondary" onclick="syncGoogleCalendarNow()">Sincronizar ahora</button>
+          <button class="btn-secondary" onclick="disconnectGoogleCalendar()">Desconectar</button>
+          <span class="gcal-status" id="gcal-last-sync">—</span>
+        </div>
+        <div class="gcal-access-box">
+          <div class="gcal-fixed-note"><b>¿No tienes acceso?</b> Escribe tu correo de Google aquí. Rubén lo verá en esta misma pantalla y tendrá que añadirlo como editor del calendario y como usuario de prueba de Google.</div>
+          <div class="gcal-access-row"><input id="gcal-request-email" type="email" placeholder="tu correo de Google"><button class="btn-secondary" onclick="requestGoogleCalendarAccess()">Pedir acceso</button></div>
+          <div class="gcal-request-list gcal-admin-only" id="gcal-request-list"></div>
+        </div>
+        <div class="gcal-fixed-note">Para sincronizar, cada persona pulsa “Conectar mi Google”. Si su correo ya tiene permiso de edición en el calendario compartido, podrá crear y modificar eventos desde Google Calendar o desde esta web.</div>
+      </div>
+      <div class="gantt-legend" id="gantt-legend"></div>
+      <div class="calendar-help-text">Las fechas y horas se toman de las tareas. Si conectas Google Calendar, los cambios se envían en ambos sentidos mientras la web esté abierta.</div>
+    </details>
   </div>
 </div>
 
@@ -5036,7 +5106,9 @@ function renderGantt() {
     const isToday = day.toDateString() === today.toDateString();
     const tasks = withDate.filter(t => taskTouchesRange(t, day, day))
       .sort((a,b)=>((a.fecha||a._computedFecha||'')+(a.horaInicio||'99:99')).localeCompare((b.fecha||b._computedFecha||'')+(b.horaInicio||'99:99')));
-    const shown = tasks.slice(0,4);
+    const compactMonth = window.matchMedia && window.matchMedia('(max-width: 760px)').matches;
+    const maxTasksPerDay = compactMonth ? 2 : 4;
+    const shown = tasks.slice(0,maxTasksPerDay);
     return `
       <div class="calendar-day ${inMonth?'':'other-month'} ${isToday?'today':''}" data-date="${dateStr}">
         <div class="calendar-day-head">
@@ -5044,7 +5116,7 @@ function renderGantt() {
           ${tasks.length?`<div class="calendar-day-count">${tasks.length}</div>`:''}
         </div>
         ${shown.map(t => calendarTaskHtml(t, today)).join('')}
-        ${tasks.length>4?`<button class="calendar-more" onclick="showCalendarDay('${dateStr}')">+${tasks.length-4} más</button>`:''}
+        ${tasks.length>maxTasksPerDay?`<button class="calendar-more" onclick="showCalendarDay('${dateStr}')">+${tasks.length-maxTasksPerDay}</button>`:''}
       </div>`;
   }).join('');
 
