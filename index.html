@@ -5254,7 +5254,7 @@ function saveGoogleCalendarSettings(){
   const cfg={
     clientId:(document.getElementById('gcal-client-id')?.value||'').trim(),
     apiKey:(document.getElementById('gcal-api-key')?.value||'').trim(),
-    calendarId:(document.getElementById('gcal-calendar-id')?.value||'primary').trim()||'primary',
+    calendarId:normalizeGoogleCalendarId(document.getElementById('gcal-calendar-id')?.value||'primary'),
     connected:false
   };
   setGoogleCalendarSettings(cfg);
@@ -5390,23 +5390,52 @@ async function pushTasksToGoogle(calendarId){
     }
   }
 }
+function normalizeGoogleCalendarId(raw){
+  let v=(raw||'primary').trim() || 'primary';
+  if(v.includes('calendar.google.com/calendar/embed')){
+    try{
+      const u=new URL(v);
+      v=decodeURIComponent(u.searchParams.get('src')||v);
+    }catch(e){}
+  }
+  return v.replace(/%40/g,'@').trim() || 'primary';
+}
 async function pullGoogleToTasks(calendarId){
-  const updatedMin = gcalLastPullISO || new Date(Date.now()-1000*60*60*24*90).toISOString();
-  let pageToken='';
-  do{
-    const res=await window.gapi.client.calendar.events.list({
-      calendarId,
-      showDeleted:true,
-      singleEvents:true,
-      orderBy:'updated',
-      updatedMin,
-      maxResults:250,
-      pageToken:pageToken||undefined
-    });
-    const items=res.result.items||[];
-    for(const ev of items) await importGoogleEvent(calendarId, ev);
-    pageToken=res.result.nextPageToken||'';
-  }while(pageToken);
+  calendarId = normalizeGoogleCalendarId(calendarId);
+  const now=Date.now();
+  const maxIncrementalAgeMs=1000*60*60*24*30;
+  const lastPullDate=gcalLastPullISO ? new Date(gcalLastPullISO) : null;
+  const canUseUpdatedMin=lastPullDate && !Number.isNaN(lastPullDate.getTime()) && (now-lastPullDate.getTime()) < maxIncrementalAgeMs;
+  const runList=async(useIncremental)=>{
+    let pageToken='';
+    do{
+      const params={ calendarId, singleEvents:true, maxResults:250, pageToken:pageToken||undefined };
+      if(useIncremental){
+        Object.assign(params,{ showDeleted:true, orderBy:'updated', updatedMin:gcalLastPullISO });
+      }else{
+        const from=new Date(now-1000*60*60*24*180).toISOString();
+        const to=new Date(now+1000*60*60*24*365).toISOString();
+        Object.assign(params,{ showDeleted:false, orderBy:'startTime', timeMin:from, timeMax:to });
+      }
+      const res=await window.gapi.client.calendar.events.list(params);
+      const items=res.result.items||[];
+      for(const ev of items) await importGoogleEvent(calendarId, ev);
+      pageToken=res.result.nextPageToken||'';
+    }while(pageToken);
+  };
+  try{
+    await runList(!!canUseUpdatedMin);
+  }catch(err){
+    const code=err?.status || err?.result?.error?.code;
+    const msg=err?.result?.error?.message || '';
+    if(code===410 || msg.toLowerCase().includes('too far in the past')){
+      gcalLastPullISO='';
+      localStorage.removeItem(GCAL_SETTINGS_KEY + '.lastPull');
+      await runList(false);
+    }else{
+      throw err;
+    }
+  }
   gcalLastPullISO=new Date(Date.now()-5000).toISOString();
   localStorage.setItem(GCAL_SETTINGS_KEY + '.lastPull', gcalLastPullISO);
 }
@@ -5476,7 +5505,7 @@ async function syncGoogleCalendarNow(show=true){
   gcalSyncing=true;
   updateGoogleCalendarStatus('Sincronizando…', 'warn');
   try{
-    const calendarId=cfg.calendarId||'primary';
+    const calendarId=normalizeGoogleCalendarId(cfg.calendarId||'primary');
     await pullGoogleToTasks(calendarId);
     await pushTasksToGoogle(calendarId);
     save();
