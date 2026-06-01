@@ -4302,6 +4302,8 @@ function imageItemTitle(item){
 
 function collectAllImages(){
   const out = [];
+  let imageOrder = 0;
+  const addImage = (img) => out.push({ ...img, imageOrder: imageOrder++ });
   const seenTasks = new Set();
 
   ROOMS_DEF.forEach(room => {
@@ -4310,7 +4312,7 @@ function collectAllImages(){
       if(seenTasks.has(tid)) return;
       seenTasks.add(tid);
       const taskRooms = (t.rooms && t.rooms.length) ? t.rooms : [room.id];
-      (t.images || []).forEach((src, imgIdx) => out.push({
+      (t.images || []).forEach((src, imgIdx) => addImage({
         src, tipo:'tareas', title:t.texto || 'Tarea sin título',
         roomIds:taskRooms, roomId:taskRooms[0] || room.id,
         estado:t.estado || '', fecha:t.fecha || t.fechaFin || '',
@@ -4320,7 +4322,7 @@ function collectAllImages(){
   });
 
   (appState.compra || []).forEach((it, idx) => {
-    (it.images || []).forEach((src, imgIdx) => out.push({
+    (it.images || []).forEach((src, imgIdx) => addImage({
       src, tipo:'compra', title:it.texto || 'Compra sin título',
       roomIds:it.roomId ? [it.roomId] : [], roomId:it.roomId || '',
       estado:it.comprado ? 'comprado' : 'pendiente', fecha:'',
@@ -4329,7 +4331,7 @@ function collectAllImages(){
   });
 
   (appState.tenemos || []).forEach((it, idx) => {
-    (it.images || []).forEach((src, imgIdx) => out.push({
+    (it.images || []).forEach((src, imgIdx) => addImage({
       src, tipo:'tenemos', title:it.texto || 'Elemento sin título',
       roomIds:it.roomId ? [it.roomId] : [], roomId:it.roomId || '',
       estado:it.estado || '', fecha:'',
@@ -4338,7 +4340,7 @@ function collectAllImages(){
   });
 
   (appState.herramientas || []).forEach((h, idx) => {
-    (h.images || []).forEach((src, imgIdx) => out.push({
+    (h.images || []).forEach((src, imgIdx) => addImage({
       src, tipo:'herramientas', title:h.nombre || 'Herramienta sin nombre',
       roomIds:h.roomId ? [h.roomId] : [], roomId:h.roomId || '',
       estado:h.estado || '', fecha:'',
@@ -4347,7 +4349,7 @@ function collectAllImages(){
   });
 
   (appState.preguntas || []).forEach((q, idx) => {
-    (q.images || []).forEach((src, imgIdx) => out.push({
+    (q.images || []).forEach((src, imgIdx) => addImage({
       src, tipo:'preguntas', title:q.text || q.texto || q.pregunta || 'Pregunta sin título',
       roomIds:q.roomId ? [q.roomId] : [], roomId:q.roomId || '',
       estado:q.resuelta ? 'resuelta' : (q.priority || q.prioridad || ''), fecha:'',
@@ -4378,7 +4380,7 @@ function renderImageGallery(){
     if(galleryFilters.tipo !== 'todas' && img.tipo !== galleryFilters.tipo) return false;
     if(galleryFilters.room && !(img.roomIds || []).includes(galleryFilters.room)) return false;
     return true;
-  });
+  }).sort((a,b) => (b.imageOrder || 0) - (a.imageOrder || 0));
 
   const totalPill = document.getElementById('gallery-total-pill');
   if(totalPill) totalPill.textContent = `${filtered.length} foto${filtered.length===1?'':'s'}`;
@@ -5829,8 +5831,7 @@ updateTenemosHeader();
   #gnav-tenemos{order:3!important}
   #gnav-herramientas{order:4!important}
   #gnav-preguntas{order:5!important}
-  #gnav-fotos{order:6!important;display:inline-flex!important;visibility:visible!important;opacity:1!important;border-color:rgba(124,247,212,.45)!important;background:linear-gradient(135deg,rgba(124,247,212,.16),rgba(138,167,255,.12))!important;color:#fff!important;}
-  #gnav-fotos .gnav-main::before{content:'📷 ';letter-spacing:0;}
+  #gnav-fotos{order:6!important;display:inline-flex!important;visibility:visible!important;opacity:1!important;}
   #gnav-gantt{order:7!important}
   #gnav-personas{order:8!important}
   #gnav-hoy{order:9!important}
@@ -5838,7 +5839,7 @@ updateTenemosHeader();
 }
 @media (max-width:700px){
   #gnav-tareas{order:1!important} #gnav-compra{order:2!important} #gnav-tenemos{order:3!important}
-  #gnav-herramientas{order:4!important} #gnav-preguntas{order:5!important} #gnav-fotos{order:6!important;display:inline-flex!important;visibility:visible!important;opacity:1!important;border-color:rgba(124,247,212,.4)!important;background:rgba(124,247,212,.1)!important;color:#fff!important;}
+  #gnav-herramientas{order:4!important} #gnav-preguntas{order:5!important} #gnav-fotos{order:6!important;display:inline-flex!important;visibility:visible!important;opacity:1!important;}
   #gnav-hoy{order:7!important} #gnav-novedades{order:8!important} #gnav-gantt{order:9!important}
 }
 </style>
